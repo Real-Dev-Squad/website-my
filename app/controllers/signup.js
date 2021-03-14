@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
+import ENV from 'website-my/config/environment';
 
-const BASE_URL = 'https://staging-api.realdevsquad.com';
+const BASE_URL = ENV.BASE_API_URL;
 
 export default class SignupController extends Controller {
   @tracked isSubmitDisabled = true;
@@ -18,6 +19,7 @@ export default class SignupController extends Controller {
     company_name: '',
     designation: '',
     linkedin_id: '',
+    instagram_id: '',
     twitter_id: '',
     website: '',
   };
@@ -32,6 +34,7 @@ export default class SignupController extends Controller {
     company_name: false,
     designation: false,
     linkedin_id: false,
+    instagram_id: false,
     twitter_id: false,
     website: false,
   };
@@ -72,7 +75,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'phone',
-      label: 'Phone Number',
+      label: 'Phone Number (Optional)',
       type: 'string',
       value: '+91-',
       errorMessage: 'Enter a valid phone number',
@@ -90,7 +93,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'company_name',
-      label: 'Company Name / College Name',
+      label: 'Company Name / College Name (Optional)',
       type: 'text',
       errorMessage: '',
       required: false,
@@ -98,7 +101,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'designation',
-      label: 'Designation',
+      label: 'Designation (Optional)',
       type: 'text',
       errorMessage: '',
       required: false,
@@ -110,6 +113,14 @@ export default class SignupController extends Controller {
       type: 'text',
       errorMessage: 'LinkedIn username is required',
       required: true,
+      showError: false,
+    },
+    {
+      id: 'instagram_id',
+      label: 'Instagram ID (Optional)',
+      type: 'text',
+      errorMessage: '',
+      required: false,
       showError: false,
     },
     {
@@ -184,14 +195,24 @@ export default class SignupController extends Controller {
     return;
   }
 
+  removeEmptyFields(reqObject) {
+    for (const field in reqObject) {
+      if (!reqObject[field]) {
+        delete reqObject[field];
+      }
+    }
+    return reqObject;
+  }
+
   @action async handleSubmit(e) {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
     e.preventDefault();
+    const cleanReqObject = this.removeEmptyFields(this.formData);
     try {
       const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
-        body: JSON.stringify(this.formData),
+        body: JSON.stringify(cleanReqObject),
         headers: {
           'Content-Type': 'application/json',
         },
