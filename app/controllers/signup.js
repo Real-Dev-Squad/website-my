@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
-import HistoryLocation from '@ember/routing/history-location';
 
 const BASE_URL = 'https://staging-api.realdevsquad.com';
 
@@ -20,7 +19,7 @@ export default class SignupController extends Controller {
     designation: '',
     linkedin_id: '',
     twitter_id: '',
-    website: ''
+    website: '',
   };
 
   @tracked formErrors = {
@@ -34,7 +33,7 @@ export default class SignupController extends Controller {
     designation: false,
     linkedin_id: false,
     twitter_id: false,
-    website: false
+    website: false,
   };
 
   @tracked fields = [
