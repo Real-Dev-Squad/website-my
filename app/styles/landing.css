@@ -55,7 +55,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .landing-container {
     width: 80%;
   }
