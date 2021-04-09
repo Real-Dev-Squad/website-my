@@ -2,6 +2,7 @@
 @import "notification.css";
 @import "tasks.css";
 @import "sidebar.css";
+@import "landing.css";
 
 body {
   font-family: "Roboto", sans-serif, serif;
