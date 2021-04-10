@@ -37,7 +37,7 @@ module('Cache Clear Page', (hooks) => {
 
     assert.equal(
       this.element.querySelector('.clear-cache-btn').disabled,
-      true,
+      false,
       'Button is enabled right now'
     );
 
