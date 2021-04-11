@@ -13,11 +13,11 @@
 }
 
 .landing-container h2 {
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .landing-container h3 {
-  font-size: 28px;
+  font-size: 1.5rem;
 }
 
 .landing-container > * {
@@ -30,7 +30,7 @@
 
 .landing-lists li {
   padding: 4px;
-  font-size: 18px;
+  font-size: 1.2rem;
   text-align: left;
   width: 50%;
   margin: auto;
