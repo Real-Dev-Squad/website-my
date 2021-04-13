@@ -3,31 +3,27 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-// Lets say we have component with name 'self-clear-cache.hbs'
-// The UI Design can be found here : https://www.figma.com/file/LMujWCqnzXl1wQJVwAzCPV/Clear-your-member-details-page?node-id=0%3A1
-// It shows the time at which user clears the cache last time.
-// Last Requested : {{ time }}
-
-module('Cache Clear Page', (hooks) => {
+module('Unit | Component | self-clear-cache', (hooks) => {
   setupRenderingTest(hooks);
 
   test('should show last time user cleared the cache', async function (assert) {
     assert.expect(1);
 
     // set the outer context '23 March 1:23 pm IST'
-    this.set('lastTime', '23 March 1:23 pm IST');
+    const time = '23 March 1:23 pm IST';
+    this.set('lastTime', time);
 
     await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
 
     assert.equal(
-      this.element.querySelector('.last-time').textContent,
-      'Last Requested : 23 March 1:23 pm IST',
-      'Last time it was request at 23 March 1:23 pm IST'
+      assert.dom('[data-test-last-time]').hasText(`Last Requested : ${time}`),
+      true,
+      'Last time it was requested at 23 March 1:23 pm IST'
     );
   });
 
   // Clear cache button should get disabled on clicking it
-  test('On Clicking Clear Cache button time should get updated', async function (assert) {
+  test('Clear cache button should get disabled on clicking it', async function (assert) {
     assert.expect(2);
 
     // set the outer context '23 March 1:23 pm IST'
@@ -35,8 +31,9 @@ module('Cache Clear Page', (hooks) => {
 
     await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
 
+    const btn = assert.dom('[data-test-clear-cache-btn]');
     assert.equal(
-      this.element.querySelector('.clear-cache-btn').disabled,
+      btn.hasAttribute('disabled'),
       false,
       'Button is enabled right now'
     );
@@ -44,7 +41,7 @@ module('Cache Clear Page', (hooks) => {
     await click('.clear-cache-btn');
 
     assert.equal(
-      this.element.querySelector('.clear-cache-btn').disabled,
+      btn.hasAttribute('disabled'),
       true,
       'Button got disabled post clicking'
     );
@@ -52,7 +49,7 @@ module('Cache Clear Page', (hooks) => {
 
   // Below button should show the total number times user has
   // already cleared the cache that day
-  test('On Clicking Clear Cache button time should get updated', async function (assert) {
+  test('Show the total number times user has already cleared the cache that day', async function (assert) {
     assert.expect(1);
 
     //pending-requests
@@ -65,18 +62,20 @@ module('Cache Clear Page', (hooks) => {
     @totalTimes={{this.totalTimes}} />`);
 
     assert.equal(
-      this.element.querySelector('.pending-requests').textContent,
-      '3 / 3 requests remaing for today',
+      assert
+        .dom('[data-test-pending-requests]')
+        .hasText('3 / 3 requests remaing for today'),
+      true,
       'Text starts with 3 / 3'
     );
   });
 
   // Clear cache button should be disabled if all user has already
   // cleared cache 3 times
-  test('On Clicking Clear Cache button time should get updated', async function (assert) {
+  test('Clear cache button should be disabled if user has already depleted the thresold upto which he can clear cache in a day', async function (assert) {
     assert.expect(2);
 
-    //pending-requests
+    // pending-requests
     // set the outer context '23 March 1:23 pm IST'
     this.set('lastTime', '23 March 1:23 pm IST');
     this.set('totalTimes', '3');
@@ -86,7 +85,7 @@ module('Cache Clear Page', (hooks) => {
     @totalTimes={{this.totalTimes}} />`);
 
     assert.equal(
-      this.element.querySelector('.clear-cache-btn').disabled,
+      assert.dom('[data-test-clear-cache-btn]').hasAttribute('disabled'),
       true,
       'Button is Disabled.'
     );
