@@ -9,7 +9,6 @@ module('Unit | Component | self-clear-cache', (hooks) => {
   test('should show last time user cleared the cache', async function (assert) {
     assert.expect(1);
 
-    // set the outer context '23 March 1:23 pm IST'
     const time = '23 March 1:23 pm IST';
     this.set('lastTime', time);
 
@@ -22,11 +21,9 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  // Clear cache button should get disabled on clicking it
   test('Clear cache button should get disabled on clicking it', async function (assert) {
     assert.expect(2);
 
-    // set the outer context '23 March 1:23 pm IST'
     this.set('lastTime', '23 March 1:23 pm IST');
 
     await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
@@ -38,7 +35,7 @@ module('Unit | Component | self-clear-cache', (hooks) => {
       'Button is enabled right now'
     );
 
-    await click('.clear-cache-btn');
+    await click(btn);
 
     assert.equal(
       btn.hasAttribute('disabled'),
@@ -47,13 +44,9 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  // Below button should show the total number times user has
-  // already cleared the cache that day
   test('Show the total number times user has already cleared the cache that day', async function (assert) {
     assert.expect(1);
 
-    //pending-requests
-    // set the outer context '23 March 1:23 pm IST'
     this.set('lastTime', '23 March 1:23 pm IST');
     this.set('totalTimes', '3');
 
@@ -70,13 +63,9 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  // Clear cache button should be disabled if all user has already
-  // cleared cache 3 times
   test('Clear cache button should be disabled if user has already depleted the thresold upto which he can clear cache in a day', async function (assert) {
     assert.expect(2);
 
-    // pending-requests
-    // set the outer context '23 March 1:23 pm IST'
     this.set('lastTime', '23 March 1:23 pm IST');
     this.set('totalTimes', '3');
 
