@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Unit | Component | self-clear-cache', (hooks) => {
   setupRenderingTest(hooks);
 
-  test('should show last time user cleared the cache', async function (assert) {
+  skip('should show last time user cleared the cache', async function (assert) {
     assert.expect(1);
 
     const time = '23 March 1:23 pm IST';
@@ -21,7 +21,7 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  test('Clear cache button should get disabled on clicking it', async function (assert) {
+  skip('Clear cache button should get disabled on clicking it', async function (assert) {
     assert.expect(2);
 
     this.set('lastTime', '23 March 1:23 pm IST');
@@ -44,7 +44,7 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  test('Show the total number times user has already cleared the cache that day', async function (assert) {
+  skip('Show the total number times user has already cleared the cache that day', async function (assert) {
     assert.expect(1);
 
     this.set('lastTime', '23 March 1:23 pm IST');
@@ -63,7 +63,7 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     );
   });
 
-  test('Clear cache button should be disabled if user has already depleted the thresold upto which he can clear cache in a day', async function (assert) {
+  skip('Clear cache button should be disabled if user has already depleted the thresold upto which he can clear cache in a day', async function (assert) {
     assert.expect(2);
 
     this.set('lastTime', '23 March 1:23 pm IST');
