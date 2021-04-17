@@ -1,0 +1,32 @@
+.last-request {
+    padding: 40px 4px 20px;
+    color:#041187;
+    font-family: Helvetica Neue;
+    font-weight: bold;
+    font-size: 36px
+    
+}
+
+
+.button {
+    top: 335px;
+    border-radius:10px;
+    padding: 16px 60px;
+    background-color: transparent;
+    border: 2px solid #FF8C00;
+    color: #FF8C00;
+    background-color: white;
+    font-family: Helvetica Neue;
+    font-weight:bold;
+    font-size: 18px;
+    cursor: pointer;
+   
+}
+
+.remaining-requests {
+    padding-top:30px;
+    color:#041187;
+    font-family: Helvetica Neue;
+    font-weight: bold;
+    font-size: 24px
+}
