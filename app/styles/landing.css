@@ -19,7 +19,7 @@
 }
 
 .landing > * {
-  padding: 12px;
+  padding: .75rem;
 }
 
 .landing__features-lists {
@@ -27,7 +27,7 @@
 }
 
 .landing__features-list {
-  padding: 4px;
+  padding: .25rem;
   font-size: 1.2rem;
   text-align: left;
   width: 50%;
@@ -35,7 +35,7 @@
 }
 
 .get-started__btn a {
-  padding: 12px 32px;
+  padding: .75rem 2rem;
   border-radius: 10px;
   outline: none;
   background-color: #041484;
