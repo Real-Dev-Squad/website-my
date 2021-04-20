@@ -1,3 +1,20 @@
-<button type="button" {{on "click" (fn this.updateStatus 'idle')}}>I am idle</button>
-<button type="button" {{on "click" (fn this.updateStatus 'active')}}>Change status to 'Doing a task'</button>
-<button type="button" {{on "click" (fn this.updateStatus 'ooo')}}>Mark yourself as OOO</button>
+<div class="heading">
+  {{#if @status.active}}
+    <h2 data-test-status>I am doing a task</h2>
+  {{/if}}
+  {{#if @status.idle}}
+    <h2 data-test-status>I am idle</h2>
+  {{/if}} 
+  {{#if @status.ooo}}
+    <h2 data-test-status>I am OOO</h2>
+  {{/if}} 
+</div>
+<div class="buttons">
+  {{#if @status.active}}
+    <button class="idle" type="button" {{on "click" (fn this.updateStatus 'idle')}}><span data-test-button-text>Change status to ‘Idle’</span></button>
+  {{/if}}   
+  {{#if @status.idle}}
+    <button class="active" type="button" data-test-button {{on "click" (fn this.updateStatus 'active')}}><span data-test-button-text>Change status to ‘Doing a task’</span></button>
+  {{/if}}
+    <button class="ooo" type="button" {{on "click" (fn this.updateStatus 'ooo')}}><span>Mark yourself as OOO</span></button>
+</div>

@@ -1,0 +1,42 @@
+.heading h2{
+    color: #0034a5;
+    margin-bottom: 40px;
+    margin-top: 50px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons .idle {
+    font-size: 1rem;
+    color: #e49504;
+    font-weight: 600;
+    border: 1px solid #e49504;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    background: #ffff;
+}
+
+.buttons .active {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #16a334;
+    border: 1px solid #16a334;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 40px;
+    background: #ffff;
+}
+
+.buttons .ooo {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #0034a5;
+    border: none;
+    background: #ffff;
+}
