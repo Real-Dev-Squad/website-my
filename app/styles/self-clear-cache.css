@@ -3,24 +3,20 @@
     color:#041187;
     font-family: Helvetica Neue;
     font-weight: bold;
-    font-size: 36px
-    
+    font-size: 2rem
 }
 
-
 .button {
-    top: 335px;
+    top: 335%;
     border-radius:10px;
     padding: 16px 60px;
-    background-color: transparent;
     border: 2px solid #FF8C00;
     color: #FF8C00;
     background-color: white;
     font-family: Helvetica Neue;
     font-weight:bold;
-    font-size: 18px;
+    font-size: 1.5rem;
     cursor: pointer;
-   
 }
 
 .remaining-requests {
@@ -28,5 +24,5 @@
     color:#041187;
     font-family: Helvetica Neue;
     font-weight: bold;
-    font-size: 24px
+    font-size: 1.3rem
 }
