@@ -3,6 +3,7 @@
 @import "image-upload.css";
 @import "tasks.css";
 @import "sidebar.css";
+@import "self-clear-cache.css";
 
 body {
   font-family: "Roboto", sans-serif, serif;
