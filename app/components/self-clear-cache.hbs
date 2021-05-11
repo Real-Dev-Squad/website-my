@@ -1,9 +1,13 @@
 <div class="self-clear-cache-container">
-    <div class="last-request">
-        Last Request: {{@time}}
+    <div class="last-request" data-test-last-time>
+        Last Requested: {{@time}}
     </div>
     <div class="clear-cache-button">
-        <button class="button" type="submit" disableb={{false}}>Clear cache</button>
+        {{#if @btnDisabled}}     
+            <button class="button" type="submit" disabled data-test-clear-cache-btn>Clear cache</button>
+        {{else}}
+             <button class="button" type="submit" data-test-clear-cache-btn>Clear cache</button>
+        {{/if}}
     </div>
     <div class="remaining-requests">
         {{@totalTimes}} / 3 requests remaining for today

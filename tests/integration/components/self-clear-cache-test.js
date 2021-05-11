@@ -1,4 +1,4 @@
-import { module, skip } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Unit | Component | self-clear-cache', (hooks) => {
   setupRenderingTest(hooks);
 
-  skip('should show last time user cleared the cache', async function (assert) {
+  test('should show last time user cleared the cache', async function (assert) {
     assert.expect(1);
 
     const time = '23 March 1:23 pm IST';
@@ -14,14 +14,10 @@ module('Unit | Component | self-clear-cache', (hooks) => {
 
     await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
 
-    assert.equal(
-      assert.dom('[data-test-last-time]').hasText(`Last Requested : ${time}`),
-      true,
-      'Last time it was requested at 23 March 1:23 pm IST'
-    );
+    assert.dom('[data-test-last-time]').hasText(`Last Requested: ${time}`);
   });
 
-  skip('Clear cache button should get disabled on clicking it', async function (assert) {
+  test('Clear cache button should get disabled on clicking it', async function (assert) {
     assert.expect(2);
 
     this.set('lastTime', '23 March 1:23 pm IST');
@@ -29,19 +25,10 @@ module('Unit | Component | self-clear-cache', (hooks) => {
     await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
 
     const btn = assert.dom('[data-test-clear-cache-btn]');
-    assert.equal(
-      btn.hasAttribute('disabled'),
-      false,
-      'Button is enabled right now'
-    );
 
+    assert.equal(btn.hasAttribute('disabled'), false, 'Button is enabled');
     await click(btn);
-
-    assert.equal(
-      btn.hasAttribute('disabled'),
-      true,
-      'Button got disabled post clicking'
-    );
+    btn.hasAttribute('disabled');
   });
 
   skip('Show the total number times user has already cleared the cache that day', async function (assert) {
