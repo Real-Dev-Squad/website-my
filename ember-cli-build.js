@@ -6,7 +6,7 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     // Add options here
     'ember-test-selectors': {
-      strip: false,
+      strip: true,
     },
   });
 
