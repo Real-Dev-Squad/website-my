@@ -10,5 +10,4 @@ Router.map(function () {
   this.route('signup');
   this.route('notifications');
   this.route('tasks');
-  this.route('landing', { path: '/get-started' });
 });

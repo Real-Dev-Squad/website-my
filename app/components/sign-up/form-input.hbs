@@ -1,0 +1,26 @@
+<div class="signup">
+  <h2 class="user-details__heading">
+    {{this.label}}
+  </h2>
+  <div class="user-details__field">
+    {{#if (eq @what "first-name")}}
+      <Input @value={{@firstName}} type="text" placeholder="Darth" />
+    {{else if (eq @what "last-name")}}
+      <Input @value={{@lastName}} type="text" placeholder="Vader" />
+    {{else}}
+      <Input @value={{@userName}} type="text" placeholder="darth" />
+    {{/if}}
+  </div>
+
+  <div class="signup-action__btn">
+    <SignUp::Button
+      @clickHandler={{if (eq @what "user-name")
+      @register @changeRouteParams}}
+      @what={{@what}}
+      @disabled={{this.disabledValue}}
+      @isSubmitClicked={{@isSubmitClicked}}
+    >
+      Next
+    </SignUp::Button>
+  </div>
+</div>
