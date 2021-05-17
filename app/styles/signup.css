@@ -5,7 +5,7 @@
   padding: 1em 0;
 }
 
-.signup {
+.user-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@
   margin: auto;
 }
 
-.signup > * {
+.user-details > * {
   padding: 2rem;
 }
 
@@ -53,13 +53,13 @@
 }
 
 @media (max-width: 768px) {
-  .signup {
+  .user-details {
     width: 80%;
   }
 } 
 
 @media (max-width: 568px) {
-  .signup {
+  .user-details {
     width: 100%;
   }
 }

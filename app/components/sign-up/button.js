@@ -2,27 +2,21 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class ButtonComponent extends Component {
-  get buttonClass() {
-    const { disabled } = this.args;
-
-    if (disabled) return 'btn-disabled';
-    return '';
-  }
   @action
   buttonClickHandler() {
-    const { what, clickHandler, disabled } = this.args;
+    const { state, clickHandler, disabled } = this.args;
 
-    switch (what) {
+    switch (state) {
       case 'get-started':
-        !disabled ? clickHandler('first-name') : '';
+        !disabled ? clickHandler('firstName') : '';
         break;
-      case 'first-name':
-        !disabled ? clickHandler('last-name') : '';
+      case 'firstName':
+        !disabled ? clickHandler('lastName') : '';
         break;
-      case 'last-name':
-        !disabled ? clickHandler('user-name') : '';
+      case 'lastName':
+        !disabled ? clickHandler('userName') : '';
         break;
-      case 'user-name':
+      case 'userName':
         !disabled ? clickHandler() : '';
         break;
       default:

@@ -1,29 +1,39 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
+import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
 
 export default class SignupController extends Controller {
-  queryParams = ['what'];
+  queryParams = ['state'];
 
   @tracked isSubmitClicked = false;
+  @tracked isButtonDisabled = true;
 
-  @tracked what = null;
-  @tracked firstName = '';
-  @tracked lastName = '';
-  @tracked userName = '';
+  @tracked state = null;
+  @tracked userDetails = {
+    firstName: '',
+    lastName: '',
+    userName: '',
+  };
   @tracked errorMessage;
 
   @action changeRouteParams(paramValue) {
     if (paramValue)
-      this.transitionToRoute({ queryParams: { what: paramValue } });
+      this.transitionToRoute({ queryParams: { state: paramValue } });
+  }
+
+  @action handleInputChange(key, value) {
+    set(this.userDetails, key, value);
+
+    if (this.userDetails[key] > '') this.isButtonDisabled = false;
+    else this.isButtonDisabled = true;
   }
 
   @action registerUser() {
     const user = {
-      first_name: this.firstName,
-      last_name: this.lastName,
-      username: this.userName,
+      first_name: this.userDetails.firstName,
+      last_name: this.userDetails.lastName,
+      username: this.userDetails.userName,
     };
     this.isSubmitClicked = true;
 
