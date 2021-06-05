@@ -7,8 +7,8 @@ export default class SignupComponent extends Component {
 
     const labelText = {
       firstName: 'What is your First Name?',
-      lastName: 'And what\'s is your Last Name?',
-      userName: 'Now choose your awesome username!',
+      lastName: 'And what is your Last Name?',
+      username: 'Now choose your awesome username!',
     };
 
     return labelText[state];

@@ -13,7 +13,7 @@ export default class SignupController extends Controller {
   @tracked userDetails = {
     firstName: '',
     lastName: '',
-    userName: '',
+    username: '',
   };
   @tracked errorMessage;
 
@@ -33,7 +33,7 @@ export default class SignupController extends Controller {
     const user = {
       first_name: this.userDetails.firstName,
       last_name: this.userDetails.lastName,
-      username: this.userDetails.userName,
+      username: this.userDetails.username,
     };
     this.isSubmitClicked = true;
 

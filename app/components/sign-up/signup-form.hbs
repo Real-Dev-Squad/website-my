@@ -3,12 +3,12 @@
     {{this.label}}
   </h2>
   <div class="user-details__field">
-    <Input @value={{get @userDetails @state}} type="text" placeholder="Darth" {{on 'input' (fn this.inputFieldChanged)}} />
+    <Input @value={{get @userDetails @state}} type="text" placeholder="Darth" {{on 'input' this.inputFieldChanged}} />
   </div>
 
   <div class="signup-action__btn">
     <SignUp::Button
-      @clickHandler={{if (eq @state "userName")
+      @clickHandler={{if (eq @state "username")
       @register @changeRouteParams}}
       @state={{@state}}
       @disabled={{@isButtonDisabled}}

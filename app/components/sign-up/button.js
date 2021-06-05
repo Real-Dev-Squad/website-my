@@ -14,9 +14,9 @@ export default class ButtonComponent extends Component {
         !disabled ? clickHandler('lastName') : '';
         break;
       case 'lastName':
-        !disabled ? clickHandler('userName') : '';
+        !disabled ? clickHandler('username') : '';
         break;
-      case 'userName':
+      case 'username':
         !disabled ? clickHandler() : '';
         break;
       default:
