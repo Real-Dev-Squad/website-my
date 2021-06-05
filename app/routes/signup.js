@@ -8,7 +8,7 @@ export default class SignupRoute extends Route {
     });
     const userData = await response.json();
     if (response.status == 200 && !userData.incompleteUserDetails) {
-      alert('You already have filled the up form. You\'ll now be redirected.');
+      alert("You already have filled the up form. You'll now be redirected.");
       window.open('https://realdevsquad.com/goto', '_self');
     } else {
       alert('You have not logged in. Please login first to fill this form.');
