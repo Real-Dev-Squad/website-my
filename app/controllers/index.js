@@ -14,7 +14,7 @@ export default class IndexController extends Controller {
       const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
         body: JSON.stringify({
-          status: status,
+          status,
         }),
         headers: {
           'Content-Type': 'application/json',

@@ -8,8 +8,8 @@ export default class TasksRoute extends Route {
     const response = await fetch(`${API_BASE_URL}/users/self`, {
       credentials: 'include',
     });
-    const status = await response.json();
+    const userData = await response.json();
 
-    return status.status;
+    return userData.status;
   };
 }

@@ -12,19 +12,19 @@
     align-items: center;
 }
 
-.buttons .idle {
+.buttons__idle {
     font-size: 1rem;
     color: #e49504;
     font-weight: 600;
     border: 1px solid #e49504;
     padding: 20px;
-    width: 300px;
+    width: 18%;
     margin-bottom: 40px;
     border-radius: 10px;
     background: #ffff;
 }
 
-.buttons .active {
+.buttons__active {
     font-size: 1rem;
     font-weight: 600;
     color: #16a334;
@@ -35,7 +35,7 @@
     background: #ffff;
 }
 
-.buttons .small {
+.buttons--small {
     font-size: 0.6rem;
     font-weight: 600;
     color: #0034a5;
