@@ -1,8 +1,14 @@
 {{#if this.state}}
   {{#if (eq this.state "get-started")}}
-    <SignUp::GetStarted @changeRouteParams={{this.changeRouteParams}} @state={{this.state}} />
+    <SignUp::GetStarted
+      @changeRouteParams={{this.changeRouteParams}}
+      @state={{this.state}}
+    />
   {{else if (eq this.state "thank-you")}}
-    <SignUp::GetStarted @changeRouteParams={{this.changeRouteParams}} @state={{this.state}}/>
+    <SignUp::GetStarted
+      @changeRouteParams={{this.changeRouteParams}}
+      @state={{this.state}}
+    />
   {{else}}
     <SignUp::SignupForm
       @changeRouteParams={{this.changeRouteParams}}

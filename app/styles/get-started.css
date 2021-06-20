@@ -8,12 +8,12 @@
   margin: auto;
 }
 
-.landing__mainHeading {
+.landing__main-heading {
   font-size: 2rem;
   color: black;
 }
 
-.landing__subHeading {
+.landing__sub-heading {
   font-size: 1.5rem;
   color: black;
 }
