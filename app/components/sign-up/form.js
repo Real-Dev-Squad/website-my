@@ -1,17 +1,12 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { LABEL_TEXT } from '../../constants/signup';
 
 export default class SignupComponent extends Component {
   get label() {
     const { state } = this.args;
 
-    const labelText = {
-      firstName: 'What is your First Name?',
-      lastName: 'And what is your Last Name?',
-      username: 'Now choose your awesome username!',
-    };
-
-    return labelText[state];
+    return LABEL_TEXT[state];
   }
 
   @action inputFieldChanged({ target: { value } }) {
