@@ -57,8 +57,10 @@
 }
 
 .image-preview {
-  width: 50%;
+  width: 30%;
   height: auto;
+  margin-left: 35%;
+  margin-right: auto;
   border-radius: 10px;
   border: solid black;
 }
