@@ -38,7 +38,7 @@ html, body {
   text-align: center;
   vertical-align: middle;
   width: 100%;
-  position: fixed;
+  position: relative;
   height: 40px;
   bottom: 0;
 }
