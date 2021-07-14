@@ -1,82 +1,127 @@
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render } from '@ember/test-helpers';
+import { click, render, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Unit | Component | self-clear-cache', (hooks) => {
+const EPOCH_TIMESTAMP = 1626242030;
+const HUMAN_TIME = ' July 13, 2021 10:53:50 PM IST';
+
+module('Integration | Component | self-clear-cache', (hooks) => {
   setupRenderingTest(hooks);
 
-  skip('should show last time user cleared the cache', async function (assert) {
+  skip('it shows last time user cleared the cache', async function (assert) {
     assert.expect(1);
 
-    const time = '23 March 1:23 pm IST';
-    this.set('lastTime', time);
+    // Assemble
+    this.set('lastTime', EPOCH_TIMESTAMP);
 
-    await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
+    await render(hbs`<SelfClearCache @lastClearedOn={{this.lastTime}} />`);
 
-    assert.equal(
-      assert.dom('[data-test-last-time]').hasText(`Last Requested : ${time}`),
-      true,
-      'Last time it was requested at 23 March 1:23 pm IST'
-    );
+    // Assert
+    assert.dom('[data-test-last-time]').hasText(HUMAN_TIME);
   });
 
-  skip('Clear cache button should get disabled on clicking it', async function (assert) {
-    assert.expect(2);
+  skip('it triggers cache clear on button click', async function (assert) {
+    assert.expect(1);
 
-    this.set('lastTime', '23 March 1:23 pm IST');
+    // Assemble
+    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
+    this.set('lastTime', EPOCH_TIMESTAMP);
 
-    await render(hbs`<SelfClearCache @time={{this.lastTime}} />`);
+    this.set('onCacheClear', function () {
+      assert.step(CACHE_CLEAR_CLICKED);
+    });
 
-    const btn = assert.dom('[data-test-clear-cache-btn]');
-    assert.equal(
-      btn.hasAttribute('disabled'),
-      false,
-      'Button is enabled right now'
-    );
+    await render(hbs`
+      <SelfClearCache
+        @lastClearedOn={{this.lastTime}}
+        @onCacheClear={{this.onCacheClear}}
+      />
+    `);
 
+    // Act
+    const btn = find('[data-test-btn-clear-cache]');
     await click(btn);
 
-    assert.equal(
-      btn.hasAttribute('disabled'),
-      true,
-      'Button got disabled post clicking'
-    );
+    // Assert
+    assert.verifySteps([CACHE_CLEAR_CLICKED]);
   });
 
-  skip('Show the total number times user has already cleared the cache that day', async function (assert) {
+  skip('it disables button after a click', async function (assert) {
     assert.expect(1);
 
-    this.set('lastTime', '23 March 1:23 pm IST');
-    this.set('totalTimes', '3');
+    // Assemble
+    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
+    this.set('lastTime', EPOCH_TIMESTAMP);
+
+    this.set('onCacheClear', function () {
+      assert.step(CACHE_CLEAR_CLICKED);
+    });
 
     await render(hbs`
-    <SelfClearCache @time={{this.lastTime}} 
-    @totalTimes={{this.totalTimes}} />`);
+      <SelfClearCache
+        @lastClearedOn={{this.lastTime}}
+        @onCacheClear={{this.onCacheClear}}
+      />
+    `);
 
-    assert.equal(
-      assert
-        .dom('[data-test-pending-requests]')
-        .hasText('3 / 3 requests remaing for today'),
-      true,
-      'Text starts with 3 / 3'
-    );
+    // Act
+    const btn = find('[data-test-btn-clear-cache]');
+    await click(btn);
+    await click(btn); // Another click -- This should not fire
+
+    // Assert
+    assert.verifySteps([CACHE_CLEAR_CLICKED]);
   });
 
-  skip('Clear cache button should be disabled if user has already depleted the thresold upto which he can clear cache in a day', async function (assert) {
-    assert.expect(2);
+  skip('it shows the number of times cache has already been cleared', async function (assert) {
+    assert.expect(1);
 
-    this.set('lastTime', '23 March 1:23 pm IST');
-    this.set('totalTimes', '3');
+    // Assemble
+    this.set('lastTime', EPOCH_TIMESTAMP);
+    this.set('totalTimes', 2);
+    this.set('allowedLimit', 3);
 
     await render(hbs`
-    <SelfClearCache @time={{this.lastTime}} 
-    @totalTimes={{this.totalTimes}} />`);
+      <SelfClearCache
+        @time={{this.lastTime}} 
+        @countCleared={{this.totalTimes}}
+        @allowedLimit={{this.maxallowedLimit}}
+      />
+    `);
 
-    assert.equal(
-      assert.dom('[data-test-clear-cache-btn]').hasAttribute('disabled'),
-      true,
-      'Button is Disabled.'
-    );
+    // Assert
+    assert.dom('[data-test-pending-requests]').hasText('2 / 3');
+  });
+
+  skip('it disables the button if already reached allowed limit', async function (assert) {
+    assert.expect(2);
+
+    // Assemble
+    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
+
+    this.set('lastTime', EPOCH_TIMESTAMP);
+    this.set('totalTimes', 3);
+    this.set('allowedLimit', 3);
+
+    this.set('onCacheClear', function () {
+      assert.step(CACHE_CLEAR_CLICKED);
+    });
+
+    await render(hbs`
+      <SelfClearCache
+        @time={{this.lastTime}} 
+        @countCleared={{this.totalTimes}}
+        @allowedLimit={{this.maxallowedLimit}}
+        @onCacheClear={{this.onCacheClear}}
+      />
+    `);
+
+    // Act
+    const btn = find('[data-test-btn-clear-cache]');
+    await click(btn);
+
+    // Assert
+    assert.verifySteps([]);
   });
 });
