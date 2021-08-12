@@ -1,4 +1,38 @@
 {{page-title 'Profile'}}
+
+<form class="form">                                                                                                                                                     [5/12]
+  <h2>{{this.title}}</h2>
+
+  {{#each this.fields as |field|}}
+    <FormInput
+      @id={{field.id}}
+      @for={{field.for}}
+      @label={{field.label}}
+      @type={{field.type}}
+      @value={{get @model field.id}}
+      @placeholder={{field.placeholder}}
+      @errorMessage={{field.errorMessage}}
+      @required={{field.required}}
+      @showError={{field.showError}}
+      @helpMsg={{field.helpMsg}}
+      @onChange={{this.handleFieldChange}}
+      @validator={{field.validator}}
+      @disabled={{field.disabled}}
+    />
+  {{/each}}
+
+  <button
+    class='submitButton'
+    type="submit"
+    {{on 'click' (fn this.handleSubmit)}}
+  >
+    {{#if this.isSubmitClicked}}
+      <i class="fa fa-spinner fa-spin"></i>
+    {{/if}}
+    Submit
+  </button>
+</form>
+
 <div class="profile-container">
   <h1>
     Upload Image
