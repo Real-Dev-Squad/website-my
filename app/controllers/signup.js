@@ -43,7 +43,7 @@ export default class SignupController extends Controller {
   @tracked fields = [
     {
       id: 'first_name',
-      label: 'First Name',
+      label: 'First Name. *',
       type: 'text',
       placeholder: 'Darth',
       errorMessage: 'First name is required',
@@ -52,7 +52,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'last_name',
-      label: 'Last Name',
+      label: 'Last Name. *',
       type: 'text',
       placeholder: 'Vader',
       errorMessage: 'Last name is required',
@@ -61,18 +61,18 @@ export default class SignupController extends Controller {
     },
     {
       id: 'username',
-      label: 'Username for Real Dev Squad',
+      label: 'Username for Real Dev Squad. *',
       type: 'text',
       placeholder: 'e.g anakin, or some other unique username',
       errorMessage: 'Username is required',
       required: true,
       showError: false,
       validator: this.userNameValidator,
-      helpMsg: `Your username should start with your first name. Spaces are are not allowed but hyphens are. Example: If your name is John Doe, then your username can be 'john' or 'john-doe'`,
+      helpMsg: `Your username should start with your first name. Spaces are  not allowed but hyphens are. Example: If your name is John Doe, then your username can be 'john' or 'john-doe'`,
     },
     {
       id: 'email',
-      label: 'Email',
+      label: 'Email. *',
       type: 'email',
       placeholder: 'lukespapa@gmail.com',
       errorMessage: 'Valid Email is required',
@@ -92,7 +92,7 @@ export default class SignupController extends Controller {
     // },
     {
       id: 'yoe',
-      label: 'Years of Experience',
+      label: 'Years of Experience. *',
       type: 'number',
       placeholder: 'How many years have you worked?',
       errorMessage: 'Number of years of experience is required',
@@ -119,7 +119,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'linkedin_id',
-      label: 'LinkedIn ID (Not the full URL)',
+      label: 'LinkedIn ID (Not the full URL). *',
       placeholder: 'anakin-skywalker-007 i.e just the ID part',
       type: 'text',
       errorMessage: 'LinkedIn username is required',
@@ -137,7 +137,7 @@ export default class SignupController extends Controller {
     },
     {
       id: 'twitter_id',
-      label: 'Twitter username (Not the full URL)',
+      label: 'Twitter username (Not the full URL). *',
       placeholder: 'anakin7',
       type: 'text',
       errorMessage: 'Twitter handle is required',
