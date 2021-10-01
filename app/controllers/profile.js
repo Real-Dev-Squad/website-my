@@ -54,7 +54,7 @@ export default class ProfileController extends Controller {
       errorMessage: 'First name is required',
       required: true,
       showError: false,
-      disabled: false,
+      disabled: true,
     },
     {
       id: 'last_name',
@@ -64,7 +64,7 @@ export default class ProfileController extends Controller {
       errorMessage: 'Last name is required',
       required: true,
       showError: false,
-      disabled: false,
+      disabled: true,
     },
     {
       id: 'username',
