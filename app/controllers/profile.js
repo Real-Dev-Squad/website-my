@@ -90,7 +90,7 @@ export default class ProfileController extends Controller {
     },
     {
       id: 'company',
-      label: 'Company Name / College Name (Optional)',
+      label: 'Company Name / College Name',
       type: 'text',
       placeholder: 'Where do you currently work? Death Star? Rebel Base?',
       showError: false,
@@ -114,7 +114,7 @@ export default class ProfileController extends Controller {
     },
     {
       id: 'instagram_id',
-      label: 'Instagram ID (Optional)',
+      label: 'Instagram ID',
       placeholder: 'ForceWielder77',
       type: 'text',
       showError: false,
