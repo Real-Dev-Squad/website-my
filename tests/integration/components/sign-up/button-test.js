@@ -1,6 +1,6 @@
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | sign-up/button', function (hooks) {
@@ -70,45 +70,5 @@ module('Integration | Component | sign-up/button', function (hooks) {
     `);
 
     assert.dom('[data-test-signup-button-spinner]').doesNotExist();
-  });
-
-  skip('Click event should not execute if button is disabled', async function (assert) {
-    assert.expect(1);
-    this.set('inputValue', 'Get Started');
-    this.set('clickFnc', () => {
-      this.set('isClicked', true);
-    });
-
-    await render(hbs`
-      <SignUp::Button @disabled={{true}}>{{inputValue}}</SignUp::Button>
-    `);
-
-    const button = this.element.querySelector(
-      '[data-test-signup-button-spinner]'
-    );
-    button.addEventListener('click', this.clickFn);
-
-    await click(button);
-    assert.notStrictEqual(this.isClicked, true);
-  });
-
-  skip('Click event should execute if button is not disabled', async function (assert) {
-    assert.expect(1);
-    this.set('inputValue', 'Get Started');
-    this.set('clickFnc', () => {
-      this.set('isClicked', true);
-    });
-
-    await render(hbs`
-      <SignUp::Button>{{inputValue}}</SignUp::Button>
-    `);
-
-    const button = this.element.querySelector(
-      '[data-test-signup-button-spinner]'
-    );
-    button.addEventListener('click', this.clickFn);
-
-    await click(button);
-    assert.strictEqual(this.isClicked, true);
   });
 });
