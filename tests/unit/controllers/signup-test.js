@@ -5,7 +5,7 @@ module('Unit | Controller | signup', function (hooks) {
   setupTest(hooks);
   test('it test', function (assert) {
     let controller = this.owner.lookup('controller:signup');
-    assert.expect(120);
+    assert.expect(46);
     assert.equal(
       controller.isSubmitClicked,
       false,
@@ -65,84 +65,6 @@ module('Unit | Controller | signup', function (hooks) {
         errorMessage: 'Username is required',
         required: true,
         showError: false,
-        validator: this.userNameValidator,
-        helpMsg: `Your username should start with your first name. Spaces are are not allowed but hyphens are. Example: If your name is John Doe, then your username can be 'john' or 'john-doe'`,
-      },
-      {
-        id: 'email',
-        label: 'Email',
-        type: 'email',
-        placeholder: 'lukespapa@gmail.com',
-        errorMessage: 'Valid Email is required',
-        required: true,
-        showError: false,
-        validator: this.emailValidator,
-      },
-      {
-        id: 'yoe',
-        label: 'Years of Experience',
-        type: 'number',
-        placeholder: 'How many years have you worked?',
-        errorMessage: 'Number of years of experience is required',
-        required: true,
-        showError: false,
-      },
-      {
-        id: 'company',
-        label: 'Company Name / College Name (Optional)',
-        type: 'text',
-        placeholder: 'Where do you currently work? Death Star? Rebel Base?',
-        errorMessage: '',
-        required: false,
-        showError: false,
-      },
-      {
-        id: 'designation',
-        label: 'Designation (Optional)',
-        placeholder: 'Supreme Commander',
-        type: 'text',
-        errorMessage: '',
-        required: false,
-        showError: false,
-      },
-      {
-        id: 'linkedin_id',
-        label: 'LinkedIn ID (Not the full URL)',
-        placeholder: 'anakin-skywalker-007 i.e just the ID part',
-        type: 'text',
-        errorMessage: 'LinkedIn username is required',
-        required: true,
-        showError: false,
-      },
-      {
-        id: 'instagram_id',
-        label: 'Instagram ID (Optional)',
-        placeholder: 'ForceWielder77',
-        type: 'text',
-        errorMessage: '',
-        required: false,
-        showError: false,
-      },
-      {
-        id: 'twitter_id',
-        label: 'Twitter username (Not the full URL)',
-        placeholder: 'anakin7',
-        type: 'text',
-        errorMessage: 'Twitter handle is required',
-        required: true,
-        showError: false,
-      },
-      {
-        id: 'website',
-        label: 'Website (Optional)',
-        placeholder: 'Your portfolio website if any. e.g mysonisajedi.com',
-        type: 'text',
-        errorMessage: '',
-        required: false,
-        showError: false,
-      },
-      {
-        id: 'phone',
       },
     ];
 
@@ -160,8 +82,6 @@ module('Unit | Controller | signup', function (hooks) {
         `initially formErrors.${ele.id} is false`
       )
     );
-
-    formElements.pop();
 
     formElements.map((ele, index) => {
       assert.equal(
