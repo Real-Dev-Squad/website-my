@@ -68,7 +68,6 @@ export default class ProfileController extends Controller {
       type: 'text',
       placeholder: 'e.g anakin, or some other unique username',
       showError: false,
-      validator: this.userNameValidator,
       disabled: true,
     },
     {
@@ -140,17 +139,11 @@ export default class ProfileController extends Controller {
 
   timerId = undefined;
 
-  //Debounce Function
-  debounce(func, delay) {
-    clearTimeout(this.timerId);
-    this.timerId = setTimeout(func, delay);
-  }
-
   @action handleFieldChange(name, value) {
     const index = this.fields.findIndex((field) => field.id === name);
     set(this.formData, name, value);
 
-    if (this.fields[index].required && !value) {
+    if (!value) {
       this.isSubmitDisabled = true;
       set(this.fields[index], 'showError', true);
     } else if (!this.fields[index].validator) {
@@ -158,58 +151,10 @@ export default class ProfileController extends Controller {
     }
 
     const anyErrors = this.fields.map((field) => {
-      return !!(field.required && this.formData[field.id] === '');
+      return !!(this.formData[field.id] === '');
     });
 
     this.isSubmitDisabled = !anyErrors.filter(Boolean).length;
-  }
-
-  async checkUserName(userName) {
-    if (!userName) {
-      return set(this.fields[2], 'errorMessage', 'Username cannot be empty');
-    }
-    try {
-      const lowerCaseUsername = userName.toLowerCase();
-      const response = await fetch(
-        `${BASE_URL}/users/isUsernameAvailable/${lowerCaseUsername}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        }
-      );
-      const data = await response.json();
-      const { isUsernameAvailable } = data;
-      set(this.fields[2], 'showError', !isUsernameAvailable);
-      set(
-        this.fields[2],
-        'errorMessage',
-        `${userName} is not available, Choose another username!`
-      );
-    } catch (error) {
-      console.error('Error : ', error);
-    }
-  }
-
-  @action async userNameValidator(userName) {
-    this.debounce(() => this.checkUserName(userName), 500);
-  }
-
-  @action phoneNumberValidator(phone) {
-    if (typeof phone !== 'string') {
-      return false;
-    }
-
-    const pattern = /^(0|[+91]{3})?[7-9][0-9]{9}$/;
-    const index = this.fields.findIndex((field) => field.id === 'phone');
-
-    if (pattern.test(phone)) {
-      set(this.fields[index], 'showError', false);
-    } else {
-      set(this.fields[index], 'showError', true);
-    }
   }
 
   @action emailValidator(email) {
@@ -231,6 +176,8 @@ export default class ProfileController extends Controller {
     for (const field in objectRequested) {
       if (!objectRequested[field]) {
         delete objectRequested[field];
+      } else if (field === 'yoe') {
+        objectRequested[field] = parseInt(objectRequested[field]);
       }
     }
     return objectRequested;
@@ -242,7 +189,6 @@ export default class ProfileController extends Controller {
     e.preventDefault();
     const cleanReqObject = this.removeEmptyFields(this.formData);
     this.isSubmitClicked = true;
-    cleanReqObject.username = cleanReqObject.username.toLowerCase();
     try {
       const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
