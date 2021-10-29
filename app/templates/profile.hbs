@@ -1,6 +1,6 @@
 {{page-title 'Profile'}}
 
-<a href="#image-upload">Click here to upload image</a>
+<a class="image-upload-link" href="#image-upload">Click here to upload image</a>
 
 <form class="form">
   <h1>{{this.title}}</h1>
@@ -32,7 +32,7 @@
   <h1>
     Upload Image
   </h1>
-  <p>( Max size 2Mb )</p>
+  <p>( Max size 2MB )</p>
   <UploadImage
     @uploadUrl={{this.imageUploadUrl}}
     @formKeyName={{this.formDataKeyName}} />
