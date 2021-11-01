@@ -6,20 +6,46 @@
 @import "local-navbar.css";
 @import "profile.css";
 
-html, body {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Roboto', sans-serif, serif;
-  font-size: 15px;
-  height: 100%;
-  background-color: white;
-  min-height: 100vh;
+
+.darkTheme {
+  --colorBackground: #1C1B22;
+  --colorLink: #0080FF;
+  --colorHighlight: #FF0090;
+  --colorText: #E1E1EC;
+  --colorCardBg: #312F3B;
+  --taskButton: #3e3c3c;
+  --browseButton: #35393b;
+  --browseHover: #2b2f31;
+  --selectStatus: #181a1b;
+}
+
+.lightTheme {
+  --colorBackground: white;
+  --colorLink: #0000ee;
+  --colorHighlight: #FF0090;
+  --colorText: black;
+  --colorCardBg: #312F3B;
+  --taskButton: #f1f1f1;
+  --browseButton: #ccc;
+  --browseHover: #ddd;
+  --selectStatus: white;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif, serif;
+  font-size: 15px;
+  height: 100%;
+  background-color: var(--colorBackground);
+  color: var(--colorText);
+  min-height: 100vh;
 }
 
 .main-container {
@@ -41,4 +67,8 @@ html, body {
   text-align: center;
   width: 100%;
   padding: 16px;
+}
+
+.footer a {
+  color: var(--colorLink);
 }
