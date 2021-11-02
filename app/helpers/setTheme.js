@@ -14,11 +14,9 @@ function setTheme() {
     if (obj.mode === 'dark') {
       const img = document.getElementById('themeLogo');
       img.src = 'assets/sun.png';
-      document.body.classList.remove('lightTheme');
-      document.body.classList.add('darkTheme');
+      setCookie.compute('dark');
     } else {
-      document.body.classList.remove('darkTheme');
-      document.body.classList.add('lightTheme');
+      setCookie.compute('light');
     }
   }
 }
