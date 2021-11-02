@@ -8,7 +8,6 @@
 @import 'get-started.css';
 @import 'components/input-field.css';
 
-
 .darkTheme {
   --colorBackground: #1C1B22;
   --colorLink: #0080FF;
