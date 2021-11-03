@@ -21,15 +21,15 @@
 }
 
 .lightTheme {
-  --colorBackground: white;
+  --colorBackground: #fff;
   --colorLink: #0000ee;
   --colorHighlight: #FF0090;
-  --colorText: black;
+  --colorText: #000;
   --colorCardBg: #312F3B;
   --taskButton: #f1f1f1;
   --browseButton: #ccc;
   --browseHover: #ddd;
-  --selectStatus: white;
+  --selectStatus: #fff;
 }
 
 * {

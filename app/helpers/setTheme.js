@@ -8,10 +8,11 @@ function setTheme() {
     const [key, value] = cookie.split('=');
     obj = { ...obj, [key.trim()]: value };
   }
-  if (!Object.prototype.hasOwnProperty.call(obj, 'mode')) {
+
+  if (!Object.prototype.hasOwnProperty.call(obj, 'theme')) {
     setCookie.compute('light');
   } else {
-    if (obj.mode === 'dark') {
+    if (obj.theme === 'dark') {
       const img = document.getElementById('themeLogo');
       img.src = 'assets/sun.png';
       setCookie.compute('dark');
