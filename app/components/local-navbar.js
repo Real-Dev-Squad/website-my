@@ -5,14 +5,11 @@ import setCookie from '../helpers/setCookie';
 export default class ExampleComponent extends Component {
   @action
   changeTheme(event) {
-    const sunURL = 'assets/sun.png';
-    const moonURL = 'assets/moon.png';
-
     if (event.target.src === 'https://dev.realdevsquad.com/assets/moon.png') {
-      event.target.src = sunURL;
+      event.target.src = 'assets/sun.png';
       setCookie.compute('dark');
     } else {
-      event.target.src = moonURL;
+      event.target.src = 'assets/moon.png';
       setCookie.compute('light');
     }
   }
