@@ -1,23 +1,26 @@
 import { helper } from '@ember/component/helper';
 import setCookie from './setCookie';
+import { SUN_URL, THEME } from '../constants/theme';
 
 function setTheme() {
-  const allCookies = document.cookie.split(';');
-  let obj = {};
-  for (let cookie of allCookies) {
-    const [key, value] = cookie.split('=');
-    obj = { ...obj, [key.trim()]: value };
-  }
+  const getCookies = document.cookie.split(';');
+  let cookies = {};
 
-  if (!Object.prototype.hasOwnProperty.call(obj, 'theme')) {
-    setCookie.compute('light');
+  //storing cookie as key value pair in Object
+  getCookies.forEach((cookie) => {
+    const [key, value] = cookie.split('=');
+    cookies = { ...cookies, [key.trim()]: value };
+  });
+
+  if (!Object.prototype.hasOwnProperty.call(cookies, 'theme')) {
+    setCookie.compute(THEME.LIGHT);
   } else {
-    if (obj.theme === 'dark') {
+    if (cookies.theme === THEME.DARK) {
       const img = document.getElementById('themeLogo');
-      img.src = 'assets/sun.png';
-      setCookie.compute('dark');
+      img.src = SUN_URL;
+      setCookie.compute(THEME.DARK);
     } else {
-      setCookie.compute('light');
+      setCookie.compute(THEME.LIGHT);
     }
   }
 }
