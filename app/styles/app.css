@@ -7,6 +7,23 @@
 @import 'profile.css';
 @import 'get-started.css';
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif, serif;
+  font-size: 15px;
+  height: 100%;
+  background-color: var(--colorBackground);
+  color: var(--colorText);
+  min-height: 100vh;
+}
+
 .darkTheme {
   --colorBackground: #1C1B22;
   --colorLink: #0080FF;
@@ -29,23 +46,6 @@
   --browseButton: #ccc;
   --browseHover: #ddd;
   --selectStatus: #fff;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Roboto', sans-serif, serif;
-  font-size: 15px;
-  height: 100%;
-  background-color: var(--colorBackground);
-  color: var(--colorText);
-  min-height: 100vh;
 }
 
 .main-container {
