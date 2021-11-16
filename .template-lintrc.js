@@ -4,7 +4,7 @@ module.exports = {
   extends: 'octane',
 
   rules: {
-    'no-curly-component-invocation': { allow: ['setTheme'] },
-    'no-implicit-this': { allow: ['setTheme'] },
+    'no-curly-component-invocation': { allow: ['initialTheme'] },
+    'no-implicit-this': { allow: ['initialTheme'] },
   },
 };
