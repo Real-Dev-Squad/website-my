@@ -21,9 +21,8 @@ export default class IndexController extends Controller {
         },
         credentials: 'include',
       });
-      const { status } = response;
-      if (status !== 204) {
-        alert('Something went wrong. Please check console errors.');
+      if (!response.ok) {
+        alert('Something went wrong!');
       }
     } catch (error) {
       console.error('Error : ', error);
