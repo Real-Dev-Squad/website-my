@@ -17,7 +17,7 @@ h1 {
   min-width: 300px;
   margin: 40px auto;
   padding: 3em 1.5em;
-  background-color: rgb(231, 231, 231);
+  background-color: var(--profileForm);
   border-radius: 8px;
 }
 
