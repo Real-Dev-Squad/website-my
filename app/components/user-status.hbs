@@ -1,24 +1,16 @@
 <div class="heading">
-  {{#if (eq @status "active")}}
-    <h2 data-test-status>I am doing a task</h2>
-  {{/if}}
-  {{#if (eq @status "idle")}}
-    <h2 data-test-status>I am idle</h2>
-  {{/if}}
-  {{#if (eq @status "ooo")}}
-    <h2 data-test-status>I am OOO</h2>
-  {{/if}}
+  {{#each this.currentUserStatus as |currentStatus|}}
+    {{#if (eq @status currentStatus.status)}}
+      <h2 data-test-status>{{currentStatus.message}}</h2>
+    {{/if}}
+  {{/each}}
 </div>
+
 <div class="buttons">
-  {{#if (eq @status "active")}}
-    <button class="buttons__idle" type="button" {{on "click" (fn @onUpdateStatus 'idle')}}><span data-test-button-text>Change status to ‘Idle’</span></button>
-    <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus 'ooo' )}}><span>Mark yourself as OOO</span></button>
-  {{/if}}
-  {{#if (eq @status "idle")}}
-    <button class="buttons__active" type="button" data-test-button {{on "click" (fn @onUpdateStatus 'active')}}><span data-test-button-text>Change status to ‘Doing a task’</span></button>
-    <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus 'ooo' )}}><span>Mark yourself as OOO</span></button>
-  {{/if}}
-  {{#if (eq @status "ooo")}}
-    <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus 'active' )}}><span>Mark yourself as Active again</span></button>
-  {{/if}}
+  {{#each this.currentUserStatus as |currentStatus|}}
+    {{#if (eq @status currentStatus.status)}}
+      <button class={{currentStatus.class}} type="button" {{on "click" (fn @onUpdateStatus currentStatus.update )}}><span>{{currentStatus.buttonText}}</span></button>
+      <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus currentStatus.update2 )}}><span>{{currentStatus.buttonText2}}</span></button>
+    {{/if}}
+  {{/each}}
 </div>
