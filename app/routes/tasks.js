@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import ENV from 'website-my/config/environment';
+import { action } from '@ember/object';
 
 const API_BASE_URL = ENV.BASE_API_URL;
 
@@ -24,4 +25,9 @@ export default class TasksRoute extends Route {
       );
     }
   };
+
+  @action
+  loading() {
+    return true;
+  }
 }

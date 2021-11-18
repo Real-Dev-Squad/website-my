@@ -44,3 +44,9 @@ body {
   width: 100%;
   padding: 16px;
 }
+
+.loading {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 24px;
+}
