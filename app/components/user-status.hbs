@@ -9,8 +9,12 @@
 <div class="buttons">
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
-      <button class={{currentStatus.class}} type="button" data-test-button {{on "click" (fn @onUpdateStatus currentStatus.update )}}><span data-test-button-text>{{currentStatus.buttonText}}</span></button>
-      <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus currentStatus.update2 )}}><span>{{currentStatus.buttonText2}}</span></button>
+      <button class={{currentStatus.class}} type="button" data-test-button {{on "click" (fn @onUpdateStatus currentStatus.update )}}>
+        <span data-test-button-text>{{currentStatus.buttonText}}</span>
+      </button>
+      <button class="buttons--small" type="button" {{on "click" (fn @onUpdateStatus currentStatus.update2 )}}>
+        <span>{{currentStatus.buttonText2}}</span>
+      </button>
     {{/if}}
   {{/each}}
 </div>

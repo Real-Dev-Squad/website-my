@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+  cursor: pointer;
 }
 
 .buttons__idle {
@@ -39,4 +40,9 @@
   font-weight: 700;
   color: #0034a5;
   border: none;
+  background: #fff;
+}
+
+.buttons {
+  transition: all 0.5s linear;
 }
