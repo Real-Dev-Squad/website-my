@@ -4,13 +4,13 @@ import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import fillIn from '@ember/test-helpers/dom/fill-in';
 
-module('Integration | Component | form-input', function (hooks) {
+module('Integration | Component | form-input-validator', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
     // Assemble
     await render(hbs`
-      <FormInput />
+      <FormInputValidator />
     `);
 
     // Assert
@@ -20,7 +20,7 @@ module('Integration | Component | form-input', function (hooks) {
   test('it shows the error', async function (assert) {
     // Assemble
     await render(hbs`
-      <FormInput
+      <FormInputValidator
         @errorMessage={{'SAMPLE ERROR'}}
         @required={{true}}
         @showError={{true}}
@@ -46,7 +46,7 @@ module('Integration | Component | form-input', function (hooks) {
     });
 
     await render(hbs`
-      <FormInput
+      <FormInputValidator
         @type={{NUMBER_TYPE}}
         @value={{this.inputValue}}
         @onChange={{this.onChange}}
@@ -74,7 +74,7 @@ module('Integration | Component | form-input', function (hooks) {
     });
 
     await render(hbs`
-      <FormInput
+      <FormInputValidator
         @type={{STRING_TYPE}}
         @value={{this.inputValue}}
         @onChange={{this.onChange}}
