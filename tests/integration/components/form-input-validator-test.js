@@ -36,6 +36,8 @@ module('Integration | Component | form-input-validator', function (hooks) {
     const NUMBER_TYPE = 'number';
     const NUMBER_INPUT = 12345;
 
+    this.set('NUMBER_TYPE', NUMBER_TYPE);
+
     // Assemble
     this.set('onChange', (inputValue) => {
       this.set('inputValue', inputValue);
@@ -47,7 +49,7 @@ module('Integration | Component | form-input-validator', function (hooks) {
 
     await render(hbs`
       <FormInputValidator
-        @type={{NUMBER_TYPE}}
+        @type={{this.NUMBER_TYPE}}
         @value={{this.inputValue}}
         @onChange={{this.onChange}}
       />
@@ -64,6 +66,8 @@ module('Integration | Component | form-input-validator', function (hooks) {
     const STRING_TYPE = 'string';
     const STRING_INPUT = '12345';
 
+    this.set('STRING_TYPE', STRING_TYPE);
+
     // Assemble
     this.set('onChange', (inputValue) => {
       this.set('inputValue', inputValue);
@@ -75,7 +79,7 @@ module('Integration | Component | form-input-validator', function (hooks) {
 
     await render(hbs`
       <FormInputValidator
-        @type={{STRING_TYPE}}
+        @type={{this.STRING_TYPE}}
         @value={{this.inputValue}}
         @onChange={{this.onChange}}
       />
