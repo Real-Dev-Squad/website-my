@@ -55,41 +55,6 @@
   position: relative;
 }
 
-/* .percent-20 {
-  width: 20%;
-}
-
-.percent-40 {
-  width: 40%;
-}
-
-.percent-60 {
-  width: 60%;
-}
-
-.percent-80 {
-  width: 80%;
-}
-
-.bar {
-  height: 100%;
-  background-color: #041484;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, .2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, .2) 50%,
-    rgba(255, 255, 255, .2) 75%,
-    transparent 75%,
-    transparent
-  );
-  background-size: 30px 30px;
-  animation: move 2s linear infinite;
-  box-shadow: 2px 0 10px inset rgba(0,0,0,0.2);
-  transition: width 2s ease-out;
-} */
-
 .progress-bar-container{
   padding: 1em;
 }
