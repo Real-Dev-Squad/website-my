@@ -14,8 +14,8 @@
 }
 
 .input-field input {
-  padding: 1em;
-  border: #666 1px solid;
+  padding: 1rem;
+  border: 1px solid #666;
   border-radius: 5px;
   width: 100%;
 }
@@ -31,7 +31,7 @@
 }
 
 .help-msg {
-  font-size: 10px;
+  font-size: 0.8rem;
   text-align: left;
 }
 

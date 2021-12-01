@@ -6,7 +6,7 @@
     value={{@value}}
     placeholder={{@placeholder}}
     disabled={{@disabled}}
-    class={{if @showError 'input error-border' 'input'}}
+    class="input-field {{if @showError 'error-border'}}"
     {{on 'input' (fn this.handleInputFieldChange)}}
   />
 

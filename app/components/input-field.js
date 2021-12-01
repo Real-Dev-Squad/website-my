@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 export default class InputFieldComponent extends Component {
   @action handleInputFieldChange(event) {
     let inputValue;
-    const { type, onChange, validator } = this.args;
+    const { type, onChange } = this.args;
     const { value } = event.target;
 
     switch (type) {
@@ -20,10 +20,6 @@ export default class InputFieldComponent extends Component {
       default:
         inputValue = value;
         console.warn('Unknown type detected! Keeping the value as string');
-    }
-
-    if (typeof validator === 'function') {
-      validator(inputValue);
     }
 
     onChange(inputValue);
