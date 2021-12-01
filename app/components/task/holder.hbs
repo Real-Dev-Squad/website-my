@@ -2,8 +2,15 @@
   <Task-Details @task={{@task}} />
   <div class="progress-bar-container">
     <div class="progress-bar">
-      <input id="input" type="range" name="percentCompleted" value="{{@task.percentCompleted}}" min="0" max="100" step="25" {{on "change" this.onPercentageChange}} {{on "change" (fn @onTaskUpdate @task.id)}}
-      list="status"/>
+      <input
+        id="input"
+        type="range"
+        name="percentCompleted"
+        value="{{@task.percentCompleted}}"
+        min="0" max="100" step="25"
+        {{on "change" this.onPercentageChange}}
+        {{on "change" (fn @onTaskUpdate @task.id)}}
+      />
       </div>
     </div>
 </div>

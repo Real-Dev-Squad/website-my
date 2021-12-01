@@ -64,13 +64,6 @@ input[type=range] {
   width: 80%;
 }
 
-.input{
-  overflow: hidden;
-}
-
-input[type=range]:focus {
-  outline: none;
-}
 input[type=range]::-webkit-slider-runnable-track {
   width: 50%;
   height: 5px;
