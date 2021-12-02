@@ -1,4 +1,4 @@
-.input-field {
+.input-field__container {
   width: 100%;
   margin-bottom: 1em;
   display: flex;
@@ -7,25 +7,24 @@
   align-items: flex-start;
 }
 
-.input-field label {
+.input-field__container label {
   font-size: 1rem;
   font-weight: bold;
   padding: 10px 0;
 }
 
-.input-field input {
+.input-field {
   padding: 1rem;
   border: 1px solid #666;
   border-radius: 5px;
   width: 100%;
 }
 
-.input-field input:focus {
+.input-field:focus {
   border: 1px solid rgb(0, 81, 255);
-  outline: 1px solid transparent;
 }
 
-.input-field > .error {
+.error {
   font-size: 0.8rem;
   color: #e74c3c;
 }
@@ -36,5 +35,5 @@
 }
 
 .error-border {
-  border: 1px solid red !important;
+  border: 1px solid red;
 }
