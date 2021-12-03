@@ -36,6 +36,8 @@ module('Integration | Component | input-field', function (hooks) {
     const NUMBER_TYPE = 'number';
     const NUMBER_INPUT = 12345;
 
+    this.set('NUMBER_TYPE', NUMBER_TYPE);
+
     // Assemble
     this.set('onChange', (inputValue) => {
       this.set('inputValue', inputValue);
@@ -63,6 +65,8 @@ module('Integration | Component | input-field', function (hooks) {
   test('it returns the right type of input entered for string', async function (assert) {
     const STRING_TYPE = 'string';
     const STRING_INPUT = '12345';
+
+    this.set('STRING_TYPE', STRING_TYPE);
 
     // Assemble
     this.set('onChange', (inputValue) => {
