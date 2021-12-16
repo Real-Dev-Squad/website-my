@@ -1,6 +1,6 @@
 .tasks-page {
   display: flex;
-  color: black;
+  color: var(--colorText);
   margin-top: 40px;
 }
 
@@ -103,12 +103,16 @@
   border-radius: 5px;
   cursor: pointer;
   text-transform: capitalize;
+  background-color: var(--selectStatus);
+  color: var(--colorText);
 }
 
 .task-card__btn button {
   cursor: pointer;
   padding: 4px;
   border-radius: 5px;
+  color: var(--colorText);
+  background-color: var(--selectStatus);
 }
 
 .task-details__title, .task-details__purpose, .dates-info__start {

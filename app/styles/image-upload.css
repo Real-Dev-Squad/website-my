@@ -36,7 +36,7 @@
 .image-form__button {
   display: inline-block;
   padding: 10px;
-  background: #ccc;
+  background: var(--browseButton);
   cursor: pointer;
   font-size: 1.25rem;
   border-radius: 5px;
@@ -45,11 +45,11 @@
 }
 
 .image-form__button--disabled {
-  background: #ddd;
+  background: var(--browseHover);
 }
 
 .image-form__button:hover {
-  background: #ddd;
+  background: var(--browseHover);
 }
 
 .image-form__input {
