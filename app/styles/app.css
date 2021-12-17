@@ -23,6 +23,7 @@ html, body {
   background-color: var(--colorBackground);
   color: var(--colorText);
   min-height: 100vh;
+  transition: all 0.20s linear;
 }
 
 .darkTheme {
