@@ -11,7 +11,6 @@
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-  cursor: pointer;
 }
 
 .buttons__idle {
@@ -23,6 +22,7 @@
   margin-bottom: 40px;
   border-radius: 10px;
   background: #fff;
+  cursor: pointer;
 }
 
 .buttons__active {
@@ -34,6 +34,7 @@
   padding: 20px;
   margin-bottom: 40px;
   background: #fff;
+  cursor: pointer;
 }
 
 .buttons--small {
@@ -41,8 +42,5 @@
   color: #0034a5;
   border: none;
   background: #fff;
-}
-
-.buttons {
-  transition: all 0.5s linear;
+  cursor: pointer;
 }
