@@ -21,7 +21,7 @@ module('Unit | Controller | signup', function (hooks) {
       'get-started',
       'initially state is get-started'
     );
-    assert.equal(controller.dev, false, 'initially dev is false');
+    assert.equal(controller.dev, true, 'initially dev is true');
     assert.equal(
       controller.errorMessage,
       null,
