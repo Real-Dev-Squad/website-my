@@ -14,7 +14,7 @@ export default class SignupController extends Controller {
   @tracked isSubmitDisabled = true; // remove this when new flow goes live
 
   @tracked state = 'get-started';
-  @tracked dev = false;
+  @tracked dev = true;
   @tracked userDetails = {
     firstName: '',
     lastName: '',
