@@ -7,9 +7,10 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @tracked status = this.model;
+  @tracked isStatusUpdating = false;
 
   @action async updateStatus(status) {
-    this.status = status;
+    this.isStatusUpdating = true;
     try {
       const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
@@ -21,11 +22,13 @@ export default class IndexController extends Controller {
         },
         credentials: 'include',
       });
-      if (!response.ok) {
-        alert('Something went wrong!');
+      if (response.ok) {
+        this.status = status;
       }
     } catch (error) {
       console.error('Error : ', error);
+      alert(`Something went wrong!`);
     }
+    this.isStatusUpdating = false;
   }
 }
