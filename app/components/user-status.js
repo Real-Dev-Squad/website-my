@@ -23,9 +23,6 @@ export default class UserStatusComponent extends Component {
     {
       status: 'ooo',
       message: 'I am OOO',
-      class: '',
-      firstAvailableStatus: '',
-      firstStatusMessage: '',
       secondAvailableStatus: 'active',
       secondStatusMessage: 'Mark yourself as Active again',
     },
