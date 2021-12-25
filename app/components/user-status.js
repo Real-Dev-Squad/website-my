@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-
 export default class UserStatusComponent extends Component {
   currentUserStatus = [
     {
