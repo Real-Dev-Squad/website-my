@@ -9,6 +9,15 @@ export default class IndexRoute extends Route {
       credentials: 'include',
     });
     const userData = await response.json();
-    return userData.status ?? defaultStatus;
+    if (response.status === 401) {
+      alert('You are not logged in. Please login to continue.');
+      window.open(
+        'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
+        '_self'
+      );
+    }
+    if (response.status === 200 && !userData.incompleteUserDetails) {
+      return userData.status ?? defaultStatus;
+    }
   };
 }
