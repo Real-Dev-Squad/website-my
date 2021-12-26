@@ -28,7 +28,8 @@ export default class IndexController extends Controller {
     } catch (error) {
       console.error('Error : ', error);
       alert(`Something went wrong!`);
+    } finally {
+      this.isStatusUpdating = false;
     }
-    this.isStatusUpdating = false;
   }
 }
