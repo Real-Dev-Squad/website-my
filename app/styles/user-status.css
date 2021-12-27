@@ -41,6 +41,6 @@
   font-weight: 700;
   color: #0034a5;
   border: none;
-  background: #fff;
+  background: var(--colorBackground);
   cursor: pointer;
 }

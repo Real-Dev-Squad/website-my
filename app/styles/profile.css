@@ -12,4 +12,5 @@
   text-align: center;
   position: relative;
   margin: 40px auto;
+  color: var(--colorLink);
  }
