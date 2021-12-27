@@ -1,6 +1,8 @@
 {{page-title "My"}}
-<LocalNavbar/>
-{{initialTheme}}
+{{#if this.canShowNavBar}}
+  <LocalNavbar/>
+  {{initialTheme}}
+{{/if}}  
 <div class="main-container">
   {{outlet}}
 </div>
