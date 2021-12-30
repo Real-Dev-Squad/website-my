@@ -1,0 +1,37 @@
+<nav class="main-nav">
+  <button type="button" class="hamburger" {{on "click" this.toggleNav}}>
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <div class="nav-login">
+    <div class="user-greet">
+      <div class="user-greet-msg">Hello, {{@firstName}}!</div>
+      <img class="user-profile-pic" src={{@profilePictureURL}} alt="profile" />
+    </div>
+  </div>
+
+  <ul class="nav-menu {{if this.isOpen "" "active-nav"}}">
+    <li class="nav-logo-li">
+      <a href={{this.HOME_PAGE_URL}}>
+        <img src="RDSLogo.png" alt="RDS" height="50px" width="50px" />
+      </a>
+    </li>
+    <li class="home-tab"><a href={{this.HOME_PAGE_URL}}>Home</a></li>
+    <li><a href={{this.WELCOME_SITE_URL}}>Welcome</a></li>
+    <li><a href={{this.EVENTS_SITE_URL}}>Events</a></li>
+    <li><a href={{this.MEMBERS_SITE_URL}}>Members</a></li>
+    <li><a href={{this.CRYPTO_SITE_URL}}>Crypto</a></li>
+    <li><a href={{this.STATUS_SITE_URL}}>Status</a></li>
+    <li class="nav-login-li">
+      <div class="user-greet">
+        <div class="user-greet-msg">Hello, {{@firstName}}!</div>
+        <img
+          class="user-profile-pic"
+          src={{@profilePictureURL}}
+          alt="profile"
+        />
+      </div>
+    </li>
+  </ul>
+</nav>
