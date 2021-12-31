@@ -33,31 +33,31 @@ nav li a:hover {
   background-color: #1d1283;
 }
 
-.nav-logo-li {
+.nav__menu__logo {
   padding: 12px 20px;
 }
 
-.nav-logo-li a {
+.nav__menu__logo a {
   margin: 0px;
   padding: 0px;
 }
 
-.nav-login-li {
+.nav__user__li {
   float: right;
 }
 
-.nav-login,
-.home-tab {
+.user,
+.nav__menu__home {
   display: none;
 }
 
-.user-greet {
+.user__greet {
   /* display: none; */
   color: #ffffff;
   margin: 23px;
 }
 
-.user-profile-pic {
+.user__profile__pic {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -65,17 +65,17 @@ nav li a:hover {
   vertical-align: middle;
 }
 
-.user-greet-msg {
+.user__greet__msg {
   display: inline;
   vertical-align: middle;
   margin-right: 10px;
 }
 
-.hamburger {
+.hamburger--toggle {
   display: none;
 }
 
-.bar {
+.hamburger__bar {
   display: block;
   width: 25px;
   height: 3px;
@@ -84,11 +84,11 @@ nav li a:hover {
 }
 
 @media screen and (max-width: 970px) {
-  .main-nav {
+  .nav {
     background: #1d1283;
   }
 
-  .hamburger {
+  .hamburger--toggle {
     margin: 20px;
     display: inline-block;
     cursor: pointer;
@@ -109,7 +109,7 @@ nav li a:hover {
     display: block;
   }
 
-  .home-tab {
+  .nav__menu__home {
     display: block;
   }
 
@@ -121,7 +121,7 @@ nav li a:hover {
     display: block;
   }
 
-  .nav-login {
+  .user {
     display: block;
     margin: 20px;
     position: absolute;
@@ -129,8 +129,8 @@ nav li a:hover {
     right: 0px;
   }
 
-  .nav-login-li,
-  .nav-logo-li {
+  .nav__user__li,
+  .nav__menu__logo {
     display: none;
   }
 
@@ -138,7 +138,7 @@ nav li a:hover {
     float: none;
   }
 
-  .user-greet {
+  .user__greet {
     margin: 0px;
   }
 }

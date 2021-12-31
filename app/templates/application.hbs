@@ -1,14 +1,18 @@
 {{page-title "My"}}
+
 <Navbar
   @firstName={{@model.firstName}}
   @profilePictureURL={{@model.profilePictureURL}}
 />
+
 {{#if this.canShowNavBar}}
-  <LocalNavbar />
+  <LocalNavbar/>
 {{/if}}
+
 <div class="main-container">
   {{outlet}}
 </div>
+
 <footer class="footer">Contents of this website are deployed from this
   <a
     href="https://github.com/Real-Dev-Squad/website-my"

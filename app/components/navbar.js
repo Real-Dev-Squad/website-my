@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class NavbarComponent extends Component {
-  @tracked isNavOpen = true;
+  @tracked isNavOpen = false;
 
   // Linked Site URLs
   HOME_PAGE_URL = 'http://realdevsquad.com/';
