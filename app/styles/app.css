@@ -30,6 +30,8 @@ body {
   margin: 0;
   padding: 0;
   flex: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .greeting {
@@ -48,7 +50,9 @@ body {
 }
 
 .loading {
-  text-align: center;
-  margin-top: 5%;
-  font-size: 24px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
 }
