@@ -10,7 +10,7 @@
       </a>
     </li>
     <li class="nav__menu__home"><a href={{this.HOME_PAGE_URL}}>Home</a></li>
-    {{#each this.siteURLs as |siteURL|}}
+    {{#each this.RDS_APPS_MAPPING as |siteURL|}}
       <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
     {{/each}}
   </ul>

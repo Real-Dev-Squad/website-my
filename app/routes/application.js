@@ -13,11 +13,9 @@ export default class ApplicationRoute extends Route {
       });
       const userData = await response.json();
       if (response.status === 200 && !userData.incompleteUserDetails) {
-        const firstName = userData.first_name;
-        const profilePictureURL = userData.picture.url;
-        return (
-          { firstName, profilePictureURL } ?? { defaultName, defaultPicture }
-        );
+        const firstName = userData.first_name || defaultName;
+        const profilePictureURL = userData.picture.url || defaultPicture;
+        return { firstName, profilePictureURL };
       } else if (response.status === 401) {
         alert('You are not logged in. Please login to continue.');
         window.open(
@@ -27,9 +25,7 @@ export default class ApplicationRoute extends Route {
       }
     } catch (error) {
       console.error(error.message);
-      alert(
-        'API Fetch Request failed. Please use dev.realdevsquad.com to access RDS APIs'
-      );
+      alert('API Fetch Request failed');
     }
   };
 }

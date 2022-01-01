@@ -7,7 +7,7 @@ export default class NavbarComponent extends Component {
 
   HOME_PAGE_URL = 'http://realdevsquad.com/';
 
-  siteURLs = [
+  RDS_APPS_MAPPING = [
     {
       siteName: 'Welcome',
       url: 'https://welcome.realdevsquad.com/',
