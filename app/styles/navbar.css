@@ -46,13 +46,18 @@ nav li a:hover {
   float: right;
 }
 
-.user,
 .nav__menu__home {
   display: none;
 }
 
+.user {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+
 .user__greet {
-  /* display: none; */
   color: #ffffff;
   margin: 23px;
 }
@@ -75,14 +80,6 @@ nav li a:hover {
   display: none;
 }
 
-.hamburger__bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: #fff;
-}
-
 @media screen and (max-width: 970px) {
   .nav {
     background: #1d1283;
@@ -95,6 +92,7 @@ nav li a:hover {
     background: none;
     border: none;
     outline: none;
+    color: #fff;
   }
 
   .nav-menu {
@@ -121,14 +119,6 @@ nav li a:hover {
     display: block;
   }
 
-  .user {
-    display: block;
-    margin: 20px;
-    position: absolute;
-    top: 0;
-    right: 0px;
-  }
-
   .nav__user__li,
   .nav__menu__logo {
     display: none;
@@ -139,6 +129,6 @@ nav li a:hover {
   }
 
   .user__greet {
-    margin: 0px;
+    margin: 18px;
   }
 }

@@ -27,7 +27,9 @@ export default class ApplicationRoute extends Route {
       }
     } catch (error) {
       console.error(error.message);
-      alert('Failed');
+      alert(
+        'API Fetch Request failed. Please use dev.realdevsquad.com to access RDS APIs'
+      );
     }
   };
 }

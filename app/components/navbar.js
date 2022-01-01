@@ -5,13 +5,30 @@ import { action } from '@ember/object';
 export default class NavbarComponent extends Component {
   @tracked isNavOpen = false;
 
-  // Linked Site URLs
   HOME_PAGE_URL = 'http://realdevsquad.com/';
-  WELCOME_SITE_URL = 'https://welcome.realdevsquad.com/';
-  EVENTS_SITE_URL = 'http://realdevsquad.com/events.html';
-  MEMBERS_SITE_URL = 'https://members.realdevsquad.com/';
-  CRYPTO_SITE_URL = 'https://crypto.realdevsquad.com/';
-  STATUS_SITE_URL = 'https://status.realdevsquad.com/';
+
+  siteURLs = [
+    {
+      siteName: 'Welcome',
+      url: 'https://welcome.realdevsquad.com/',
+    },
+    {
+      siteName: 'Events',
+      url: 'http://realdevsquad.com/events.html',
+    },
+    {
+      siteName: 'Members',
+      url: 'https://members.realdevsquad.com/',
+    },
+    {
+      siteName: 'Crypto',
+      url: 'https://crypto.realdevsquad.com/',
+    },
+    {
+      siteName: 'Status',
+      url: 'https://status.realdevsquad.com/',
+    },
+  ];
 
   @action toggleNav() {
     this.isNavOpen = !this.isNavOpen;

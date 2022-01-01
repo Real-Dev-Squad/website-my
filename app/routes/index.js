@@ -21,7 +21,6 @@ export default class IndexRoute extends Route {
       }
     } catch (error) {
       console.error(error.message);
-      alert('Failed');
     }
   };
 }
