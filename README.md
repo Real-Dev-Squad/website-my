@@ -11,11 +11,9 @@ You will need the following things properly installed on your computer.
 * [Ember CLI](https://ember-cli.com/)
 * [Google Chrome](https://google.com/chrome/)
 
-## Installation
+## Setup and contributing
 
-* `git clone <repository-url>` this repository
-* `cd website-my`
-* `npm install`
+Please refer [CONTRIBUTING.md](./CONTRIBUTING.md) for the setup and contributing guidelines. 
 
 ## Running / Development
 
