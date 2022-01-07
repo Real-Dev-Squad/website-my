@@ -1,0 +1,42 @@
+.identity-heading {
+    margin-top: 25px;
+}
+
+.identity-container {
+    margin-left: 400px;
+}
+
+input[type=text] {
+    margin-top: 25px;
+    width: 35%;
+    margin-left: 140px;
+}
+
+.identity-Buttons {
+    display: flex;
+    background-color: rgb(81, 81, 245);
+    color: white;
+    display: inline;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 4px 15px;
+    border: none;
+}
+
+.identity-label {
+    display: block;
+    margin-top: 20px;
+    margin-left: 160px;
+}
+
+.identity-verify-btn {
+    display: flex;
+    background-color: rgb(53, 194, 25);
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 8px 20px;
+    border: none;
+    margin-top: 40px;
+    margin-left: 22rem;
+}

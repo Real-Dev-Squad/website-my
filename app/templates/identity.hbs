@@ -1,0 +1,34 @@
+{{page-title 'Identity'}}
+
+<h1 class="identity-heading">
+    Identity Service Verification
+</h1>
+<div class="identity-container">
+    <Input @value={{this.identityURL}} type="text" placeholder="service url" />
+
+    <button
+        type="submit"
+        class="identity-Buttons"
+        {{on 'click' (fn this.handleEdit)}}>
+        Edit
+    </button>
+    <label class="identity-label">
+        Generated Chaincode
+        <button
+        type="submit"
+        class="identity-Buttons">
+        Generate Chaincode
+        </button>
+    </label>
+    
+    <label class="identity-label">
+        Click here to verify
+        <Input @type="checkbox" @checked={{this.isChecked}} />
+    </label>
+    <button
+        type="submit"
+        class="identity-verify-btn"
+        {{on 'click' (fn this.handleVerify)}}>
+        Verify
+    </button>
+</div>
