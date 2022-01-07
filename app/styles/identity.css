@@ -41,6 +41,7 @@ input[type=text] {
     margin-left: 22rem;
 }
 
-.label {
-    color: black;
+.chaincode {
+    padding-left: 2rem;
+    font-weight: bold;
 }
