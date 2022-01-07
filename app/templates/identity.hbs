@@ -14,11 +14,15 @@
     </button>
     <label class="identity-label">
         Generated Chaincode
-        <button
-        type="submit"
-        class="identity-Buttons">
-        Generate Chaincode
-        </button>
+        {{#if this.isChaincodeClicked }}
+        <label for="label">{{this.Chaincode}}</label>
+        {{else}}
+         <Input
+        class='identity-Buttons'
+        type="button"
+        @value={{this.Chaincode}}
+        {{on 'click' (fn this.handleChaincode)}}/>
+        {{/if}}
     </label>
     
     <label class="identity-label">
