@@ -10,6 +10,8 @@ export default class IdentityController extends Controller {
   @tracked isGenerateChaincodeClicked = false;
   @tracked identityURL = ' ';
   @tracked isChecked = false;
+  @tracked isChaincodeClicked = false;
+  @tracked Chaincode = 'Generate Chaincode';
 
   @action handleVerify() {
     if (this.isChecked === false) {
@@ -17,6 +19,11 @@ export default class IdentityController extends Controller {
     } else {
       alert('Approved!');
     }
+  }
+
+  @action handleChaincode() {
+    this.isChaincodeClicked = true;
+    this.Chaincode = 'abcd1234';
   }
 
   @action async handleEdit(e) {

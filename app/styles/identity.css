@@ -40,3 +40,7 @@ input[type=text] {
     margin-top: 40px;
     margin-left: 22rem;
 }
+
+.label {
+    color: black;
+}
