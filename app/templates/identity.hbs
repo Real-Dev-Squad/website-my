@@ -16,6 +16,11 @@
         Generated Chaincode:
         {{#if this.isChaincodeClicked }}
         <label class="chaincode">{{this.Chaincode}}</label>
+            <Input
+                class='copy-button'
+                type="button"
+                @value={{this.Code}}
+                {{on 'click' (fn this.handleCopy)}}/>
         {{else}}
          <Input
         class='identity-Buttons'
