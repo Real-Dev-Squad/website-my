@@ -12,6 +12,18 @@ export default class IdentityController extends Controller {
   @tracked isChecked = false;
   @tracked isChaincodeClicked = false;
   @tracked Chaincode = 'Generate Chaincode';
+  @tracked Code = 'Copy Code';
+
+  @action handleCopy() {
+    navigator.clipboard.writeText(this.Chaincode).then(
+      function () {
+        alert('Copied!');
+      },
+      function (err) {
+        alert('Could not copy code: ', err);
+      }
+    );
+  }
 
   @action handleVerify() {
     if (this.isChecked === false) {

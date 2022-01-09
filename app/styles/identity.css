@@ -45,3 +45,10 @@ input[type=text] {
     padding-left: 2rem;
     font-weight: bold;
 }
+
+.copy-button {
+    margin-left: 1rem;
+    background-color: rgb(232, 235, 78);
+    border-radius: 5px;
+    padding: 2px 5px;
+}
