@@ -75,5 +75,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "mixpanel-browser": "^2.42.1"
   }
 }
