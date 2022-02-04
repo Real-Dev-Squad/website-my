@@ -1,15 +1,30 @@
 .identity-heading {
     margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .identity-container {
-    margin-left: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-div {
+    width: 30%;
 }
 
 input[type=text] {
+    height: 2rem;
     margin-top: 25px;
-    width: 35%;
-    margin-left: 140px;
+    width: 70%;
+}
+
+.chaincode-div {
+    margin-top: 20px;
+    width: 30%;
 }
 
 .identity-Buttons {
@@ -20,13 +35,10 @@ input[type=text] {
     cursor: pointer;
     border-radius: 3px;
     padding: 4px 15px;
-    border: none;
 }
 
 .identity-label {
-    display: block;
-    margin-top: 20px;
-    margin-left: 160px;
+    margin-top: 30px;
 }
 
 .identity-verify-btn {
@@ -38,17 +50,41 @@ input[type=text] {
     padding: 8px 20px;
     border: none;
     margin-top: 40px;
-    margin-left: 22rem;
 }
 
 .chaincode {
-    padding-left: 2rem;
+    padding-left: 1rem;
     font-weight: bold;
 }
 
 .copy-button {
-    margin-left: 1rem;
-    background-color: rgb(232, 235, 78);
-    border-radius: 5px;
+    margin-left: 0.75rem;
+    background-color: wheat;
+    color: #e30062;
+    border: 2px solid #e30062;
     padding: 2px 5px;
+}
+
+@media (max-width: 1240px){
+    .input-div {
+        width: 38%;
+    }
+}
+
+@media (max-width: 790px){
+    .input-div {
+        width: 58%;
+    }
+    input[type=text] {
+        width: 75%;
+    }
+}
+
+@media (max-width: 460px){
+    .input-div {
+        width: 70%;
+    }
+    input[type=text] {
+        width: 70%;
+    }
 }

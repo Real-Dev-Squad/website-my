@@ -4,31 +4,45 @@
     Identity Service Verification
 </h1>
 <div class="identity-container">
-    <Input @value={{this.identityURL}} type="text" placeholder="service url" />
-
-    <button
+    <div class="input-div">
+       <label>Identity Url</label>
+       <Input @value={{this.identityURL}} type="text" placeholder="service url" />
+       <button    
         type="submit"
-        class="identity-Buttons"
+        class="identity-Buttons edit"
         {{on 'click' (fn this.handleEdit)}}>
         Edit
-    </button>
-    <label class="identity-label">
-        Generated Chaincode:
-        {{#if this.isChaincodeClicked }}
-        <label class="chaincode">{{this.Chaincode}}</label>
+        </button> 
+    </div>
+
+    <div class="chaincode-div">
+        <label class="identity-label">
+           Generate Chaincode
+            {{#if this.isChaincodeClicked }}
+            <label class="chaincode">{{this.Chaincode}}</label>
+
+            {{#if this.isCopyClicked }}
+            <Input
+                class='copy-button'
+                type="button"
+                @value={{this.Code}}/>
+            {{else}}
             <Input
                 class='copy-button'
                 type="button"
                 @value={{this.Code}}
                 {{on 'click' (fn this.handleCopy)}}/>
-        {{else}}
-         <Input
-        class='identity-Buttons'
-        type="button"
-        @value={{this.Chaincode}}
-        {{on 'click' (fn this.handleChaincode)}}/>
-        {{/if}}
-    </label>
+            {{/if}}
+
+            {{else}}
+            <Input
+                class='identity-Buttons'
+                type="button"
+                @value={{this.Chaincode}}
+                {{on 'click' (fn this.handleChaincode)}}/>
+            {{/if}}
+        </label>
+    </div>
     
     <label class="identity-label">
         Click here to verify
