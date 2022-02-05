@@ -2,9 +2,12 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
+import mixpanel from 'mixpanel-browser';
 import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
+
+mixpanel.init('5fcfb02eabfc77f5a6a0e4cb65bbf5e0', { debug: true });
 
 export default class SignupController extends Controller {
   queryParams = ['state', 'dev'];
@@ -281,6 +284,7 @@ export default class SignupController extends Controller {
   @action async handleSubmit(e) {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
+    mixpanel.track('Form Submitted');
     e.preventDefault();
     const cleanReqObject = this.sanitizeRequestObject(this.formData);
     this.isSubmitClicked = true;
@@ -331,6 +335,8 @@ export default class SignupController extends Controller {
       username: this.userDetails.username,
     };
     this.isSubmitClicked = true;
+
+    mixpanel.track('Registering User');
 
     registerUser(user)
       .then((res) => {
