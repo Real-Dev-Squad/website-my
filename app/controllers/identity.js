@@ -8,7 +8,7 @@ const BASE_URL = ENV.BASE_API_URL;
 export default class IdentityController extends Controller {
   @tracked isEditClicked = false;
   @tracked isGenerateChaincodeClicked = false;
-  @tracked identityURL = ' ';
+  @tracked identityURL = '';
   @tracked isChecked = false;
   @tracked isChaincodeClicked = false;
   @tracked Chaincode = 'Generate Chaincode';
@@ -18,8 +18,6 @@ export default class IdentityController extends Controller {
   @action async handleVerify() {
     if (this.isChecked === false) {
       alert('Please verify!');
-    } else {
-      alert('Approved!');
     }
   }
 
@@ -31,7 +29,9 @@ export default class IdentityController extends Controller {
   @action handleCopy() {
     navigator.clipboard.writeText(this.Chaincode);
     this.isCopyClicked = true;
-    this.Code = 'Copied';
+    if (this.isCopyClicked === true) {
+      alert('Copied');
+    }
   }
 
   @action async handleEdit(e) {

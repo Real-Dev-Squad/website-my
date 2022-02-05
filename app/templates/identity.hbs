@@ -4,9 +4,14 @@
     Identity Service Verification
 </h1>
 <div class="identity-container">
-    <div class="input-div">
+      {{#if (eq @model.identityStatus "PENDING")}}
+      <p>Verification process is Pending!</p>
+      {{else if (eq @model.identityStatus "VERIFIED")}}
+      <p>Verification Done!</p>
+      {{else}}
+       <div class="input-div">
        <label>Identity Url</label>
-       <Input @value={{this.identityURL}} type="text" placeholder="service url" />
+       <Input @value={{@model.identityURL}} type="text" placeholder="service url" />
        <button    
         type="submit"
         class="identity-Buttons edit"
@@ -21,18 +26,11 @@
             {{#if this.isChaincodeClicked }}
             <label class="chaincode">{{this.Chaincode}}</label>
 
-            {{#if this.isCopyClicked }}
-            <Input
-                class='copy-button'
-                type="button"
-                @value={{this.Code}}/>
-            {{else}}
             <Input
                 class='copy-button'
                 type="button"
                 @value={{this.Code}}
-                {{on 'click' (fn this.handleCopy)}}/>
-            {{/if}}
+                {{on 'click' (fn this.handleCopy)}} />
 
             {{else}}
             <Input
@@ -54,4 +52,6 @@
         {{on 'click' (fn this.handleVerify)}}>
         Verify
     </button>
+    {{/if}}
+   
 </div>
