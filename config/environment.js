@@ -24,7 +24,6 @@ module.exports = function (environment) {
   };
 
   ENV.BASE_API_URL = 'https://api.realdevsquad.com';
-  ENV.MIXPANEL_TOKEN = '5fcfb02eabfc77f5a6a0e4cb65bbf5e0';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
