@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+
 export default class FormInputComponent extends Component {
   @action
   inputFieldChanged(event) {
