@@ -284,7 +284,7 @@ export default class SignupController extends Controller {
   @action async handleSubmit(e) {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
-    mixpanel.track('Form Submitted');
+    mixpanel.track('User Registered - Old SignUp Flow');
     e.preventDefault();
     const cleanReqObject = this.sanitizeRequestObject(this.formData);
     this.isSubmitClicked = true;
@@ -336,7 +336,7 @@ export default class SignupController extends Controller {
     };
     this.isSubmitClicked = true;
 
-    mixpanel.track('Registering User');
+    mixpanel.track('User Registered - New SignUp Flow');
 
     registerUser(user)
       .then((res) => {

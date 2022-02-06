@@ -1,5 +1,8 @@
 import Route from '@ember/routing/route';
+import mixpanel from 'mixpanel-browser';
 import ENV from 'website-my/config/environment';
+
+mixpanel.init('5fcfb02eabfc77f5a6a0e4cb65bbf5e0', { debug: true });
 
 export default class SignupRoute extends Route {
   async model() {
@@ -15,6 +18,7 @@ export default class SignupRoute extends Route {
       );
     }
     if (response.status === 200 && !userData.incompleteUserDetails) {
+      mixpanel.track('User Already Registered');
       alert("You already have filled the up form. You'll now be redirected.");
       window.open('https://realdevsquad.com/goto', '_self');
     }
