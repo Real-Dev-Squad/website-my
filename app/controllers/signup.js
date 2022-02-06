@@ -284,7 +284,6 @@ export default class SignupController extends Controller {
   @action async handleSubmit(e) {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
-    mixpanel.track('User Registered - Old SignUp Flow');
     e.preventDefault();
     const cleanReqObject = this.sanitizeRequestObject(this.formData);
     this.isSubmitClicked = true;
@@ -301,8 +300,10 @@ export default class SignupController extends Controller {
 
       const { status } = response;
       if (status === 204) {
+        mixpanel.track('User Registered - Old SignUp Flow');
         window.open('https://realdevsquad.com/goto', '_self');
       } else {
+        mixpanel.track('Unable to Sign Up - Old SignUp Flow Breaks');
         alert('Something went wrong. Please check console errors.');
       }
     } catch (error) {
@@ -336,13 +337,13 @@ export default class SignupController extends Controller {
     };
     this.isSubmitClicked = true;
 
-    mixpanel.track('User Registered - New SignUp Flow');
-
     registerUser(user)
       .then((res) => {
         if (res.status === 204) {
+          mixpanel.track('User Registered - New SignUp Flow');
           window.open('https://realdevsquad.com/goto', '_self');
         } else {
+          mixpanel.track('Unable to Sign Up - New SignUp Flow Breaks');
           res.json().then((res) => {
             this.errorMessage = res.errors[0].title;
           });
