@@ -2,12 +2,10 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
-import mixpanel from 'mixpanel-browser';
+import trackEvent from '../utils/mixpanel';
 import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
-
-mixpanel.init(ENV.MIXPANEL_TOKEN);
 
 export default class SignupController extends Controller {
   queryParams = ['state', 'dev'];
@@ -300,10 +298,10 @@ export default class SignupController extends Controller {
 
       const { status } = response;
       if (status === 204) {
-        mixpanel.track('User Registered - Old SignUp Flow');
+        trackEvent('User Registered - Old SignUp Flow');
         window.open('https://realdevsquad.com/goto', '_self');
       } else {
-        mixpanel.track('Unable to Sign Up - Old SignUp Flow Breaks');
+        trackEvent('Unable to Sign Up - Old SignUp Flow Breaks');
         alert('Something went wrong. Please check console errors.');
       }
     } catch (error) {
@@ -340,10 +338,10 @@ export default class SignupController extends Controller {
     registerUser(user)
       .then((res) => {
         if (res.status === 204) {
-          mixpanel.track('User Registered - New SignUp Flow');
+          trackEvent('User Registered - New SignUp Flow');
           window.open('https://realdevsquad.com/goto', '_self');
         } else {
-          mixpanel.track('Unable to Sign Up - New SignUp Flow Breaks');
+          trackEvent('Unable to Sign Up - New SignUp Flow Breaks');
           res.json().then((res) => {
             this.errorMessage = res.errors[0].title;
           });

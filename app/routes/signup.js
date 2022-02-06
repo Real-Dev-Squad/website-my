@@ -1,8 +1,6 @@
 import Route from '@ember/routing/route';
-import mixpanel from 'mixpanel-browser';
+import trackEvent from '../utils/mixpanel';
 import ENV from 'website-my/config/environment';
-
-mixpanel.init(ENV.MIXPANEL_TOKEN);
 
 export default class SignupRoute extends Route {
   async model() {
@@ -18,7 +16,7 @@ export default class SignupRoute extends Route {
       );
     }
     if (response.status === 200 && !userData.incompleteUserDetails) {
-      mixpanel.track('User Already Registered');
+      trackEvent('User Already Registered');
       alert("You already have filled the up form. You'll now be redirected.");
       window.open('https://realdevsquad.com/goto', '_self');
     }
