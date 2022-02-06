@@ -7,7 +7,7 @@ import ENV from 'website-my/config/environment'; // remove this when new flow go
 
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
 
-mixpanel.init('5fcfb02eabfc77f5a6a0e4cb65bbf5e0');
+mixpanel.init(ENV.MIXPANEL_TOKEN);
 
 export default class SignupController extends Controller {
   queryParams = ['state', 'dev'];

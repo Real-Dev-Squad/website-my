@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import mixpanel from 'mixpanel-browser';
 import ENV from 'website-my/config/environment';
 
-mixpanel.init('5fcfb02eabfc77f5a6a0e4cb65bbf5e0');
+mixpanel.init(ENV.MIXPANEL_TOKEN);
 
 export default class SignupRoute extends Route {
   async model() {
