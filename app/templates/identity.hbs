@@ -4,54 +4,53 @@
     Identity Service Verification
 </h1>
 <div class="identity-container">
-      {{#if (eq @model.identityStatus "PENDING")}}
-      <p>Verification process is Pending!</p>
-      {{else if (eq @model.identityStatus "VERIFIED")}}
-      <p>Verification Done!</p>
-      {{else}}
-       <div class="input-div">
-       <label>Identity Url</label>
-       <Input @value={{@model.identityURL}} type="text" placeholder="service url" />
-       <button    
-        type="submit"
-        class="identity-Buttons edit"
-        {{on 'click' (fn this.handleEdit)}}>
-        Edit
-        </button> 
-    </div>
+    {{#if (eq @model.identityStatus "PENDING")}}
+        <p>Verification process is Pending!</p>
+    {{else if (eq @model.identityStatus "VERIFIED")}}
+        <p>Verification Done!</p>
+    {{else}}
+        <div class="input-div">
+            <label>Identity Url</label>
+            <Input @value={{@model.identityURL}} type="text" placeholder="service url" />
+            <button    
+                type="submit"
+                class="identity-Buttons edit"
+                {{on 'click' (fn this.handleEdit)}}>
+                Edit
+            </button> 
+        </div>
 
-    <div class="chaincode-div">
-        <label class="identity-label">
-           Generate Chaincode
-            {{#if this.isChaincodeClicked }}
-            <label class="chaincode">{{this.Chaincode}}</label>
+        <div class="chaincode-div">
+            <label class="identity-label">
+                Generate Chaincode
+                {{#if this.isChaincodeClicked }}
+                    <label class="chaincode">{{this.Chaincode}}</label>
 
-            <Input
-                class='copy-button'
-                type="button"
-                @value={{this.Code}}
-                {{on 'click' (fn this.handleCopy)}} />
+                    <Input
+                        class='copy-button'
+                        type="button"
+                        @value='Copy'
+                        {{on 'click' (fn this.handleCopy)}} />
 
-            {{else}}
-            <Input
-                class='identity-Buttons'
-                type="button"
-                @value={{this.Chaincode}}
-                {{on 'click' (fn this.handleChaincode)}}/>
-            {{/if}}
-        </label>
-    </div>
+                {{else}}
+                    <Input
+                        class='identity-Buttons'
+                        type="button"
+                        @value={{this.Chaincode}}
+                        {{on 'click' (fn this.handleChaincode)}}/>
+                {{/if}}
+            </label>
+        </div>
     
-    <label class="identity-label">
-        Click here to verify
+        <label class="identity-label">
+            Click here to verify
         <Input @type="checkbox" @checked={{this.isChecked}} />
-    </label>
-    <button
-        type="submit"
-        class="identity-verify-btn"
-        {{on 'click' (fn this.handleVerify)}}>
-        Verify
-    </button>
+        </label>
+        <button
+            type="submit"
+            class="identity-verify-btn"
+            {{on 'click' (fn this.handleVerify)}}>
+            Verify
+        </button>
     {{/if}}
-   
 </div>

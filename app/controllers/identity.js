@@ -12,7 +12,6 @@ export default class IdentityController extends Controller {
   @tracked isChecked = false;
   @tracked isChaincodeClicked = false;
   @tracked Chaincode = 'Generate Chaincode';
-  @tracked Code = 'Copy';
   @tracked isCopyClicked = false;
 
   @action async handleVerify() {
@@ -81,7 +80,7 @@ export default class IdentityController extends Controller {
         alert('Something went wrong. Please check console errors.');
       }
     } catch (error) {
-      console.error('Error : ', error);
+      alert('Something went wrong. Please check console errors.');
     } finally {
       this.isGenerateChaincodeClicked = false;
     }
