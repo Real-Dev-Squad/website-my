@@ -31,7 +31,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.MIXPANEL_TOKEN = '5fcfb02eabfc77f5a6a0e4cb65bbf5e0';
+    ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
   }
 
   if (environment === 'test') {

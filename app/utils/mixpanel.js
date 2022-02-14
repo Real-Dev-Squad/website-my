@@ -3,8 +3,8 @@ import mixpanel from 'mixpanel-browser';
 
 mixpanel.init(ENV.MIXPANEL_TOKEN);
 
-const trackEvent = (description) => {
-  mixpanel.track(description);
+const trackEvent = (event) => {
+  mixpanel.track(event);
 };
 
 export default trackEvent;

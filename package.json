@@ -27,6 +27,9 @@
     "test:ember:server": "ember test --server",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "mixpanel-browser": "^2.43.0"
+  },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.2.1",
@@ -76,8 +79,5 @@
   },
   "ember": {
     "edition": "octane"
-  },
-  "dependencies": {
-    "mixpanel-browser": "^2.43.0"
   }
 }
