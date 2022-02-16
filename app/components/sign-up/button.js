@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import trackEvent from '../../utils/mixpanel';
+import { trackEvent } from '../../utils/mixpanel';
 
 export default class ButtonComponent extends Component {
   @action

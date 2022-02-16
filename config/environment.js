@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config({ debug: true });
 
 module.exports = function (environment) {
   let ENV = {
@@ -24,6 +25,7 @@ module.exports = function (environment) {
   };
 
   ENV.BASE_API_URL = 'https://api.realdevsquad.com';
+  ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -31,7 +33,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
   }
 
   if (environment === 'test') {
