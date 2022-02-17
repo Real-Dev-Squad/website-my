@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import trackEvent from '../utils/mixpanel';
+import { trackEvent } from '../utils/mixpanel';
 import ENV from 'website-my/config/environment';
 
 export default class SignupRoute extends Route {

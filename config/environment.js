@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config({ debug: true });
+require('dotenv').config();
 
 module.exports = function (environment) {
   let ENV = {
