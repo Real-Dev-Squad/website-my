@@ -6,17 +6,24 @@
 <div class="identity-container">
     {{#if (eq @model.identityStatus "PENDING")}}
         <p>Verification process is Pending!</p>
+        <button type="button" {{on 'click' (fn this.handleRefresh)}}>Refresh</button>
     {{else if (eq @model.identityStatus "VERIFIED")}}
         <p>Verification Done!</p>
     {{else}}
+       {{#if (eq @model.identityStatus "BLOCKED")}}
+       <p>Your previous chaincode is blocked for some reason.Please generate a new chaincode.</p>
+       {{/if}}
         <div class="input-div">
             <label>Identity Url</label>
-            <Input @value={{@model.identityURL}} type="text" placeholder="service url" />
+            <Input @value={{@model.identityURL}} type="text" placeholder="Identity URL" />
             <button    
                 type="submit"
                 class="identity-Buttons edit"
                 {{on 'click' (fn this.handleEdit)}}>
-                Edit
+                {{#if this.isEditClicked}}
+                    <i class="fa fa-spinner fa-spin"></i>
+                {{/if}}
+                Save
             </button> 
         </div>
 
@@ -37,20 +44,23 @@
                         class='identity-Buttons'
                         type="button"
                         @value={{this.Chaincode}}
-                        {{on 'click' (fn this.handleChaincode)}}/>
+                        {{on 'click' (fn this.handleGenerateChaincode)}}/>
                 {{/if}}
             </label>
         </div>
 
         <label class="identity-label">
-            Click here to verify
+            I have saved my identity URL, generated a chaincode<br />and successfully added that to my service.
         <Input @type="checkbox" @checked={{this.isChecked}} />
         </label>
         <button
             type="submit"
             class="identity-verify-btn"
             {{on 'click' (fn this.handleVerify)}}>
-            Verify
+            {{#if this.isVerifyClicked}}
+                <i class="fa fa-spinner fa-spin"></i>
+            {{/if}}
+            Link Chaincode
         </button>
     {{/if}}
 </div>

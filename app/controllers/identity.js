@@ -13,69 +13,75 @@ export default class IdentityController extends Controller {
   @tracked isChaincodeClicked = false;
   @tracked Chaincode = 'Generate Chaincode';
   @tracked isCopyClicked = false;
+  @tracked isVerifyClicked = false;
+  @tracked identityURL = this.model.identityURL || '';
 
-@action async handleVerify() {
-    if (this.isChecked === false) {
-      alert('Please verify!');
-    }
-}
+  @action async handleRefresh() {
+    window.location.reload();
+  }
 
-@action handleChaincode() {
+  @action handleChaincode() {
     this.isChaincodeClicked = true;
     this.Chaincode = 'abcd1234';
-}
+  }
 
-@action handleCopy() {
+  @action handleCopy() {
     navigator.clipboard.writeText(this.Chaincode);
     this.isCopyClicked = true;
     if (this.isCopyClicked === true) {
       alert('Copied');
     }
-}
+  }
 
-@action async handleEdit(e) {
+  @action async handleEdit(e) {
     e.preventDefault();
-    this.isEditClicked = true;
 
-    try {
-      const response = await fetch(`${BASE_URL}/users/identityURL`, {
-        method: 'PATCH',
-        body: JSON.stringify({ identityURL: this.identityURL }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-
-      const { status } = response;
-      if (status === 204) {
-        alert('Identity URL successfully edited');
-      } else {
-        alert('Something went wrong. Please check console errors.');
-      }
-    } catch (error) {
-      console.error('Error : ', error);
-    } finally {
-        this.isEditClicked = false;
-    }
-}
-
-@action async handleGenerateChaincode(e) {
-      e.preventDefault();
-      this.isGenerateChaincodeClicked = true;
+    if (this.isEditClicked === false) {
+      this.isEditClicked = true;
 
       try {
-        const response = await fetch(`${BASE_URL}/users/chainCode`, {
+        const response = await fetch(`${BASE_URL}/users/identityURL`, {
           method: 'PATCH',
+          body: JSON.stringify({ identityURL: this.identityURL }),
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
         });
-        
-        const { status } = response;
-        if (status === 204) {
-            alert(' ');
+        console.log(response);
+        if (response.ok) {
+          alert('Updated identity URL!!');
+        } else {
+          alert('Something went wrong. Please check console errors.');
+        }
+      } catch (error) {
+        console.error('Something went wrong. Please check console errors.');
+      } finally {
+        this.isEditClicked = false;
+      }
+    }
+  }
+
+  @action async handleGenerateChaincode(e) {
+    e.preventDefault();
+    if (this.isGenerateChaincodeClicked === false) {
+      this.isGenerateChaincodeClicked = true;
+
+      try {
+        const response = await fetch(`${BASE_URL}/users/chaincode`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        const { chaincode } = await response.json();
+
+        if (response.ok) {
+          this.Chaincode = chaincode;
+          this.isChaincodeClicked = true;
+          alert('Generated New Chaincode!!');
         } else {
           alert('Something went wrong. Please check console errors.');
         }
@@ -86,3 +92,35 @@ export default class IdentityController extends Controller {
       }
     }
   }
+
+  @action async handleVerify(e) {
+    e.preventDefault();
+
+    if (this.isChecked === false) {
+      alert('Please verify!');
+    } else if (this.isVerifyClicked === false) {
+      this.isVerifyClicked = true;
+
+      try {
+        const response = await fetch(`${BASE_URL}/users/verify`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          alert('Your request has been queued successfully');
+          window.location.reload();
+        } else {
+          alert('Something went wrong. Please check console errors.');
+        }
+      } catch (error) {
+        alert('Something went wrong. Please check console errors.');
+      } finally {
+        this.isVerifyClicked = false;
+      }
+    }
+  }
+}

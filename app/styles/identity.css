@@ -10,21 +10,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .input-div {
-    width: 30%;
+    width: 40%;
 }
 
 input[type=text] {
     height: 2rem;
     margin-top: 25px;
-    width: 70%;
+    width: 65%;
 }
 
 .chaincode-div {
     margin-top: 20px;
-    width: 30%;
+    margin-left: 30%;
+    width: 50%;
 }
 
 .identity-Buttons {
@@ -39,6 +41,7 @@ input[type=text] {
 
 .identity-label {
     margin-top: 30px;
+    text-align: center;
 }
 
 .identity-verify-btn {
@@ -67,16 +70,19 @@ input[type=text] {
 
 @media (max-width: 1240px){
     .input-div {
-        width: 38%;
+        width: 50%;
     }
 }
 
 @media (max-width: 790px){
     .input-div {
-        width: 58%;
+        width: 70%;
     }
     input[type=text] {
-        width: 75%;
+        width: 50%;
+    }
+    .chaincode-div{
+        margin-left: 10%;
     }
 }
 
@@ -85,6 +91,6 @@ input[type=text] {
         width: 70%;
     }
     input[type=text] {
-        width: 70%;
+        width: 50%;
     }
 } 
