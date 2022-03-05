@@ -8,7 +8,6 @@ const BASE_URL = ENV.BASE_API_URL;
 export default class IdentityController extends Controller {
   @tracked isEditClicked = false;
   @tracked isGenerateChaincodeClicked = false;
-  @tracked identityURL = '';
   @tracked isChecked = false;
   @tracked isChaincodeClicked = false;
   @tracked Chaincode = 'Generate Chaincode';
@@ -18,11 +17,6 @@ export default class IdentityController extends Controller {
 
   @action async handleRefresh() {
     window.location.reload();
-  }
-
-  @action handleChaincode() {
-    this.isChaincodeClicked = true;
-    this.Chaincode = 'abcd1234';
   }
 
   @action handleCopy() {
@@ -48,7 +42,6 @@ export default class IdentityController extends Controller {
           },
           credentials: 'include',
         });
-        console.log(response);
         if (response.ok) {
           alert('Updated identity URL!!');
         } else {
