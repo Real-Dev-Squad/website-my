@@ -13,7 +13,7 @@ export default class IdentityController extends Controller {
   @tracked Chaincode = 'Generate Chaincode';
   @tracked isCopyClicked = false;
   @tracked isVerifyClicked = false;
-  @tracked identityURL = this.model.identityURL || '';
+  @tracked profileURL = this.model.profileURL || '';
 
   @action async handleRefresh() {
     window.location.reload();
@@ -34,16 +34,16 @@ export default class IdentityController extends Controller {
       this.isEditClicked = true;
 
       try {
-        const response = await fetch(`${BASE_URL}/users/identityURL`, {
+        const response = await fetch(`${BASE_URL}/users/profileURL`, {
           method: 'PATCH',
-          body: JSON.stringify({ identityURL: this.identityURL }),
+          body: JSON.stringify({ profileURL: this.profileURL }),
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
         });
         if (response.ok) {
-          alert('Updated identity URL!!');
+          alert('Updated profile URL!!');
         } else {
           alert('Something went wrong. Please check console errors.');
         }

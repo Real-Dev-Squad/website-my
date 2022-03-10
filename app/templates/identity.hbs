@@ -4,18 +4,18 @@
     Identity Service Verification
 </h1>
 <div class="identity-container">
-    {{#if (eq @model.identityStatus "PENDING")}}
+    {{#if (eq @model.profileStatus "PENDING")}}
         <p>Verification process is Pending!</p>
         <button type="button" {{on 'click' (fn this.handleRefresh)}}>Refresh</button>
-    {{else if (eq @model.identityStatus "VERIFIED")}}
+    {{else if (eq @model.profileStatus "VERIFIED")}}
         <p>Verification Done!</p>
     {{else}}
-       {{#if (eq @model.identityStatus "BLOCKED")}}
+       {{#if (eq @model.profileStatus "BLOCKED")}}
        <p>Your previous chaincode is blocked for some reason.Please generate a new chaincode.</p>
        {{/if}}
         <div class="input-div">
-            <label>Identity Url</label>
-            <Input @value={{@model.identityURL}} type="text" placeholder="Identity URL" />
+            <label>Profile Url</label>
+            <Input @value={{@model.profileURL}} type="text" placeholder="Profile URL" />
             <button    
                 type="submit"
                 class="identity-Buttons edit"
@@ -50,7 +50,7 @@
         </div>
 
         <label class="identity-label">
-            I have saved my identity URL, generated a chaincode<br />and successfully added that to my service.
+            I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
         <Input @type="checkbox" @checked={{this.isChecked}} />
         </label>
         <button
