@@ -10,7 +10,22 @@ const { ACTIVE, BLOCKED, COMPLETED, PENDING } = TASK_STATUS;
 export default class TasksController extends Controller {
   @tracked showDropDown = false;
   @tracked taskFields = {};
-  @tracked allTasks = this.model;
+  @tracked allTasks = [
+    {
+      id: 'EORRbv7S0PDdJIygpSyF',
+      purpose: 'testing of dark-mode',
+      startedOn: 1640736000,
+      assignee: 'akshay',
+      title: 'Identity service /health data',
+      endsOn: 1641254400,
+      createdBy: 'ankush',
+      status: 'active',
+      isNoteworthy: true,
+      type: 'feature',
+      percentCompleted: 70,
+    },
+  ];
+  // @tracked allTasks = this.model;
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;

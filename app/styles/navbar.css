@@ -80,6 +80,16 @@ nav li a:hover {
   display: none;
 }
 
+.themeLogo {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.nav__menu__toggleTheme {
+  padding: 24px 20px 20px 20px;
+}
+
 @media screen and (max-width: 970px) {
   .nav {
     background: #1d1283;
@@ -96,7 +106,7 @@ nav li a:hover {
   }
 
   .nav-menu {
-    background: white;
+    background: var(--mobileNavbar);
     display: none;
     width: 100%;
     padding: 10px 0px;

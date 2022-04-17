@@ -4,10 +4,10 @@
   @firstName={{@model.firstName}}
   @profilePictureURL={{@model.profilePictureURL}}
 />
+{{initialTheme}}
 
 {{#if this.canShowNavBar}}
   <LocalNavbar/>
-  {{initialTheme}}
 {{/if}}  
 <div class="main-container">
   {{outlet}}

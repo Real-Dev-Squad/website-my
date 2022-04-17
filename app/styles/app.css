@@ -39,6 +39,7 @@ html, body {
   --browseHover: #2b2f31;
   --selectStatus: #181a1b;
   --profileForm: #2c2d2e;
+  --mobileNavbar: #181a1b;
 }
 
 .lightTheme {
@@ -52,6 +53,7 @@ html, body {
   --browseHover: #ddd;
   --selectStatus: #fff;
   --profileForm: #e7e7e7;
+  --mobileNavbar: #fff;
 }
 
 .main-container {
