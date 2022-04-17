@@ -15,22 +15,7 @@ export default class TasksController extends Controller {
   DEFAULT_TASK_TYPE = this.allTasksObject;
   @tracked showDropDown = true;
   @tracked taskFields = {};
-  @tracked allTasks = [
-    {
-      id: 'EORRbv7S0PDdJIygpSyF',
-      purpose: 'testing of dark-mode',
-      startedOn: 1640736000,
-      assignee: 'akshay',
-      title: 'Identity service /health data',
-      endsOn: 1641254400,
-      createdBy: 'ankush',
-      status: 'active',
-      isNoteworthy: true,
-      type: 'feature',
-      percentCompleted: 70,
-    },
-  ];
-  // @tracked allTasks = this.model;
+  @tracked allTasks = this.model;
   @tracked isLoading = false;
   @tracked userSelectedTask = this.DEFAULT_TASK_TYPE;
 
