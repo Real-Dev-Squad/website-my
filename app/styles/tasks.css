@@ -29,7 +29,7 @@
   flex-direction: column;
   border: 1px solid #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 0 15px -7px rgba(0,0,0,.65);
+  box-shadow: 0 0 15px -7px var(--taskCard);
   width: 50%;
   margin: auto;
   padding: 1rem;
@@ -37,7 +37,7 @@
 }
 
 .task-card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)
+  box-shadow: 0 4px 8px 0 var(--taskCardHover1),0 6px 20px 0 var(--taskCardHover2);
 }
 
 .dates-info {
@@ -206,6 +206,13 @@ input[type=range]:focus::-ms-fill-upper {
   margin-top: 10px;
 }
 
+#task-update, .optionValue {
+  background-color: var(--colorBackground);
+  color: var(--colorText);
+}
+#task-update {
+  border-color: var(--taskUpdateBorder);
+}
 @media screen and (max-width: 800px) {
   .tasks-page {
     flex-direction: column;

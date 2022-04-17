@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
 import setTheme from './setTheme';
 import setCookie from './setCookie';
-import { SUN_URL, THEME } from '../constants/theme';
+import { THEME } from '../constants/theme';
 
 function initialTheme() {
   const getCookies = document.cookie.split(';');
@@ -15,12 +15,10 @@ function initialTheme() {
   });
 
   if (!Object.prototype.hasOwnProperty.call(cookies, 'theme')) {
-    setCookie.compute(THEME.LIGHT);
+    setCookie.compute('theme', THEME.LIGHT, 30);
   } else {
     if (cookies.theme === THEME.DARK) {
       setTheme.compute(THEME.DARK);
-      const img = document.getElementById('themeLogo');
-      img.src = SUN_URL;
     } else {
       setTheme.compute(THEME.LIGHT);
     }

@@ -30,7 +30,7 @@
       >
         {{#each this.availabletaskStatusList as |taskStatus|}}
           {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-            <option value={{taskStatus.key}}>
+            <option value={{taskStatus.key}} class="optionValue">
               {{taskStatus.displayLabel}}
             </option>
           {{/if}}

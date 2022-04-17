@@ -40,6 +40,10 @@ html, body {
   --selectStatus: #181a1b;
   --profileForm: #2c2d2e;
   --mobileNavbar: #181a1b;
+  --taskCard: #000;
+  --taskCardHover1: #6a6a6a33;
+  --taskCardHover2: #39393930;
+  --taskUpdateBorder: #736b5e;
 }
 
 .lightTheme {
@@ -54,6 +58,10 @@ html, body {
   --selectStatus: #fff;
   --profileForm: #e7e7e7;
   --mobileNavbar: #fff;
+  --taskCard: #000000a6;
+  --taskCardHover1: #00000033;
+  --taskCardHover2: #00000030;
+  --taskUpdateBorder: #736b5e;
 }
 
 .main-container {

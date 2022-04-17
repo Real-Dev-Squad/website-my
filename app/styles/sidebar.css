@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   width: 200px;
-  background-color: var(--taskButton);
+  background-color: var(--colorBackground);
   overflow: auto;
 }
 
@@ -21,12 +21,13 @@
   border: none;
   text-align: left;
   padding: 8px 20px;
-  background-color: white;
+  color: var(--colorText);
+  background-color: var(--selectStatus);
 }
 
 .sidebar__dropdown-container__button:hover {
   cursor: pointer;
-  border-left: 2px solid black;
+  border-left: 2px solid var(--colorText);
   font-weight: 800;
 }
 
