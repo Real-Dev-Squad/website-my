@@ -4,6 +4,7 @@ import ENV from 'website-my/config/environment';
 
 export default class SignupRoute extends Route {
   async model() {
+    trackEvent('Signup Page Loaded Successfully');
     const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
       credentials: 'include',
     });
