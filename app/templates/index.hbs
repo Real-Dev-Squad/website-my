@@ -1,1 +1,11 @@
+<div class="greeting">
+  <h1>Welcome to my site!</h1>
+</div>
+
 <SelfClearCache @time="23 March 1:23 pm IST" @totalTimes="1"/>
+
+<UserStatus 
+  @status={{this.status}} 
+  @onUpdateStatus={{this.updateStatus}} 
+  @isStatusUpdating={{this.isStatusUpdating}}
+/>

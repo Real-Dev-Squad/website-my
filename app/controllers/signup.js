@@ -1,13 +1,28 @@
 import Controller from '@ember/controller';
-import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
-import ENV from 'website-my/config/environment';
+import { tracked } from '@glimmer/tracking';
+import registerUser from '../utils/register-api';
+import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
-const BASE_URL = ENV.BASE_API_URL;
+const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
 
 export default class SignupController extends Controller {
-  @tracked isSubmitDisabled = true;
+  queryParams = ['state', 'dev'];
+
   @tracked isSubmitClicked = false;
+  @tracked isButtonDisabled = true;
+  @tracked isSubmitDisabled = true; // remove this when new flow goes live
+
+  @tracked state = 'get-started';
+  @tracked dev = false;
+  @tracked userDetails = {
+    firstName: '',
+    lastName: '',
+    username: '',
+  };
+  @tracked errorMessage;
+
+  // Existing flow starts
 
   @tracked title = 'Account Details';
   @tracked formData = {
@@ -250,10 +265,14 @@ export default class SignupController extends Controller {
     return;
   }
 
-  removeEmptyFields(reqObject) {
+  sanitizeRequestObject(reqObject) {
     for (const field in reqObject) {
       if (!reqObject[field]) {
         delete reqObject[field];
+      } else if (field === 'yoe') {
+        reqObject[field] = parseInt(reqObject[field]);
+      } else if (field === 'username') {
+        reqObject[field] = reqObject[field].toLowerCase();
       }
     }
     return reqObject;
@@ -263,9 +282,9 @@ export default class SignupController extends Controller {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
     e.preventDefault();
-    const cleanReqObject = this.removeEmptyFields(this.formData);
+    const cleanReqObject = this.sanitizeRequestObject(this.formData);
     this.isSubmitClicked = true;
-    cleanReqObject.username = cleanReqObject.username.toLowerCase();
+
     try {
       const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
@@ -288,4 +307,46 @@ export default class SignupController extends Controller {
       this.isSubmitClicked = false;
     }
   }
+
+  // Existing flow ends
+
+  // New flow starts
+
+  @action changeRouteParams(paramValue) {
+    this.isButtonDisabled = true;
+    if (paramValue)
+      this.transitionToRoute({ queryParams: { state: paramValue } });
+  }
+
+  @action handleInputChange(key, value) {
+    set(this.userDetails, key, value);
+    if (this.userDetails[key] > '') this.isButtonDisabled = false;
+    else this.isButtonDisabled = true;
+  }
+
+  @action signup() {
+    const user = {
+      first_name: this.userDetails.firstName,
+      last_name: this.userDetails.lastName,
+      username: this.userDetails.username,
+    };
+    this.isSubmitClicked = true;
+
+    registerUser(user)
+      .then((res) => {
+        if (res.status === 204) {
+          window.open('https://realdevsquad.com/goto', '_self');
+        } else {
+          res.json().then((res) => {
+            this.errorMessage = res.errors[0].title;
+          });
+        }
+      })
+      .catch((err) => (this.errorMessage = err))
+      .finally(() => {
+        this.isSubmitClicked = false;
+      });
+  }
+
+  // New flow ends
 }

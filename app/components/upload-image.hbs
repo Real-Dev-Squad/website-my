@@ -1,4 +1,4 @@
-<div class="image-upload">
+<div class="image-upload" id="image-upload">
   <div
     class="drop-area {{if this.overDropZone 'drop-area__highlight'}}"
     {{on 'drop' this.handleDrop}}
@@ -9,12 +9,9 @@
     <form class="image-form">
       <p class="image-form__text">
         {{#if this.isImageSelected}}
-          You have selected{{this.imageFileName}}
+          You have selected <span>{{this.imageFileName}}</span>
         {{else}}
-          Drag and drop file here
-          <span>
-            or
-          </span>
+          Drag and drop file here or
         {{/if}}
       </p>
       <label
@@ -35,7 +32,8 @@
     </form>
   </div>
   {{#if this.isImageSelected}}
-    <img class="image-preview" src="{{this.image}}" alt="preview" />
+    <div class="image-cropper-preview"></div>
+    <ImageCropper @image={{this.image}} @setImageCoordinates={{this.setImageCoordinates}} />
     <button
       class="upload-button"
       type="button"

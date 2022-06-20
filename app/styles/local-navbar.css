@@ -1,0 +1,19 @@
+.local-navbar {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.local-navbar__link a {
+  padding: 10px;
+  text-decoration: none;
+}
+
+.local-navbar__link a:hover {
+  cursor: pointer;
+}
+
+.active {
+  color: #e30062;
+}

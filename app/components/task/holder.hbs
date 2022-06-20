@@ -1,28 +1,47 @@
-<div class="task-card">
+<div class="task-card" tabindex="0">
   <Task-Details @task={{@task}} />
-  <div class="task-card__status">
-    {{#if (eq @task.status "active")}}
-      <select name="percentage-complete" id="percentCompleted" {{on "change" this.onPercentageChange}}>
-        <option value="">Percentage Completed</option>
-        {{#each this.availablePercentOptions as |percent| }}
-          <option value={{percent}}>{{percent}}</option>
+  {{#if (eq @task.status this.TASK_KEYS.IN_PROGRESS)}}
+    <div class="task-card__progress-bar-container">
+      <div class="task-card__progress-bar-container__progress-bar">
+        <input
+          id="input"
+          type="range"
+          name="percentCompleted"
+          value="{{@task.percentCompleted}}"
+          min="0" max="100" step="25"
+          {{on "change" this.onPercentageChange}}
+          {{on "change" (fn @onTaskUpdate @task.id)}}
+        />  
+      </div>
+    </div>
+  {{/if}} 
+  <div>
+    {{#if (eq @userSelectedTask.key this.TASK_KEYS.ALL)}}
+      <div class="task-card__current-task-status">
+        <strong>Current task status:</strong> {{@task.status}}
+      </div>
+    {{/if}}
+
+    {{#if (not-eq @task.status this.TASK_KEYS.VERIFIED)}}
+      <label for="task-update">Change task status:</label>
+      <select id="task-update" 
+      {{on "change" this.onStatusChange}}
+      {{on "change" (fn @onTaskUpdate @task.id)}}
+      >
+        {{#each this.availabletaskStatusList as |taskStatus|}}
+          {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
+            <option value={{taskStatus.key}}>
+              {{taskStatus.displayLabel}}
+            </option>
+          {{/if}}
         {{/each}}
       </select>
     {{/if}}
-    <select name="task-status" id="status" {{on "change" this.onStatusChange}}>
-      <option value="">status</option>
-      {{#each this.availableStatusOptions as |status| }}
-          <option value={{status}}>{{status}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="task-card__btn">
-    <button type="button" {{on "click" (fn @onTaskUpdate @task.id)}}>Update Task</button>
-  </div>
-  <div class="progress-bar-container">
-    <div class="progress-bar">
-      <div class="bar percent-{{@task.percentCompleted}}">
-      </div>
-    </div>
+
+     {{#if @isLoading}}
+       <div class="task-card__loader-container">
+         <Spinner />
+       </div>
+     {{/if}}
   </div>
 </div>
