@@ -1,16 +1,25 @@
-@import "signup.css";
-@import "notification.css";
-@import "image-upload.css";
-@import "tasks.css";
-@import "sidebar.css";
-@import "local-navbar.css";
-@import "profile.css";
+@import 'signup.css';
+@import 'notification.css';
+@import 'image-upload.css';
+@import 'tasks.css';
+@import 'sidebar.css';
+@import 'local-navbar.css';
+@import 'profile.css';
+@import 'get-started.css';
+@import 'user-status.css';
+@import 'components/input-field.css';
+@import 'navbar.css';
+@import 'identity.css';
 
-html, body {
+html,
+body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Roboto', sans-serif, serif;
   font-size: 15px;
   height: 100%;
   background-color: white;
+  min-height: 100vh;
 }
 
 * {
@@ -22,23 +31,30 @@ html, body {
 .main-container {
   margin: 0;
   padding: 0;
-  height: 100%;
+  flex: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .greeting {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-top: 50px;
 }
 
 .footer {
   font-weight: lighter;
   text-align: center;
-  vertical-align: middle;
   width: 100%;
-  position: fixed;
-  height: 40px;
-  bottom: 0;
+  padding: 16px;
+}
+
+.loading {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
 }
