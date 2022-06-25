@@ -4,7 +4,7 @@ import { click, render, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 const EPOCH_TIMESTAMP = 1626242030;
-const HUMAN_TIME = ' July 13, 2021 10:53:50 PM IST';
+const HUMAN_TIME = 'July 13, 2021 10:53:50 PM IST';
 const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
 
 module('Integration | Component | self-clear-cache', (hooks) => {
