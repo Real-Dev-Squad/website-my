@@ -5,6 +5,7 @@ import { hbs } from 'ember-cli-htmlbars';
 
 const EPOCH_TIMESTAMP = 1626242030;
 const HUMAN_TIME = ' July 13, 2021 10:53:50 PM IST';
+const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
 
 module('Integration | Component | self-clear-cache', (hooks) => {
   setupRenderingTest(hooks);
@@ -25,7 +26,6 @@ module('Integration | Component | self-clear-cache', (hooks) => {
     assert.expect(1);
 
     // Assemble
-    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
     this.set('lastTime', EPOCH_TIMESTAMP);
 
     this.set('onCacheClear', function () {
@@ -51,7 +51,6 @@ module('Integration | Component | self-clear-cache', (hooks) => {
     assert.expect(1);
 
     // Assemble
-    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
     this.set('lastTime', EPOCH_TIMESTAMP);
 
     this.set('onCacheClear', function () {
@@ -86,7 +85,7 @@ module('Integration | Component | self-clear-cache', (hooks) => {
       <SelfClearCache
         @time={{this.lastTime}} 
         @countCleared={{this.totalTimes}}
-        @allowedLimit={{this.maxallowedLimit}}
+        @allowedLimit={{this.allowedLimit}}
       />
     `);
 
@@ -98,8 +97,6 @@ module('Integration | Component | self-clear-cache', (hooks) => {
     assert.expect(2);
 
     // Assemble
-    const CACHE_CLEAR_CLICKED = 'CACHE_CLEAR_CLICKED';
-
     this.set('lastTime', EPOCH_TIMESTAMP);
     this.set('totalTimes', 3);
     this.set('allowedLimit', 3);
@@ -112,7 +109,7 @@ module('Integration | Component | self-clear-cache', (hooks) => {
       <SelfClearCache
         @time={{this.lastTime}} 
         @countCleared={{this.totalTimes}}
-        @allowedLimit={{this.maxallowedLimit}}
+        @allowedLimit={{this.allowedLimit}}
         @onCacheClear={{this.onCacheClear}}
       />
     `);
