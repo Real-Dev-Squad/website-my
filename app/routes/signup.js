@@ -1,10 +1,10 @@
 import Route from '@ember/routing/route';
-import { trackEvent } from '../utils/mixpanel';
+import mixpanelAnalytics from '../utils/mixpanel-analytics';
 import ENV from 'website-my/config/environment';
 
 export default class SignupRoute extends Route {
   async model() {
-    trackEvent('Signup Page Loaded Successfully');
+    mixpanelAnalytics().trackEvent('Signup Page Loaded Successfully');
     const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
       credentials: 'include',
     });
@@ -17,7 +17,7 @@ export default class SignupRoute extends Route {
       );
     }
     if (response.status === 200 && !userData.incompleteUserDetails) {
-      trackEvent('User Already Registered');
+      mixpanelAnalytics().trackEvent('User Already Registered');
       alert("You already have filled the up form. You'll now be redirected.");
       window.open('https://realdevsquad.com/goto', '_self');
     }

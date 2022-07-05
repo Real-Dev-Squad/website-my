@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { trackEvent } from '../../utils/mixpanel';
+import mixpanelAnalytics from '../../utils/mixpanel-analytics';
 
 export default class ButtonComponent extends Component {
   @action
@@ -9,19 +9,27 @@ export default class ButtonComponent extends Component {
 
     switch (state) {
       case 'get-started':
-        trackEvent('User Getting-Started - New SignUp Flow');
+        mixpanelAnalytics().trackEvent(
+          'User Getting-Started - New SignUp Flow'
+        );
         !disabled ? clickHandler('firstName') : '';
         break;
       case 'firstName':
-        trackEvent('User entered First Name - New SignUp Flow');
+        mixpanelAnalytics().trackEvent(
+          'User entered First Name - New SignUp Flow'
+        );
         !disabled ? clickHandler('lastName') : '';
         break;
       case 'lastName':
-        trackEvent('User entered Last Name - New SignUp Flow');
+        mixpanelAnalytics().trackEvent(
+          'User entered Last Name - New SignUp Flow'
+        );
         !disabled ? clickHandler('username') : '';
         break;
       case 'username':
-        trackEvent('User entered Username - New SignUp Flow');
+        mixpanelAnalytics().trackEvent(
+          'User entered Username - New SignUp Flow'
+        );
         !disabled ? clickHandler() : '';
         break;
       default:
