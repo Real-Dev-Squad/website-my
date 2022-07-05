@@ -2,7 +2,7 @@
   <h1>Welcome to my site!</h1>
 </div>
 
-<SelfClearCache @time="23 March 1:23 pm IST" @totalTimes="1"/>
+<SelfClearCache @time="23 March 1:23 pm IST" @totalTimes="1" @onClearCache={{this.purgeCache}}/>
 
 <UserStatus 
   @status={{this.status}} 

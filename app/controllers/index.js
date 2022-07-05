@@ -9,6 +9,10 @@ export default class IndexController extends Controller {
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
 
+  @tracked isPurgingCache = false;
+  @tracked timestamp = '';
+  @tracked cacheCount = 0;
+
   @action async updateStatus(status) {
     this.isStatusUpdating = true;
     try {
@@ -30,6 +34,28 @@ export default class IndexController extends Controller {
       alert('Something went wrong!');
     } finally {
       this.isStatusUpdating = false;
+    }
+  }
+
+  @action async purgeCache() {
+    this.isPurgingCache = true;
+    try {
+      const response = await fetch(`${BASE_URL}/members/cache/clear/self`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error : ', error);
+      alert('Something went wrong!');
+    } finally {
+      this.isPurgingCache = false;
     }
   }
 }
