@@ -76,5 +76,9 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "volta": {
+    "node": "12.22.12",
+    "yarn": "1.22.19"
   }
 }
