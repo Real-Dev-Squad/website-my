@@ -3,6 +3,7 @@ import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
 import mixpanelAnalytics from '../utils/mixpanel-analytics';
+import { GOTO_URL } from '../constants/signup';
 import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
@@ -301,7 +302,7 @@ export default class SignupController extends Controller {
       if (status === 204) {
         mixpanelAnalytics().identifyUser();
         mixpanelAnalytics().trackEvent('User Registered - Old SignUp Flow');
-        window.open('https://realdevsquad.com/goto', '_self');
+        window.open(GOTO_URL, '_self');
       } else {
         mixpanelAnalytics().trackEvent(
           'Unable to Sign Up - Old SignUp Flow Breaks'
@@ -347,13 +348,14 @@ export default class SignupController extends Controller {
         if (res.status === 204) {
           mixpanelAnalytics().identifyUser();
           mixpanelAnalytics().trackEvent('User Registered - New SignUp Flow');
-          window.open('https://realdevsquad.com/goto', '_self');
+          window.open(GOTO_URL, '_self');
         } else {
           mixpanelAnalytics().trackEvent(
             'Unable to Sign Up - New SignUp Flow Breaks'
           );
           res.json().then((res) => {
-            this.errorMessage = res.errors[0].title;
+            const error = res.errors[0];
+            this.errorMessage = error.title;
           });
         }
       })
