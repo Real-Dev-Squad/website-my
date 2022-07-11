@@ -356,22 +356,20 @@ export default class SignupController extends Controller {
     };
     this.isSubmitClicked = true;
 
-    console.log(user);
-
-    // registerUser(user)
-    //   .then((res) => {
-    //     if (res.status === 204) {
-    //       window.open('https://realdevsquad.com/goto', '_self');
-    //     } else {
-    //       res.json().then((res) => {
-    //         this.errorMessage = res.errors[0].title;
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => (this.errorMessage = err))
-    //   .finally(() => {
-    //     this.isSubmitClicked = false;
-    //   });
+    registerUser(user)
+      .then((res) => {
+        if (res.status === 204) {
+          window.open('https://realdevsquad.com/goto', '_self');
+        } else {
+          res.json().then((res) => {
+            this.errorMessage = res.errors[0].title;
+          });
+        }
+      })
+      .catch((err) => (this.errorMessage = err))
+      .finally(() => {
+        this.isSubmitClicked = false;
+      });
   }
 
   // New flow ends
