@@ -19,6 +19,17 @@ export default class SignupController extends Controller {
   @tracked isSubmitDisabled = true; // remove this when new flow goes live
 
   @tracked state = 'get-started';
+
+  // stores the order in which the route transition will happen
+  // based on the signup steps
+  // get-started -> capture first name -> captur last name -> capture username
+  @tracked routeParamsMap = new Map([
+    ['get-started', 'first-name'],
+    ['first-name', 'last-name'],
+    ['last-name', 'username'],
+    ['username', ''],
+  ]);
+
   @tracked dev = false;
   @tracked userDetails = {
     firstName: '',
@@ -324,45 +335,43 @@ export default class SignupController extends Controller {
 
   @action changeRouteParams(paramValue) {
     this.isButtonDisabled = true;
-    if (paramValue)
+    if (paramValue > '')
       this.transitionToRoute({ queryParams: { state: paramValue } });
+    else this.signup();
   }
 
   @action handleInputChange(key, value) {
+    console.log(key, value);
     set(this.userDetails, key, value);
     if (this.userDetails[key] > '') this.isButtonDisabled = false;
     else this.isButtonDisabled = true;
   }
 
   @action signup() {
+    console.log(this.userDetails);
     const user = {
-      first_name: this.userDetails.firstName,
-      last_name: this.userDetails.lastName,
+      first_name: this.userDetails['first-name'],
+      last_name: this.userDetails['last-name'],
       username: this.userDetails.username,
     };
     this.isSubmitClicked = true;
 
-    registerUser(user)
-      .then((res) => {
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          window.open(GOTO_URL, '_self');
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          res.json().then((res) => {
-            const error = res.errors[0];
-            this.errorMessage = error.title;
-          });
-        }
-      })
-      .catch((err) => {
-        this.errorMessage = err;
-        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-      })
-      .finally(() => {
-        this.isSubmitClicked = false;
-      });
+    console.log(user);
+
+    // registerUser(user)
+    //   .then((res) => {
+    //     if (res.status === 204) {
+    //       window.open('https://realdevsquad.com/goto', '_self');
+    //     } else {
+    //       res.json().then((res) => {
+    //         this.errorMessage = res.errors[0].title;
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => (this.errorMessage = err))
+    //   .finally(() => {
+    //     this.isSubmitClicked = false;
+    //   });
   }
 
   // New flow ends

@@ -4,23 +4,26 @@
   {{#if this.state}}
     {{#if (eq this.state "get-started")}}
       <SignUp::GetStarted
-        @changeRouteParams={{this.changeRouteParams}}
+        @handleRouteParamsChange={{this.changeRouteParams}}
         @state={{this.state}}
+        @routeParams={{this.routeParamsMap}}
       />
     {{else if (eq this.state "thank-you")}}
       <SignUp::GetStarted
-        @changeRouteParams={{this.changeRouteParams}}
+        @handleRouteParamsChange={{this.changeRouteParams}}
         @state={{this.state}}
+        @routeParams={{this.routeParamsMap}}
       />
     {{else}}
       <SignUp::Form
-        @changeRouteParams={{this.changeRouteParams}}
+        @handleRouteParamsChange={{this.changeRouteParams}}
         @register={{this.signup}}
         @userDetails={{this.userDetails}}
         @onChange={{this.handleInputChange}}
         @state={{this.state}}
         @isSubmitClicked={{this.isSubmitClicked}}
         @isButtonDisabled={{this.isButtonDisabled}}
+        @routeParams={{this.routeParamsMap}}
       />
     {{/if}}
   {{/if}}

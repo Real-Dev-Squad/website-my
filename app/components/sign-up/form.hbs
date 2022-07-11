@@ -8,11 +8,11 @@
 
   <div class="signup-action__btn">
     <SignUp::Button
-      @clickHandler={{if (eq @state "username")
-      @register @changeRouteParams}}
+      @clickHandler={{@handleRouteParamsChange}}
       @state={{@state}}
       @disabled={{@isButtonDisabled}}
       @isSubmitClicked={{@isSubmitClicked}}
+      @routeParams={{@routeParams}}
     >
       Next
     </SignUp::Button>
