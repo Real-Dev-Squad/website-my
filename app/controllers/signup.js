@@ -341,14 +341,12 @@ export default class SignupController extends Controller {
   }
 
   @action handleInputChange(key, value) {
-    console.log(key, value);
     set(this.userDetails, key, value);
     if (this.userDetails[key] > '') this.isButtonDisabled = false;
     else this.isButtonDisabled = true;
   }
 
   @action signup() {
-    console.log(this.userDetails);
     const user = {
       first_name: this.userDetails['first-name'],
       last_name: this.userDetails['last-name'],
