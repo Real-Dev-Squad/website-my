@@ -1,0 +1,28 @@
+{{page-title "New Sign Up"}}
+
+{{#if this.state}}
+  {{#if (eq this.state "get-started")}}
+    <NewSignUp::GetStarted
+      @handleRouteParamsChange={{this.changeRouteParams}}
+      @state={{this.state}}
+      @routeParams={{this.routeParamsMap}}
+    />
+  {{else if (eq this.state "thank-you")}}
+    <NewSignUp::GetStarted
+      @handleRouteParamsChange={{this.changeRouteParams}}
+      @state={{this.state}}
+      @routeParams={{this.routeParamsMap}}
+    />
+  {{else}}
+    <NewSignUp::Form
+      @handleRouteParamsChange={{this.changeRouteParams}}
+      @register={{this.signup}}
+      @userDetails={{this.userDetails}}
+      @onChange={{this.handleInputChange}}
+      @state={{this.state}}
+      @isSubmitClicked={{this.isSubmitClicked}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @routeParams={{this.routeParamsMap}}
+    />
+  {{/if}}
+{{/if}}

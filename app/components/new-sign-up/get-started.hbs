@@ -14,13 +14,13 @@
   {{/if}}
 
   <div class="get-started__btn">
-    <SignUp::Button
+    <NewSignUp::Button
       @clickHandler={{@handleRouteParamsChange}}
       @state={{@state}}
       @disabled={{false}}
       @routeParams={{@routeParams}}
     >
       {{if (eq @state "get-started") "Get Started" "Let's Go"}}
-    </SignUp::Button>
+    </NewSignUp::Button>
   </div>
 </div>
