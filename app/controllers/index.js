@@ -10,8 +10,8 @@ export default class IndexController extends Controller {
   @tracked isStatusUpdating = false;
 
   @tracked isPurgingCache = false;
-  @tracked timestamp = '';
-  @tracked cacheCount = 0;
+  @tracked timestamp = this.model.time;
+  @tracked cacheCount = this.model.count;
 
   @action async updateStatus(status) {
     this.isStatusUpdating = true;
@@ -49,7 +49,8 @@ export default class IndexController extends Controller {
       });
 
       if (response.ok) {
-        console.log(response);
+        const data = await response.json();
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error : ', error);

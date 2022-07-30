@@ -23,4 +23,23 @@ export default class IndexRoute extends Route {
       console.error(error.message);
     }
   };
+
+  model = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/logs/member/CACHE_SELF`, {
+        credentials: 'include',
+      });
+
+      const logsData = await response.json();
+      const { count, logs } = logsData;
+      const timestamp = logs[logs.length - 1].timestamp;
+      const time =
+        new Date(timestamp._seconds * 1000).toString().slice(0, 25) +
+        new Date(timestamp._seconds * 1000).toString().slice(34);
+
+      return { count, time };
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 }

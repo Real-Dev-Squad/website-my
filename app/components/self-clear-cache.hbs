@@ -1,14 +1,14 @@
 <section class="cache">
   <div data-test-last-time class="cache__last-request">
-    Last Request: {{@time}}
+    Last Request: <br> {{@time}}
   </div>
-  <button data-test-btn-clear-cache class="cache__clear-btn" type="submit" disabled={{@isPurgingCache}} {{on "click" (fn @onClearCache)}}>Clear cache</button>
-  <div data-test-pending-requests class="cache__remaining-requests">
-    {{@totalTimes}} / 3 requests remaining for today
-  </div>
-  {{#if @isStatusUpdating}}
+  {{#if @isPurgingCache}}
     <div>
       <Spinner />
     </div>
   {{/if}}
+  <button data-test-btn-clear-cache class="cache__clear-btn" type="submit" disabled={{@isPurgingCache}} {{on "click" (fn @onClearCache)}}>Clear cache</button>
+  <div data-test-pending-requests class="cache__remaining-requests">
+    {{@totalTimes}} / 3 requests remaining for today
+  </div>
 </section>
