@@ -40,7 +40,7 @@ export default class IndexController extends Controller {
   @action async purgeCache() {
     this.isPurgingCache = true;
     try {
-      const response = await fetch(`${BASE_URL}/members/cache/clear/self`, {
+      const response = await fetch(`${BASE_URL}/members/cache`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
