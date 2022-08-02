@@ -13,8 +13,8 @@ export default class SignupController extends Controller {
 
   // stores the order in which the route transition will happen
   // based on the signup steps
-  // get-started -> capture first name -> captur last name -> capture username
-  @tracked routeParamsMap = new Map([
+  // get-started -> capture first name -> capture last name -> capture username
+  routeParamsMap = new Map([
     ['get-started', 'firstName'],
     ['firstName', 'lastName'],
     ['lastName', 'username'],
@@ -29,11 +29,13 @@ export default class SignupController extends Controller {
   };
   @tracked errorMessage;
 
-  @action changeRouteParams(paramValue) {
-    this.isButtonDisabled = true;
-    if (paramValue > '')
+  @action changeRouteParams() {
+    const paramValue = this.routeParamsMap.get(this.state);
+    console.log(this.state);
+    if (paramValue > '' && !this.isButtonDisabled) {
+      this.isButtonDisabled = true;
       this.transitionToRoute({ queryParams: { state: paramValue } });
-    else this.signup();
+    } else this.signup();
   }
 
   @action handleInputChange(key, value) {
