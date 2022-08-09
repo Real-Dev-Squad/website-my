@@ -7,14 +7,11 @@ const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
   host = API_BASE_URL;
-  headers = {
-    credentials: 'include',
-  };
 
-  _fetchRequest(options) {
+  ajaxOptions() {
+    const options = super.ajaxOptions(...arguments);
     options.credentials = 'include';
-
-    return fetch(options.url, options);
+    return options;
   }
 
   buildURL(...args) {

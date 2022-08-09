@@ -1,32 +1,35 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { UnauthorizedError } from '@ember-data/adapter/error';
+import { action } from '@ember/object';
+import RSVP from 'rsvp';
 
 export default class IndexRoute extends Route {
   @service store;
+
   async model() {
-    return this.store.findAll('users', 'self');
+    const res = RSVP.hash({
+      user: this.store.findRecord('users', 'self'),
+      cache: this.store.findRecord('users', 'self'),
+      // cache: this.store.findAll('caches'),
+    });
+
+    console.log(res);
+    return res;
+  }
+
+  @action
+  error(error) {
+    if (error instanceof UnauthorizedError) {
+      alert('You are not logged in. Please login to continue.');
+      window.open(
+        'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
+        '_self'
+      );
+      return;
+    }
   }
 }
-// model = async () => {
-//   const defaultStatus = 'active';
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/users/self`, {
-//       credentials: 'include',
-//     });
-//     const userData = await response.json();
-//     if (response.status === 200 && !userData.incompleteUserDetails) {
-//       return userData.status ?? defaultStatus;
-//     } else if (response.status === 401) {
-//       alert('You are not logged in. Please login to continue.');
-//       window.open(
-//         'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
-//         '_self'
-//       );
-//     }
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// };
 
 //   model = async () => {
 //     const DEFAULT_TIME = 'Cache not cleared in last 24 hours';

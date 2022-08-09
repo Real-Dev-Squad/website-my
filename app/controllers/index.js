@@ -6,12 +6,10 @@ import ENV from 'website-my/config/environment';
 const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
-  @tracked status = this.model;
+  @tracked status = this.model.user.status;
   @tracked isStatusUpdating = false;
 
   @tracked isPurgingCache = false;
-  @tracked timestamp = this.model.time;
-  @tracked cacheCount = this.model.count;
 
   @action async updateStatus(status) {
     this.isStatusUpdating = true;

@@ -1,13 +1,13 @@
 import Model, { attr } from '@ember-data/model';
 
 export default class UsersModel extends Model {
-  @attr first_name;
+  @attr('string', { defaultValue: 'User' }) first_name;
   @attr last_name;
   @attr username;
-  @attr status;
+  @attr('string', { defaultValue: 'active' }) status;
   @attr roles;
   @attr yoe;
-  @attr picture;
+  @attr('json', { defaultValue: 'dummyProfilePicture.png' }) picture;
   @attr company;
   @attr incompleteUserDetails;
   @attr github_display_name;
