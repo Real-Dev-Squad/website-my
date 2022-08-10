@@ -28,7 +28,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "mixpanel-browser": "^2.43.0"
   },
   "devDependencies": {

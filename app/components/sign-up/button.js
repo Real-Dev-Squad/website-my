@@ -1,33 +1,35 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import mixpanelAnalytics from '../../utils/mixpanel-analytics';
+import { inject as service } from '@ember/service';
 
 export default class ButtonComponent extends Component {
+  @service mixpanelAnalytics;
+
   @action
   buttonClickHandler() {
     const { state, clickHandler, disabled } = this.args;
 
     switch (state) {
       case 'get-started':
-        mixpanelAnalytics().trackEvent(
+        this.mixpanelAnalytics.trackEvent(
           'User Getting-Started - New SignUp Flow'
         );
         !disabled ? clickHandler('firstName') : '';
         break;
       case 'firstName':
-        mixpanelAnalytics().trackEvent(
+        this.mixpanelAnalytics.trackEvent(
           'User entered First Name - New SignUp Flow'
         );
         !disabled ? clickHandler('lastName') : '';
         break;
       case 'lastName':
-        mixpanelAnalytics().trackEvent(
+        this.mixpanelAnalytics.trackEvent(
           'User entered Last Name - New SignUp Flow'
         );
         !disabled ? clickHandler('username') : '';
         break;
       case 'username':
-        mixpanelAnalytics().trackEvent(
+        this.mixpanelAnalytics.trackEvent(
           'User entered Username - New SignUp Flow'
         );
         !disabled ? clickHandler() : '';
