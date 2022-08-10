@@ -1,5 +1,4 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
-// import { get } from '@ember/object';
 
 import ENV from 'website-my/config/environment';
 
