@@ -3,14 +3,14 @@
 </div>
 
 <SelfClearCache 
-  @time={{@model.cache.count}} 
-  @totalTimes={{@model.cache.count}} 
+  @time={{this.timestamp}} 
+  @totalTimes={{this.count}} 
   @onClearCache={{this.purgeCache}} 
   @isPurgingCache={{this.isPurgingCache}}
 />
 
 <UserStatus 
-  @status={{@model.user.status}} 
+  @status={{this.status}} 
   @onUpdateStatus={{this.updateStatus}} 
   @isStatusUpdating={{this.isStatusUpdating}}
 />

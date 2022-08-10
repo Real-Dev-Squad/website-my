@@ -9,6 +9,9 @@ export default class IndexController extends Controller {
   @tracked status = this.model.user.status;
   @tracked isStatusUpdating = false;
 
+  @tracked timestamp = this.model.cache.timestamp;
+  @tracked count = this.model.cache.count;
+
   @tracked isPurgingCache = false;
 
   @action async updateStatus(status) {
@@ -55,6 +58,9 @@ export default class IndexController extends Controller {
       alert('Something went wrong!');
     } finally {
       this.isPurgingCache = false;
+      const newCache = await this.store.queryRecord('caches', {});
+      this.timestamp = newCache.timestamp;
+      this.count = newCache.count;
     }
   }
 }
