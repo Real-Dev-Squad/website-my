@@ -2,6 +2,13 @@
   <h1>Welcome to my site!</h1>
 </div>
 
+<SelfClearCache 
+  @time={{this.timestamp}} 
+  @totalTimes={{this.count}} 
+  @onClearCache={{this.purgeCache}} 
+  @isPurgingCache={{this.isPurgingCache}}
+/>
+
 <UserStatus 
   @status={{this.status}} 
   @onUpdateStatus={{this.updateStatus}} 

@@ -1,26 +1,28 @@
 import Route from '@ember/routing/route';
-import ENV from 'website-my/config/environment';
+import { inject as service } from '@ember/service';
+import { UnauthorizedError } from '@ember-data/adapter/error';
+import { action } from '@ember/object';
+import RSVP from 'rsvp';
 
-const API_BASE_URL = ENV.BASE_API_URL;
 export default class IndexRoute extends Route {
-  model = async () => {
-    const defaultStatus = 'active';
-    try {
-      const response = await fetch(`${API_BASE_URL}/users/self`, {
-        credentials: 'include',
-      });
-      const userData = await response.json();
-      if (response.status === 200 && !userData.incompleteUserDetails) {
-        return userData.status ?? defaultStatus;
-      } else if (response.status === 401) {
-        alert('You are not logged in. Please login to continue.');
-        window.open(
-          'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
-          '_self'
-        );
-      }
-    } catch (error) {
-      console.error(error.message);
+  @service store;
+
+  async model() {
+    return RSVP.hash({
+      user: this.store.findRecord('users', 'self'),
+      cache: this.store.queryRecord('caches', {}),
+    });
+  }
+
+  @action
+  error(error) {
+    if (error instanceof UnauthorizedError) {
+      alert('You are not logged in. Please login to continue.');
+      window.open(
+        'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
+        '_self'
+      );
+      return;
     }
-  };
+  }
 }
