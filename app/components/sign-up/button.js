@@ -8,34 +8,30 @@ export default class ButtonComponent extends Component {
   @action
   buttonClickHandler() {
     const { state, clickHandler, disabled } = this.args;
+    let event;
 
     switch (state) {
       case 'get-started':
-        this.mixpanelAnalytics.trackEvent(
-          'User Getting-Started - New SignUp Flow'
-        );
+        event = 'User Getting-Started - New SignUp Flow';
         !disabled ? clickHandler('firstName') : '';
         break;
       case 'firstName':
-        this.mixpanelAnalytics.trackEvent(
-          'User entered First Name - New SignUp Flow'
-        );
+        event = 'User entered First Name - New SignUp Flow';
         !disabled ? clickHandler('lastName') : '';
         break;
       case 'lastName':
-        this.mixpanelAnalytics.trackEvent(
-          'User entered Last Name - New SignUp Flow'
-        );
+        event = 'User entered Last Name - New SignUp Flow';
         !disabled ? clickHandler('username') : '';
         break;
       case 'username':
-        this.mixpanelAnalytics.trackEvent(
-          'User entered Username - New SignUp Flow'
-        );
+        event = 'User entered Username - New SignUp Flow';
         !disabled ? clickHandler() : '';
         break;
       default:
+        event = 'Something went wrong - New SignUp Flow';
         return;
     }
+
+    this.mixpanelAnalytics.trackEvent(event);
   }
 }
