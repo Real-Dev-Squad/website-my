@@ -4,12 +4,13 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
 import { GOTO_URL } from '../constants/signup';
+import { NEW_SIGNUP_FLOW, OLD_SIGNUP_FLOW } from '../constants/analytics';
 import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
 
 export default class SignupController extends Controller {
-  @service mixpanelAnalytics;
+  @service analytics;
 
   queryParams = ['state', 'dev'];
 
@@ -286,9 +287,7 @@ export default class SignupController extends Controller {
     // submit
     // https://github.com/Real-Dev-Squad/website-api-contracts/tree/main/users#patch-usersself
     e.preventDefault();
-    this.mixpanelAnalytics.trackEvent(
-      'Submit Button Clicked - Old SignUp Flow'
-    );
+    this.analytics.trackEvent(OLD_SIGNUP_FLOW.SUBMIT_CLICKED);
     const cleanReqObject = this.sanitizeRequestObject(this.formData);
     this.isSubmitClicked = true;
 
@@ -304,21 +303,17 @@ export default class SignupController extends Controller {
 
       const { status } = response;
       if (status === 204) {
-        this.mixpanelAnalytics.identifyUser();
-        this.mixpanelAnalytics.trackEvent('User Registered - Old SignUp Flow');
+        this.analytics.identifyUser();
+        this.analytics.trackEvent(OLD_SIGNUP_FLOW.USER_REGISTERED);
         window.open(GOTO_URL, '_self');
       } else {
-        this.mixpanelAnalytics.trackEvent(
-          'Unable to Sign Up - Old SignUp Flow Breaks'
-        );
+        this.analytics.trackEvent(OLD_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
         alert('Something went wrong. Please check console errors.');
       }
     } catch (error) {
       console.error('Error : ', error);
     } finally {
-      this.mixpanelAnalytics.trackEvent(
-        'User unable to register - Old SignUp Flow Breaks'
-      );
+      this.analytics.trackEvent(OLD_SIGNUP_FLOW.UNABLE_TO_REGISTER);
       this.isSubmitClicked = false;
     }
   }
@@ -350,15 +345,11 @@ export default class SignupController extends Controller {
     registerUser(user)
       .then((res) => {
         if (res.status === 204) {
-          this.mixpanelAnalytics.identifyUser();
-          this.mixpanelAnalytics.trackEvent(
-            'User Registered - New SignUp Flow'
-          );
+          this.analytics.identifyUser();
+          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
           window.open(GOTO_URL, '_self');
         } else {
-          this.mixpanelAnalytics.trackEvent(
-            'Unable to Sign Up - New SignUp Flow Breaks'
-          );
+          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
           res.json().then((res) => {
             const error = res.errors[0];
             this.errorMessage = error.title;
@@ -367,9 +358,7 @@ export default class SignupController extends Controller {
       })
       .catch((err) => {
         this.errorMessage = err;
-        this.mixpanelAnalytics.trackEvent(
-          'Unable to Register - New SignUp Flow Breaks'
-        );
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
       })
       .finally(() => {
         this.isSubmitClicked = false;

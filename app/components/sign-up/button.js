@@ -1,9 +1,10 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { NEW_SIGNUP_FLOW } from '../../constants/analytics';
 
 export default class ButtonComponent extends Component {
-  @service mixpanelAnalytics;
+  @service analytics;
 
   @action
   buttonClickHandler() {
@@ -12,26 +13,26 @@ export default class ButtonComponent extends Component {
 
     switch (state) {
       case 'get-started':
-        event = 'User Getting-Started - New SignUp Flow';
+        event = NEW_SIGNUP_FLOW.USER_GETTING_STARTED;
         !disabled ? clickHandler('firstName') : '';
         break;
       case 'firstName':
-        event = 'User entered First Name - New SignUp Flow';
+        event = NEW_SIGNUP_FLOW.USER_FIRST_NAME;
         !disabled ? clickHandler('lastName') : '';
         break;
       case 'lastName':
-        event = 'User entered Last Name - New SignUp Flow';
+        event = NEW_SIGNUP_FLOW.USER_LAST_NAME;
         !disabled ? clickHandler('username') : '';
         break;
       case 'username':
-        event = 'User entered Username - New SignUp Flow';
+        event = NEW_SIGNUP_FLOW.USER_USERNAME;
         !disabled ? clickHandler() : '';
         break;
       default:
-        event = 'Something went wrong - New SignUp Flow';
+        event = NEW_SIGNUP_FLOW.SOMETHING_WENT_WRONG;
         return;
     }
 
-    this.mixpanelAnalytics.trackEvent(event);
+    this.analytics.trackEvent(event);
   }
 }
