@@ -22,5 +22,3 @@ export const SIGNUP = {
   PAGE_LOADED: 'Signup Page Loaded Successfully',
   USER_ALREADY_REGISTERED: 'User Already Registered',
 };
-
-export const TEST_EVENT = 'Test Event';

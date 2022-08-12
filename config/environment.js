@@ -39,7 +39,7 @@ module.exports = function (environment) {
     // Testem prefers this...
     ENV.locationType = 'none';
 
-    ENV.MIXPANEL_TOKEN = '<TOKEN>';
+    ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
