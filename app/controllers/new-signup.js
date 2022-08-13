@@ -2,24 +2,25 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
+import { inject as service } from '@ember/service';
+
+const SIGNUP_STEPS = [
+  'get-started',
+  'firstName',
+  'lastName',
+  'username',
+  'thank-you',
+];
 
 export default class SignupController extends Controller {
-  queryParams = ['state', 'dev'];
+  @service router;
 
   @tracked isSubmitClicked = false;
   @tracked isButtonDisabled = true;
 
-  @tracked state = 'get-started';
+  currentStepIndex = 0;
 
-  // stores the order in which the route transition will happen
-  // based on the signup steps
-  // get-started -> capture first name -> capture last name -> capture username
-  routeParamsMap = new Map([
-    ['get-started', 'firstName'],
-    ['firstName', 'lastName'],
-    ['lastName', 'username'],
-    ['username', ''],
-  ]);
+  // new-signup?state=firstName
 
   @tracked dev = false;
   @tracked userDetails = {
@@ -29,13 +30,24 @@ export default class SignupController extends Controller {
   };
   @tracked errorMessage;
 
+  get currentStep() {
+    return this.router.currentRoute?.queryParams.state;
+  }
+
   @action changeRouteParams() {
-    const paramValue = this.routeParamsMap.get(this.state);
-    console.log(this.state);
-    if (paramValue > '' && !this.isButtonDisabled) {
-      this.isButtonDisabled = true;
-      this.transitionToRoute({ queryParams: { state: paramValue } });
-    } else this.signup();
+    const nextStepIndex = this.currentStepIndex + 1;
+
+    if (nextStepIndex > SIGNUP_STEPS.length) {
+      throw new Error('Invalid Step');
+    }
+
+    this.currentStepIndex = nextStepIndex;
+
+    this.router.transitionTo({
+      queryParams: {
+        state: SIGNUP_STEPS[nextStepIndex],
+      },
+    });
   }
 
   @action handleInputChange(key, value) {
