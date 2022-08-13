@@ -3,4 +3,4 @@
 
 echo "Checking for linting problems, please wait⏳\n"
 
-yarn run lint
+yarn lint

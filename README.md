@@ -22,7 +22,7 @@ To install Volta, please follow the [process](https://docs.volta.sh/guide/gettin
 
 ## Running / Development
 
-- `yarn run dev`
+- `yarn dev`
 - (or `ember s`)
 - Visit your app at [http://localhost](http://localhost).
 - Visit your tests at [http://localhost/tests](http://localhost/tests).
@@ -33,9 +33,9 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Running Tests
 
-- `yarn run test`
-- `yarn run test:ember`
-- `yarn run test:ember:server`
+- `yarn test`
+- `yarn test:ember`
+- `yarn test:ember:server`
 - (or `ember test` and `ember test --server`)
 - You can also visit the `/tests` route when running dev server
 
@@ -46,14 +46,14 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Linting
 
-- `yarn run lint`: To allow the linter to check for problems
-- `yarn run lint:fix`: To allow linter to fix the auto-fixable problems
+- `yarn lint`: To allow the linter to check for problems
+- `yarn lint:fix`: To allow linter to fix the auto-fixable problems
 
 ### Note: For solving CORS errors while making API calls during development, please make sure to follow step 1 from [this](https://github.com/Real-Dev-Squad/website-code-docs/tree/main/docs/dev/https-dev-url-cors) documentation . This project has taken care of step 2 in itself.
 
 ### Building
 
-- `yarn run build` (production)
+- `yarn build` (production)
 - (or `ember build --environment production`)
 - `ember build` (development)
 
