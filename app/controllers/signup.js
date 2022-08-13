@@ -311,9 +311,9 @@ export default class SignupController extends Controller {
         alert('Something went wrong. Please check console errors.');
       }
     } catch (error) {
+      this.analytics.trackEvent(OLD_SIGNUP_FLOW.UNABLE_TO_REGISTER);
       console.error('Error : ', error);
     } finally {
-      this.analytics.trackEvent(OLD_SIGNUP_FLOW.UNABLE_TO_REGISTER);
       this.isSubmitClicked = false;
     }
   }
