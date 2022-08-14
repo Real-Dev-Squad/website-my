@@ -12,10 +12,10 @@ module('Integration | Component | new-sign-up/get-started', function (hooks) {
     this.set('changeRouteParams', function () {
       this.transitionToRoute({ queryParams: { state: 'firstName' } });
     });
-    this.set('state', 'get-started');
+    this.set('currentStep', 'get-started');
 
     await render(
-      hbs`<NewSignUp::GetStarted @state={{this.state}} @handleRouteParamsChange={{this.changeRouteParams}} />`
+      hbs`<NewSignUp::GetStarted @currentStep={{this.currentStep}} @handleRouteParamsChange={{this.changeRouteParams}} />`
     );
 
     assert.equal(
@@ -53,15 +53,15 @@ module('Integration | Component | new-sign-up/get-started', function (hooks) {
     this.set('changeRouteParams', function () {
       this.transitionToRoute({ queryParams: { state: 'firstName' } });
     });
-    this.set('state', 'thank-you');
+    this.set('currentStep', 'thank-you');
 
     await render(
-      hbs`<NewSignUp::GetStarted @state={{this.state}} @handleRouteParamsChange={{this.changeRouteParams}} />`
+      hbs`<NewSignUp::GetStarted @currentStep={{this.currentStep}} @handleRouteParamsChange={{this.changeRouteParams}} />`
     );
 
     assert.equal(
       this.element.querySelector('[data-test-mainHeading]').textContent.trim(),
-      'Congratulations!',
+      'Thank you for connecting your GitHub!',
       'Correct Heading'
     );
     assert.equal(
