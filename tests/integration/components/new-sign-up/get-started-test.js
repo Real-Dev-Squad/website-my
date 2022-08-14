@@ -3,21 +3,19 @@ import { setupRenderingTest } from 'ember-qunit';
 import { hbs } from 'ember-cli-htmlbars';
 import { render } from '@ember/test-helpers';
 
-module('Integration | Component | sign-up/get-started', function (hooks) {
+module('Integration | Component | new-sign-up/get-started', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders in get-started state', async function (assert) {
     assert.expect(5);
 
-    this.set('changeRouteParams', function (paramValue) {
-      this.isButtonDisabled = true;
-      if (paramValue)
-        this.transitionToRoute({ queryParams: { state: paramValue } });
+    this.set('changeRouteParams', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
     });
     this.set('state', 'get-started');
 
     await render(
-      hbs`<SignUp::GetStarted @state={{this.state}} @changeRouteParams={{this.changeRouteParams}} />`
+      hbs`<NewSignUp::GetStarted @state={{this.state}} @handleRouteParamsChange={{this.changeRouteParams}} />`
     );
 
     assert.equal(
@@ -52,15 +50,13 @@ module('Integration | Component | sign-up/get-started', function (hooks) {
   test('it renders in thankyou state', async function (assert) {
     assert.expect(3);
 
-    this.set('changeRouteParams', function (paramValue) {
-      this.isButtonDisabled = true;
-      if (paramValue)
-        this.transitionToRoute({ queryParams: { state: paramValue } });
+    this.set('changeRouteParams', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
     });
     this.set('state', 'thank-you');
 
     await render(
-      hbs`<SignUp::GetStarted @state={{this.state}} @changeRouteParams={{this.changeRouteParams}} />`
+      hbs`<NewSignUp::GetStarted @state={{this.state}} @handleRouteParamsChange={{this.changeRouteParams}} />`
     );
 
     assert.equal(

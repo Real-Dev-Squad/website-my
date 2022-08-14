@@ -3,13 +3,19 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | sign-up/form', function (hooks) {
+module('Integration | Component | new-sign-up/form', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it has a label', async function (assert) {
     assert.expect(1);
 
-    await render(hbs`<SignUp::Form />`);
+    this.set('changeRouteParams', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
+    await render(
+      hbs`<NewSignUp::Form @handleRouteParamsChange={{this.changeRouteParams}} />`
+    );
 
     assert.dom('[data-test-signup-form-label]').hasAnyText();
   });
@@ -17,7 +23,13 @@ module('Integration | Component | sign-up/form', function (hooks) {
   test('It should have button with text', async function (assert) {
     assert.expect(2);
 
-    await render(hbs`<SignUp::Form /> `);
+    this.set('changeRouteParams', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
+    await render(
+      hbs`<NewSignUp::Form @handleRouteParamsChange={{this.changeRouteParams}} />`
+    );
 
     assert.dom('[data-test-signup-button]').exists();
     assert.dom('[data-test-signup-button]').hasAnyText();
@@ -26,7 +38,13 @@ module('Integration | Component | sign-up/form', function (hooks) {
   test('It should have input field', async function (assert) {
     assert.expect(3);
 
-    await render(hbs`<SignUp::Form /> `);
+    this.set('changeRouteParams', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
+    await render(
+      hbs`<NewSignUp::Form @handleRouteParamsChange={{this.changeRouteParams}} />`
+    );
 
     assert.dom('[data-test-signup-form-input]').exists();
     assert

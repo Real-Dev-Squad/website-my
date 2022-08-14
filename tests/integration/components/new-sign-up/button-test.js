@@ -3,15 +3,19 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | sign-up/button', function (hooks) {
+module('Integration | Component | new-sign-up/button', function (hooks) {
   setupRenderingTest(hooks);
 
   test('Button should be disabled if @disabled is true', async function (assert) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button @disabled={{true}}>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @disabled={{true}} @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button]').isDisabled();
@@ -21,8 +25,12 @@ module('Integration | Component | sign-up/button', function (hooks) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button]').isNotDisabled();
@@ -32,8 +40,12 @@ module('Integration | Component | sign-up/button', function (hooks) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button @disabled={{false}}>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @disabled={{false}} @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button]').isNotDisabled();
@@ -43,8 +55,12 @@ module('Integration | Component | sign-up/button', function (hooks) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button]').hasAttribute('type', 'button');
@@ -54,8 +70,12 @@ module('Integration | Component | sign-up/button', function (hooks) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button @isSubmitClicked={{true}}>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @isSubmitClicked={{true}} @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button-spinner]').exists();
@@ -65,8 +85,12 @@ module('Integration | Component | sign-up/button', function (hooks) {
     assert.expect(1);
     this.set('inputValue', 'Get Started');
 
+    this.set('handleButtonClick', function () {
+      this.transitionToRoute({ queryParams: { state: 'firstName' } });
+    });
+
     await render(hbs`
-      <SignUp::Button>{{inputValue}}</SignUp::Button>
+      <NewSignUp::Button @clickHandler={{this.handleButtonClick}}>{{inputValue}}</NewSignUp::Button>
     `);
 
     assert.dom('[data-test-signup-button-spinner]').doesNotExist();
