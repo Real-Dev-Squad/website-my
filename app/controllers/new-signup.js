@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
-import { inject as service } from '@ember/service';
 
 const SIGNUP_STEPS = [
   'get-started',
@@ -13,14 +12,10 @@ const SIGNUP_STEPS = [
 ];
 
 export default class SignupController extends Controller {
-  @service router;
-
   @tracked isSubmitClicked = false;
   @tracked isButtonDisabled = true;
 
-  currentStepIndex = 0;
-
-  // new-signup?state=firstName
+  @tracked currentStepIndex = 0;
 
   @tracked dev = false;
   @tracked userDetails = {
@@ -31,23 +26,21 @@ export default class SignupController extends Controller {
   @tracked errorMessage;
 
   get currentStep() {
-    return this.router.currentRoute?.queryParams.state;
+    return SIGNUP_STEPS[this.currentStepIndex];
   }
 
   @action changeRouteParams() {
     const nextStepIndex = this.currentStepIndex + 1;
 
-    if (nextStepIndex > SIGNUP_STEPS.length) {
-      throw new Error('Invalid Step');
+    console.log(nextStepIndex, SIGNUP_STEPS.length);
+
+    if (nextStepIndex >= SIGNUP_STEPS.length) {
+      this.signup();
+      return;
     }
 
     this.currentStepIndex = nextStepIndex;
-
-    this.router.transitionTo({
-      queryParams: {
-        state: SIGNUP_STEPS[nextStepIndex],
-      },
-    });
+    this.isButtonDisabled = true;
   }
 
   @action handleInputChange(key, value) {
@@ -63,6 +56,7 @@ export default class SignupController extends Controller {
       username: this.userDetails.username,
     };
     this.isSubmitClicked = true;
+    console.log(user);
 
     registerUser(user)
       .then((res) => {

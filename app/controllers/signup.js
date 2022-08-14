@@ -2,43 +2,19 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import registerUser from '../utils/register-api';
 import { GOTO_URL } from '../constants/signup';
-import { NEW_SIGNUP_FLOW, OLD_SIGNUP_FLOW } from '../constants/analytics';
-import ENV from 'website-my/config/environment'; // remove this when new flow goes live
+import { OLD_SIGNUP_FLOW } from '../constants/analytics';
+import ENV from 'website-my/config/environment';
 
-const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
+const BASE_URL = ENV.BASE_API_URL;
 
 export default class SignupController extends Controller {
   @service analytics;
 
-  queryParams = ['state', 'dev'];
-
   @tracked isSubmitClicked = false;
-  @tracked isButtonDisabled = true;
-  @tracked isSubmitDisabled = true; // remove this when new flow goes live
+  @tracked isSubmitDisabled = true;
 
-  @tracked state = 'get-started';
-
-  // stores the order in which the route transition will happen
-  // based on the signup steps
-  // get-started -> capture first name -> captur last name -> capture username
-  @tracked routeParamsMap = new Map([
-    ['get-started', 'first-name'],
-    ['first-name', 'last-name'],
-    ['last-name', 'username'],
-    ['username', ''],
-  ]);
-
-  @tracked dev = false;
-  @tracked userDetails = {
-    firstName: '',
-    lastName: '',
-    username: '',
-  };
   @tracked errorMessage;
-
-  // Existing flow starts
 
   @tracked title = 'Account Details';
   @tracked formData = {
@@ -328,47 +304,4 @@ export default class SignupController extends Controller {
       this.isSubmitClicked = false;
     }
   }
-
-  // Existing flow ends
-
-  // New flow starts
-
-  @action changeRouteParams(paramValue) {
-    this.isButtonDisabled = true;
-    if (paramValue > '')
-      this.transitionToRoute({ queryParams: { state: paramValue } });
-    else this.signup();
-  }
-
-  @action handleInputChange(key, value) {
-    set(this.userDetails, key, value);
-    if (this.userDetails[key] > '') this.isButtonDisabled = false;
-    else this.isButtonDisabled = true;
-  }
-
-  @action signup() {
-    const user = {
-      first_name: this.userDetails['first-name'],
-      last_name: this.userDetails['last-name'],
-      username: this.userDetails.username,
-    };
-    this.isSubmitClicked = true;
-
-    registerUser(user)
-      .then((res) => {
-        if (res.status === 204) {
-          window.open('https://realdevsquad.com/goto', '_self');
-        } else {
-          res.json().then((res) => {
-            this.errorMessage = res.errors[0].title;
-          });
-        }
-      })
-      .catch((err) => (this.errorMessage = err))
-      .finally(() => {
-        this.isSubmitClicked = false;
-      });
-  }
-
-  // New flow ends
 }

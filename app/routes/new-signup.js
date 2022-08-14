@@ -2,7 +2,6 @@ import Route from '@ember/routing/route';
 import ENV from 'website-my/config/environment';
 
 export default class NewSignupRoute extends Route {
-  queryParams = { state: { refreshModel: false, replace: true } };
   async model() {
     const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
       credentials: 'include',

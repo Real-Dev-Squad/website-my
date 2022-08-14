@@ -3,13 +3,12 @@
     {{this.label}}
   </h2>
   <div class="user-details__field">
-    <Input @value={{get @userDetails @state}} type="text" placeholder="Darth" {{on 'input' this.inputFieldChanged}} data-test-signup-form-input/>
+    <Input @value={{get @userDetails @currentStep}} type="text" placeholder="Darth" {{on 'input' this.inputFieldChanged}} data-test-signup-form-input/>
   </div>
 
   <div class="signup-action__btn">
     <NewSignUp::Button
       @clickHandler={{@handleRouteParamsChange}}
-      @state={{@state}}
       @disabled={{@isButtonDisabled}}
       @isSubmitClicked={{@isSubmitClicked}}
     >

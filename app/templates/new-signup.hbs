@@ -3,14 +3,14 @@
 {{#if (eq this.currentStep "get-started")}}
   <NewSignUp::GetStarted  
     @handleRouteParamsChange={{this.changeRouteParams}}
-    @state={{this.currentStep}}
-    @routeParams={{this.routeParamsMap}}
+    @currentStep={{this.currentStep}}
+    @isSubmitClicked={{this.isSubmitClicked}}
   />  
 {{else if (eq this.currentStep "thank-you")}}
   <NewSignUp::GetStarted
     @handleRouteParamsChange={{this.changeRouteParams}}
-    @state={{this.currentStep}}
-    @routeParams={{this.routeParamsMap}}
+    @currentStep={{this.currentStep}}
+    @isSubmitClicked={{this.isSubmitClicked}}
   />
 {{else}}
   <NewSignUp::Form
@@ -18,7 +18,7 @@
     @register={{this.signup}}
     @userDetails={{this.userDetails}}
     @onChange={{this.handleInputChange}}
-    @state={{this.currentStep}}
+    @currentStep={{this.currentStep}}
     @isSubmitClicked={{this.isSubmitClicked}}
     @isButtonDisabled={{this.isButtonDisabled}}
   />
