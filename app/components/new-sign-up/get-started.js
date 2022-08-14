@@ -8,17 +8,17 @@ import {
 
 export default class GetStartedComponent extends Component {
   get mainHeading() {
-    const { state } = this.args;
+    const { currentStep } = this.args;
 
-    return state === 'get-started'
+    return currentStep === 'get-started'
       ? GET_STARTED_MAIN_HEADING
       : THANK_YOU_MAIN_HEADING;
   }
 
   get subHeading() {
-    const { state } = this.args;
+    const { currentStep } = this.args;
 
-    return state === 'get-started'
+    return currentStep === 'get-started'
       ? GET_STARTED_SUB_HEADING
       : THANK_YOU_SUB_HEADING;
   }

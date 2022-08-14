@@ -61,7 +61,7 @@ module('Integration | Component | new-sign-up/get-started', function (hooks) {
 
     assert.equal(
       this.element.querySelector('[data-test-mainHeading]').textContent.trim(),
-      'Thank you for connecting your GitHub!',
+      'Congratulations!',
       'Correct Heading'
     );
     assert.equal(
