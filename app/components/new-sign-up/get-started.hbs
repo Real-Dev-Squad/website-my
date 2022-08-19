@@ -6,7 +6,7 @@
   <h3 class="landing__sub-heading" data-test-subHeading>
     {{this.subHeading}}
   </h3>
-  {{#if (eq @currentStep "get-started")}}
+  {{#if (eq @currentStep this.signUpStepsConstants.getStarted)}}
     <ul class="landing__features-lists">
       <li class="landing__features-list" data-test-li1>Use Features</li>
       <li class="landing__features-list" data-test-li2>Display yourself on the (members) page</li>
@@ -19,7 +19,7 @@
       @disabled={{false}}
       @isSubmitClicked={{@isSubmitClicked}}
     >
-      {{if (eq @currentStep "get-started") "Get Started" "Let's Go"}}
+      {{if (eq @currentStep this.signUpStepsConstants.getStarted) this.buttonLabels.getStarted this.buttonLabels.thankYou}}
     </NewSignUp::Button>
   </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="user-details">
   <h2 class="user-details__heading" data-test-signup-form-label>
-    {{this.label}}
+    {{this.labels.heading}}
   </h2>
   <div class="user-details__field">
-    <Input @value={{get @userDetails @currentStep}} type="text" placeholder="Darth" {{on 'input' this.inputFieldChanged}} data-test-signup-form-input/>
+    <Input @value={{get @userDetails @currentStep}} type="text" placeholder={{this.labels.placeholder}} {{on 'input' this.inputFieldChanged}} data-test-signup-form-input/>
   </div>
 
   <div class="signup-action__btn">
@@ -12,7 +12,7 @@
       @disabled={{@isButtonDisabled}}
       @isSubmitClicked={{@isSubmitClicked}}
     >
-      Next
+      {{this.buttonLabels.next}}
     </NewSignUp::Button>
   </div>
 </div>

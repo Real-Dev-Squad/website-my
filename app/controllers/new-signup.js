@@ -2,13 +2,14 @@ import Controller from '@ember/controller';
 import { action, set } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
+import { SIGNUP_STEPS as SIGNUP_STEPS_CONSTANTS } from '../constants/signup';
 
 const SIGNUP_STEPS = [
-  'get-started',
-  'firstName',
-  'lastName',
-  'username',
-  'thank-you',
+  SIGNUP_STEPS_CONSTANTS.getStarted,
+  SIGNUP_STEPS_CONSTANTS.firstName,
+  SIGNUP_STEPS_CONSTANTS.lastName,
+  SIGNUP_STEPS_CONSTANTS.username,
+  SIGNUP_STEPS_CONSTANTS.thankYou,
 ];
 
 export default class SignupController extends Controller {
@@ -26,7 +27,12 @@ export default class SignupController extends Controller {
   @tracked errorMessage;
 
   get currentStep() {
+    console.log(SIGNUP_STEPS[this.currentStepIndex]);
     return SIGNUP_STEPS[this.currentStepIndex];
+  }
+
+  get signUpStepsConstants() {
+    return SIGNUP_STEPS_CONSTANTS;
   }
 
   @action changeRouteParams() {

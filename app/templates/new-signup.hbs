@@ -1,12 +1,11 @@
 {{page-title "New Sign Up"}}
-
-{{#if (eq this.currentStep "get-started")}}
+{{#if (eq this.currentStep this.signUpStepsConstants.getStarted)}}
   <NewSignUp::GetStarted  
     @handleRouteParamsChange={{this.changeRouteParams}}
     @currentStep={{this.currentStep}}
     @isSubmitClicked={{this.isSubmitClicked}}
   />  
-{{else if (eq this.currentStep "thank-you")}}
+{{else if (eq this.currentStep this.signUpStepsConstants.thankYou)}}
   <NewSignUp::GetStarted
     @handleRouteParamsChange={{this.changeRouteParams}}
     @currentStep={{this.currentStep}}
