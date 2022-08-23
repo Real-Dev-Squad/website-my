@@ -4,6 +4,13 @@ import { inject as service } from '@ember/service';
 
 export default class SignupRoute extends Route {
   @service analytics;
+  @service router;
+
+  afterModel(model, transition) {
+    if (transition?.to?.queryParams?.dev === 'yes') {
+      this.router.transitionTo('new-signup');
+    }
+  }
 
   async model() {
     const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
