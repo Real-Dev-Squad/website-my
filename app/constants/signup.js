@@ -29,6 +29,6 @@ export const SIGNUP_STEPS = {
 
 export const SIGNUP_STEPS_BUTTON_LABELS = {
   getStarted: 'Get Started',
-  thankYou: 'Lets Go',
+  thankYou: "Let's Go",
   next: 'Next',
 };

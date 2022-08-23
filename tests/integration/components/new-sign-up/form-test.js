@@ -43,7 +43,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     });
 
     await render(
-      hbs`<NewSignUp::Form @handleRouteParamsChange={{this.changeRouteParams}} />`
+      hbs`<NewSignUp::Form @handleRouteParamsChange={{this.changeRouteParams}} @currentStep="firstName" />`
     );
 
     assert.dom('[data-test-signup-form-input]').exists();
