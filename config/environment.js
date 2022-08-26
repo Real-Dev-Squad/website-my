@@ -34,6 +34,8 @@ module.exports = function (environment) {
   }
 
   if (environment === 'test') {
+    ENV.BASE_API_URL = 'https://test.realdevsquad.com';
+
     // Testem prefers this...
     ENV.locationType = 'none';
 

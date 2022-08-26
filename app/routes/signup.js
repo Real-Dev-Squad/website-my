@@ -16,7 +16,7 @@ export default class SignupRoute extends Route {
     }
     if (response.status === 200 && !userData.incompleteUserDetails) {
       alert("You already have filled the up form. You'll now be redirected.");
-      window.open('https://realdevsquad.com/goto', '_self');
+      window.open('https://realdevsquad.com/goto', '_self'); // if user is there => realdevsquad,com => no ---> up 
     }
   }
 }
