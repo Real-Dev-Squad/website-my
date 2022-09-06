@@ -27,7 +27,9 @@
                 {{/if}}
                 Save
             </button>
-            {{#if this.saveDisabled}}
+            {{#if (eq this.profileURL this.model.profileURL)}}
+                <BsTooltip @title="This URL is already in use." @placement="right" />
+            {{else if  this.saveDisabled}}
                 <BsTooltip @title="Profile URL is empty!" @placement="right" />
             {{/if}} 
             </div>
@@ -54,12 +56,11 @@
                         @value={{this.Chaincode}}
                         {{on 'click' (fn this.handleGenerateChaincode)}}
                         disabled={{this.generateChainCodeDisabled}}/>
-                        {{#if this.saveDisabled}}
+                        {{#if this.generateChainCodeDisabled}}
                         <BsTooltip @title="Profile Url is empty !" @placement="right"/>
                         {{/if}}
-                    </div>
-                    
                         
+                    </div>
                 {{/if}}
             </label>
         </div>
@@ -68,7 +69,8 @@
             I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
         <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}}/>
         </label>
-        <div class="btn_div">
+        
+        <div class="identity-verify-btn-div">
             <button
             type="submit"
             class="identity-verify-btn"
@@ -79,8 +81,10 @@
             {{/if}}
             Link Chaincode
         </button>
-            {{#if this.saveDisabled}}
-                <BsTooltip @title="Profile Url is empty !" @placement="right"/>
+            {{#if this.checkboxDisabled}}
+                <BsTooltip @title="Profile Url is empty or Chaincode is not generated." @placement="right"/>
+            {{else if (not this.isChecked)}}
+                <BsTooltip @title="Opps! Checkbox is not checked" @placement="right"/>
             {{/if}}
         </div>
         
