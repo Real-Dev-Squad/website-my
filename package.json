@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "mixpanel-browser": "^2.43.0"
+    "mixpanel-browser": "^2.43.0",
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
@@ -39,9 +40,11 @@
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "babel-eslint": "^10.1.0",
+    "bootstrap": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "cropperjs": "^1.5.12",
     "ember-auto-import": "^1.10.1",
+    "ember-bootstrap": "^5.1.1",
     "ember-cli": "~3.25.0",
     "ember-cli-app-version": "^4.0.0",
     "ember-cli-babel": "^7.23.1",
@@ -82,7 +85,7 @@
     "edition": "octane"
   },
   "volta": {
-    "node": "16.16.0",
+    "node": "14.20.0",
     "yarn": "1.22.19"
   }
 }
