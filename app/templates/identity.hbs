@@ -16,7 +16,8 @@
         <div class="input-div">
             <label>Profile Url</label>
             <Input class="input-url" @value={{this.profileURL}} type="text" placeholder="Profile URL" onkeyup={{this.changeSaveDisabled}}/>
-            <button    
+            <div class="btn_div">
+                <button    
                 disabled={{this.saveDisabled}}
                 type="submit"
                 class="identity-Buttons edit"
@@ -25,7 +26,12 @@
                     <i class="fa fa-spinner fa-spin"></i>
                 {{/if}}
                 Save
-            </button> 
+            </button>
+            {{#if this.saveDisabled}}
+                <BsTooltip @title="Profile URL is empty!" @placement="right" />
+            {{/if}} 
+            </div>
+            
         </div>
 
         <div class="chaincode-div">
@@ -41,21 +47,29 @@
                         {{on 'click' (fn this.handleCopy)}} />
 
                 {{else}}
-                    <Input
+                    <div class="btn_div">
+                        <Input
                         class='identity-Buttons'
                         type="button"
                         @value={{this.Chaincode}}
                         {{on 'click' (fn this.handleGenerateChaincode)}}
                         disabled={{this.generateChainCodeDisabled}}/>
+                        {{#if this.saveDisabled}}
+                        <BsTooltip @title="Profile Url is empty !" @placement="right"/>
+                        {{/if}}
+                    </div>
+                    
+                        
                 {{/if}}
             </label>
         </div>
-
+        
         <label class="identity-label">
             I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
         <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}}/>
         </label>
-        <button
+        <div class="btn_div">
+            <button
             type="submit"
             class="identity-verify-btn"
             disabled={{not this.isChecked}}
@@ -65,5 +79,10 @@
             {{/if}}
             Link Chaincode
         </button>
+            {{#if this.saveDisabled}}
+                <BsTooltip @title="Profile Url is empty !" @placement="right"/>
+            {{/if}}
+        </div>
+        
     {{/if}}
 </div>

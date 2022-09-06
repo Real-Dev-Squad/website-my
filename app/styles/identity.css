@@ -39,6 +39,10 @@
     padding: 4px 15px;
 }
 
+.btn_div{
+    display: initial;
+}
+
 .identity-label {
     margin-top: 30px;
     text-align: center;

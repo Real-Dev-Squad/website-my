@@ -5206,7 +5206,7 @@ ember-ast-helpers@0.3.5:
     "@glimmer/compiler" "^0.27.0"
     "@glimmer/syntax" "^0.27.0"
 
-ember-auto-import@^1.10.1, ember-auto-import@^1.11.3:
+ember-auto-import@^1.11.3:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.12.2.tgz#cc7298ee5c0654b0249267de68fb27a2861c3579"
   integrity sha512-gLqML2k77AuUiXxWNon1FSzuG1DV7PEPpCLCU5aJvf6fdL6rmFfElsZRh+8ELEB/qP9dT+LHjNEunVzd2dYc8A==
@@ -5241,7 +5241,7 @@ ember-auto-import@^1.10.1, ember-auto-import@^1.11.3:
     walk-sync "^0.3.3"
     webpack "^4.43.0"
 
-ember-auto-import@^2.2.3, ember-auto-import@^2.4.0:
+ember-auto-import@^2.2.3, ember-auto-import@^2.4.0, ember-auto-import@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-2.4.2.tgz#d4d3bc6885a11cf124f606f5c37169bdf76e37ae"
   integrity sha512-REh+1aJWpTkvN42a/ga41OuRpUsSW7UQfPr2wPtYx56o/xoSNhVBXejy7yV9ObrkN7gogz6fs2xZwih5cOwpYg==
@@ -12119,6 +12119,11 @@ webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
+webpack-5@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/webpack-5/-/webpack-5-0.0.0.tgz#6292fd40fb111c833a55cfd43ab697c2c2984e06"
+  integrity sha512-jebVNW7VeOorJFUQas2aRtEY80zbS4DcdD82lejG9YkulD+LKHLOS11kuWycx9wuydUdzBhxpHNkduRvlFKbbQ==
 
 webpack-sources@^1.4.0, webpack-sources@^1.4.1:
   version "1.4.3"
