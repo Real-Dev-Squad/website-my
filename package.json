@@ -31,7 +31,8 @@
     "dotenv": "^16.0.1",
     "mixpanel-browser": "^2.43.0",
     "ember-click-outside": "^5.0.1",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "webpack-5": "^0.0.0"
   },
   "devDependencies": {
     "@ember/jquery": "^2.0.0",
@@ -45,7 +46,7 @@
     "bootstrap": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "cropperjs": "^1.5.12",
-    "ember-auto-import": "^1.10.1",
+    "ember-auto-import": "^2.4.2",
     "ember-bootstrap": "^5.1.1",
     "ember-cli": "~3.25.0",
     "ember-cli-app-version": "^4.0.0",

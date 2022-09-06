@@ -47,6 +47,15 @@
     margin-top: 40px;
 }
 
+.btn_div{
+    display: initial;
+}
+
+.identity-label {
+    margin-top: 30px;
+    text-align: center;
+}
+
 .identity-verify-btn {
     background-color: var(--button-color);
     color: white;
