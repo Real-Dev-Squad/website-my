@@ -56,6 +56,12 @@
     text-align: center;
 }
 
+.identity-verify-btn-div{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
 .identity-verify-btn {
     background-color: var(--button-color);
     color: white;
