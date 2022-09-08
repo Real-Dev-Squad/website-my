@@ -3,15 +3,9 @@ import { inject as service } from '@ember/service';
 import ENV from 'website-my/config/environment';
 import { SIGNUP } from '../constants/analytics';
 
-export default class SignupRoute extends Route {
+export default class NewSignupRoute extends Route {
   @service analytics;
-  @service router;
 
-  afterModel(model, transition) {
-    if (transition?.to?.queryParams?.dev === 'true') {
-      this.router.transitionTo('new-signup');
-    }
-  }
   async model() {
     this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
     const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
