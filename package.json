@@ -76,5 +76,9 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "msw": "^0.47.0",
+    "sinon": "^14.0.0"
   }
 }

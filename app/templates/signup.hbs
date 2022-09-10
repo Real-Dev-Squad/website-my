@@ -47,6 +47,7 @@
     {{/each}}
     {{#if this.isSubmitDisabled }}
       <button
+        data-test-id='signup-button-disabled'
         class='submitButton disabledButton'
         type="submit"
         disabled={{true}}
@@ -55,6 +56,7 @@
       </button>
       {{else}}
         <button
+        data-test-id='signup-button'
         class='submitButton'
         type="submit"
         {{on 'click' (fn this.handleSubmit)}}
