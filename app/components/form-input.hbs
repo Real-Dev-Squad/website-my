@@ -1,6 +1,7 @@
 <div class="field">
   <label for={{@for}}>{{@label}}:</label>
-  <Input
+  <div class="field">
+<Input
     @id={{@id}}
     @type={{@type}}
     @value={{@value}}
@@ -9,6 +10,13 @@
     @class={{if @showError 'input errorBorder' 'input'}}
     {{on 'input' (fn this.inputFieldChanged)}}
   />
+  {{#if @buttonupload }}
+  <button class="upload" type="submit">update location</button>
+  {{/if}}
+  </div>
+
+  
+  
    {{#if @helpMsg}}
     <em class="help-msg">{{@helpMsg}}</em>
    {{/if}}

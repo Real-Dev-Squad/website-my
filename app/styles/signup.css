@@ -28,6 +28,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
 }
 
 .field label {
@@ -153,3 +154,11 @@ h1 {
     width: 70%;
   }
 }
+.upload{
+  position: absolute;
+  top:0;
+  right: 0;
+  height: 100%;
+  color: blue;
+  font-weight: bold;
+ }
