@@ -3,9 +3,6 @@ import ENV from 'website-my/config/environment'; // remove this when new flow go
 const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
 
 export default async function checkUserName(userName) {
-  if (!userName) {
-    alert('username field cannot be empty');
-  }
   try {
     const lowerCaseUsername = userName.toLowerCase();
     const response = await fetch(

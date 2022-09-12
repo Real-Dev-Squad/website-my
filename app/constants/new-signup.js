@@ -18,7 +18,7 @@ export const LABEL_TEXT = {
   username: 'Now choose your awesome username!',
 };
 
-export const errorMessages = {
+export const ERROR_MESSAGES = {
   userName: 'username already taken!',
   others: 'something went wrong',
 };

@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
 import { GOTO_URL } from '../constants/signup';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
-import { errorMessages, NEW_SIGNUP_STEPS } from '../constants/new-signup';
+import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
 
 export default class NewSignUpController extends Controller {
@@ -77,7 +77,7 @@ export default class NewSignUpController extends Controller {
       this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
       this.isLoading = false;
       this.isButtonDisabled = false;
-      return (this.error = errorMessages.userName);
+      return (this.error = ERROR_MESSAGES.userName);
     }
 
     registerUser(signupDetails)
@@ -88,13 +88,13 @@ export default class NewSignUpController extends Controller {
           this.currentStep = this.LAST_STEP;
         } else {
           this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          this.error = errorMessages.others;
+          this.error = ERROR_MESSAGES.others;
           this.isButtonDisabled = false;
         }
       })
       .catch(() => {
         this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-        this.error = errorMessages.others;
+        this.error = ERROR_MESSAGES.others;
         this.isButtonDisabled = false;
       })
       .finally(() => {
