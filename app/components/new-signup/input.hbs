@@ -4,6 +4,9 @@
   </h2>
   <div class="user-details__field">
     <Input @value={{get @signupDetails @currentStep}} type="text" placeholder="Darth" {{on 'input' this.inputFieldChanged}} data-test-signup-form-input/>
+    {{#if @error}} 
+      <p class="error">{{@error}}</p>
+    {{/if}}
   </div>
 
   <div class="signup-action__btn">

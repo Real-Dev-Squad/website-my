@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
 import { GOTO_URL } from '../constants/signup';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
-import { NEW_SIGNUP_STEPS } from '../constants/new-signup';
+import { errorMessages, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
 
 export default class NewSignUpController extends Controller {
@@ -15,6 +15,7 @@ export default class NewSignUpController extends Controller {
 
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
+  @tracked error = '';
   @tracked currentStep = NEW_SIGNUP_STEPS[0];
   FIRST_STEP = NEW_SIGNUP_STEPS[0];
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
@@ -57,6 +58,7 @@ export default class NewSignUpController extends Controller {
   }
 
   @action handleInputChange(key, value) {
+    this.error = '';
     set(this.signupDetails, key, value);
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
     else this.isButtonDisabled = true;
@@ -75,7 +77,7 @@ export default class NewSignUpController extends Controller {
       this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
       this.isLoading = false;
       this.isButtonDisabled = false;
-      return alert('Username already taken');
+      return (this.error = errorMessages.userName);
     }
 
     registerUser(signupDetails)
@@ -86,13 +88,13 @@ export default class NewSignUpController extends Controller {
           this.currentStep = this.LAST_STEP;
         } else {
           this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          alert('Something went wrong!');
+          this.error = errorMessages.others;
           this.isButtonDisabled = false;
         }
       })
       .catch(() => {
         this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-        alert('Something went wrong!');
+        this.error = errorMessages.others;
         this.isButtonDisabled = false;
       })
       .finally(() => {

@@ -48,7 +48,11 @@
     font-size: 2rem;
     border: none;
 }
-
+.error {
+    color: red;
+    padding: 0.4rem;
+    font-size: 1rem;
+}
 .signup-action__btn button.btn-disabled {
     background: #ccc;
 }

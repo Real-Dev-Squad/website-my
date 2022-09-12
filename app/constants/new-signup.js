@@ -18,6 +18,11 @@ export const LABEL_TEXT = {
   username: 'Now choose your awesome username!',
 };
 
+export const errorMessages = {
+  userName: 'username already taken!',
+  others: 'something went wrong',
+};
+
 export const GET_STARTED_MAIN_HEADING = 'Thank you for connecting your GitHub!';
 export const GET_STARTED_SUB_HEADING =
   'Please complete the signup in order to:';
