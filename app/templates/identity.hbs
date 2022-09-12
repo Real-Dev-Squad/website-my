@@ -16,7 +16,7 @@
         <div class="input-div">
             <label>Profile Url</label>
             <Input class="input-url" @value={{this.profileURL}} type="text" placeholder="Profile URL" onkeyup={{this.changeSaveDisabled}}/>
-            <div class="btn_div">
+            <div class="btn-container">
                 <button    
                 disabled={{this.saveDisabled}}
                 type="submit"
@@ -49,7 +49,7 @@
                         {{on 'click' (fn this.handleCopy)}} />
 
                 {{else}}
-                    <div class="btn_div">
+                    <div class="btn-container">
                         <Input
                         class='identity-Buttons'
                         type="button"
