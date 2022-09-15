@@ -1,6 +1,18 @@
+:root {
+    --container-color: #666;
+    --user-details-background: #f0f2f5;
+    --heading-color: #000000f2;
+    --input-border: #a9a9a9;
+    --button-background: #008000;
+    --button-color: #ffffff;
+    --button-background-disabled: #ccc;
+    --error: #ff0000;
+    
+}
+
 .container {
     width: 100%;
-    color: #666;
+    color: var(--container-color);
     text-align: center;
     padding: 1em 0;
 }
@@ -13,16 +25,16 @@
     align-content: center;
     max-width: 80%;
     margin: auto;
-    background-color: #f0f2f5;
+    background-color: var(--user-details-background);
 }
 
-.user-details>* {
+.user-details > * {
     padding: 1rem;
 }
 
 .user-details__heading {
     font-size: 2rem;
-    color: black;
+    color: var(--heading-color);
     margin-bottom: 0;
 }
 
@@ -30,7 +42,7 @@
     padding: 0.8rem;
     width: 100%;
     border-radius: 10px;
-    border: 2px solid darkgray;
+    border: 2px solid var(--input-border);
     font-size: 2rem;
 }
 
@@ -38,51 +50,43 @@
     padding: .75rem 2rem;
     border-radius: 10px;
     outline: none;
-    background-color: green;
-    color: white;
+    background-color: var(--button-background);
+    color: var(--button-color);
     text-decoration: none;
     cursor: pointer;
-    width: 40%;
+    width: 70%;
     display: block;
     margin: auto;
     font-size: 2rem;
     border: none;
 }
+
 .error {
-    color: red;
+    color: var(--error);
     padding: 0.4rem;
     font-size: 1rem;
 }
+
 .signup-action__btn button.btn-disabled {
-    background: #ccc;
+    background: var(--button-background-disabled);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .user-details__heading {
         font-size: 1.4rem;
     }
-    .user-details__field input {
-        font-size: 1.5rem;
-    }
+    .user-details__field input,
     .signup-action__btn button {
         font-size: 1.5rem;
     }
 }
 
-@media (max-width: 768px) {
-    .user-details {
-        width: 80%;
+@media (max-width: 480px) {
+    .user-details__heading {
+        font-size: 1.1rem;
     }
-}
-
-@media (max-width: 568px) {
-    .user-details {
-        width: 100%;
-    }
-}
-
-@media (max-width: 520px) {
+    .user-details__field input,
     .signup-action__btn button {
-        width: 70%;
+        font-size: 1.2rem;
     }
 }

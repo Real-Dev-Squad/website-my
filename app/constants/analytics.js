@@ -6,9 +6,9 @@ export const NEW_SIGNUP_FLOW = {
   USER_USERNAME: 'User entered Username - New SignUp Flow',
   SOMETHING_WENT_WRONG: 'Something went wrong - New SignUp Flow',
   USERNAME_NOT_AVAILABLE:
-    'user entered a username which was already taken - New Signup Flow',
+    'User entered a username which was already taken - New SignUp Flow',
   USER_REGISTERED: 'User Registered - New SignUp Flow',
-  NEW_SIGNUP_FLOW_DONE: 'user completed all the steps - New Sign Flow',
+  NEW_SIGNUP_FLOW_DONE: 'User completed all the steps - New SignUp Flow',
   UNABLE_TO_SIGNUP: 'Unable to Sign Up - New SignUp Flow Breaks',
   UNABLE_TO_REGISTER: 'Unable to Register - New SignUp Flow Breaks',
 };

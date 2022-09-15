@@ -1,6 +1,6 @@
-import ENV from 'website-my/config/environment'; // remove this when new flow goes live
+import ENV from 'website-my/config/environment';
 
-const BASE_URL = ENV.BASE_API_URL; // remove this when new flow goes live
+const BASE_URL = ENV.BASE_API_URL;
 
 export default async function checkUserName(userName) {
   try {

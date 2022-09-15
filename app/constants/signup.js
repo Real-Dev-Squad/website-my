@@ -5,3 +5,7 @@ export const REDIRECT_TEXT = {
   formAlreadyFilled:
     "You already have filled the up form. You'll now be redirected.",
 };
+
+export const ERROR_MESSAGES = {
+  unknown: 'Something went wrong!',
+};
