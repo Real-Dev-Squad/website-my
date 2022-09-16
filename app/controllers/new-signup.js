@@ -29,30 +29,30 @@ export default class NewSignUpController extends Controller {
     username: '',
   };
 
-  @action firstStep() {
+  @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
   }
 
-  @action secondStep() {
+  @action changeStepToThree() {
     this.currentStep = this.THIRD_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_FIRST_NAME);
     this.isButtonDisabled = true;
   }
 
-  @action thirdStep() {
+  @action changeStepToFour() {
     this.currentStep = this.FOURTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_LAST_NAME);
     this.isButtonDisabled = true;
   }
 
-  @action fourthStep() {
+  @action register() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_USERNAME);
     this.isButtonDisabled = true;
     this.signup();
   }
 
-  @action lastStep() {
+  @action completeSignUp() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.NEW_SIGNUP_FLOW_DONE);
     window.open(GOTO_URL, '_self');
   }

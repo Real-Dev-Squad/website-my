@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
-import { NEW_SIGNUP_STEPS } from '../../constants/new-signup';
 import {
+  NEW_SIGNUP_STEPS,
   GET_STARTED_MAIN_HEADING,
   GET_STARTED_SUB_HEADING,
   THANK_YOU_MAIN_HEADING,
