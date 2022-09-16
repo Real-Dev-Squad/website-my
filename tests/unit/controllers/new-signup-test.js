@@ -12,21 +12,21 @@ module('Unit | Controller | new-signup', function (hooks) {
       'current step initially will be get-started'
     );
 
-    controller.send('firstStep');
+    controller.send('changeStepToTwo');
     assert.equal(
       controller.currentStep,
       'firstName',
       'current step updated to first name'
     );
 
-    controller.send('secondStep');
+    controller.send('changeStepToThree');
     assert.equal(
       controller.currentStep,
       'lastName',
       'current step updated to lastName'
     );
 
-    controller.send('thirdStep');
+    controller.send('changeStepToFour');
     assert.equal(
       controller.currentStep,
       'username',
