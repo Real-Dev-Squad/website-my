@@ -27,6 +27,12 @@
     "test:ember:server": "ember test --server",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "mixpanel-browser": "^2.43.0",
+    "msw": "^0.47.0",
+    "sinon": "^14.0.0"
+  },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.2.1",
@@ -77,8 +83,8 @@
   "ember": {
     "edition": "octane"
   },
-  "dependencies": {
-    "msw": "^0.47.0",
-    "sinon": "^14.0.0"
+  "volta": {
+    "node": "16.16.0",
+    "yarn": "1.22.19"
   }
 }

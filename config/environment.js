@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 
 module.exports = function (environment) {
   let ENV = {
@@ -24,8 +25,10 @@ module.exports = function (environment) {
   };
 
   ENV.BASE_API_URL = 'https://api.realdevsquad.com';
+  ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
 
   if (environment === 'development') {
+    ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -36,6 +39,8 @@ module.exports = function (environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
+
+    ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
