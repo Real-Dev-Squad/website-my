@@ -11,16 +11,24 @@ module('Acceptance | signup flow', function (hooks) {
 
   hooks.beforeEach(() => {
     worker.start();
-   
+    class Blob {}
+        Blob = Blob;
+       window = {
+          open() {},
+          URL: {
+            createObjectURL() {},
+          },
+        };
   });
   hooks.afterEach(() => {
     worker.stop();
   });
-	
 
   setupApplicationTest(hooks);
 
   test('signup flow', async function (assert) {
+    const openStub = sinon.stub(window, "open");
+    const createObjectURLStub = sinon.stub(window.URL, "createObjectURL").returns("fake object url");
         
     await visit('/signup');
     assert.equal(currentURL(), '/signup');
@@ -72,6 +80,11 @@ module('Acceptance | signup flow', function (hooks) {
 
 
     await click('[data-test-id="signup-button"]')
+    assert.ok(createObjectURLStub.calledOnce)
+    assert.ok(openStub.calledWith("fake object url"))
+
+
+    await this.pauseTest();
  
 
   });
