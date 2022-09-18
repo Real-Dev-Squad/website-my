@@ -21,8 +21,8 @@ export default class ModalLocationComponent extends Component {
     console.log(this.updateLocation, 'update location option');
   }
 
-  @action setSelectedNotification(selected) {
-    this.sendNotification = selected;
+  @action setSelectedNotification(event) {
+    this.sendNotification = event.target.value;
 
     console.log(this.sendNotification, 'notification sent to');
   }
@@ -54,8 +54,10 @@ export default class ModalLocationComponent extends Component {
       sendNotification: this.sendNotification,
     };
 
-    // const cleanReqObject = this.removeEmptyFields(this.formData);
+   
     this.isSubmitClicked = true;
+
+    this.location = '';
 
     console.log(cleanReqObject, 'feilds value');
   }
