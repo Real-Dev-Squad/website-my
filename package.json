@@ -30,8 +30,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "mixpanel-browser": "^2.43.0",
-    "webpack": "^5.74.0",
-    "webpack-5": "^0.0.0"
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
