@@ -1,52 +1,47 @@
 .modal__open {
-  margin-inline: auto;
-  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
   max-width: 100%;
-  left: calc(50% - 300px);
-  border: .5px solid #000;
+  width: 600px;
+  margin: 0 auto;
   border-radius: 6px;
   background: #e7e7e7;
-  color: #000;
   height: auto;
-  /* box-shadow: 5px 10px #888888; */
-  transition: opacity 250ms ease;
-  /* -webkit-transition: 0.5s; */
-    z-index: 1010;
-    /* opacity: 0; */
-    box-shadow: 0 .3rem .3rem  #000;
-
+  border: 0.5px solid #000;
+  color: #000;
+  top: 40%;
 }
 
-
-.modal__open::backdrop{
-
-  background: rgba(255, 255, 255, 0.3);
-
-  
-
+.modal__overlay {
+  background: rgb(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
-
-
-
 
 .modal__selectinput {
-
   outline: none;
   border: none;
   padding-left: 1.5em;
+  padding-right: 1.5em;
   color: #757575;
   font-size: 1.2em;
   font-weight: 400;
   height: 2.75em;
-  /* width: 100%; */
   border-radius: 6px;
   display: block;
   margin-bottom: 1.3em;
   overflow: auto;
   max-width: 100%;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right 3% top 50% #fff;
+    -webkit-appearance: none;
+ 
 }
-
-
 
 .update__link {
   cursor: pointer;
@@ -93,7 +88,6 @@
 }
 
 .modal__location {
-  /* border: .5px solid #708090; */
   display: flex;
   align-items: center;
   height: 2.75em;
@@ -120,36 +114,15 @@
 
 .magnifying-glass {
   font-size: 1.5em;
- 
-
-
-
 }
 
 .test {
-
   right: 4px;
   top: 0;
   position: absolute;
   height: 100%;
-
-     
 }
 
-/* .search__container {
-      display: block;
-      position: absolute;
-      right:-5px;
-      top: 0;
-      height: 100%;
-      width: 5em;
-      outline: none;
-      border: none;
-      margin: 0 auto;
-   
-
-
-} */
 .update__heading {
   font-weight: 700;
   font-size: 1.4em;
@@ -181,24 +154,18 @@
     left: calc(50% - 150px);
   }
 
-  
+  .modal__selectinput {
+    padding-left: 1em;
 
-.modal__selectinput {
+    font-size: 1em;
+    font-weight: 400;
+  }
 
-  padding-left: 1em;
-
-  font-size: 1em;
-  font-weight: 400;
-}
-
-.modal__Locationinput {
-
-  padding-left: 1em;
-  font-size: 1em;
-  font-weight: 400;
- 
-}
-
+  .modal__Locationinput {
+    padding-left: 1em;
+    font-size: 1em;
+    font-weight: 400;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
@@ -208,19 +175,16 @@
   }
 
   .modal__selectinput {
-
     padding-left: 1em;
-  
+
     font-size: 1em;
     font-weight: 400;
   }
-  
+
   .modal__Locationinput {
-  
     padding-left: 1em;
     font-size: 1em;
     font-weight: 400;
-   
   }
 }
 
@@ -231,18 +195,15 @@
   }
 
   .modal__selectinput {
-
     padding-left: 1em;
-  
+
     font-size: 1em;
     font-weight: 400;
   }
-  
+
   .modal__Locationinput {
-  
     padding-left: 1em;
     font-size: 1em;
     font-weight: 400;
-   
   }
 }

@@ -1,5 +1,6 @@
 {{#if this.isOpen}}
-  <div class='modal__open' id='#blur'>
+  <div class="modal__overlay">
+     <div class='modal__open' id='#blur'>
     <div class='modal__header'>
       <h3 class='update__heading'>
         Update Location
@@ -16,10 +17,11 @@
       <form class='form__container'>
         <div class='modal__location'>
           <Input
+            
             class='modal__Locationinput'
             type='text'
             value={{this.location}}
-            {{on 'change' this.updateValue}}
+            {{on 'input' this.updateValue}}
             @placeholder={{'Enter New Location'}}
             @disabled={{@disabled}}
           />
@@ -28,6 +30,12 @@
             <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
           </div>
         </div>
+
+         {{#each this.placesArray as |places|}}
+          <li>
+            {{places.place_name}}
+          </li>
+        {{/each}}
 
         <select
           class='modal__selectinput'
@@ -75,6 +83,9 @@
       </form>
     </div>
   </div>
+
+  </div>
+ 
 {{else}}
   <a href="#" type='link' class='update__link' {{on 'click' this.toggleModal}}>
     update location

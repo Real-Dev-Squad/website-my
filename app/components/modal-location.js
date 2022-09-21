@@ -4,6 +4,10 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
+import ENV from 'website-my/config/environment';
+
+const BASE_URL = ENV.GEOCODING_API_URL;
+
 export default class ModalLocationComponent extends Component {
   @tracked isOpen = false;
 
@@ -14,6 +18,10 @@ export default class ModalLocationComponent extends Component {
   @tracked sendNotification = null;
 
   @tracked isCheckAll = false;
+
+  @tracked isLoading = false;
+
+  @tracked placesArray = [];
 
   @action setSelection(event) {
     this.updateLocation = event.target.value;
@@ -27,10 +35,38 @@ export default class ModalLocationComponent extends Component {
     console.log(this.sendNotification, 'notification sent to');
   }
 
-  @action updateValue(event) {
+  @action async updateValue(event) {
     this.location = event.target.value;
 
-    console.log(this.location);
+    this.isLoading = true;
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/${this.location}.json?proximity=ip&types=place%2Cpostcode%2Caddress&access_token=pk.eyJ1IjoidmluYXlhay0wOSIsImEiOiJjbDdoM24waG0wYW9tM3dwYjN3aWJpNGh4In0.pcwljIKYp_NL-GmtDztvPg`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.ok) {
+        this.isLoading = false;
+        console.log(response, 'result url');
+
+        const result = await response.json();
+
+        this.placesArray = result?.features;
+
+        console.log(this.placesArray, '____result');
+      }
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error.message, '__error');
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   @action toggleModal() {
@@ -54,7 +90,6 @@ export default class ModalLocationComponent extends Component {
       sendNotification: this.sendNotification,
     };
 
-   
     this.isSubmitClicked = true;
 
     this.location = '';
