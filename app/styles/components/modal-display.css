@@ -8,7 +8,8 @@
   margin: 0 auto;
   border-radius: 6px;
   background: #e7e7e7;
-  height: auto;
+  max-height: 100%;
+  height: 60vh;
   border: 0.5px solid #000;
   color: #000;
   top: 40%;
@@ -19,8 +20,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -35,12 +36,12 @@
   height: 2.75em;
   border-radius: 6px;
   display: block;
-  margin-bottom: 1.3em;
+  margin-top: 1.3em;
   overflow: auto;
   max-width: 100%;
-  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right 3% top 50% #fff;
-    -webkit-appearance: none;
- 
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right 3% top 50% #fff;
+  -webkit-appearance: none;
 }
 
 .update__link {
@@ -80,7 +81,6 @@
   outline: none;
   border: 0.5px solid#708090;
   border-radius: 6px;
-  margin-bottom: 1em;
   padding-left: 1.5em;
   color: #757575;
   font-size: 1.2em;
@@ -92,7 +92,6 @@
   align-items: center;
   height: 2.75em;
   width: 100%;
-  margin-bottom: 1.3em;
   background-color: #fff;
   border-radius: 6px;
   position: relative;
@@ -109,7 +108,7 @@
   width: 100%;
   border-radius: 6px;
   display: block;
-  margin-bottom: 1.3em;
+  margin-bottom: 0.7em;
 }
 
 .magnifying-glass {
@@ -145,7 +144,27 @@
 .modal__location {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+/* places container */
+
+.places__container {
+  width: 100%;
+  height: auto;
+  padding: 0.3em;
+  background-color: #fff;
+  margin: 0.2em;
+  cursor: pointer;
+  padding-left: 1.5em;
+  color: #757575;
+  font-size: 1.2em;
+  font-weight: 400;
+  border-radius: 6px;
+}
+
+.location-dot {
+
+    margin-right: 0.3em;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

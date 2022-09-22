@@ -1,93 +1,108 @@
 {{#if this.isOpen}}
-  <div class="modal__overlay">
-     <div class='modal__open' id='#blur'>
-    <div class='modal__header'>
-      <h3 class='update__heading'>
-        Update Location
-      </h3>
+  <div class='modal__overlay'>
+    <div class='modal__open' id='#blur'>
+      <div class='modal__header'>
+        <h3 class='update__heading'>
+          Update Location
+        </h3>
 
-      <FaIcon
-        @icon='xmark'
-        class='xmark__icon'
-        {{on 'click' this.toggleModal}}
-      />
-    </div>
+        <FaIcon
+          @icon='xmark'
+          class='xmark__icon'
+          {{on 'click' this.toggleModal}}
+        />
+      </div>
 
-    <div class='modal__form'>
-      <form class='form__container'>
-        <div class='modal__location'>
-          <Input
-            
-            class='modal__Locationinput'
-            type='text'
-            value={{this.location}}
-            {{on 'input' this.updateValue}}
-            @placeholder={{'Enter New Location'}}
-            @disabled={{@disabled}}
-          />
+      <div class='modal__form'>
+        <form class='form__container'>
+          <div class='modal__location'>
+            <Input
+              class='modal__Locationinput'
+              type='text'
+              value={{this.location}}
+              {{on 'input' this.updateValue}}
+              @placeholder={{'Enter New Location'}}
+              @disabled={{@disabled}}
+            />
 
-          <div class='test'>
-            <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
+            <div class='test'>
+              <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
+            </div>
           </div>
-        </div>
 
-         {{#each this.placesArray as |places|}}
-          <li>
-            {{places.place_name}}
-          </li>
-        {{/each}}
+         
+            {{#if this.isLoading}}
 
-        <select
-          class='modal__selectinput'
-          {{on 'change' this.setSelection}}
-   
-        >
-          <option value='' disabled selected>
-            Reason To Update Location
-          </option>
-          <option value='travelling'>
-            travelling
-          </option>
-          <option value='relocating'>
-            relocating
-          </option>
-        </select>
+          <div class="task-card__loader-container">
+         <Spinner />
+         </div>
 
-        <select
-          class='modal__selectinput'
-          {{on 'change' this.setSelectedNotification}}
+            {{else}}
+                {{#each this.placesArray as |places|}}
+              <div class='places__container'>
+
+                <div class='places__box'>
+
+                  <FaIcon class='location-dot' @icon='location-dot' />
+
+                  {{places.place_name}}
+
+                </div>
+
+              </div>
+
+              {{/each}}
+
+            {{/if}}
+
           
-        >
-          <option value='' disabled selected>
-            Send Notification to :
-          </option>
-          <option value='Developers'>
-            Developers
-          </option>
-          <option value='Members'>
-            Members
-          </option>
-          <option value='Users'>
-            Users
-          </option>
-        </select>
 
-        <button
-          class='update__btn'
-          type='submit'
-          disabled={{this.isSubmitDisabled}}
-          {{on 'click' this.handleSubmit}}
-        >
-          Update
-        </button>
-      </form>
+          <select class='modal__selectinput' {{on 'change' this.setSelection}}>
+            <option value='' disabled selected>
+              Reason To Update Location
+            </option>
+            <option value='travelling'>
+              travelling
+            </option>
+            <option value='relocating'>
+              relocating
+            </option>
+          </select>
+
+          <select
+            class='modal__selectinput'
+            {{on 'change' this.setSelectedNotification}}
+          >
+            <option value='' disabled selected>
+              Send Notification to :
+            </option>
+            <option value='Developers'>
+              Developers
+            </option>
+            <option value='Members'>
+              Members
+            </option>
+            <option value='Users'>
+              Users
+            </option>
+          </select>
+
+          <button
+            class='update__btn'
+            type='submit'
+            disabled={{this.isSubmitDisabled}}
+            {{on 'click' this.handleSubmit}}
+          >
+            Update
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
 
   </div>
- 
+
 {{else}}
-  <a href="#" type='link' class='update__link' {{on 'click' this.toggleModal}}>
+  <a href='#' type='link' class='update__link' {{on 'click' this.toggleModal}}>
     update location
   </a>
 {{/if}}
