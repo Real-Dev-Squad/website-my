@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, fillIn, click, settled } from '@ember/test-helpers';
+import { visit, currentURL, fillIn, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { fields } from '../mocks/user-data';
 import { setupWorker } from 'msw';
@@ -8,23 +8,23 @@ import sinon from 'sinon';
 
 module('Acceptance | signup flow', function (hooks) {
   const worker = setupWorker(...handlers);
-
+  const defaultWindowOpen =  window.open;
   hooks.beforeEach(() => {
     worker.start();
-
   });
   hooks.afterEach(() => {
-    
     worker.stop();
   });
+  hooks.after(() => {
+    window.open = defaultWindowOpen;
+  })
 
   setupApplicationTest(hooks);
 
   test('signup flow', async function (assert) {
-    const openStub = sinon.stub(window, 'open').returns('')
-    const createObjectURLStub = sinon
-      .stub(window.URL, 'createObjectURL')
-      .returns('fake object url');
+    window.open = (urlToOpen) =>{
+      assert.equal(urlToOpen,'https://realdevsquad.com/goto','Check url');
+    }
 
     await visit('/signup');
     assert.equal(currentURL(), '/signup');
@@ -58,17 +58,5 @@ module('Acceptance | signup flow', function (hooks) {
     assert.dom('[data-test-id="signup-button"]').exists();
 
     await click('[data-test-id="signup-button"]');
-    assert.ok(createObjectURLStub.calledOnce);
-    assert.ok(openStub.calledOnce);
-
-    // console.log("a",createObjectURLStub.calledOnce)
-    // console.log("b",createObjectURLStub.returns('fake object url'))
-    console.log("c",openStub.calledOnce)
-
-
-    // assert.ok(openStub.calledWith('fake object url'));
-
-    // await this.pauseTest()
-
   });
 });
