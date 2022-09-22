@@ -4,27 +4,26 @@ import { setupApplicationTest } from 'ember-qunit';
 import { fields } from '../mocks/user-data';
 import { setupWorker } from 'msw';
 import { handlers } from '../mocks/handler';
-import sinon from 'sinon';
 
 module('Acceptance | signup flow', function (hooks) {
   const worker = setupWorker(...handlers);
-  const defaultWindowOpen =  window.open;
   hooks.beforeEach(() => {
     worker.start();
   });
   hooks.afterEach(() => {
     worker.stop();
   });
+  const defaultWindowOpen = window.open;
   hooks.after(() => {
     window.open = defaultWindowOpen;
-  })
+  });
 
   setupApplicationTest(hooks);
 
   test('signup flow', async function (assert) {
-    window.open = (urlToOpen) =>{
-      assert.equal(urlToOpen,'https://realdevsquad.com/goto','Check url');
-    }
+    window.open = (urlToOpen) => {
+      assert.equal(urlToOpen, 'https://realdevsquad.com/goto', 'Check url');
+    };
 
     await visit('/signup');
     assert.equal(currentURL(), '/signup');
