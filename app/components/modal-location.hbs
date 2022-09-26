@@ -5,59 +5,45 @@
         <h3 class='update__heading'>
           Update Location
         </h3>
-
         <FaIcon
           @icon='xmark'
           class='xmark__icon'
-          {{on 'click' this.toggleModal}}
+          {{on 'click' (fn this.toggleModal)}}
         />
       </div>
-
       <div class='modal__form'>
         <form class='form__container'>
           <div class='modal__location'>
-            <Input
-              class='modal__Locationinput'
-              type='text'
-              value={{this.location}}
-              {{on 'input' this.updateValue}}
-              @placeholder={{'Enter New Location'}}
-              @disabled={{@disabled}}
-            />
+            <div class='modal__location__input__container'>
+              <Input
+                class='modal__Locationinput'
+                type='text'
+                value={{this.location}}
+                @placeholder={{'Enter New Location'}}
+                @disabled={{@disabled}}
+                {{on 'input' (fn this.updateValue)}}
+              />
+            </div>
 
-            <div class='test'>
+            <div class='search__box'>
               <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
             </div>
           </div>
 
-         
-            {{#if this.isLoading}}
+          {{#each this.placesArray as |places|}}
+            <div class="places__container" role="button" {{on 'click' (fn this.handleSelectedPlace  places.place_name)}}>
 
-          <div class="task-card__loader-container">
-         <Spinner />
-         </div>
+            <FaIcon @icon='location-dot' class='location-dot' />
+              {{places.place_name}}
 
-            {{else}}
-                {{#each this.placesArray as |places|}}
-              <div class='places__container'>
+                
+            </div>
+          {{/each}}
 
-                <div class='places__box'>
-
-                  <FaIcon class='location-dot' @icon='location-dot' />
-
-                  {{places.place_name}}
-
-                </div>
-
-              </div>
-
-              {{/each}}
-
-            {{/if}}
-
-          
-
-          <select class='modal__selectinput' {{on 'change' this.setSelection}}>
+          <select
+            class='modal__selectinput'
+            {{on 'change' (fn this.setSelection)}}
+          >
             <option value='' disabled selected>
               Reason To Update Location
             </option>
@@ -68,10 +54,9 @@
               relocating
             </option>
           </select>
-
           <select
             class='modal__selectinput'
-            {{on 'change' this.setSelectedNotification}}
+            {{on 'change' (fn this.setSelectedNotification)}}
           >
             <option value='' disabled selected>
               Send Notification to :
@@ -86,23 +71,25 @@
               Users
             </option>
           </select>
-
           <button
             class='update__btn'
             type='submit'
             disabled={{this.isSubmitDisabled}}
-            {{on 'click' this.handleSubmit}}
+            {{on 'click' (fn this.handleSubmit)}}
           >
             Update
           </button>
         </form>
       </div>
     </div>
-
   </div>
-
 {{else}}
-  <a href='#' type='link' class='update__link' {{on 'click' this.toggleModal}}>
+  <a
+    href='#'
+    type='link'
+    class='update__link'
+    {{on 'click' (fn this.toggleModal)}}
+  >
     update location
   </a>
 {{/if}}
