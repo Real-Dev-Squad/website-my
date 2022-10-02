@@ -30,6 +30,9 @@ h1 {
   align-items: flex-start;
   position: relative;
 }
+.field_right{
+  position: relative;
+}
 
 .field label {
   font-size: 1rem;
@@ -161,4 +164,5 @@ h1 {
   height: 100%;
   color: blue;
   font-weight: bold;
+  padding: .5rem;
  }
