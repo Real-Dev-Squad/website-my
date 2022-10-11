@@ -27,7 +27,7 @@
       <label for="task-update">Change task status:</label>
       <select id="task-update" 
       {{on "change" this.onStatusChange}}
-      {{on "change" (fn @onTaskUpdate @task.id)}}
+      {{on "change" (fn this.handleUpdateTask @task.id)}}
       >
         {{#each this.availabletaskStatusList as |taskStatus|}}
           {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
