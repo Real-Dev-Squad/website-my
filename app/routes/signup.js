@@ -14,8 +14,8 @@ export default class SignupRoute extends Route {
   @service router;
   beforeModel(transition) {
     if (transition?.to?.queryParams?.dev === 'true') {
-      this.router.transitionTo('new-signup');
       this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
+      this.router.transitionTo('new-signup');
     }
   }
   async model() {
