@@ -16,7 +16,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}} @disabled={{true}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}} @disabled={{true}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button]').isDisabled();
@@ -32,7 +32,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button]').isNotDisabled();
@@ -48,7 +48,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}} @disabled={{false}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}} @disabled={{false}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button]').isNotDisabled();
@@ -64,7 +64,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button]').hasAttribute('type', 'button');
@@ -80,7 +80,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}} @isLoading={{true}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}} @isLoading={{true}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button-spinner]').exists();
@@ -96,7 +96,7 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Button @onClick={{this.onClick}} @isLoading={{false}}>{{inputValue}}</NewSignup::Button>
+      <Button @onClick={{this.onClick}} @isLoading={{false}}>{{inputValue}}</Button>
     `);
 
     assert.dom('[data-test-signup-button-spinner]').doesNotExist();

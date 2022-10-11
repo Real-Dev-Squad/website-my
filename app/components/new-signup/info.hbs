@@ -1,4 +1,4 @@
-<div class="landing">
+<div class="landing" data-test-landing>
   <h2 class="landing__main-heading" data-test-mainHeading>
     {{this.mainHeading}}
   </h2>
@@ -12,12 +12,12 @@
     </ul>
   {{/if}}
 
-  <div class="get-started__btn">
-    <NewSignup::Button
+  <div class="get-started__btn" data-test-get-started-btn>
+    <Button
       @onClick={{@onClick}}
       @disabled={{false}}
     >
       {{if (eq @currentStep this.GET_STARTED) "Get Started" "Let's Go"}}
-    </NewSignup::Button>
+    </Button>
   </div>
 </div>

@@ -10,12 +10,12 @@
   </div>
 
   <div class="signup-action__btn">
-    <NewSignup::Button
+    <Button
       @onClick={{@onClick}}
       @disabled={{@isButtonDisabled}}
       @isLoading={{@isLoading}}
     >
      {{if (eq @currentStep 'username') 'Submit' 'Next'}}
-    </NewSignup::Button>
+    </Button>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | new-sign-up/form', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it has a label - What is your first name? when current step is firstStep', async function (assert) {
+  test('it has a first name when current step is firstStep', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
@@ -28,7 +28,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
       .hasText('What is your first name?');
   });
 
-  test('it has a label - And what is your last name? when current step is lastName', async function (assert) {
+  test('it has a lastname label when current step is lastName', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
@@ -49,7 +49,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
       .hasText('And what is your last name?');
   });
 
-  test('it has a label - Now choose your awesome username! when current step is username', async function (assert) {
+  test('it has a username label when current step is username', async function (assert) {
     assert.expect(1);
 
     this.setProperties({

@@ -2,15 +2,20 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ENV from 'website-my/config/environment';
 import { SIGNUP } from '../constants/analytics';
-import { ERROR_MESSAGES, REDIRECT_TEXT } from '../constants/signup';
+import {
+  AUTH_URL,
+  ERROR_MESSAGES,
+  GOTO_URL,
+  REDIRECT_TEXT,
+} from '../constants/signup';
 
 export default class SignupRoute extends Route {
   @service analytics;
   @service router;
-
-  afterModel(model, transition) {
+  beforeModel(transition) {
     if (transition?.to?.queryParams?.dev === 'true') {
       this.router.transitionTo('new-signup');
+      this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
     }
   }
   async model() {
@@ -22,15 +27,12 @@ export default class SignupRoute extends Route {
       const userData = await response.json();
       if (response.status === 401) {
         alert(REDIRECT_TEXT.loggedIn);
-        window.open(
-          'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
-          '_self'
-        );
+        window.open(AUTH_URL, '_self');
       }
       if (response.status === 200 && !userData.incompleteUserDetails) {
         this.analytics.trackEvent(SIGNUP.USER_ALREADY_REGISTERED);
         alert(REDIRECT_TEXT.formAlreadyFilled);
-        window.open('https://realdevsquad.com/goto', '_self');
+        window.open(GOTO_URL, '_self');
       }
     } catch {
       alert(ERROR_MESSAGES.unknown);
