@@ -20,7 +20,7 @@ export default class ApplicationRoute extends Route {
         const profilePictureURL = userData?.picture?.url || defaultPicture;
         return { firstName, profilePictureURL };
       } else if (response.status === 401) {
-        this.toast.warning(
+        this.toast.error(
           'You are not logged in. Please login to continue.',
           '',
           toastNotificationTimeoutOptions

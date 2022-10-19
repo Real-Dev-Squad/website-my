@@ -130,7 +130,7 @@ export default class TasksController extends Controller {
             this.closeDisabled = false;
           }
         } else {
-          this.toast.warning(
+          this.toast.error(
             'Failed to update the task',
             '',
             toastNotificationTimeoutOptions

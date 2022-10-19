@@ -71,7 +71,7 @@ export default class IdentityController extends Controller {
           );
           this.generateChainCodeDisabled = false;
         } else {
-          this.toast.warning(
+          this.toast.error(
             'Something went wrong. Please check console errors.',
             '',
             toastNotificationTimeoutOptions
@@ -115,7 +115,7 @@ export default class IdentityController extends Controller {
             toastNotificationTimeoutOptions
           );
         } else {
-          this.toast.warning(
+          this.toast.error(
             'Something went wrong. Please check console errors.',
             '',
             toastNotificationTimeoutOptions
@@ -158,7 +158,7 @@ export default class IdentityController extends Controller {
           );
           window.location.reload();
         } else {
-          this.toast.warning(
+          this.toast.error(
             'Something went wrong. Please check console errors.',
             '',
             toastNotificationTimeoutOptions

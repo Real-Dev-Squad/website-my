@@ -16,7 +16,7 @@ export default class IndexRoute extends Route {
       if (response.status === 200 && !userData.incompleteUserDetails) {
         return userData.status ?? defaultStatus;
       } else if (response.status === 401) {
-        this.toast.warning(
+        this.toast.error(
           'You are not logged in. Please login to continue.',
           '',
           toastNotificationTimeoutOptions
