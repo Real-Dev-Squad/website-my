@@ -25,11 +25,7 @@ export default class NewSignupRoute extends Route {
           '',
           toastNotificationTimeoutOptions
         );
-        setTimeout(
-          () =>
-          window.open(AUTH_URL, '_self'),
-          2000
-        );
+        setTimeout(() => window.open(AUTH_URL, '_self'), 2000);
       }
       if (response.status === 200 && !userData.incompleteUserDetails) {
         this.analytics.trackEvent(SIGNUP.USER_ALREADY_REGISTERED);
@@ -38,12 +34,7 @@ export default class NewSignupRoute extends Route {
           '',
           toastNotificationTimeoutOptions
         );
-        setTimeout(
-          () =>
-          window.open(GOTO_URL, '_self'),
-          2000
-        );
-
+        setTimeout(() => window.open(GOTO_URL, '_self'), 2000);
       }
     } catch {
       this.toast.error(
