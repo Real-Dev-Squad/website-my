@@ -14,10 +14,6 @@ export default class TasksController extends Controller {
     (obj) => obj.key === this.TASK_KEYS.ALL
   );
   DEFAULT_TASK_TYPE = this.allTasksObject;
-
-  @tracked isUpdating = false;
-  @tracked assignTask = false;
-  @tracked closeDisabled = false;
   @tracked showDropDown = true;
   @tracked taskFields = {};
   @tracked allTasks = this.model;
@@ -64,17 +60,7 @@ export default class TasksController extends Controller {
 
   @action markComplete() {
     this.updateTask(this.tempTaskId);
-    this.message = TASK_MESSAGES.UPDATE_TASK;
-    this.isUpdating = true;
-    this.closeDisabled = true;
-  }
-
-  @action markCompleteAndAssignTask() {
-    this.assignTask = true;
-    this.message = TASK_MESSAGES.UPDATE_TASK;
-    this.isUpdating = true;
-    this.updateTask(this.tempTaskId);
-    this.closeDisabled = true;
+    this.showModal = false;
   }
 
   @action changeUserSelectedTask(statusObject) {
@@ -89,10 +75,9 @@ export default class TasksController extends Controller {
   }
 
   @action async updateTask(taskId) {
-    this.isLoading = true;
     this.disabled = true;
-    this.buttonRequired = false;
     const taskData = this.taskFields;
+    this.isLoading = true;
     const cleanBody = this.constructReqBody(taskData);
     if (taskData.status || taskData.percentCompleted) {
       try {
@@ -107,10 +92,11 @@ export default class TasksController extends Controller {
 
         if (response.ok) {
           this.disabled = false;
-          this.showModal = true;
           const res = await response.json();
           const { message } = res;
           this.message = message;
+          this.showModal = true;
+          this.buttonRequired = false;
           const indexOfSelectedTask = this.allTasks.findIndex(
             (task) => task.id === taskId
           );
@@ -118,12 +104,6 @@ export default class TasksController extends Controller {
           const updatedTask = { ...selectedTask, ...cleanBody };
           this.allTasks[indexOfSelectedTask] = updatedTask;
           this.filterTasksByStatus();
-          if (this.assignTask === true) {
-            this.assingTaskFunction();
-          } else {
-            this.isUpdating = false;
-            this.closeDisabled = false;
-          }
         } else {
           alert('Failed to update the task');
           this.disabled = false;
@@ -137,32 +117,14 @@ export default class TasksController extends Controller {
     }
   }
 
-  @action async assingTaskFunction() {
-    this.assignTask = false;
-    setTimeout(async () => {
-      this.message = TASK_MESSAGES.FIND_TASK;
-      const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const res = await response.json();
-      const { message } = res;
-      this.message = message;
-      this.isUpdating = false;
-      this.closeDisabled = false;
-    }, 2000);
-  }
-
   @action async handleUpdateTask(taskId) {
     const taskData = this.taskFields;
     if (taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage) {
-      this.message = TASK_MESSAGES.MARK_DONE;
+      this.message = TASK_MESSAGES.markDone;
       this.showModal = true;
       this.buttonRequired = true;
       this.tempTaskId = taskId;
+
       return;
     } else {
       this.updateTask(taskId);
