@@ -24,6 +24,7 @@
   text-align: center;
 }
 
+
 .tasks-container__no-tasks-found {
   margin-top: 20px;
 }
@@ -273,6 +274,29 @@ input[type=range]:focus::-ms-fill-upper {
   margin-right: 0.5rem;
 }
 
+/* fetch task styles */
+
+.fetch-task {
+  margin-top: 1rem;
+}
+
+.fetch-task > p {
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.fetch-task > button {
+  background-color: #008000;
+  padding: 1rem 5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.fetch-task > button:disabled {
+  background-color: grey;
+}
 @media screen and (max-width: 800px) {
   .tasks-page {
     flex-direction: column;

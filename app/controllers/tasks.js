@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
+import { later } from '@ember/runloop';
 import { action } from '@ember/object';
 import ENV from 'website-my/config/environment';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
@@ -8,6 +9,10 @@ import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksController extends Controller {
+  constructor() {
+    super(...arguments);
+    console.log(this.model);
+  }
   queryParams = ['dev'];
   TASK_KEYS = TASK_KEYS;
   taskStatusList = TASK_STATUS_LIST;
@@ -30,9 +35,26 @@ export default class TasksController extends Controller {
   @tracked message = ''; // this is required in the modal
   @tracked buttonRequired = false; // this is required in the modal
   @tracked disabled = false; // this is required for the holder component
+  @tracked inProgressTasks = this.model.filter(
+    (task) => task.status === 'IN_PROGRESS'
+  );
+  // @tracked noInProgressTask = this.inProgressTasks.length === 0;
+  @tracked findingTask = false;
+  @tracked showFetchButton = this.inProgressTasks.length === 0;
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;
+  }
+
+  tasksInProgress() {
+    return this.model.filter((task) => task.status === 'IN_PROGRESS');
+  }
+
+  noInProgressTask() {
+    const taskINProgress = this.model.filter(
+      (task) => task.status === 'IN_PROGRESS'
+    );
+    this.showFetchButton = taskINProgress.length === 0;
   }
 
   @tracked tasksByStatus = {};
@@ -40,6 +62,7 @@ export default class TasksController extends Controller {
   filterTasksByStatus() {
     if (this.userSelectedTask.key === this.allTasksObject.key) {
       this.tasksToShow = this.allTasks;
+      console.log(this.noInProgressTask);
     } else {
       this.tasksToShow = this.allTasks.filter(
         (task) => task.status === this.userSelectedTask.key
@@ -108,7 +131,6 @@ export default class TasksController extends Controller {
         });
 
         if (response.ok) {
-          this.disabled = false;
           this.showModal = true;
           const res = await response.json();
           const { message } = res;
@@ -120,42 +142,61 @@ export default class TasksController extends Controller {
           const updatedTask = { ...selectedTask, ...cleanBody };
           this.allTasks[indexOfSelectedTask] = updatedTask;
           this.filterTasksByStatus();
+          // this.noInProgressTask =
           if (this.assignTask === true) {
-            this.assingTaskFunction();
+            this.handleAssingnmentAfterUpdate();
           } else {
             this.isUpdating = false;
             this.closeDisabled = false;
           }
         } else {
           alert('Failed to update the task');
-          this.disabled = false;
         }
       } catch (err) {
         alert('Failed to update the task');
         console.error('Error : ', err);
       } finally {
         this.isLoading = false;
+        this.disabled = false;
+        this.noInProgressTask();
       }
     }
   }
 
-  @action async assingTaskFunction() {
+  // function for fetching task after clicking on fetch task button
+  @action async handleAssignment() {
+    this.findingTask = true;
+    this.disabled = true;
+    const message = await this.assingnTaskFunction();
+    this.message = message;
+    this.showModal = true;
+    this.disabled = false;
+    this.findingTask = false;
+    this.noInProgressTask();
+  }
+
+  async handleAssingnmentAfterUpdate() {
     this.assignTask = false;
-    setTimeout(async () => {
+    later(async () => {
       this.message = TASK_MESSAGES.FIND_TASK;
-      const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      const res = await response.json();
-      const { message } = res;
+      const message = await this.assingnTaskFunction();
       this.message = message;
       this.isUpdating = false;
       this.closeDisabled = false;
     }, 2000);
+  }
+
+  async assingnTaskFunction() {
+    const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    const res = await response.json();
+    const { message } = res;
+    return message;
   }
 
   @action async handleUpdateTask(taskId) {
