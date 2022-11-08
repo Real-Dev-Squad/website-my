@@ -5,7 +5,7 @@
       <div class="fetch-task" data-test-fetchSection>
         <p>You have no task in progress! click below to fetch tasks</p>
         <Button @onClick={{@handleAssignment}} @disabled={{@disabled}} @isLoading={{@findingTask}}>
-          {{if (eq @findingTask true) "Fetching task" "Fetch Task"}}
+          {{if @findingTask "Fetching task" "Fetch Task"}}
         </Button> 
       </div>
     {{/if}}

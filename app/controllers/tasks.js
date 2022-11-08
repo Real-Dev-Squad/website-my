@@ -9,10 +9,6 @@ import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksController extends Controller {
-  constructor() {
-    super(...arguments);
-    console.log(this.model);
-  }
   queryParams = ['dev'];
   TASK_KEYS = TASK_KEYS;
   taskStatusList = TASK_STATUS_LIST;
@@ -35,26 +31,37 @@ export default class TasksController extends Controller {
   @tracked message = ''; // this is required in the modal
   @tracked buttonRequired = false; // this is required in the modal
   @tracked disabled = false; // this is required for the holder component
-  @tracked inProgressTasks = this.model.filter(
-    (task) => task.status === 'IN_PROGRESS'
-  );
-  // @tracked noInProgressTask = this.inProgressTasks.length === 0;
   @tracked findingTask = false;
-  @tracked showFetchButton = this.inProgressTasks.length === 0;
+  @tracked showFetchButton = this.isShowFetchButton();
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;
   }
 
-  tasksInProgress() {
-    return this.model.filter((task) => task.status === 'IN_PROGRESS');
-  }
-
-  noInProgressTask() {
-    const taskINProgress = this.model.filter(
+  isShowFetchButton() {
+    const inProgressTasks = this.model.filter(
       (task) => task.status === 'IN_PROGRESS'
     );
-    this.showFetchButton = taskINProgress.length === 0;
+    const assignedTask = this.model.filter(
+      (task) => task.status === 'ASSIGNED'
+    );
+    return inProgressTasks.length === 0 && assignedTask.length === 0;
+  }
+
+  setShowFetchButton() {
+    this.showFetchButton = this.isShowFetchButton();
+  }
+
+  async setTasksToShow() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/tasks/self`, {
+        credentials: 'include',
+      });
+      const data = await response.json();
+      this.tasksToShow = data;
+    } catch {
+      alert('something went wrong');
+    }
   }
 
   @tracked tasksByStatus = {};
@@ -62,7 +69,6 @@ export default class TasksController extends Controller {
   filterTasksByStatus() {
     if (this.userSelectedTask.key === this.allTasksObject.key) {
       this.tasksToShow = this.allTasks;
-      console.log(this.noInProgressTask);
     } else {
       this.tasksToShow = this.allTasks.filter(
         (task) => task.status === this.userSelectedTask.key
@@ -142,12 +148,12 @@ export default class TasksController extends Controller {
           const updatedTask = { ...selectedTask, ...cleanBody };
           this.allTasks[indexOfSelectedTask] = updatedTask;
           this.filterTasksByStatus();
-          // this.noInProgressTask =
           if (this.assignTask === true) {
             this.handleAssingnmentAfterUpdate();
           } else {
             this.isUpdating = false;
             this.closeDisabled = false;
+            this.setShowFetchButton();
           }
         } else {
           alert('Failed to update the task');
@@ -158,7 +164,6 @@ export default class TasksController extends Controller {
       } finally {
         this.isLoading = false;
         this.disabled = false;
-        this.noInProgressTask();
       }
     }
   }
@@ -168,11 +173,14 @@ export default class TasksController extends Controller {
     this.findingTask = true;
     this.disabled = true;
     const message = await this.assingnTaskFunction();
+    if (message === 'Task assigned') {
+      await this.setTasksToShow();
+      this.showFetchButton = false;
+    }
     this.message = message;
     this.showModal = true;
     this.disabled = false;
     this.findingTask = false;
-    this.noInProgressTask();
   }
 
   async handleAssingnmentAfterUpdate() {
@@ -180,6 +188,10 @@ export default class TasksController extends Controller {
     later(async () => {
       this.message = TASK_MESSAGES.FIND_TASK;
       const message = await this.assingnTaskFunction();
+      if (message === 'Task assigned') {
+        await this.setTasksToShow();
+        this.showFetchButton = false;
+      }
       this.message = message;
       this.isUpdating = false;
       this.closeDisabled = false;
@@ -187,16 +199,20 @@ export default class TasksController extends Controller {
   }
 
   async assingnTaskFunction() {
-    const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
-    const res = await response.json();
-    const { message } = res;
-    return message;
+    try {
+      const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const res = await response.json();
+      const { message } = res;
+      return message;
+    } catch {
+      alert('something went wrong!');
+    }
   }
 
   @action async handleUpdateTask(taskId) {
