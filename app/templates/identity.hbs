@@ -16,6 +16,7 @@
         <div class="input-div">
             <label>Profile Url</label>
             <Input class="input-url" @value={{this.profileURL}} type="text" placeholder="Profile URL" onkeyup={{this.changeSaveDisabled}}/>
+            <div class='btn-container'>
             <button    
                 disabled={{this.saveDisabled}}
                 type="submit"
@@ -26,6 +27,12 @@
                 {{/if}}
                 Save
             </button> 
+            {{#if (eq this.profileURL this.model.profileURL)}}
+            <BsTooltip @title='This URL is already in use.' @placement='right' />
+            {{else if this.saveDisabled}}
+            <BsTooltip @title='Profile URL is empty!' @placement='right' />
+            {{/if}}
+            </div>
         </div>
 
     <div class='chaincode-div'>
