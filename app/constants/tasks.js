@@ -97,4 +97,15 @@ const TASK_STATUS_LIST = [
   },
 ];
 
+export const TASK_MESSAGES = {
+  MARK_DONE:
+    'This task will be marked as complete and a new task will be assigned to you',
+  UPDATE_TASK: 'Updating task',
+  FIND_TASK: 'Finding new task for you!',
+};
+
+export const TASK_PERCENTAGE = {
+  completedPercentage: '100',
+};
+
 export { TASK_KEYS, TASK_STATUS_LIST };

@@ -10,6 +10,8 @@
 @import 'components/input-field.css';
 @import 'navbar.css';
 @import 'identity.css';
+@import 'new-signup.css';
+@import 'variables.css';
 
 html,
 body {
@@ -37,10 +39,7 @@ body {
 }
 
 .greeting {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  text-align: center;
   margin-top: 50px;
 }
 
@@ -57,4 +56,11 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 28px;
+}
+
+@media (max-width: 460px) {
+  .footer {
+    padding: 8px 8px 16px;
+    font-size: 0.87rem;
+  }
 }
