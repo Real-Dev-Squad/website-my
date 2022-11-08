@@ -106,4 +106,8 @@
     .identity-verify-btn {
         margin-top: 0;
     }    
+
+    .identity-Buttons{
+        width: 100%;
+    }
 }
