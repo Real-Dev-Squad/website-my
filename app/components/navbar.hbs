@@ -15,13 +15,13 @@
     {{/each}}
   </ul>
 
-  <div class="user" {{on "click" this.toggleMenu}} {{on-click-outside this.outsideClickMenu}}>
+  <div role="button" class="user" {{on "click" this.toggleMenu}} {{on-click-outside this.outsideClickMenu}}>
     <div class="user__msg">Hello, {{@firstName}}!</div>
     <img class="user__pic" src={{@profilePictureURL}} alt="profile" />
     <i class="fa-solid fa-chevron-down"></i>
   </div>
 
-  <nav class="menu {{if this.isMenuOpen " active-menu" "" }}">
+  <section class="menu {{if this.isMenuOpen " active-menu" "" }}">
     <span class="menu__link">
       <LinkTo @route="index">Home</LinkTo>
     </span>
@@ -37,5 +37,5 @@
     <span class="menu__link">
       <LinkTo @route="identity">Identity</LinkTo>
     </span>
-  </nav>
+  </section>
 </nav>
