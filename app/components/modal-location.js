@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import Controller from '@ember/controller';
+
 
 import ENV from 'website-my/config/environment';
 
 const BASE_URL = ENV.GEOCODING_API_URL;
 
 
-export default class ModalLocationComponent extends  Controller{
+export default class ModalLocationComponent extends  Component{
 
     @tracked isOpen = false;
 
