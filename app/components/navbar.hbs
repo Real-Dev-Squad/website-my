@@ -3,7 +3,7 @@
     <i class="fas fa-bars fa-2x"></i>
   </button>
 
-  <ul class="nav-menu {{if this.isNavOpen "active-nav" ""}}">
+  <ul class="nav-menu {{if this.isNavOpen " active-nav" "" }}">
     <li class="nav__menu__logo">
       <a href={{this.HOME_PAGE_URL}}>
         <img src="RDSLogo.png" alt="real_dev_squad" height="50px" width="50px" />
@@ -11,14 +11,31 @@
     </li>
     <li class="nav__menu__home"><a href={{this.HOME_PAGE_URL}}>Home</a></li>
     {{#each this.RDS_APPS_MAPPING as |siteURL|}}
-      <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
+    <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
     {{/each}}
   </ul>
 
-  <div class="user">
-    <div class="user__greet">
-      <div class="user__greet__msg">Hello, {{@firstName}}!</div>
-      <img class="user__profile__pic" src={{@profilePictureURL}} alt="profile"/>
-    </div>
+  <div class="user" {{on "click" this.toggleMenu}} {{on-click-outside this.outsideClickMenu}}>
+    <div class="user__msg">Hello, {{@firstName}}!</div>
+    <img class="user__pic" src={{@profilePictureURL}} alt="profile" />
+    <i class="fa-solid fa-chevron-down"></i>
   </div>
+
+  <nav class="menu {{if this.isMenuOpen " active-menu" "" }}">
+    <span class="menu__link">
+      <LinkTo @route="index">Home</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="profile">Profile</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="tasks">Tasks</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="notifications">Notifications</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="identity">Identity</LinkTo>
+    </span>
+  </nav>
 </nav>
