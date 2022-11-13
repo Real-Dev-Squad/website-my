@@ -114,16 +114,6 @@ nav li a:hover {
   color: #e30062;
 }
 
-@media screen and (max-width: 371px) {
-  .local-navbar__link a {
-    padding: 5px;
-  }
-
-  .local-navbar {
-    font-size: 0.75rem;
-  }
-}
-
 @media screen and (max-width: 970px) {
   .nav {
     background: #1d1283;
@@ -172,7 +162,7 @@ nav li a:hover {
     float: none;
   }
 
-  .user__greet {
+  .user {
     margin: 18px;
   }
 }
