@@ -3,7 +3,7 @@
     <i class="fas fa-bars fa-2x"></i>
   </button>
 
-  <ul class="nav-menu {{if this.isNavOpen " active-nav" "" }}">
+  <ul class="nav-menu {{if this.isNavOpen "active-nav" ""}}">
     <li class="nav__menu__logo">
       <a href={{this.HOME_PAGE_URL}}>
         <img src="RDSLogo.png" alt="real_dev_squad" height="50px" width="50px" />
@@ -11,7 +11,7 @@
     </li>
     <li class="nav__menu__home"><a href={{this.HOME_PAGE_URL}}>Home</a></li>
     {{#each this.RDS_APPS_MAPPING as |siteURL|}}
-    <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
+      <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
     {{/each}}
   </ul>
 
@@ -21,7 +21,7 @@
     <i class="fa-solid fa-chevron-down"></i>
   </div>
 
-  <section class="menu {{if this.isMenuOpen " active-menu" "" }}">
+  <section class="menu {{if this.isMenuOpen "active-menu" ""}}">
     <span class="menu__link">
       <LinkTo @route="index">Home</LinkTo>
     </span>
