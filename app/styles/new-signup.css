@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  color: var(--dark-gray);
+  color: var(--color-gray);
   text-align: center;
   padding: 1em 0;
 }
@@ -13,7 +13,7 @@
   align-content: center;
   max-width: 80%;
   margin: auto;
-  background-color: var(--off-white);
+  background-color: var(--color--off-white-2);
 }
 
 .user-details > * {
@@ -22,7 +22,7 @@
 
 .user-details__heading {
   font-size: 2rem;
-  color: var(--black);
+  color: var(--color-black);
   margin-bottom: 0;
 }
 
@@ -39,7 +39,7 @@
   border-radius: 10px;
   outline: none;
   background-color: var(--green);
-  color: var(--white);
+  color: var(--color-white);
   text-decoration: none;
   cursor: pointer;
   width: 70%;
@@ -50,7 +50,7 @@
 }
 
 .error {
-  color: var(--red);
+  color: var(--color-red--error-2);
   padding: 0.4rem;
   font-size: 1rem;
 }

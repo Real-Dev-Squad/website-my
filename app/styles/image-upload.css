@@ -5,7 +5,7 @@
 }
 
 .drop-area {
-  border: 2px dashed #ccc;
+  border: 2px dashed var(--drop-area--border-color);
   border-radius: 20px;
   width: 480px;
   font-family: sans-serif;
@@ -15,8 +15,8 @@
 }
 
 .drop-area__highlight {
-  border-color: purple;
-  background-color: gainsboro;
+  border-color: var(--drop-area--highlight-border-color);
+  background-color: var(--drop-area--highlight-bg-color);
   transition: background-color 0.5s ease-in;
 }
 
@@ -36,20 +36,20 @@
 .image-form__button {
   display: inline-block;
   padding: 10px;
-  background: #ccc;
+  background: var(--button--form);
   cursor: pointer;
   font-size: 1.25rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--button--form);
   margin: 10px 0;
 }
 
 .image-form__button--disabled {
-  background: #ddd;
+  background: var(--button--form-disabled);
 }
 
 .image-form__button:hover {
-  background: #ddd;
+  background: var(--button--form-hover);
 }
 
 .image-form__input {
@@ -59,7 +59,7 @@
 .image-preview {
   max-height: 500px;
   border-radius: 10px;
-  border: solid black;
+  border: solid var(--color-black);
   display: block;
   margin: auto;
 }
@@ -77,12 +77,12 @@
 }
 
 .message-text__success {
-  color: green;
+  color: var(--color-green--success-text);
   font-size: 1.25rem;
   font-weight: bolder;
 }
 .message-text__failure {
-  color: red;
+  color: var(--color-red--failure-text);
   font-size: 1.25rem;
   font-weight: bolder;
 }
@@ -102,7 +102,7 @@
   overflow: hidden;
   width: 500px;
   height: 500px;
-  border: 5px solid #ccc;
+  border: 5px solid var(--color--image-cropper-preview);
   margin: 20px auto;
 }
 

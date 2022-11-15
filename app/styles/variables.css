@@ -1,4 +1,66 @@
 :root {
+
+  --color-white: #ffffff;
+  --color-off-white: #fffbfb;
+  --color--off-white-2: #f0f2f5;
+  --color-black: black;
+  --color-gray: #666;
+
+  --color-blue--focus: rgb(0, 81, 255);
+  --color-blue--button: #041484;
+  --color--user-status-heading: #0034a5;
+
+  --color-active: #e30062;
+  --color-red--error: #e74c3c;
+  --color-red--error-2: red;
+  --color-red--error-border: red;
+  --color-green--success-text: green;
+  --color-red--failure-text: red;
+  --color-red--not-assigned: red;
+
+
+  --button-verify-color: rgb(53, 194, 25);
+  --button-primary-color: rgb(81, 81, 245);
+  --button-copy-color: #e30062;
+  --button-copy-bg: wheat;
+  --button--form: #ccc;
+  --button--form-disabled: #ddd;
+  --button--form-hover: #ddd;
+  --button--submit: #43a047;
+  --button--idle:#e49504;
+  --button--active:#16a334;
+  --button--small-text: #0034a5;
+
+  --drop-area--border-color: #ccc;
+  --drop-area--highlight-bg-color: gainsboro;
+  --drop-area--highlight-border-color: purple;
+
+  --color--image-cropper-preview: #ccc;
+  --color--nav-bg: #1d1283;
+  --color--nav-link-hover: #49a82e;
+  --color--menu-link-hover-bg: #d0e7ff;
+  
+  --notification-primary-background: #ff6f00;
+  --alert-box-background: #fff8e1;
+  --alert-box-color: #212121;
+
+  --sidebar-border: rgba(84, 84, 84, 0.5);
+  --form-bg:rgb(231, 231, 231);
+  --task-card--border: #f4f4f4;
+  --input--slider-border: #3724e3;
+  --input--thumb-border: #2497E3;
+
+
+  /* Below this were the variables which was defined earlier */
+
+  --slider-colour: #424CC1;
+  --slider-background: #CFD3FF;
+  --thumb-background: #A1D0FF;
+  --opaque-black: #000000b3;
+  --white: #ffffff;
+  --black: #000000;
+  --green: #008000;
+
   --dark-gray: #666;
   --off-white: #f0f2f5;
   --black: #000000f2;
