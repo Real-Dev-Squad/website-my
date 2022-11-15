@@ -30,6 +30,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "mixpanel-browser": "^2.43.0",
+    "ember-click-outside": "^5.0.1",
     "webpack": "^5.74.0"
   },
   "devDependencies": {
