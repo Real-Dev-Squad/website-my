@@ -41,22 +41,7 @@
     padding: 2px 5px;
 }
 
-.identity-verify-btn-div{
-    display: flex;
-    align-items: center;
-    margin-top: 40px;
-}
-
-.btn_div{
-    display: initial;
-}
-
-.identity-label {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.identity-verify-btn-div{
+.identity-verify-btn-div {
     display: flex;
     align-items: center;
     margin-top: 40px;

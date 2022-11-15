@@ -53,94 +53,9 @@
         </label>
     </div>
 
-        <label class="identity-check-label">
-            I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
-        <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}}/>
-        </label>
-        <div class="btn_div">
-            <button
-            type="submit"
-            class="identity-verify-btn"
-            disabled={{not this.isChecked}}
-            {{on 'click' (fn this.handleVerify)}}>
-            {{#if this.isVerifyClicked}}
-                <i class="fa fa-spinner fa-spin"></i>
-            {{/if}}
-            Link Chaincode
-        </button>
-            {{#if this.saveDisabled}}
-                <BsTooltip @title="Profile Url is empty !" @placement="right"/>
-            {{/if}}
-        </div>
-        
-    {{/if}}
-    <div class='input-div'>
-      <label>Profile Url</label>
-      <Input
-        class='input-url'
-        @value={{this.profileURL}}
-        type='text'
-        placeholder='Profile URL'
-        onkeyup={{this.changeSaveDisabled}}
-      />
-      <div class='btn-container'>
-        <button
-          disabled={{this.saveDisabled}}
-          type='submit'
-          class='identity-Buttons edit'
-          {{on 'click' (fn this.handleEdit)}}
-        >
-          {{#if this.isEditClicked}}
-            <i class='fa fa-spinner fa-spin'></i>
-          {{/if}}
-          Save
-        </button>
-        {{#if (eq this.profileURL this.model.profileURL)}}
-          <BsTooltip @title='This URL is already in use.' @placement='right' />
-        {{else if this.saveDisabled}}
-          <BsTooltip @title='Profile URL is empty!' @placement='right' />
-        {{/if}}
-      </div>
-    </div>
-
-    <div class='chaincode-div'>
-      <label class='identity-label'>
-        Generate Chaincode
-        {{#if this.isChaincodeClicked}}
-          <label class="chaincode">{{this.Chaincode}}</label>
-
-          <Input
-            class='copy-button'
-            type='button'
-            @value='Copy'
-            {{on 'click' (fn this.handleCopy)}}
-          />
-
-        {{else}}
-          <div class='btn-container'>
-            <Input
-              class='identity-Buttons'
-              type='button'
-              @value={{this.Chaincode}}
-              {{on 'click' (fn this.handleGenerateChaincode)}}
-              disabled={{this.generateChainCodeDisabled}}
-            />
-            {{#if this.generateChainCodeDisabled}}
-              <BsTooltip @title='Profile Url is empty !' @placement='right' />
-            {{/if}}
-          </div>
-        {{/if}}
-      </label>
-    </div>
-
-    <label class='identity-label'>
-      I have saved my profile URL, generated a chaincode<br />and successfully
-      added that to my service.
-      <Input
-        @type='checkbox'
-        @checked={{this.isChecked}}
-        disabled={{this.checkboxDisabled}}
-      />
+    <label class="identity-check-label">
+        I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
+        <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}} />
     </label>
     <button type="submit" class="identity-verify-btn" disabled={{not this.isChecked}} {{on 'click' (fn
         this.handleVerify)}}>
