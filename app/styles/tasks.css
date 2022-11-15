@@ -136,7 +136,7 @@ input[type=range]::-ms-fill-upper {
 input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 0px var(--color-black);
-  border: 1px solid 3;
+  border: 1px solid var(--color-blue-light);
   height: 18px;
   width: 18px;
   border-radius: 25px;
@@ -182,9 +182,7 @@ input[type=range]:focus::-ms-fill-upper {
   border-radius: 5px;
 }
 
-.task-details__title,
-.task-details__purpose,
-.dates-info__start {
+.task-details__title, .task-details__purpose, .dates-info__start {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -237,7 +235,7 @@ input[type=range]:focus::-ms-fill-upper {
 .proceed-btn {
   display: block;
   width: 70%;
-  margin: 0.4rem;
+  margin: .4rem;
   padding: 0.5rem;
   background-color: var(--green);
   border: none;
@@ -248,7 +246,7 @@ input[type=range]:focus::-ms-fill-upper {
 .not-assign {
   display: block;
   width: 70%;
-  margin: 0.4rem;
+  margin: .4rem;
   padding: 0.5rem;
   border: 2px solid var(--color-red);
   background-color: var(--color-white);
