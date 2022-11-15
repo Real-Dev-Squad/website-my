@@ -58,12 +58,12 @@
   position: relative;
 }
 
-input[type='range'] {
+input[type='z'] {
   -webkit-appearance: none;
   width: 80%;
 }
 
-input[type='range']::-webkit-slider-runnable-track {
+input[type=range]::-webkit-slider-runnable-track {
   width: 50%;
   height: 5px;
   cursor: pointer;
@@ -74,7 +74,7 @@ input[type='range']::-webkit-slider-runnable-track {
   border: 0px solid var(--color-black);
 }
 
-input[type='range']::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px var(--color-black);
   border: 1px solid var(--color-blue--input-border);
   height: 18px;
@@ -86,11 +86,11 @@ input[type='range']::-webkit-slider-thumb {
   margin-top: -7px;
 }
 
-input[type='range']:focus::-webkit-slider-runnable-track {
+input[type=range]:focus::-webkit-slider-runnable-track {
   background: var(--slider-colour);
 }
 
-input[type='range']::-moz-range-track {
+input[type=range]::-moz-range-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
@@ -100,7 +100,7 @@ input[type='range']::-moz-range-track {
   border: 0px solid #000000;
 }
 
-input[type='range']::-moz-range-thumb {
+input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #000000;
   border: 1px solid var(--slider-colour);
   height: 18px;
@@ -110,7 +110,7 @@ input[type='range']::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type='range']::-ms-track {
+input[type=range]::-ms-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
@@ -119,21 +119,21 @@ input[type='range']::-ms-track {
   color: transparent;
 }
 
-input[type='range']::-ms-fill-lower {
+input[type=range]::-ms-fill-lower {
   background: var(--slider-colour);
   border: 0px solid var(--color-black);
   border-radius: 2px;
   box-shadow: 0px 0px 0px var(--color-black);
 }
 
-input[type='range']::-ms-fill-upper {
+input[type=range]::-ms-fill-upper {
   background: var(--slider-background);
   border: 0px solid var(--color-black);
   border-radius: 2px;
   box-shadow: 0px 0px 0px var(--color-black);
 }
 
-input[type='range']::-ms-thumb {
+input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 0px var(--color-black);
   border: 1px solid 3;
@@ -144,11 +144,11 @@ input[type='range']::-ms-thumb {
   cursor: pointer;
 }
 
-input[type='range']:focus::-ms-fill-lower {
+input[type=range]:focus::-ms-fill-lower {
   background: var(--slider-colour);
 }
 
-input[type='range']:focus::-ms-fill-upper {
+input[type=range]:focus::-ms-fill-upper {
   background: var(--slider-colour);
 }
 
