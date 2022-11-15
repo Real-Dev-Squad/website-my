@@ -58,7 +58,7 @@
   position: relative;
 }
 
-input[type='z'] {
+input[type=range] {
   -webkit-appearance: none;
   width: 80%;
 }
