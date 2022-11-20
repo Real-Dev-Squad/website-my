@@ -35,7 +35,8 @@ export default class TasksController extends Controller {
   @tracked buttonRequired = false; // this is required in the modal
   @tracked disabled = false; // this is required for the holder component
   @tracked findingTask = false;
-  @tracked showFetchButton = this.isShowFetchButton();
+  @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
+  alreadyFetched = localStorage.getItem('already-fetched');
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;
@@ -191,12 +192,13 @@ export default class TasksController extends Controller {
     const message = await this.assingnTaskFunction();
     if (message === 'Task assigned') {
       await this.setTasksToShow();
-      this.showFetchButton = false;
     }
     this.message = message;
     this.showModal = true;
     this.disabled = false;
     this.findingTask = false;
+    this.showFetchButton = false;
+    localStorage.setItem('already-fetched', true);
   }
 
   async handleAssingnmentAfterUpdate() {
