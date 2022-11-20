@@ -15,10 +15,27 @@
     {{/each}}
   </ul>
 
-  <div class="user">
-    <div class="user__greet">
-      <div class="user__greet__msg">Hello, {{@firstName}}!</div>
-      <img class="user__profile__pic" src={{@profilePictureURL}} alt="profile"/>
-    </div>
+  <div role="button" class="user" {{on "click" this.toggleMenu}} {{on-click-outside this.outsideClickMenu}}>
+    <div class="user__msg">Hello, {{@firstName}}!</div>
+    <img class="user__pic" src={{@profilePictureURL}} alt="profile" />
+    <i class="fa-solid fa-chevron-down"></i>
   </div>
+
+  <section class="menu {{if this.isMenuOpen "active-menu" ""}}">
+    <span class="menu__link">
+      <LinkTo @route="index">Home</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="profile">Profile</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="tasks">Tasks</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="notifications">Notifications</LinkTo>
+    </span>
+    <span class="menu__link">
+      <LinkTo @route="identity">Identity</LinkTo>
+    </span>
+  </section>
 </nav>

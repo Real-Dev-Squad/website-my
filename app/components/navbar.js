@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 export default class NavbarComponent extends Component {
   @tracked isNavOpen = false;
+  @tracked isMenuOpen = false;
 
   HOME_PAGE_URL = 'http://realdevsquad.com/';
 
@@ -32,5 +33,13 @@ export default class NavbarComponent extends Component {
 
   @action toggleNav() {
     this.isNavOpen = !this.isNavOpen;
+  }
+
+  @action toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  @action outsideClickMenu() {
+    this.isMenuOpen = false;
   }
 }

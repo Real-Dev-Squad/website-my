@@ -41,6 +41,12 @@
     padding: 2px 5px;
 }
 
+.identity-verify-btn-div {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
 .identity-verify-btn {
     background-color: var(--button-color);
     color: white;
@@ -99,5 +105,9 @@
 
     .identity-verify-btn {
         margin-top: 0;
-    }    
+    }
+
+    .identity-Buttons {
+        width: 100%;
+    }
 }
