@@ -1,7 +1,7 @@
 <div class="tasks-container">
   <h2 class="tasks-container__title">{{@userSelectedTask.displayLabel}} Tasks</h2>
-  {{#if @noInProgressTask}}
-    {{#if @dev}}
+  {{#if @dev}}
+    {{#if @noInProgressTask}}
       <div class="fetch-task" data-test-fetchSection>
         <p>You have no task in progress! click below to fetch tasks</p>
         <Button @onClick={{@handleAssignment}} @disabled={{@disabled}} @isLoading={{@findingTask}}>

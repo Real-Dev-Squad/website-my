@@ -63,7 +63,11 @@ export default class TasksController extends Controller {
       const data = await response.json();
       this.tasksToShow = data;
     } catch {
-      alert('something went wrong');
+      this.toast.error(
+        'Failed to fetch your tasks',
+        '',
+        toastNotificationTimeoutOptions
+      );
     }
   }
 
@@ -223,7 +227,11 @@ export default class TasksController extends Controller {
       const { message } = res;
       return message;
     } catch {
-      alert('something went wrong!');
+      this.toast.error(
+        'Something went wrong',
+        '',
+        toastNotificationTimeoutOptions
+      );
     }
   }
 
