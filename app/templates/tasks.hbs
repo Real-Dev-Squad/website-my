@@ -1,25 +1,31 @@
 {{page-title "My Tasks"}}
 
 <div class="tasks-page">
-  <SideBar
-    @taskStatusList={{this.taskStatusList}}
+  <SideBar 
+    @taskStatusList={{this.taskStatusList}} 
     @showDropDown={{this.showDropDown}}
-    @toggleDropDown={{this.toggleDropDown}}
-    @changeUserSelectedTask={{this.changeUserSelectedTask}}
+    @toggleDropDown={{this.toggleDropDown}} 
+    @changeUserSelectedTask={{this.changeUserSelectedTask}} 
   />
-  <Tasks
-    @userSelectedTask={{this.userSelectedTask}}
+
+  <Tasks 
+    @userSelectedTask={{this.userSelectedTask}} 
     @tasksToShow={{this.tasksToShow}}
-    @onTaskChange={{this.onTaskChange}}
-    @onTaskUpdate={{this.handleUpdateTask}}
+    @onTaskChange={{this.onTaskChange}} 
+    @onTaskUpdate={{this.handleUpdateTask}} 
     @isLoading={{this.isLoading}}
-    @disabled={{this.disabled}}
+    @disabled={{this.disabled}} 
   />
+  
   <Task::Modal 
-    @goBack={{this.goBack}}
+    @goBack={{this.goBack}} 
     @markComplete={{this.markComplete}}
+    @markCompleteAndAssignTask={{this.markCompleteAndAssignTask}} 
     @buttonRequired={{this.buttonRequired}}
-    @message={{this.message}}
-    @showModal={{this.showModal}}
+    @message={{this.message}} 
+    @showModal={{this.showModal}} 
+    @isUpdating={{this.isUpdating}}
+    @closeDisabled={{this.closeDisabled}} 
+    @dev={{this.dev}} 
   />
 </div>

@@ -1,4 +1,4 @@
-:root{
+:root {
   --slider-colour: #424CC1;
   --slider-background: #CFD3FF;
   --thumb-background: #A1D0FF;
@@ -33,7 +33,7 @@
   flex-direction: column;
   border: 1px solid #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 0 15px -7px rgba(0,0,0,.65);
+  box-shadow: 0 0 15px -7px rgba(0, 0, 0, .65);
   width: 50%;
   margin: auto;
   padding: 1rem;
@@ -41,7 +41,7 @@
 }
 
 .task-card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19)
 }
 
 .dates-info {
@@ -50,12 +50,12 @@
 
 /* progress bar */
 
-.wrapper-div{
+.wrapper-div {
   margin: 1em;
   padding: 1rem;
 }
 
-.task-card__progress-bar-container{
+.task-card__progress-bar-container {
   padding: 1em;
 }
 
@@ -166,6 +166,7 @@ input[type=range]:focus::-ms-fill-upper {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 30px 30px;
   }
@@ -192,7 +193,9 @@ input[type=range]:focus::-ms-fill-upper {
   border-radius: 5px;
 }
 
-.task-details__title, .task-details__purpose, .dates-info__start {
+.task-details__title,
+.task-details__purpose,
+.dates-info__start {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -239,6 +242,8 @@ input[type=range]:focus::-ms-fill-upper {
   color: var(--black);
   margin-bottom: 1rem;
   font-weight: 600;
+  text-align: center;
+  width: 80%;
 }
 
 .proceed-btn {
@@ -249,6 +254,19 @@ input[type=range]:focus::-ms-fill-upper {
   background-color: var(--green);
   border: none;
   color: var(--white);
+  cursor: pointer;
+}
+
+.not-assign {
+  display: block;
+  width: 70%;
+  margin: .4rem;
+  padding: 0.5rem;
+  border: 2px solid red;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .close {
@@ -263,16 +281,18 @@ input[type=range]:focus::-ms-fill-upper {
     flex-direction: column;
     align-items: center;
   }
-  .task-card{
+
+  .task-card {
     width: 90%;
   }
+
   .tasks-container {
     margin-top: 1rem;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .task-card__status{
+  .task-card__status {
     flex-direction: column;
   }
 }

@@ -14,7 +14,7 @@ Fork this repository using the **Fork** option at the top-right corner of this p
 
 ![how-to-fork](https://i.imgur.com/o6LJadj.png)
 
-2. **Cloning repository**
+2. **Cloning repository and Installing packages**
 
 Clone your forked repository, this will download your copy of repository in your computer. To do this, open your terminal (command prompt/bash/git bash) and enter the following command, paste your link after the word **clone** without the **<>**.
 
@@ -26,6 +26,12 @@ Once you have cloned the repository, now you should go into the folder containin
 ```
 cd website-my
 ```
+
+Now you should install the required packages to run this project by doing:
+```
+yarn or yarn install
+```
+
 
 3. **Adding remote repository**
 

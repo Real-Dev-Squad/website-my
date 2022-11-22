@@ -16,9 +16,7 @@ You will need the following things properly installed on your computer.
 We are moving to yarn, to ensure that we use yarn , we are moving ahead with [Volta](https://docs.volta.sh/guide/#why-volta)
 To install Volta, please follow the [process](https://docs.volta.sh/guide/getting-started)
 
-- `git clone <repository-url>` this repository
-- `cd website-my`
-- `yarn`
+Please refer [CONTRIBUTING.md](./CONTRIBUTING.md) for the setup and contributing guidelines.
 
 ## Running / Development
 
