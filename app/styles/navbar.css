@@ -6,13 +6,13 @@
 nav {
   font: 'Roboto', sans-serif;
   font-weight: 700;
-  background-color: #1d1283;
+  background-color: var(--nav--bg);
 }
 
 nav li a {
   margin: 10px;
   display: block;
-  color: #ffffff;
+  color: var(--nav--link--text);
   text-align: center;
   padding: 19px 16px;
   text-decoration: none;
@@ -23,7 +23,7 @@ nav li {
 }
 
 nav li a:hover {
-  color: #49a82e;
+  color: var(--nav--link--hover);
 }
 
 .nav-menu {
@@ -31,7 +31,7 @@ nav li a:hover {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #1d1283;
+  background-color: var(--nav-menu--bg);
 }
 
 .nav__menu__logo {
@@ -56,7 +56,7 @@ nav li a:hover {
   position: absolute;
   top: 0;
   right: 0px;
-  color: #ffffff;
+  color: var(--user--text);
   margin: 23px;
   cursor: pointer;
 }
@@ -83,8 +83,8 @@ nav li a:hover {
   font-size: 0.87rem;
   flex-direction: column;
   justify-content: center;
-  background-color: #fffbfb;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color: var(--menu--bg);
+  box-shadow: var(--menu--bpx-shadow--1) 0px 1px 2px 0px, var(--menu--bpx-shadow--2) 0px 2px 6px 2px;
   border-radius: 10px;
   width: 150px;
   padding: 15px 0px;
@@ -108,16 +108,16 @@ nav li a:hover {
 }
 
 .menu__link:hover {
-  background-color: #d0e7ff;
+  background-color: var(--menu--link--hover);
 }
 
 .active {
-  color: #e30062;
+  color: var(--active);
 }
 
 @media screen and (max-width: 970px) {
   .nav {
-    background: #1d1283;
+    background: var(--nav--bg);
   }
 
   .hamburger--toggle {
@@ -127,15 +127,15 @@ nav li a:hover {
     background: none;
     border: none;
     outline: none;
-    color: #fff;
+    color: var(--hamburger--toggle--text);
   }
 
   .nav-menu {
-    background: white;
+    background: var(--nav-menu--bg--smaller-screen);
     display: none;
     width: 100%;
     padding: 10px 0px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 15px var(--nav-menu--box-shadow--smaller-screen);
   }
 
   .active-nav {
@@ -149,7 +149,7 @@ nav li a:hover {
   nav li a {
     padding: 10px 40px;
     text-align: left;
-    color: #1d1283;
+    color: var(--nav--link--text--smaller-screen);
     text-decoration: none;
     display: block;
   }
