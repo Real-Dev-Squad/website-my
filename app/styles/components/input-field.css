@@ -15,18 +15,18 @@
 
 .input-field {
   padding: 1rem;
-  border: 1px solid #666;
+  border: 1px solid var(--input-field-border);
   border-radius: 5px;
   width: 100%;
 }
 
 .input-field:focus {
-  border: 1px solid rgb(0, 81, 255);
+  border: 1px solid var(--input-field-border--focus);
 }
 
 .error {
   font-size: 0.8rem;
-  color: #e74c3c;
+  color: var(--input-field-border--error);
 }
 
 .help-msg {
@@ -35,5 +35,5 @@
 }
 
 .error-border {
-  border: 1px solid red;
+  border: 1px solid var(--input-field-border--error-border);
 }

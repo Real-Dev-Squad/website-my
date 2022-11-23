@@ -1,8 +1,3 @@
-:root {
-  --notification-primary-background: #ff6f00;
-  --alert-box-background: #fff8e1;
-  --alert-box-color: #212121;
-}
 
 .notifications {
   display: flex;
@@ -35,15 +30,15 @@
 .info-tab i::before {
   width: 24px;
   height: 24px;
-  box-shadow: inset 12px 0 13px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 12px 0 13px var(--info-tab--before--box-shadow);
 }
 
 .info-tab i::after {
   width: 0;
   height: 0;
   border: 12px solid transparent;
-  border-bottom-color: #fff;
-  border-left-color: #fff;
+  border-bottom-color: var(--info-tab--after--border-b);
+  border-left-color: var(--info-tab--after--border-l);
   bottom: -18px;
 }
 
@@ -59,19 +54,19 @@
 
 .tip-box-alert {
   padding: 10px 10px 10px 20px;
-  color: var(--alert-box-color);
-  background: var(--alert-box-background);
+  color: var(--tip-box-alert--text);
+  background: var(--tip-box-alert--bg);
   flex-direction: column;
 }
 
 .new-message-box-alert {
-  background: var(--notification-primary-background);
+  background: var(--new-message-box-alert--bg);
   padding: 3px;
   margin: 10px 0;
 }
 
 .tip-icon-alert {
-  background: var(--notification-primary-background);
+  background: var(--tip-icon-alert--bg);
 }
 
 @media (max-width: 800px) {
