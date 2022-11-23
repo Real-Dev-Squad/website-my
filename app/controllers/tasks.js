@@ -31,9 +31,9 @@ export default class TasksController extends Controller {
   @tracked userSelectedTask = this.DEFAULT_TASK_TYPE;
   @tracked showModal = false;
   @tracked tempTaskId = ''; // this Id will be used to update task which are completed 100%
-  @tracked message = ''; // this is required in the modal
-  @tracked buttonRequired = false; // this is required in the modal
-  @tracked disabled = false; // this is required for the holder component
+  @tracked message = ''; // required in the modal
+  @tracked buttonRequired = false;
+  @tracked disabled = false;
   @tracked findingTask = false;
   @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
   alreadyFetched = localStorage.getItem('already-fetched');

@@ -279,16 +279,16 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .fetch-task > button {
-  background-color: #008000;
+  background-color: var(--fetch--button-bg);
   padding: 1rem 5rem;
-  color: #ffffff;
+  color: var(--fetch--button--color);
   font-size: 1rem;
   border-radius: 50px;
   cursor: pointer;
 }
 
 .fetch-task > button:disabled {
-  background-color: grey;
+  background-color: var(--fetch--button--bg--disabled);
 }
 @media screen and (max-width: 800px) {
   .tasks-page {
