@@ -1,10 +1,13 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import ENV from 'website-my/config/environment';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+
+const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksController extends Controller {
   queryParams = ['dev'];
@@ -21,6 +24,7 @@ export default class TasksController extends Controller {
   @tracked assignTask = false;
   @tracked closeDisabled = false;
   @tracked showDropDown = true;
+  @tracked taskFields = {};
   @tracked allTasks = this.model;
   @tracked isLoading = false;
   @tracked userSelectedTask = this.DEFAULT_TASK_TYPE;
@@ -46,18 +50,49 @@ export default class TasksController extends Controller {
     }
   }
 
+  constructReqBody(object) {
+    const requestBody = { ...object };
+    const taskCompletionPercentage = object.percentCompleted;
+    if (taskCompletionPercentage) {
+      if (taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage) {
+        requestBody.status = 'COMPLETED';
+      }
+      requestBody.percentCompleted = parseInt(taskCompletionPercentage);
+    }
+    return requestBody;
+  }
+
+  @action goBack() {
+    this.showModal = false;
+    this.onTaskChange('percentCompleted', '75');
+  }
+
+  @action markComplete() {
+    this.updateTask(this.tempTaskId);
+    this.message = TASK_MESSAGES.UPDATE_TASK;
+    this.isUpdating = true;
+    this.closeDisabled = true;
+  }
+
+  @action markCompleteAndAssignTask() {
+    this.assignTask = true;
+    this.message = TASK_MESSAGES.UPDATE_TASK;
+    this.isUpdating = true;
+    this.updateTask(this.tempTaskId);
+    this.closeDisabled = true;
+  }
+
   @action changeUserSelectedTask(statusObject) {
     this.userSelectedTask = statusObject;
     this.filterTasksByStatus();
   }
 
-  @action updateLoader(value) {
-    this.isLoading = value;
-  }
-
   @tracked tasksToShow = this.allTasks;
 
   @action onTaskChange(key, value) {
+    for (let prop in this.taskFields) {
+      delete this.taskFields[prop];
+    }
     this.taskFields[key] = value;
   }
 
