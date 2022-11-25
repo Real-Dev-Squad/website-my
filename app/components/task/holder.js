@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
+import { tracked } from '@glimmer/tracking';
 import { TASK_PERCENTAGE } from '../../constants/tasks';
 
 export default class TasksHolderComponent extends Component {

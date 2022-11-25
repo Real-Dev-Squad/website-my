@@ -40,7 +40,7 @@ export default class TasksController extends Controller {
 
   @tracked tasksByStatus = {};
 
-  @action filterTasksByStatus() {
+  filterTasksByStatus() {
     if (this.userSelectedTask.key === this.allTasksObject.key) {
       this.tasksToShow = this.allTasks;
     } else {
