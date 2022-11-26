@@ -124,6 +124,9 @@ export default class TasksController extends Controller {
   @tracked tasksToShow = this.allTasks;
 
   @action onTaskChange(key, value) {
+    for (let prop in this.taskFields) {
+      delete this.taskFields[prop];
+    }
     this.taskFields[key] = value;
   }
 
