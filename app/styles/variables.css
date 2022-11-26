@@ -159,5 +159,9 @@
   --button--color--bg :#fff;
 
   --button--small--text: #0034a5;
-  --button--small--bg: #fff;;
+  --button--small--bg: #fff;
+
+  --fetch--button-bg: #008000;
+  --fetch--button--color: #ffffff;
+  --fetch--button--bg--disabled: #808080;
 }

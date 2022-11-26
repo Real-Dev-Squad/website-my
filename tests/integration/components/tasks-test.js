@@ -23,4 +23,28 @@ module('Integration | Component | tasks', function (hooks) {
 
     assert.ok(this.element.textContent.trim().includes('Tasks'));
   });
+
+  test('there is a fetch task button if no in progress task are there', async function (assert) {
+    this.setProperties({
+      onTaskChange: () => {},
+      onTaskUpdate: () => {},
+      showFetchButton: true,
+      handleAssignment: () => {},
+      findingTask: false,
+      dev: true,
+    });
+
+    await render(hbs`
+      <Tasks
+        @onTaskChange={{this.onTaskChange}}
+        @onTaskUpdate={{this.handleUpdateTask}}
+        @noInProgressTask={{this.showFetchButton}}
+        @handleAssignment={{this.handleAssignment}}
+        @findingTask={{this.findingTask}}
+        @dev={{this.dev}}
+      />
+    `);
+
+    assert.dom('[data-test-fetchSection]').exists();
+  });
 });
