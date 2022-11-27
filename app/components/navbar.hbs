@@ -31,9 +31,11 @@
     <span class="menu__link">
       <LinkTo @route="tasks">Tasks</LinkTo>
     </span>
+    {{#if this.isDev}}
     <span class="menu__link">
       <LinkTo @route="notifications">Notifications</LinkTo>
     </span>
+    {{/if}}
     <span class="menu__link">
       <LinkTo @route="identity">Identity</LinkTo>
     </span>
