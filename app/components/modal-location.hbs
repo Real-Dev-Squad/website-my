@@ -24,8 +24,6 @@
                 {{on 'input' (fn this.updateValue)}}
               />
             </div>
-
-
             <div class='search__box'>
               <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
             </div>
@@ -86,6 +84,7 @@
   </div>
 {{else}}
   <a
+    id="update__link"
     href='#'
     type='link'
     class='update__link'
