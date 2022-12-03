@@ -102,7 +102,7 @@ nav li a:hover {
   padding: 15px 30px;
 }
 
-.menu__link a {
+.menu__link {
   text-decoration: none;
   cursor: pointer;
 }

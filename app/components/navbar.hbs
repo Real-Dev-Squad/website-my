@@ -22,22 +22,12 @@
   </div>
 
   <section class="menu {{if this.isMenuOpen "active-menu" ""}}">
-    <span class="menu__link">
-      <LinkTo @route="index">Home</LinkTo>
-    </span>
-    <span class="menu__link">
-      <LinkTo @route="profile">Profile</LinkTo>
-    </span>
-    <span class="menu__link">
-      <LinkTo @route="tasks">Tasks</LinkTo>
-    </span>
+      <LinkTo class="menu__link" @route="index">Home</LinkTo>
+      <LinkTo class="menu__link" @route="profile">Profile</LinkTo>
+      <LinkTo class="menu__link" @route="tasks">Tasks</LinkTo>
     {{#if this.isDev}}
-    <span class="menu__link">
-      <LinkTo @route="notifications">Notifications</LinkTo>
-    </span>
+      <LinkTo class="menu__link" @route="notifications">Notifications</LinkTo>
     {{/if}}
-    <span class="menu__link">
-      <LinkTo @route="identity">Identity</LinkTo>
-    </span>
+      <LinkTo class="menu__link" @route="identity">Identity</LinkTo>
   </section>
 </nav>
