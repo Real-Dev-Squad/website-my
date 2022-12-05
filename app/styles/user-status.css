@@ -24,6 +24,17 @@
   background: var( --button--idle--bg);
   cursor: pointer;
 }
+.buttons__ooo {
+  font-size: 1.25rem;
+  color: var(--button--ooo--text);
+  font-weight: 700;
+  border: 3px solid var(--button--ooo--border);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  background: var( --button--ooo--bg);
+  cursor: pointer;
+}
 
 .buttons__active {
   font-size: 1.25rem;

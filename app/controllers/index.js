@@ -11,22 +11,26 @@ export default class IndexController extends Controller {
   @service toast;
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
+  @tracked showUserStateModal = false;
+  @tracked newStatus;
 
-  @action async updateStatus(status) {
+  @action toggleUserStateModal() {
+    this.showUserStateModal = !this.showUserStateModal;
+  }
+
+  @action async updateStatus(newState) {
     this.isStatusUpdating = true;
     try {
-      const response = await fetch(`${BASE_URL}/users/self`, {
+      const response = await fetch(`${BASE_URL}/users/status/self`, {
         method: 'PATCH',
-        body: JSON.stringify({
-          status,
-        }),
+        body: JSON.stringify(newState),
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
       });
       if (response.ok) {
-        this.status = status;
+        this.status = newState.currentStatus.state;
       }
     } catch (error) {
       console.error('Error : ', error);
@@ -38,5 +42,11 @@ export default class IndexController extends Controller {
     } finally {
       this.isStatusUpdating = false;
     }
+    this.toggleUserStateModal();
+  }
+
+  @action async changeStatus(status) {
+    this.newStatus = status;
+    this.toggleUserStateModal();
   }
 }

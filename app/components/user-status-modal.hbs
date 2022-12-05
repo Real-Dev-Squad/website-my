@@ -1,0 +1,29 @@
+{{#if @showUserStateModal}}
+<div class="overlay">
+    <div class="modal">
+        <div class="datePickerAndMessageContainer">
+            <label class="date-picker">From</label>
+            <Input name='fromDate' type='date' value={{this.fromDate}} {{on "change" this.updateValue}} />
+            {{#if (eq @newStatus 'OOO')}}
+            <label class="date-picker">Until</label>
+            <Input name='untilDate' type='date' value={{this.untilDate}} {{on "change" this.updateValue}} />
+            {{/if}}
+            {{#if (not-eq @newStatus 'ACTIVE')}}
+            {{#if (eq @newStatus 'OOO')}}
+            <label class="date-picker">Reason</label>
+            {{/if}}
+            {{#if (eq @newStatus 'IDLE')}}
+            <label class="date-picker">Missing Skills</label>
+            {{/if}}
+            <textarea name='reason' class="reason" value={{this.reason}} {{on "change" this.updateValue}}></textarea>
+            {{/if}}
+        </div>
+        <button type="button" class="submit" {{on "click" this.getCurrentStatusObj}}>
+            Submit
+        </button>
+        <button type="button" class="close" {{on "click" @toggleUserStateModal}}>
+            Cancel
+        </button>
+    </div>
+</div>
+{{/if}}
