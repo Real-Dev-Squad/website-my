@@ -6,6 +6,7 @@
           Update Location
         </h3>
         <FaIcon
+          data-test-cross-icon
           @icon='xmark'
           class='xmark__icon'
           {{on 'click' (fn this.toggleModal)}}
@@ -17,6 +18,7 @@
             <div class='modal__location__input__container'>
               <Input
                 class='modal__Locationinput'
+                data-test-input-location
                 type='text'
                 value={{this.location}}
                 @placeholder={{'Enter New Location'}}
@@ -30,17 +32,17 @@
           </div>
 
           {{#each this.placesArray as |places|}}
-            <div class="places__container" role="button" {{on 'click' (fn this.handleSelectedPlace  places.place_name)}}>
+            <div data-test-places class="places__container" role="button" {{on 'click' (fn this.handleSelectedPlace  places.place_name)}}>
 
             <FaIcon @icon='location-dot' class='location-dot' />
               {{places.place_name}}
-
                 
             </div>
           {{/each}}
 
           <select
             class='modal__selectinput'
+            data-test-update_location
             {{on 'change' (fn this.setSelection)}}
           >
             <option value='' disabled selected>
@@ -55,6 +57,7 @@
           </select>
           <select
             class='modal__selectinput'
+            data-test-send-notification
             {{on 'change' (fn this.setSelectedNotification)}}
           >
             <option value='' disabled selected>
@@ -71,6 +74,7 @@
             </option>
           </select>
           <button
+            data-test-submit-btn
             class='update__btn'
             type='submit'
             disabled={{this.isSubmitDisabled}}
@@ -85,6 +89,7 @@
 {{else}}
   <a
     id="update__link"
+    data-test-update-link
     href='#'
     type='link'
     class='update__link'
