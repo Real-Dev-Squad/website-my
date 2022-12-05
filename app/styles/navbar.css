@@ -98,11 +98,8 @@ nav li a:hover {
   display: flex;
 }
 
-.menu__link {
+.menu__link  {
   padding: 15px 30px;
-}
-
-.menu__link a {
   text-decoration: none;
   cursor: pointer;
 }
