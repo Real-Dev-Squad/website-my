@@ -32,12 +32,24 @@
           </div>
 
           {{#each this.placesArray as |places|}}
-            <div data-test-places class="places__container" role="button" {{on 'click' (fn this.handleSelectedPlace  places.place_name)}}>
+            {{#if this.location}}
 
-            <FaIcon @icon='location-dot' class='location-dot' />
-              {{places.place_name}}
-                
-            </div>
+              <div
+                data-test-places
+                class='places__container'
+                role='button'
+                {{on 'click' (fn this.handleSelectedPlace places.place_name)}}
+              >
+
+                <FaIcon @icon='location-dot' class='location-dot' />
+                {{places.place_name}}
+
+              </div>
+
+            {{else}}
+
+            {{/if}}
+
           {{/each}}
 
           <select
@@ -88,7 +100,7 @@
   </div>
 {{else}}
   <a
-    id="update__link"
+    id='update__link'
     data-test-update-link
     href='#'
     type='link'
