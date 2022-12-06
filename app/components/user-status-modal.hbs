@@ -1,27 +1,30 @@
 {{#if @showUserStateModal}}
 <div class="overlay">
-    <div class="modal">
+    <div class="modal" data-test-modal>
         <div class="datePickerAndMessageContainer">
-            <label class="date-picker">From</label>
-            <Input name='fromDate' type='date' value={{this.fromDate}} {{on "change" this.updateValue}} />
+            <label class="input-description" data-test-labelFrom>From</label>
+            <Input name='fromDate' type='date' value={{this.fromDate}} {{on "change" this.updateValue}}
+                data-test-datePickerFrom />
             {{#if (eq @newStatus 'OOO')}}
-            <label class="date-picker">Until</label>
-            <Input name='untilDate' type='date' value={{this.untilDate}} {{on "change" this.updateValue}} />
+            <label class="input-description" data-test-labelUntil>Until</label>
+            <Input name='untilDate' type='date' value={{this.untilDate}} {{on "change" this.updateValue}}
+                data-test-datePickerUntil />
             {{/if}}
             {{#if (not-eq @newStatus 'ACTIVE')}}
             {{#if (eq @newStatus 'OOO')}}
-            <label class="date-picker">Reason</label>
+            <label class="input-description" data-test-labelReason>Reason</label>
             {{/if}}
             {{#if (eq @newStatus 'IDLE')}}
-            <label class="date-picker">Missing Skills</label>
+            <label class="input-description" data-test-labelMissingSkills>Missing Skills</label>
             {{/if}}
-            <textarea name='reason' class="reason" value={{this.reason}} {{on "change" this.updateValue}}></textarea>
+            <textarea name='reason' class="reason" value={{this.reason}} {{on "change" this.updateValue}}
+                data-test-textareaReason></textarea>
             {{/if}}
         </div>
-        <button type="button" class="submit" {{on "click" this.getCurrentStatusObj}}>
+        <button type="button" class="submit" {{on "click" this.getCurrentStatusObj}} data-test-submitBtn>
             Submit
         </button>
-        <button type="button" class="close" {{on "click" @toggleUserStateModal}}>
+        <button type="button" class="close" {{on "click" this.onCancelModal}} data-test-cancelBtn>
             Cancel
         </button>
     </div>

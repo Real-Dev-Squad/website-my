@@ -23,6 +23,7 @@
   border-radius: 10px;
   background: var( --button--idle--bg);
   cursor: pointer;
+  width: 25rem;
 }
 .buttons__ooo {
   font-size: 1.25rem;
@@ -34,6 +35,7 @@
   border-radius: 10px;
   background: var( --button--ooo--bg);
   cursor: pointer;
+  width: 25rem;
 }
 
 .buttons__active {
@@ -46,6 +48,7 @@
   margin-bottom: 40px;
   background: var( --button--color--bg);
   cursor: pointer;
+  width: 25rem;
 }
 
 .buttons--small {

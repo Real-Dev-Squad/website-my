@@ -15,8 +15,8 @@ export default class FormStatusModal extends Component {
   @service toast;
   @tracked currentStatus;
   @tracked newStatus;
-  @tracked fromDate;
-  @tracked untilDate;
+  @tracked fromDate = '';
+  @tracked untilDate = '';
   @tracked reason = '';
 
   @action
@@ -32,7 +32,7 @@ export default class FormStatusModal extends Component {
   }
 
   @action
-  getCurrentStatusObj() {
+  async getCurrentStatusObj() {
     let from;
     let until;
     if (!this.fromDate) {
@@ -50,6 +50,14 @@ export default class FormStatusModal extends Component {
       if (!this.untilDate) {
         this.toast.error(
           warningMessageForUntilField,
+          '',
+          toastNotificationTimeoutOptions
+        );
+        return;
+      }
+      if (this.untilDate < this.fromDate) {
+        this.toast.error(
+          'until date cant lie before the from date. Please recheck the dates again.',
           '',
           toastNotificationTimeoutOptions
         );
@@ -77,6 +85,20 @@ export default class FormStatusModal extends Component {
       message: this.reason,
       state: this.args.newStatus,
     };
-    this.args.updateStatus({ currentStatus: newStateObj });
+    await this.args.updateStatus({ currentStatus: newStateObj });
+    this.resetInputFields();
+  }
+
+  @action
+  resetInputFields() {
+    this.fromDate = '';
+    this.untilDate = '';
+    this.reason = '';
+  }
+
+  @action
+  onCancelModal() {
+    this.resetInputFields();
+    this.args.toggleUserStateModal();
   }
 }

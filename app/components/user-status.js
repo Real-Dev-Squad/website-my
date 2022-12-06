@@ -5,7 +5,6 @@ export default class UserStatusComponent extends Component {
     {
       status: userStates.active,
       message: 'You are Active',
-      class: 'buttons__idle',
       firstAvailableStatus: userStates.idle,
       firstStatusMessage: 'Change your status to Idle',
       firstStatusClass: 'buttons__idle',
@@ -16,7 +15,6 @@ export default class UserStatusComponent extends Component {
     {
       status: userStates.idle,
       message: 'You are Idle',
-      class: 'buttons__active',
       firstAvailableStatus: userStates.active,
       firstStatusMessage: 'Change your status status to Active',
       firstStatusClass: 'buttons__active',

@@ -34,7 +34,8 @@
   flex-direction: column;
   width: 80%;
 }
-.date-picker {
+
+.input-description {
   padding: 0.50rem 0.50rem 0.10rem 0rem;
 }
 
