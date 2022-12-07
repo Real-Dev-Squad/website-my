@@ -46,6 +46,9 @@ export default class NavbarComponent extends Component {
   }
 
   get isDev() {
-    return this.router.currentRoute.queryParams.dev;
+    if (this.router.currentRoute) {
+      return this.router.currentRoute.queryParams.dev;
+    }
+    return false;
   }
 }
