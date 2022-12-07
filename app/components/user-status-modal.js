@@ -4,11 +4,12 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import {
-  warningMessageForIdle,
-  warningMessageForOOO,
-  warningMessageForFromField,
-  warningMessageForUntilField,
-  userStates,
+  WARNING_MESSAGE_FOR_IDLE,
+  WARNING_MESSAGE_FOR_OOO,
+  WARNING_MESSAGE_FOR_FROM_FIELD,
+  WARNING_MESSAGE_FOR_UNTIL_FIELD,
+  USER_STATES,
+  WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE,
 } from '../constants/user-status';
 
 export default class FormStatusModal extends Component {
@@ -37,7 +38,7 @@ export default class FormStatusModal extends Component {
     let until;
     if (!this.fromDate) {
       this.toast.error(
-        warningMessageForFromField,
+        WARNING_MESSAGE_FOR_FROM_FIELD,
         '',
         toastNotificationTimeoutOptions
       );
@@ -46,10 +47,10 @@ export default class FormStatusModal extends Component {
     if (this.fromDate) {
       from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
     }
-    if (this.args.newStatus === userStates.ooo) {
+    if (this.args.newStatus === USER_STATES.OOO) {
       if (!this.untilDate) {
         this.toast.error(
-          warningMessageForUntilField,
+          WARNING_MESSAGE_FOR_UNTIL_FIELD,
           '',
           toastNotificationTimeoutOptions
         );
@@ -57,7 +58,7 @@ export default class FormStatusModal extends Component {
       }
       if (this.untilDate < this.fromDate) {
         this.toast.error(
-          'until date cant lie before the from date. Please recheck the dates again.',
+          WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE,
           '',
           toastNotificationTimeoutOptions
         );
@@ -67,11 +68,11 @@ export default class FormStatusModal extends Component {
         until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
       }
     }
-    if (this.args.newStatus !== userStates.active) {
+    if (this.args.newStatus !== USER_STATES.ACTIVE) {
       const warningMessage =
-        this.args.newStatus === userStates.idle
-          ? warningMessageForIdle
-          : warningMessageForOOO;
+        this.args.newStatus === USER_STATES.IDLE
+          ? WARNING_MESSAGE_FOR_IDLE
+          : WARNING_MESSAGE_FOR_OOO;
       if (!this.reason.length) {
         this.toast.error(warningMessage, '', toastNotificationTimeoutOptions);
         return;

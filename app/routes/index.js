@@ -2,13 +2,13 @@ import Route from '@ember/routing/route';
 import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-import { userStates } from '../constants/user-status';
+import { USER_STATES } from '../constants/user-status';
 import { AUTH_URL } from './../constants/signup';
 const API_BASE_URL = ENV.BASE_API_URL;
 export default class IndexRoute extends Route {
   @service toast;
   model = async () => {
-    const defaultStatus = userStates.active;
+    const defaultStatus = USER_STATES.ACTIVE;
     try {
       const response = await fetch(`${API_BASE_URL}/users/status/self`, {
         credentials: 'include',

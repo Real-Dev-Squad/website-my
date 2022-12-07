@@ -25,6 +25,12 @@
   cursor: pointer;
   width: 25rem;
 }
+
+.buttons__idle:hover {
+  color: var(--button--idle--bg);
+  background: var(--button--idle--text);
+}
+
 .buttons__ooo {
   font-size: 1.25rem;
   color: var(--button--ooo--text);
@@ -36,6 +42,11 @@
   background: var( --button--ooo--bg);
   cursor: pointer;
   width: 25rem;
+}
+
+.buttons__ooo:hover {
+  color: var(--button--ooo--bg);
+  background: var(--button--ooo--text);
 }
 
 .buttons__active {
@@ -51,6 +62,10 @@
   width: 25rem;
 }
 
+.buttons__active:hover {
+  color: var(--button--color--bg);
+  background: var(--button--color--text);
+}
 .buttons--small {
   font-weight: 700;
   color: var(--button--small--text);
