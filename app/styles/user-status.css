@@ -66,6 +66,7 @@
   color: var(--button--color--bg);
   background: var(--button--color--text);
 }
+
 .buttons--small {
   font-weight: 700;
   color: var(--button--small--text);

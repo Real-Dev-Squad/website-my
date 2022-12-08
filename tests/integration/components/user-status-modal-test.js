@@ -23,8 +23,8 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
         `);
 
     assert.dom('.modal').exists();
-    assert.dom('.close').exists();
-    assert.dom('.close').hasProperty('button');
+    assert.dom('.modal__close').exists();
+    assert.dom('.modal__close').hasProperty('button');
   });
 
   test('modal is not visible if showModal is false', async function (assert) {
@@ -44,7 +44,7 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
         `);
 
     assert.dom('.modal').doesNotExist();
-    assert.dom('.close').doesNotExist();
+    assert.dom('.modal__close').doesNotExist();
   });
 
   test('payload contains relevant data when status is changed to OOO', async function (assert) {
@@ -82,10 +82,10 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
         />
     `);
 
-    await fillIn('[data-test-datePickerFrom]', '2022-12-02');
-    await fillIn('[data-test-datePickerUntil]', '2022-12-05');
-    await fillIn('[data-test-textareaReason]', 'OOO due to Bad Health');
-    await click('.submit');
+    await fillIn('[data-test-date-picker-from]', '2022-12-02');
+    await fillIn('[data-test-date-picker-until]', '2022-12-05');
+    await fillIn('[data-test-textarea-reason]', 'OOO due to Bad Health');
+    await click('.modal__submit');
   });
 
   test('payload contains relevant data when status is changed to IDLE', async function (assert) {
@@ -121,9 +121,9 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
             @updateStatus={{this.updateStatus}}
             
         />`);
-    await fillIn('[data-test-datePickerFrom]', '2022-12-02');
-    await fillIn('[data-test-textareaReason]', 'Rust and GoLang');
-    await click('.submit');
+    await fillIn('[data-test-date-picker-from]', '2022-12-02');
+    await fillIn('[data-test-textarea-reason]', 'Rust and GoLang');
+    await click('.modal__submit');
   });
 
   test('payload contains relevant data when status is changed to ACTIVE', async function (assert) {
@@ -154,8 +154,8 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
             @updateStatus={{this.updateStatus}}
         />`);
 
-    await fillIn('[data-test-datePickerFrom]', '2022-12-02');
-    await click('.submit');
+    await fillIn('[data-test-date-picker-from]', '2022-12-02');
+    await click('.modal__submit');
   });
 
   test('modal is closed on click of close button', async function (assert) {
@@ -175,8 +175,8 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
         `);
 
     assert.dom('.modal').exists();
-    assert.dom('.close').exists();
-    await click('.close');
+    assert.dom('.modal__close').exists();
+    await click('.modal__close');
     assert.dom('.modal').doesNotExist();
   });
 });

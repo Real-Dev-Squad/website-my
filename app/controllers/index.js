@@ -18,19 +18,19 @@ export default class IndexController extends Controller {
     this.showUserStateModal = !this.showUserStateModal;
   }
 
-  @action async updateStatus(newState) {
+  @action async updateStatus(newStatus) {
     this.isStatusUpdating = true;
     try {
       const response = await fetch(`${BASE_URL}/users/status/self`, {
         method: 'PATCH',
-        body: JSON.stringify(newState),
+        body: JSON.stringify(newStatus),
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
       });
       if (response.ok) {
-        this.status = newState.currentStatus.state;
+        this.status = newStatus.currentStatus.state;
       }
     } catch (error) {
       console.error('Error : ', error);
