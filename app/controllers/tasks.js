@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
+import { later } from '@ember/runloop';
 import { action } from '@ember/object';
 import ENV from 'website-my/config/environment';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
@@ -30,12 +31,45 @@ export default class TasksController extends Controller {
   @tracked userSelectedTask = this.DEFAULT_TASK_TYPE;
   @tracked showModal = false;
   @tracked tempTaskId = ''; // this Id will be used to update task which are completed 100%
-  @tracked message = ''; // this is required in the modal
-  @tracked buttonRequired = false; // this is required in the modal
-  @tracked disabled = false; // this is required for the holder component
+  @tracked message = ''; // required in the modal
+  @tracked buttonRequired = false;
+  @tracked disabled = false;
+  @tracked findingTask = false;
+  @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
+  alreadyFetched = localStorage.getItem('already-fetched');
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;
+  }
+
+  isShowFetchButton() {
+    const inProgressTasks = this.model.filter(
+      (task) => task.status === 'IN_PROGRESS'
+    );
+    const assignedTask = this.model.filter(
+      (task) => task.status === 'ASSIGNED'
+    );
+    return inProgressTasks.length === 0 && assignedTask.length === 0;
+  }
+
+  setShowFetchButton() {
+    this.showFetchButton = this.isShowFetchButton();
+  }
+
+  async setTasksToShow() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/tasks/self`, {
+        credentials: 'include',
+      });
+      const data = await response.json();
+      this.tasksToShow = data;
+    } catch {
+      this.toast.error(
+        'Failed to fetch your tasks',
+        '',
+        toastNotificationTimeoutOptions
+      );
+    }
   }
 
   @tracked tasksByStatus = {};
@@ -90,6 +124,9 @@ export default class TasksController extends Controller {
   @tracked tasksToShow = this.allTasks;
 
   @action onTaskChange(key, value) {
+    for (let prop in this.taskFields) {
+      delete this.taskFields[prop];
+    }
     this.taskFields[key] = value;
   }
 
@@ -112,7 +149,6 @@ export default class TasksController extends Controller {
         });
 
         if (response.ok) {
-          this.disabled = false;
           this.showModal = true;
           const res = await response.json();
           const { message } = res;
@@ -125,10 +161,11 @@ export default class TasksController extends Controller {
           this.allTasks[indexOfSelectedTask] = updatedTask;
           this.filterTasksByStatus();
           if (this.assignTask === true) {
-            this.assingTaskFunction();
+            this.handleAssingnmentAfterUpdate();
           } else {
             this.isUpdating = false;
             this.closeDisabled = false;
+            this.setShowFetchButton();
           }
         } else {
           this.toast.error(
@@ -147,14 +184,44 @@ export default class TasksController extends Controller {
         console.error('Error : ', err);
       } finally {
         this.isLoading = false;
+        this.disabled = false;
       }
     }
   }
 
-  @action async assingTaskFunction() {
+  // function for fetching task after clicking on fetch task button
+  @action async handleAssignment() {
+    this.findingTask = true;
+    this.disabled = true;
+    const message = await this.assingnTaskFunction();
+    if (message === 'Task assigned') {
+      await this.setTasksToShow();
+    }
+    this.message = message;
+    this.showModal = true;
+    this.disabled = false;
+    this.findingTask = false;
+    this.showFetchButton = false;
+    localStorage.setItem('already-fetched', true);
+  }
+
+  async handleAssingnmentAfterUpdate() {
     this.assignTask = false;
-    setTimeout(async () => {
+    later(async () => {
       this.message = TASK_MESSAGES.FIND_TASK;
+      const message = await this.assingnTaskFunction();
+      if (message === 'Task assigned') {
+        await this.setTasksToShow();
+        this.showFetchButton = false;
+      }
+      this.message = message;
+      this.isUpdating = false;
+      this.closeDisabled = false;
+    }, 2000);
+  }
+
+  async assingnTaskFunction() {
+    try {
       const response = await fetch(`${API_BASE_URL}/tasks/assign/self`, {
         method: 'PATCH',
         headers: {
@@ -164,10 +231,14 @@ export default class TasksController extends Controller {
       });
       const res = await response.json();
       const { message } = res;
-      this.message = message;
-      this.isUpdating = false;
-      this.closeDisabled = false;
-    }, 2000);
+      return message;
+    } catch {
+      this.toast.error(
+        'Something went wrong',
+        '',
+        toastNotificationTimeoutOptions
+      );
+    }
   }
 
   @action async handleUpdateTask(taskId) {

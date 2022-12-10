@@ -14,7 +14,11 @@
     @onTaskChange={{this.onTaskChange}} 
     @onTaskUpdate={{this.handleUpdateTask}} 
     @isLoading={{this.isLoading}}
-    @disabled={{this.disabled}} 
+    @disabled={{this.disabled}}
+    @noInProgressTask={{this.showFetchButton}}
+    @handleAssignment={{this.handleAssignment}}
+    @findingTask={{this.findingTask}}
+    @dev={{this.dev}}
   />
   
   <Task::Modal 

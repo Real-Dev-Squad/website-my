@@ -2,19 +2,20 @@ import Route from '@ember/routing/route';
 import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-
+import { USER_STATES } from '../constants/user-status';
+import { AUTH_URL } from './../constants/signup';
 const API_BASE_URL = ENV.BASE_API_URL;
 export default class IndexRoute extends Route {
   @service toast;
   model = async () => {
-    const defaultStatus = 'active';
+    const defaultStatus = USER_STATES.ACTIVE;
     try {
-      const response = await fetch(`${API_BASE_URL}/users/self`, {
+      const response = await fetch(`${API_BASE_URL}/users/status/self`, {
         credentials: 'include',
       });
       const userData = await response.json();
       if (response.status === 200 && !userData.incompleteUserDetails) {
-        return userData.status ?? defaultStatus;
+        return userData?.data?.currentStatus?.state ?? defaultStatus;
       } else if (response.status === 401) {
         this.toast.error(
           'You are not logged in. Please login to continue.',
@@ -22,14 +23,13 @@ export default class IndexRoute extends Route {
           toastNotificationTimeoutOptions
         );
         // added setTimeout here because before new page opens user should be notified of error by toast
-        setTimeout(
-          () =>
-            window.open(
-              'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97',
-              '_self'
-            ),
-          2000
-        );
+        setTimeout(() => {
+          let authUrl = AUTH_URL;
+          if (typeof window !== 'undefined') {
+            authUrl = `${authUrl}&state=${window.location.href}`;
+          }
+          window.open(authUrl, '_self');
+        }, 2000);
       }
     } catch (error) {
       console.error(error.message);
