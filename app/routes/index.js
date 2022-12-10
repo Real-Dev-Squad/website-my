@@ -14,7 +14,7 @@ export default class IndexRoute extends Route {
         credentials: 'include',
       });
       const userData = await response.json();
-      if (response.status === 200 && !userData.incompleteUserDetails) {
+      if (response.status === 200) {
         return userData?.data?.currentStatus?.state ?? defaultStatus;
       } else if (response.status === 401) {
         this.toast.error(
@@ -30,6 +30,13 @@ export default class IndexRoute extends Route {
           }
           window.open(authUrl, '_self');
         }, 2000);
+      } else if (response.status === 404) {
+        this.toast.error(
+          `Your Status data doesnt exist yet.Please choose your status from the options below.`,
+          '',
+          toastNotificationTimeoutOptions
+        );
+        return USER_STATES.DNE;
       }
     } catch (error) {
       console.error(error.message);
