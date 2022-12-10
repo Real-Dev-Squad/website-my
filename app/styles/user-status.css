@@ -23,6 +23,30 @@
   border-radius: 10px;
   background: var( --button--idle--bg);
   cursor: pointer;
+  width: 25rem;
+}
+
+.buttons__idle:hover {
+  color: var(--button--idle--bg);
+  background: var(--button--idle--text);
+}
+
+.buttons__ooo {
+  font-size: 1.25rem;
+  color: var(--button--ooo--text);
+  font-weight: 700;
+  border: 3px solid var(--button--ooo--border);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  background: var( --button--ooo--bg);
+  cursor: pointer;
+  width: 25rem;
+}
+
+.buttons__ooo:hover {
+  color: var(--button--ooo--bg);
+  background: var(--button--ooo--text);
 }
 
 .buttons__active {
@@ -35,6 +59,12 @@
   margin-bottom: 40px;
   background: var( --button--color--bg);
   cursor: pointer;
+  width: 25rem;
+}
+
+.buttons__active:hover {
+  color: var(--button--color--bg);
+  background: var(--button--color--text);
 }
 
 .buttons--small {

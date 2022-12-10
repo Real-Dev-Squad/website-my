@@ -4,6 +4,13 @@
 
 <UserStatus 
   @status={{this.status}} 
-  @onUpdateStatus={{this.updateStatus}} 
+  @onChangeStatus={{this.changeStatus}} 
   @isStatusUpdating={{this.isStatusUpdating}}
+/>
+<UserStatusModal
+  @isStatusUpdating={{this.isStatusUpdating}}
+  @newStatus={{this.newStatus}}
+  @showUserStateModal={{this.showUserStateModal}}
+  @toggleUserStateModal={{this.toggleUserStateModal}}
+  @updateStatus={{this.updateStatus}}
 />
