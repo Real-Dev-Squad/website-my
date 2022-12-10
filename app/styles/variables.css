@@ -1,6 +1,4 @@
 :root {
-
-
   --body-bg-color: white;
 
   --input-field-border: #666;
@@ -54,7 +52,7 @@
   --nav--link--text--smaller-screen:#1d1283;
   --nav--link--hover: #49a82e;
   --nav-menu--bg: #1d1283;
-  --nav-menu--bg--smaller-screen: #1d1283;
+  --nav-menu--bg--smaller-screen: #ffffff;
   --nav-menu--box-shadow--smaller-screen: rgba(0, 0, 0, 0.5);
 
   --user--text: #ffffff;
