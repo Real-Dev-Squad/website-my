@@ -8,14 +8,13 @@ const API_BASE_URL = ENV.BASE_API_URL;
 export default class IndexRoute extends Route {
   @service toast;
   model = async () => {
-    const defaultStatus = USER_STATES.ACTIVE;
     try {
       const response = await fetch(`${API_BASE_URL}/users/status/self`, {
         credentials: 'include',
       });
       const userData = await response.json();
       if (response.status === 200) {
-        return userData?.data?.currentStatus?.state ?? defaultStatus;
+        return userData?.data?.currentStatus?.state ?? USER_STATES.DNE;
       } else if (response.status === 401) {
         this.toast.error(
           'You are not logged in. Please login to continue.',
@@ -32,7 +31,7 @@ export default class IndexRoute extends Route {
         }, 2000);
       } else if (response.status === 404) {
         this.toast.error(
-          `Your Status data doesnt exist yet.Please choose your status from the options below.`,
+          `Your Status data doesn't exist yet. Please choose your status from the options below.`,
           '',
           toastNotificationTimeoutOptions
         );

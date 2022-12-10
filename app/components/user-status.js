@@ -4,17 +4,17 @@ export default class UserStatusComponent extends Component {
   ALL_FEASIBLE_STATUS = {
     [USER_STATES.ACTIVE]: {
       status: USER_STATES.ACTIVE,
-      message: 'Change your status status to Active',
+      message: 'Change your status to Active',
       class: 'buttons__active',
     },
     [USER_STATES.IDLE]: {
       status: USER_STATES.IDLE,
-      message: 'Change your status status to Idle',
+      message: 'Change your status to Idle',
       class: 'buttons__idle',
     },
     [USER_STATES.OOO]: {
       status: USER_STATES.OOO,
-      message: 'Change your status status to OOO',
+      message: 'Change your status to OOO',
       class: 'buttons__ooo',
     },
   };
@@ -45,7 +45,7 @@ export default class UserStatusComponent extends Component {
     },
     {
       status: USER_STATES.DNE,
-      message: `Your Staus doesn't exist`,
+      message: `Your Status doesn't exist`,
       otherAvailableStatus: [
         this.ALL_FEASIBLE_STATUS.ACTIVE,
         this.ALL_FEASIBLE_STATUS.IDLE,
