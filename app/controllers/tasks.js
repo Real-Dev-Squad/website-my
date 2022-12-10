@@ -135,6 +135,7 @@ export default class TasksController extends Controller {
     this.disabled = true;
     this.buttonRequired = false;
     const taskData = this.taskFields;
+    this.isLoading = true;
     const cleanBody = this.constructReqBody(taskData);
     if (taskData.status || taskData.percentCompleted) {
       try {

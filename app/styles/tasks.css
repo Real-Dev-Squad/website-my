@@ -1,4 +1,12 @@
-
+:root {
+  --slider-colour: #424CC1;
+  --slider-background: #CFD3FF;
+  --thumb-background: #A1D0FF;
+  --opaque-black: #000000b3;
+  --white: #ffffff;
+  --black: #000000;
+  --green: #008000;
+}
 
 .tasks-page {
   display: flex;
@@ -43,12 +51,12 @@
 
 /* progress bar */
 
-.wrapper-div{
+.wrapper-div {
   margin: 1em;
   padding: 1rem;
 }
 
-.task-card__progress-bar-container{
+.task-card__progress-bar-container {
   padding: 1em;
 }
 
@@ -159,6 +167,7 @@ input[type=range]:focus::-ms-fill-upper {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 30px 30px;
   }
@@ -185,7 +194,9 @@ input[type=range]:focus::-ms-fill-upper {
   border-radius: 5px;
 }
 
-.task-details__title, .task-details__purpose, .dates-info__start {
+.task-details__title,
+.task-details__purpose,
+.dates-info__start {
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -295,16 +306,18 @@ input[type=range]:focus::-ms-fill-upper {
     flex-direction: column;
     align-items: center;
   }
-  .task-card{
+
+  .task-card {
     width: 90%;
   }
+
   .tasks-container {
     margin-top: 1rem;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .task-card__status{
+  .task-card__status {
     flex-direction: column;
   }
 }
