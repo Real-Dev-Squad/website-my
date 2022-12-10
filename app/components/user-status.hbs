@@ -9,12 +9,11 @@
 <div class="buttons">
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
-        <button class={{currentStatus.firstStatusClass}} type="button" data-test-button disabled={{@isStatusUpdating}} {{on "click" (fn @onChangeStatus currentStatus.firstAvailableStatus )}}>
-          <span data-test-button-text>{{currentStatus.firstStatusMessage}}</span>
+      {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
+        <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn @onChangeStatus otherPossibleStatus.status )}}>
+          <span>{{otherPossibleStatus.message}}</span>
         </button>
-      <button class={{currentStatus.secondStatusClass}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn @onChangeStatus currentStatus.secondAvailableStatus )}}>
-        <span>{{currentStatus.secondStatusMessage}}</span>
-      </button>
+      {{/each}}
     {{/if}}
   {{/each}}
 </div>
