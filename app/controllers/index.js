@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+import { USER_STATES } from '../constants/user-status';
 
 const BASE_URL = ENV.BASE_API_URL;
 
@@ -41,11 +42,13 @@ export default class IndexController extends Controller {
       );
     } finally {
       this.isStatusUpdating = false;
+      if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
+        this.toggleUserStateModal();
+      }
     }
-    this.toggleUserStateModal();
   }
 
-  @action async changeStatus(status) {
+  @action changeStatus(status) {
     this.newStatus = status;
     this.toggleUserStateModal();
   }
