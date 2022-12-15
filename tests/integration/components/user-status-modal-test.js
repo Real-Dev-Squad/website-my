@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, render, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module.only('Integration | Component | user-status-modal', function (hooks) {
+module('Integration | Component | user-status-modal', function (hooks) {
   setupRenderingTest(hooks);
 
   test('modal is visible if showModal is true', async function (assert) {
@@ -121,40 +121,7 @@ module.only('Integration | Component | user-status-modal', function (hooks) {
             @updateStatus={{this.updateStatus}}
             
         />`);
-    await fillIn('[data-test-date-picker-from]', '2022-12-02');
     await fillIn('[data-test-textarea-reason]', 'Rust and GoLang');
-    await click('.modal__submit');
-  });
-
-  test('payload contains relevant data when status is changed to ACTIVE', async function (assert) {
-    this.setProperties({
-      newStatus: 'ACTIVE',
-      showUserStateModal: true,
-      toggleUserStateModal: () => {
-        this.set('showUserStateModal', !this.showUserStateModal);
-      },
-      updateStatus: (statusPayLoad) => {
-        const {
-          currentStatus: { state, from, updatedAt },
-        } = statusPayLoad;
-        assert.equal(state, 'ACTIVE', 'new state present in the payload');
-        assert.ok(typeof from === 'number', 'from is a numeric timestamp');
-        assert.ok(
-          typeof updatedAt === 'number',
-          'updatedAt is a numeric timestamp'
-        );
-      },
-    });
-
-    await render(hbs`
-        <UserStatusModal 
-            @showUserStateModal={{this.showUserStateModal}}
-            @newStatus={{this.newStatus}}
-            @toggleUserStateModal={{this.toggleUserStateModal}}
-            @updateStatus={{this.updateStatus}}
-        />`);
-
-    await fillIn('[data-test-date-picker-from]', '2022-12-02');
     await click('.modal__submit');
   });
 
