@@ -15,7 +15,6 @@ import {
 export default class FormStatusModal extends Component {
   @service toast;
   @tracked currentStatus;
-  @tracked newStatus;
   @tracked fromDate = '';
   @tracked untilDate = '';
   @tracked reason = '';

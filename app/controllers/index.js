@@ -21,6 +21,9 @@ export default class IndexController extends Controller {
 
   @action async updateStatus(newStatus) {
     this.isStatusUpdating = true;
+    if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
+      this.toggleUserStateModal();
+    }
     try {
       const response = await fetch(`${BASE_URL}/users/status/self`, {
         method: 'PATCH',
@@ -42,9 +45,6 @@ export default class IndexController extends Controller {
       );
     } finally {
       this.isStatusUpdating = false;
-      if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
-        this.toggleUserStateModal();
-      }
     }
   }
 
