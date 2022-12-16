@@ -1,9 +1,18 @@
-.modal__open {
+.modal__overlay {
+  background: rgb(0, 0, 0, 0.7);
   position: absolute;
-  float: left;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__open {
   margin-inline: auto;
   width: 600px;
   max-width: 100%;
@@ -15,17 +24,6 @@
   transition: all 0.3s linear;
   -webkit-transition: 0.5s;
   z-index: 1010;
-  margin: 0 auto;
-}
-
-.modal__overlay {
-  background: rgb(0, 0, 0, 0.7);
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
 }
 
 .modal__selectinput {
@@ -190,8 +188,7 @@
   }
 
   .places__container {
-
-      font-size: 1em;
+    font-size: 1em;
   }
 
   .update__btn {
@@ -201,18 +198,12 @@
     font-size: 1em;
     font-weight: 400;
     margin-top: 0.65em;
-  
   }
-
-  
-
- 
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .modal__open {
     width: 340px;
-   
   }
 
   .modal__selectinput {
@@ -232,7 +223,6 @@
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
   .modal__open {
     width: 380px;
-    
   }
 
   .modal__selectinput {
@@ -249,12 +239,9 @@
   }
 }
 
-
-@media only screen and (min-device-width : 736px) and (max-device-width : 800px){
-
+@media only screen and (min-device-width: 736px) and (max-device-width: 800px) {
   .modal__open {
     width: 500px;
-    
   }
 
   .modal__selectinput {
@@ -271,20 +258,15 @@
   }
 
   .places__container {
-
     font-size: 1em;
+  }
+
+  .update__btn {
+    padding: 0.75em 1em;
+    text-align: center;
+    color: #000;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 0.65em;
+  }
 }
-
-.update__btn {
-  padding: 0.75em 1em;
-  text-align: center;
-  color: #000;
-  font-size: 1em;
-  font-weight: 400;
-  margin-top: 0.65em;
-
-}
-
-
-}
-
