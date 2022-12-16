@@ -96,6 +96,7 @@ export default class FormStatusModal extends Component {
     };
     await this.args.updateStatus({ currentStatus: newStateObj });
     this.resetInputFields();
+    this.disableSubmitButton = true;
   }
 
   @action
