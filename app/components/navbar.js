@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
+const LOGOUT_URL = 'https://api.realdevsquad.com/auth/signout';
 export default class NavbarComponent extends Component {
   @tracked isNavOpen = false;
   @tracked isMenuOpen = false;
@@ -32,6 +33,20 @@ export default class NavbarComponent extends Component {
       url: 'https://status.realdevsquad.com/',
     },
   ];
+
+  @action async logoutHandler() {
+    try {
+      const response = await fetch(LOGOUT_URL, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (response.status === 200) {
+        location.reload();
+      }
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  }
 
   @action toggleNav() {
     this.isNavOpen = !this.isNavOpen;
