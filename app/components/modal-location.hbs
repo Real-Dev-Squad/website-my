@@ -1,0 +1,112 @@
+{{#if this.isOpen}}
+  <div class='modal__overlay'>
+    <div class='modal__open' id='#blur'>
+      <div class='modal__header'>
+        <h3 class='update__heading'>
+          Update Location
+        </h3>
+        <FaIcon
+          data-test-cross-icon
+          @icon='xmark'
+          class='xmark__icon'
+          {{on 'click' (fn this.toggleModal)}}
+        />
+      </div>
+      <div class='modal__form'>
+        <form class='form__container'>
+          <div class='modal__location'>
+            <div class='modal__location__input__container'>
+              <Input
+                class='modal__Locationinput'
+                data-test-input-location
+                type='text'
+                value={{this.location}}
+                @placeholder={{'Enter New Location'}}
+                @disabled={{@disabled}}
+                {{on 'input' (fn this.updateValue)}}
+              />
+            </div>
+            <div class='search__box'>
+              <FaIcon @icon='magnifying-glass' class='magnifying-glass' />
+            </div>
+          </div>
+
+          {{#each this.placesArray as |places|}}
+            {{#if this.location}}
+
+              <div
+                data-test-places
+                class='places__container'
+                role='button'
+                {{on 'click' (fn this.handleSelectedPlace places.place_name)}}
+              >
+
+                <FaIcon @icon='location-dot' class='location-dot' />
+                {{places.place_name}}
+
+              </div>
+
+            {{else}}
+
+            {{/if}}
+
+          {{/each}}
+
+          <select
+            class='modal__selectinput'
+            data-test-update_location
+            {{on 'change' (fn this.setSelection)}}
+          >
+            <option value='' disabled selected>
+              Reason To Update Location
+            </option>
+            <option value='travelling'>
+              travelling
+            </option>
+            <option value='relocating'>
+              relocating
+            </option>
+          </select>
+          <select
+            class='modal__selectinput'
+            data-test-send-notification
+            {{on 'change' (fn this.setSelectedNotification)}}
+          >
+            <option value='' disabled selected>
+              Send Notification to :
+            </option>
+            <option value='Developers'>
+              Developers
+            </option>
+            <option value='Members'>
+              Members
+            </option>
+            <option value='Users'>
+              Users
+            </option>
+          </select>
+          <button
+            data-test-submit-btn
+            class='update__btn'
+            type='submit'
+            disabled={{this.isSubmitDisabled}}
+            {{on 'click' (fn this.handleSubmit)}}
+          >
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <a
+    id='update__link'
+    data-test-update-link
+    href='#'
+    type='link'
+    class='update__link'
+    {{on 'click' (fn this.toggleModal)}}
+  >
+    update location
+  </a>
+{{/if}}

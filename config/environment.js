@@ -26,6 +26,7 @@ module.exports = function (environment) {
 
   ENV.BASE_API_URL = 'https://api.realdevsquad.com';
   ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
+  ENV.GEOCODING_API_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

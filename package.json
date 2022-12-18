@@ -74,6 +74,7 @@
     "prettier": "^2.2.1",
     "qunit": "^2.14.0",
     "qunit-dom": "^1.6.0"
+    
   },
   "engines": {
     "node": "10.* || >= 12"

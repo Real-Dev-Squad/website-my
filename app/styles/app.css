@@ -10,6 +10,7 @@
 @import 'components/input-field.css';
 @import 'navbar.css';
 @import 'identity.css';
+@import 'components/modal-display.css';
 
 html,
 body {
@@ -34,6 +35,7 @@ body {
   flex: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .greeting {
