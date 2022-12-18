@@ -58,14 +58,14 @@ export default class UserStatusComponent extends Component {
   @action async changeStatus(status) {
     if (status === USER_STATES.ACTIVE) {
       const updatedAt = Date.now();
-      const activeStateObj = {
+      const activeStateData = {
         updatedAt,
         from: updatedAt,
         until: undefined,
         message: undefined,
         state: USER_STATES.ACTIVE,
       };
-      await this.args.updateStatus({ currentStatus: activeStateObj });
+      await this.args.updateStatus({ currentStatus: activeStateData });
     } else {
       this.args.changeStatus(status);
     }

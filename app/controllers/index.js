@@ -33,8 +33,15 @@ export default class IndexController extends Controller {
         },
         credentials: 'include',
       });
-      if (response.ok) {
+      const { status, statusText } = response;
+      if (status === 200) {
         this.status = newStatus.currentStatus.state;
+      } else {
+        this.toast.error(
+          `${statusText}. Status Update failed`,
+          '',
+          toastNotificationTimeoutOptions
+        );
       }
     } catch (error) {
       console.error('Error : ', error);

@@ -12,3 +12,4 @@ export const USER_STATES = {
 };
 export const WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE =
   'Until date cant lie before the From date. Please recheck the dates again.';
+export const THREE_DAYS_TIME_DIFFERENCE_MS = 172800000;

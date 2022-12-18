@@ -10,6 +10,7 @@ import {
   WARNING_MESSAGE_FOR_UNTIL_FIELD,
   USER_STATES,
   WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE,
+  THREE_DAYS_TIME_DIFFERENCE_MS,
 } from '../constants/user-status';
 
 export default class FormStatusModal extends Component {
@@ -20,6 +21,7 @@ export default class FormStatusModal extends Component {
   @tracked reason = '';
   @tracked disableSubmitButton = true;
   @tracked disableDatesPrior = new Date().toJSON().slice(0, 10);
+  USER_STATES = USER_STATES;
 
   @action
   updateValue(event) {
@@ -132,8 +134,7 @@ export default class FormStatusModal extends Component {
       let from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
       let until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
       const timeGap = until - from;
-      // 172800000 is the no of milli seconds in 3 days. as reason field is not mandatory if its less than 3 days
-      return timeGap <= 172800000;
+      return timeGap <= THREE_DAYS_TIME_DIFFERENCE_MS;
     }
     return false;
   }
