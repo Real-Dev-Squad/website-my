@@ -11,6 +11,9 @@ import {
   USER_STATES,
   WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE,
   THREE_DAYS_TIME_DIFFERENCE_MS,
+  FROM_DATE,
+  UNTIL_DATE,
+  REASON,
 } from '../constants/user-status';
 
 export default class FormStatusModal extends Component {
@@ -26,14 +29,14 @@ export default class FormStatusModal extends Component {
   @action
   updateValue(event) {
     const { name, value } = event.target;
-    if (name === 'fromDate') {
+    if (name === FROM_DATE) {
       this.fromDate = value;
-    } else if (name === 'untilDate') {
+    } else if (name === UNTIL_DATE) {
       this.untilDate = value;
-    } else if (name === 'reason') {
+    } else if (name === REASON) {
       this.reason = value;
     }
-    this.checkSubmitBttnState();
+    this.checkSubmitBtnState();
   }
 
   @action
@@ -105,11 +108,11 @@ export default class FormStatusModal extends Component {
   handleInput(event) {
     const { value } = event.target;
     this.reason = value;
-    this.checkSubmitBttnState();
+    this.checkSubmitBtnState();
   }
 
   @action
-  checkSubmitBttnState() {
+  checkSubmitBtnState() {
     this.disableSubmitButton = true;
     if (this.args.newStatus === USER_STATES.OOO) {
       if (this.checkIfFromToDatesAreClose()) {
