@@ -1,6 +1,6 @@
 {{page-title "My"}}
 
-<Navbar @firstName={{@model.firstName}} @profilePictureURL={{@model.profilePictureURL}} />
+<Navbar @firstName={{@model.firstName}} @profilePictureURL={{@model.profilePictureURL}} @signOutHandler={{this.signOutHandler}} />
 
 <div class="main-container">
   {{outlet}}

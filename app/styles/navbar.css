@@ -98,6 +98,11 @@ nav li a:hover {
   display: flex;
 }
 
+.separator{
+  width:90%; 
+  margin: auto;
+}
+
 .menu__link {
   padding: 15px 30px;
   text-decoration: none;
