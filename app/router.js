@@ -13,5 +13,5 @@ Router.map(function () {
   this.route('tasks');
   this.route('profile');
   this.route('identity');
-  this.route('page-not-found', { path: '/*' });
+  this.route('404', { path: '/*' });
 });

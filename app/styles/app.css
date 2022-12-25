@@ -13,7 +13,8 @@
 @import 'new-signup.css';
 @import 'variables.css';
 @import 'user-status-modal.css';
-@import 'page-not-found.css';
+@import '404.css';
+
 html,
 body {
   display: flex;
