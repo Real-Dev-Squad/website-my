@@ -12,7 +12,7 @@ export default class NotificationsRoute extends Route {
 
   beforeModel(transition) {
     if (transition?.to?.queryParams?.dev !== 'true') {
-      this.router.transitionTo('');
+      this.router.transitionTo('404');
     }
   }
 

@@ -10,44 +10,48 @@ import {
   WARNING_MESSAGE_FOR_UNTIL_FIELD,
   USER_STATES,
   WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE,
+  THREE_DAYS_TIME_DIFFERENCE_MS,
+  FROM_DATE,
+  UNTIL_DATE,
+  REASON,
 } from '../constants/user-status';
 
 export default class FormStatusModal extends Component {
   @service toast;
   @tracked currentStatus;
-  @tracked newStatus;
   @tracked fromDate = '';
   @tracked untilDate = '';
   @tracked reason = '';
+  @tracked disableSubmitButton = true;
+  @tracked disableDatesPrior = new Date().toJSON().slice(0, 10);
+  USER_STATES = USER_STATES;
 
   @action
   updateValue(event) {
     const { name, value } = event.target;
-    if (name === 'fromDate') {
+    if (name === FROM_DATE) {
       this.fromDate = value;
-    } else if (name === 'untilDate') {
+    } else if (name === UNTIL_DATE) {
       this.untilDate = value;
-    } else if (name === 'reason') {
+    } else if (name === REASON) {
       this.reason = value;
     }
+    this.checkSubmitBtnState();
   }
 
   @action
   async getCurrentStatusObj() {
     let from;
     let until;
-    if (!this.fromDate) {
-      this.toast.error(
-        WARNING_MESSAGE_FOR_FROM_FIELD,
-        '',
-        toastNotificationTimeoutOptions
-      );
-      return;
-    }
-    if (this.fromDate) {
-      from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
-    }
     if (this.args.newStatus === USER_STATES.OOO) {
+      if (!this.fromDate) {
+        this.toast.error(
+          WARNING_MESSAGE_FOR_FROM_FIELD,
+          '',
+          toastNotificationTimeoutOptions
+        );
+        return;
+      }
       if (!this.untilDate) {
         this.toast.error(
           WARNING_MESSAGE_FOR_UNTIL_FIELD,
@@ -64,17 +68,26 @@ export default class FormStatusModal extends Component {
         );
         return;
       }
-      if (this.untilDate) {
-        until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
+      from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
+      until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
+      const isReasonReq = !this.checkIfFromToDatesAreClose();
+
+      if (isReasonReq && !this.reason.length) {
+        this.toast.error(
+          WARNING_MESSAGE_FOR_OOO,
+          '',
+          toastNotificationTimeoutOptions
+        );
+        return;
       }
-    }
-    if (this.args.newStatus !== USER_STATES.ACTIVE) {
-      const warningMessage =
-        this.args.newStatus === USER_STATES.IDLE
-          ? WARNING_MESSAGE_FOR_IDLE
-          : WARNING_MESSAGE_FOR_OOO;
+    } else if (this.args.newStatus === USER_STATES.IDLE) {
+      from = Date.now();
       if (!this.reason.length) {
-        this.toast.error(warningMessage, '', toastNotificationTimeoutOptions);
+        this.toast.error(
+          WARNING_MESSAGE_FOR_IDLE,
+          '',
+          toastNotificationTimeoutOptions
+        );
         return;
       }
     }
@@ -88,6 +101,45 @@ export default class FormStatusModal extends Component {
     };
     await this.args.updateStatus({ currentStatus: newStateObj });
     this.resetInputFields();
+    this.disableSubmitButton = true;
+  }
+
+  @action
+  handleInput(event) {
+    const { value } = event.target;
+    this.reason = value;
+    this.checkSubmitBtnState();
+  }
+
+  @action
+  checkSubmitBtnState() {
+    this.disableSubmitButton = true;
+    if (this.args.newStatus === USER_STATES.OOO) {
+      if (this.checkIfFromToDatesAreClose()) {
+        this.disableSubmitButton = false;
+      } else if (
+        this.fromDate !== '' &&
+        this.untilDate !== '' &&
+        this.reason !== ''
+      ) {
+        this.disableSubmitButton = false;
+      }
+    } else if (this.args.newStatus === USER_STATES.IDLE) {
+      if (this.reason !== '') {
+        this.disableSubmitButton = false;
+      }
+    }
+  }
+
+  @action
+  checkIfFromToDatesAreClose() {
+    if (this.fromDate && this.untilDate) {
+      let from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
+      let until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
+      const timeGap = until - from;
+      return timeGap <= THREE_DAYS_TIME_DIFFERENCE_MS;
+    }
+    return false;
   }
 
   @action
