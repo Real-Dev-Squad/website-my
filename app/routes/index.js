@@ -3,7 +3,7 @@ import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { USER_STATES } from '../constants/user-status';
-import { AUTH_URL } from './../constants/signup';
+import redirectAuth from '../utils/redirect-auth';
 const API_BASE_URL = ENV.BASE_API_URL;
 export default class IndexRoute extends Route {
   @service toast;
@@ -22,13 +22,7 @@ export default class IndexRoute extends Route {
           toastNotificationTimeoutOptions
         );
         // added setTimeout here because before new page opens user should be notified of error by toast
-        setTimeout(() => {
-          let authUrl = AUTH_URL;
-          if (typeof window !== 'undefined') {
-            authUrl = `${authUrl}&state=${window.location.href}`;
-          }
-          window.open(authUrl, '_self');
-        }, 2000);
+        setTimeout(redirectAuth, 2000);
       } else if (response.status === 404) {
         this.toast.error(
           `Your Status data doesn't exist yet. Please choose your status from the options below.`,
