@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import { USER_STATES } from '../constants/user-status';
 export default class UserStatusComponent extends Component {
   ALL_FEASIBLE_STATUS = {
@@ -53,4 +54,20 @@ export default class UserStatusComponent extends Component {
       ],
     },
   ];
+
+  @action async changeStatus(status) {
+    if (status === USER_STATES.ACTIVE) {
+      const updatedAt = Date.now();
+      const activeStateData = {
+        updatedAt,
+        from: updatedAt,
+        until: undefined,
+        message: undefined,
+        state: USER_STATES.ACTIVE,
+      };
+      await this.args.updateStatus({ currentStatus: activeStateData });
+    } else {
+      this.args.changeStatus(status);
+    }
+  }
 }

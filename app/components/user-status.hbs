@@ -1,3 +1,8 @@
+{{#if @isStatusUpdating}}
+  <div class="loading">
+    <Spinner />
+  </div>
+{{else}}
 <div class="heading">
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
@@ -10,10 +15,11 @@
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
       {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
-        <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn @onChangeStatus otherPossibleStatus.status )}}>
+        <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
           <span>{{otherPossibleStatus.message}}</span>
         </button>
       {{/each}}
     {{/if}}
   {{/each}}
 </div>
+{{/if}}
