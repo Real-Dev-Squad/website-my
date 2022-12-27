@@ -74,6 +74,14 @@ export default class ProfileController extends Controller {
       disabled: true,
     },
     {
+      id: 'location',
+      label: 'Location',
+      type: 'text',
+      placeholder: 'bangalore',
+      buttonupload: true,
+      disabled: true,
+    },
+    {
       id: 'email',
       label: 'Email',
       type: 'email',

@@ -16,7 +16,10 @@
     @helpMsg={{field.helpMsg}}
     @onChange={{this.handleFieldChange}}
     @validator={{field.validator}}
-    @disabled={{field.disabled}} />
+    @disabled={{field.disabled}} 
+    @buttonupload={{field.buttonupload}}
+    />
+    
   {{/each}}
 
   <button class='submitButton' type="submit" {{on 'click' (fn this.handleSubmit)}}>
