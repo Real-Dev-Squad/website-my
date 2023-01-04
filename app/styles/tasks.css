@@ -1,7 +1,7 @@
 :root {
-  --slider-colour: #424CC1;
-  --slider-background: #CFD3FF;
-  --thumb-background: #A1D0FF;
+  --slider-colour: #424cc1;
+  --slider-background: #cfd3ff;
+  --thumb-background: #a1d0ff;
   --opaque-black: #000000b3;
   --white: #ffffff;
   --black: #000000;
@@ -24,7 +24,6 @@
   text-align: center;
 }
 
-
 .tasks-container__no-tasks-found {
   margin-top: 20px;
 }
@@ -42,7 +41,8 @@
 }
 
 .task-card:hover {
-  box-shadow: 0 4px 8px 0 var(--task-card--box-shadow-1--hover),0 6px 20px 0 var(--task-card--box-shadow-2--hover);
+  box-shadow: 0 4px 8px 0 var(--task-card--box-shadow-1--hover),
+    0 6px 20px 0 var(--task-card--box-shadow-2--hover);
 }
 
 .dates-info {
@@ -69,12 +69,12 @@
   position: relative;
 }
 
-input[type=range] {
+input[type='range'] {
   -webkit-appearance: none;
   width: 80%;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+input[type='range']::-webkit-slider-runnable-track {
   width: 50%;
   height: 5px;
   cursor: pointer;
@@ -85,7 +85,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border: 0px solid var(--input-slider-runnable-track--border);
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px var(--input--slider-thumb--box-shadow);
   border: 1px solid var(--input--slider-thumb--border);
   height: 18px;
@@ -97,11 +97,11 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7px;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type='range']:focus::-webkit-slider-runnable-track {
   background: var(--input-slider-runnable-track--background);
 }
 
-input[type=range]::-moz-range-track {
+input[type='range']::-moz-range-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
@@ -111,7 +111,7 @@ input[type=range]::-moz-range-track {
   border: 0px solid var(--input-range-track--border);
 }
 
-input[type=range]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   box-shadow: 0px 0px 0px var(--input--range-thumb--box-shadow);
   border: 1px solid var(--input--range-thumb--border);
   height: 18px;
@@ -121,7 +121,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type=range]::-ms-track {
+input[type='range']::-ms-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
@@ -130,21 +130,21 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-input[type=range]::-ms-fill-lower {
+input[type='range']::-ms-fill-lower {
   background: var(--input--fill-lower--bg);
   border: 0px solid var(--input--fill-lower--border);
   border-radius: 2px;
   box-shadow: 0px 0px 0px var(--input--fill-lower--box-shadow);
 }
 
-input[type=range]::-ms-fill-upper {
+input[type='range']::-ms-fill-upper {
   background: var(--input-fill-upper--bg);
   border: 0px solid var(--input-fill-upper--border);
   border-radius: 2px;
   box-shadow: 0px 0px 0px var(--input-fill-upper--box-shadow);
 }
 
-input[type=range]::-ms-thumb {
+input[type='range']::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 0px var(--input-thumb--box-shadow);
   border: 1px solid var(--input-thumb--border);
@@ -155,11 +155,11 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 
-input[type=range]:focus::-ms-fill-lower {
+input[type='range']:focus::-ms-fill-lower {
   background: var(--input-fill-lower--bg);
 }
 
-input[type=range]:focus::-ms-fill-upper {
+input[type='range']:focus::-ms-fill-upper {
   background: var(--input-fill-lower--bg);
 }
 
@@ -204,7 +204,6 @@ input[type=range]:focus::-ms-fill-upper {
 .task-card__current-task-status {
   margin-bottom: 15px;
 }
-
 
 .task-card__loader-container {
   margin-top: 10px;
@@ -251,7 +250,7 @@ input[type=range]:focus::-ms-fill-upper {
 .proceed-btn {
   display: block;
   width: 70%;
-  margin: .4rem;
+  margin: 0.4rem;
   padding: 0.5rem;
   background-color: var(--button-proceed--bg);
   border: none;
@@ -262,7 +261,7 @@ input[type=range]:focus::-ms-fill-upper {
 .not-assign {
   display: block;
   width: 70%;
-  margin: .4rem;
+  margin: 0.4rem;
   padding: 0.5rem;
   border: 2px solid var(--not-assign--border);
   background-color: var(--not-assign--bg);
@@ -301,6 +300,136 @@ input[type=range]:focus::-ms-fill-upper {
 .fetch-task > button:disabled {
   background-color: var(--fetch--button--bg--disabled);
 }
+
+/* extension form */
+.task-card__extensionForm-button {
+  font-weight: bolder;
+  color: var(--tasks-page--text);
+  display: block;
+  margin: 8px auto;
+  border: 1px solid var(--tasks-page--text);
+  padding: 5px 9px;
+  background-color: transparent;
+  border-radius: 2px;
+}
+
+.extension-form__container-parent {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.extension-form__container-back{
+  background-color: #00000048;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.extension-form__container-main {
+  z-index: 1;
+  flex-grow: 0;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: white;
+  min-width: 30%;
+  width: max-content;
+  height: max-content;
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+.extension-form__container-main:hover{
+  cursor: default;
+}
+.extension-form__container-main::-webkit-scrollbar {
+  width: 10px;
+}
+.extension-form__container-main::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+.extension-form__container-main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #888;
+}
+.extension-form__container-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.extension-form__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  margin: 10px 0px;
+}
+
+.extension-form__create-button {
+  background-color: var(--button-proceed--bg);
+  color: var(--button-proceed--text);
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+}
+
+.extension-form__contentWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.extension-form__content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+}
+.extension-form__content form > p {
+  margin: 0;
+}
+.extension-form__content form > button,
+.extension-form__container-close {
+  background-color: var(--button-proceed--bg);
+  color: var(--button-proceed--text);
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+}
+.extension-form__content input {
+  margin: 5px 0px 15px 0px;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--input-field-border);
+}
+
+.extension-info__content > table,
+.extension-info__content > table > tr,
+.extension-info__content {
+  text-align: left;
+  width: 100%;
+}
+
+.extension-info__content{
+  border-bottom: 1px solid black;
+  margin: 10px;
+}
+
 @media screen and (max-width: 800px) {
   .tasks-page {
     flex-direction: column;

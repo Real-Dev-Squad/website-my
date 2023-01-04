@@ -1,33 +1,46 @@
-<div class="task-card" tabindex="0">
+<div class='task-card' tabindex='0'>
   <Task-Details @task={{@task}} />
   {{#if (eq @task.status this.TASK_KEYS.IN_PROGRESS)}}
-    <div class="task-card__progress-bar-container">
-      <div class="task-card__progress-bar-container__progress-bar">
+    <div class='task-card__progress-bar-container'>
+      <div class='task-card__progress-bar-container__progress-bar'>
         <input
-          id="input"
-          type="range"
-          name="percentCompleted"
+          id='input'
+          type='range'
+          name='percentCompleted'
           disabled={{@disabled}}
           value={{this.percentCompleted}}
-          min="0" max="100" step="25"
-          {{on "change" this.onPercentageChange}}
-          {{on "change" (fn @onTaskUpdate @task.id)}}
-        /> 
+          min='0'
+          max='100'
+          step='25'
+          {{on 'change' this.onPercentageChange}}
+          {{on 'change' (fn @onTaskUpdate @task.id)}}
+        />
       </div>
     </div>
-  {{/if}} 
+  {{/if}}
   <div>
     {{#if (eq @userSelectedTask.key this.TASK_KEYS.ALL)}}
-      <div class="task-card__current-task-status">
-        <strong>Current task status:</strong> {{@task.status}}
+      <div class='task-card__current-task-status'>
+        <strong>Current task status:</strong>
+        {{@task.status}}
       </div>
     {{/if}}
 
+    {{#if this.extensionFormOpened}}
+      <Task::ExtensionForm
+        @task={{@task}}
+        @closeForm={{this.closeExtensionForm}}
+        @title='Form for extension Request'
+        @closeModel={{this.closeExtensionModel}}
+      />
+    {{/if}}
+
     {{#if (not-eq @task.status this.TASK_KEYS.VERIFIED)}}
-      <label for="task-update">Change task status:</label>
-      <select id="task-update" 
-      {{on "change" this.onStatusChange}}
-      {{on "change" (fn @onTaskUpdate @task.id)}}
+      <label for='task-update'>Change task status:</label>
+      <select
+        id='task-update'
+        {{on 'change' this.onStatusChange}}
+        {{on 'change' (fn @onTaskUpdate @task.id)}}
       >
         {{#each this.availabletaskStatusList as |taskStatus|}}
           {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
@@ -39,10 +52,14 @@
       </select>
     {{/if}}
 
-     {{#if @isLoading}}
-       <div class="task-card__loader-container">
-         <Spinner />
-       </div>
-     {{/if}}
+    <button
+      class='task-card__extensionForm-button' type="button" {{on 'click' this.toggleExtensionForm}}
+    >Extension Status</button>
+
+    {{#if @isLoading}}
+      <div class='task-card__loader-container'>
+        <Spinner />
+      </div>
+    {{/if}}
   </div>
 </div>

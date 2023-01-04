@@ -29,8 +29,10 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "mixpanel-browser": "^2.43.0",
     "ember-click-outside": "^5.0.1",
+    "ember-resources": "^5.6.0",
+    "mixpanel-browser": "^2.43.0",
+    "tracked-built-ins": "^3.1.0",
     "webpack": "^5.74.0",
     "webpack-5": "^0.0.0"
   },
