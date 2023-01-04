@@ -16,3 +16,5 @@ export const THREE_DAYS_TIME_DIFFERENCE_MS = 172800000;
 export const FROM_DATE = 'fromDate';
 export const UNTIL_DATE = 'untilDate';
 export const REASON = 'reason';
+export const WARNING_INVALID_NEW_ETA =
+  'New ETA(endsOn) should be bigger than old ETA(endsOn)';
