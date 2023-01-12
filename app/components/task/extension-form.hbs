@@ -23,18 +23,18 @@
       </div>
     {{else}}
       <div class='extension-form__content'>
-        {{#if this.load.value}}
+        {{#if this.extensionData.value}}
           <div class='extension-form__contentWrapper'>
-            {{#each this.load.value as |extension|}}
+            {{#each this.extensionData.value as |extension|}}
               <Task::ExtensionInfo @extension={{extension}} />
             {{/each}}
           </div>
-        {{else if this.load.isLoading}}
+        {{else if this.extensionData.isLoading}}
           <div class='task-card__loader-container'>
             <Spinner />
           </div>
-        {{else if this.load.error}}
-          <h4>{{this.load.error}}</h4>
+        {{else if this.extensionData.error}}
+          <h4>{{this.extensionData.error}}</h4>
           <button
             class='extension-form__create-button' type="button" {{on 'click' this.createExtensionRequestToggle}}
           >Create an extension request</button>
