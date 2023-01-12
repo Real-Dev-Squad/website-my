@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { resource, use } from 'ember-resources';
-import { TrackedObject } from 'tracked-built-ins';
+import { TrackedMap } from 'tracked-maps-and-sets';
 import ENV from 'website-my/config/environment';
 import { action } from '@ember/object';
 import { WARNING_INVALID_NEW_ETA } from '../../constants/user-status';
@@ -11,19 +11,18 @@ import { inject as service } from '@ember/service';
 export default class ExtensionFormComponent extends Component {
   @tracked createExtensionRequest = false;
   @service toast;
-
   @service userState;
 
   oldETA = new Date(this.args.task.endsOn * 1000).toLocaleString();
 
   @use load = resource(({ on }) => {
-    const state = new TrackedObject({});
+    const state = new TrackedMap();
     const controller = new AbortController();
 
     on.cleanup(() => controller.abort());
     (async () => {
       if (this.args.task) {
-        state.isLoading = true;
+        state.set('isLoading', true);
         try {
           const response = await fetch(
             `${ENV.BASE_API_URL}/extensionRequests/self/?taskId=${this.args.task.id}`,
@@ -46,11 +45,11 @@ export default class ExtensionFormComponent extends Component {
               'No extension request found for this task, want to create one?'
             );
           }
-          state.value = data.allExtensionRequests;
-          state.isLoading = false;
+          state.set('value', data.allExtensionRequests);
+          state.set('isLoading', false);
         } catch (error) {
-          state.error = error.message;
-          state.isLoading = false;
+          state.set('error', error.message);
+          state.set('isLoading', false);
           console.error(error);
         }
       }
@@ -58,6 +57,14 @@ export default class ExtensionFormComponent extends Component {
 
     return state;
   });
+
+  get extensionData() {
+    const result = {};
+    result['isLoading'] = this.load.get('isLoading');
+    result['value'] = this.load.get('value');
+    result['error'] = this.load.get('error');
+    return result;
+  }
 
   @action
   createExtensionRequestToggle(e) {
