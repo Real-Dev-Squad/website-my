@@ -6,7 +6,7 @@ import { GITHUB_URL } from '../constants/url';
 
 export default class ApplicationController extends Controller {
   @service router;
-  url = GITHUB_URL;
+  GITHUB_URL = GITHUB_URL;
   get canShowNavBar() {
     return this.router.currentRouteName != 'signup';
   }
