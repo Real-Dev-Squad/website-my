@@ -17,7 +17,7 @@ export default class ProfileController extends Controller {
   @tracked isSubmitDisabled = true;
   @tracked isSubmitClicked = false;
 
-  @tracked title = 'Account Details';
+  @tracked title = 'Profile Details';
   @tracked formData = {
     first_name: '',
     last_name: '',
@@ -55,7 +55,7 @@ export default class ProfileController extends Controller {
       type: 'text',
       placeholder: 'Darth',
       showError: false,
-      disabled: true,
+      disabled: false,
     },
     {
       id: 'last_name',
@@ -63,23 +63,14 @@ export default class ProfileController extends Controller {
       type: 'text',
       placeholder: 'Vader',
       showError: false,
-      disabled: true,
+      disabled: false,
     },
     {
       id: 'username',
-      label: 'Username for Real Dev Squad',
+      label: 'Username ',
       type: 'text',
       placeholder: 'e.g anakin, or some other unique username',
       showError: false,
-      disabled: true,
-    },
-    {
-      id: 'email',
-      label: 'Email',
-      type: 'email',
-      placeholder: 'lukespapa@gmail.com',
-      showError: false,
-      validator: this.emailValidator,
       disabled: false,
     },
     {
@@ -91,49 +82,9 @@ export default class ProfileController extends Controller {
       disabled: false,
     },
     {
-      id: 'company',
-      label: 'Company Name / College Name',
-      type: 'text',
-      placeholder: 'Where do you currently work? Death Star? Rebel Base?',
-      showError: false,
-      disabled: false,
-    },
-    {
-      id: 'designation',
-      label: 'Designation',
-      placeholder: 'Supreme Commander',
-      type: 'text',
-      showError: false,
-      disabled: false,
-    },
-    {
-      id: 'linkedin_id',
-      label: 'LinkedIn ID (Not the full URL)',
-      placeholder: 'anakin-skywalker-007 i.e just the ID part',
-      type: 'text',
-      showError: false,
-      disabled: false,
-    },
-    {
-      id: 'instagram_id',
-      label: 'Instagram ID',
-      placeholder: 'ForceWielder77',
-      type: 'text',
-      showError: false,
-      disabled: false,
-    },
-    {
-      id: 'twitter_id',
-      label: 'Twitter username (Not the full URL)',
-      placeholder: 'anakin7',
-      type: 'text',
-      showError: false,
-      disabled: false,
-    },
-    {
-      id: 'website',
-      label: 'Website',
-      placeholder: 'Your portfolio website if any. e.g mysonisajedi.com',
+      id: 'github',
+      label: 'Github ID',
+      placeholder: 'Your github id e.g mysonisajedi.com',
       type: 'text',
       showError: false,
       disabled: false,

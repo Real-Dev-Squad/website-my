@@ -1,33 +1,31 @@
 {{page-title 'Profile'}}
 
-<a class="image-upload-link" href="#image-upload">Click here to upload image</a>
-<form class="form">
+<form class='form profile-form'>
   <h1>{{this.title}}</h1>
+  {{!-- <img class='user__pic' src={{@model.profilePictureURL}} alt='profile' /> --}}
+  <div class='profile-form-grid'>
 
-  {{#each this.fields as |field|}}
-  <FormInput
-    @id={{field.id}}
-    @for={{field.for}}
-    @label={{field.label}}
-    @type={{field.type}}
-    @value={{get @modelfield.id}}
-    @placeholder={{field.placeholder}}
-    @showError={{field.showError}}
-    @helpMsg={{field.helpMsg}}
-    @onChange={{this.handleFieldChange}}
-    @validator={{field.validator}}
-    @disabled={{field.disabled}} />
-  {{/each}}
+    {{#each this.fields as |field|}}
+      <FormInput
+        @class='input-field'
+        @id={{field.id}}
+        @for={{field.for}}
+        @label={{field.label}}
+        @type={{field.type}}
+        @value={{get @modelfield.id}}
+        @placeholder={{field.placeholder}}
+        @showError={{field.showError}}
+        @helpMsg={{field.helpMsg}}
+        @onChange={{this.handleFieldChange}}
+        @validator={{field.validator}}
+        @disabled={{field.disabled}}
+      />
+    {{/each}}
+  </div>
 
-  <button class='submitButton' type="submit" {{on 'click' (fn this.handleSubmit)}}>
-    {{#if this.isSubmitClicked}}
-    <i class="fa fa-spinner fa-spin"></i>
-    {{/if}}
-    Submit
-  </button>
 </form>
 
-<div class="profile-container">
+<div class='image-upload-container'>
   <h1>
     Upload Image
   </h1>

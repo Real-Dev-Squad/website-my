@@ -1,42 +1,47 @@
-<div class="image-upload" id="image-upload">
+<div class='image-upload' id='image-upload'>
+
   <div
-    class="drop-area {{if this.overDropZone 'drop-area__highlight'}}"
+    class='drop-area {{if this.overDropZone "drop-area__highlight"}}'
     {{on 'drop' this.handleDrop}}
     {{on 'dragover' this.handleDragOver}}
     {{on 'dragenter' this.handleDragEnter}}
     {{on 'dragleave' this.handleDragLeave}}
   >
-    <form class="image-form">
-      <p class="image-form__text">
+    <form class='image-form'>
+      <p class='image-form__text'>
         {{#if this.isImageSelected}}
-          You have selected <span>{{this.imageFileName}}</span>
+          You have selected
+          <span>{{this.imageFileName}}</span>
         {{else}}
           Drag and drop file here or
         {{/if}}
       </p>
       <label
-        class="image-form__button
-          {{if this.isImageUploading 'image-form__button--disabled'}}"
-        for="image"
+        class='image-form__button
+          {{if this.isImageUploading "image-form__button--disabled"}}'
+        for='image'
       >
         Browse
       </label>
       <input
-        class="image-form__input"
-        type="file"
-        id="image"
-        accept="image/png, image/jpeg"
+        class='image-form__input'
+        type='file'
+        id='image'
+        accept='image/png, image/jpeg'
         disabled={{this.isImageUploading}}
         {{on 'change' this.handleBrowseImage}}
       />
     </form>
   </div>
   {{#if this.isImageSelected}}
-    <div class="image-cropper-preview"></div>
-    <ImageCropper @image={{this.image}} @setImageCoordinates={{this.setImageCoordinates}} />
+    <div class='image-cropper-preview'></div>
+    <ImageCropper
+      @image={{this.image}}
+      @setImageCoordinates={{this.setImageCoordinates}}
+    />
     <button
-      class="upload-button"
-      type="button"
+      class='upload-button'
+      type='button'
       disabled={{this.isImageUploading}}
       {{on 'click' this.onSubmit}}
     >
@@ -47,11 +52,11 @@
       {{/if}}
     </button>
     <p
-      class="{{if
+      class='{{if
           this.imageUploadSuccess
-          'message-text__success'
-          'message-text__failure'
-        }}"
+          "message-text__success"
+          "message-text__failure"
+        }}'
     >
       {{this.statusMessage}}
     </p>
