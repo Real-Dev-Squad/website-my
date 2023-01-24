@@ -2,9 +2,11 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { LOGOUT_URL, MAIN_SITE_URL } from '../constants/navbar';
 import { action } from '@ember/object';
+import { GITHUB_URL } from '../constants/url';
 
 export default class ApplicationController extends Controller {
   @service router;
+  GITHUB_URL = GITHUB_URL;
   get canShowNavBar() {
     return this.router.currentRouteName != 'signup';
   }
