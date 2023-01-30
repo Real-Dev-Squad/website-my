@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { LOGOUT_URL, MAIN_SITE_URL } from '../constants/navbar';
+import { LOGOUT_URL, MAIN_SITE_URL } from '../constants/url';
 import { action } from '@ember/object';
 import { GITHUB_URL } from '../constants/url';
 
