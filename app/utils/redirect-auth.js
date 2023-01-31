@@ -1,4 +1,4 @@
-import { AUTH_URL } from '../constants/signup';
+import { AUTH_URL } from '../constants/url';
 
 export default function () {
   let authUrl = AUTH_URL;

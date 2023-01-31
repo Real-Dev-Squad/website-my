@@ -7,3 +7,6 @@ export const RDS_CRYPTO_URL = 'https://crypto.realdevsquad.com/';
 export const RDS_STATUS_URL = 'https://status.realdevsquad.com/';
 export const LOGOUT_URL = 'https://api.realdevsquad.com/auth/signout';
 export const MAIN_SITE_URL = 'https://realdevsquad.com/';
+export const GOTO_URL = 'https://realdevsquad.com/goto';
+export const AUTH_URL =
+  'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97';

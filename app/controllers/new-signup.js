@@ -3,7 +3,7 @@ import { action, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import registerUser from '../utils/register-api';
-import { GOTO_URL } from '../constants/signup';
+import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
