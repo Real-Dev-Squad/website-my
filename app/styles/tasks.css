@@ -6,6 +6,8 @@
   --white: #ffffff;
   --black: #000000;
   --green: #008000;
+  --light-black : rgba(0, 0, 0, 0.3);
+  --gray: #f1f1f1;
 }
 
 .tasks-page {
@@ -325,8 +327,8 @@ input[type='range']:focus::-ms-fill-upper {
   min-height: 100vh;
 }
 
-.extension-form__container-back{
-  background-color: #00000048;
+.extension-form__container-back {
+  background-color: var(--light-black);
   position: absolute;
   top: 0;
   left: 0;
@@ -339,14 +341,14 @@ input[type='range']:focus::-ms-fill-upper {
   flex-grow: 0;
   padding: 18px;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--white);
   min-width: 30%;
   width: max-content;
   height: max-content;
   max-height: 50vh;
   overflow-y: scroll;
 }
-.extension-form__container-main:hover{
+.extension-form__container-main:hover {
   cursor: default;
 }
 .extension-form__container-main::-webkit-scrollbar {
@@ -354,7 +356,7 @@ input[type='range']:focus::-ms-fill-upper {
 }
 .extension-form__container-main::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: #f1f1f1;
+  background: var(--gray);
 }
 .extension-form__container-main::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -376,7 +378,7 @@ input[type='range']:focus::-ms-fill-upper {
 .extension-form__create-button {
   background-color: var(--button-proceed--bg);
   color: var(--button-proceed--text);
-  font-size: 18px;
+  font-size: 1.2rem;
   border: none;
   border-radius: 8px;
   padding: 5px 9px;
@@ -398,17 +400,25 @@ input[type='range']:focus::-ms-fill-upper {
   align-items: flex-start;
   width: 80%;
 }
+.extension-form__content form > label {
+  font-weight: bold;
+}
 .extension-form__content form > p {
   margin: 0;
+  font-size: 90%;
 }
 .extension-form__content form > button,
 .extension-form__container-close {
   background-color: var(--button-proceed--bg);
   color: var(--button-proceed--text);
-  font-size: 18px;
+  font-size: 1.2rem;
   border: none;
   border-radius: 8px;
   padding: 5px 9px;
+}
+.extension-form__content form > button:disabled {
+  opacity: 0.7;
+  background-color: #888;
 }
 .extension-form__content input {
   margin: 5px 0px 15px 0px;
@@ -425,8 +435,8 @@ input[type='range']:focus::-ms-fill-upper {
   width: 100%;
 }
 
-.extension-info__content{
-  border-bottom: 1px solid black;
+.extension-info__content {
+  border-bottom: 1px solid var(--light-black);
   margin: 10px;
 }
 
