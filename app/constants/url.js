@@ -10,5 +10,3 @@ export const MAIN_SITE_URL = 'https://realdevsquad.com/';
 export const GOTO_URL = 'https://realdevsquad.com/goto';
 export const AUTH_URL =
   'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97';
-import ENV from 'website-my/config/environment'; // remove this when new flow goes live
-export const API_BASE_URL = ENV.BASE_API_URL;

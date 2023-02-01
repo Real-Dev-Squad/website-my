@@ -3,10 +3,12 @@ import { inject as service } from '@ember/service';
 import { LOGOUT_URL, MAIN_SITE_URL } from '../constants/url';
 import { action } from '@ember/object';
 import { GITHUB_URL } from '../constants/url';
+import ENV from 'website-my/config/environment'; // remove this when new flow goes live
 
 export default class ApplicationController extends Controller {
   @service router;
   GITHUB_URL = GITHUB_URL;
+  BASE_API_URL = ENV.BASE_API_URL;
   get canShowNavBar() {
     return this.router.currentRouteName != 'signup';
   }
