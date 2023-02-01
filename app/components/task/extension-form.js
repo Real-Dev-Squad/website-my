@@ -31,26 +31,30 @@ export default class ExtensionFormComponent extends Component {
               signal: controller.signal,
             }
           );
-          if (response.status !== 200) {
-            this.toast.error(
-              'Something went wrong!',
-              '',
-              toastNotificationTimeoutOptions
-            );
-            setTimeout(() => window.location.reload(), 1500);
+          if (response.status === 200) {
+            const data = await response.json();
+            if (!data.allExtensionRequests.length) {
+              throw Error(
+                'No extension request found for this task, want to create one?'
+              );
+            }
+            state.set('value', data.allExtensionRequests);
+            state.set('isLoading', false);
+            return;
           }
-          const data = await response.json();
-          if (!data.allExtensionRequests.length) {
-            throw Error(
-              'No extension request found for this task, want to create one?'
-            );
-          }
-          state.set('value', data.allExtensionRequests);
-          state.set('isLoading', false);
+          this.toast.error('Something went wrong!', '', {
+            ...toastNotificationTimeoutOptions,
+            timeOut: '3000',
+          });
+          setTimeout(this.args.closeModel, 2000);
         } catch (error) {
           state.set('error', error.message);
           state.set('isLoading', false);
           console.error(error);
+          this.toast.error(error.message, '', {
+            ...toastNotificationTimeoutOptions,
+            timeOut: '3000',
+          });
         }
       }
     })();
@@ -75,6 +79,8 @@ export default class ExtensionFormComponent extends Component {
   @action
   async submitExtensionRequest(e) {
     e.preventDefault();
+    //submit button
+    e.submitter.disabled = true;
     const formData = new FormData(e.target);
     const extensionTime = new Date(formData.get('newEndsOn')).getTime() / 1000;
     const json = {};
@@ -84,11 +90,11 @@ export default class ExtensionFormComponent extends Component {
     json['newEndsOn'] = extensionTime;
 
     if (extensionTime < this.args.task.endsOn) {
-      this.toast.error(
-        WARNING_INVALID_NEW_ETA,
-        '',
-        toastNotificationTimeoutOptions
-      );
+      this.toast.error(WARNING_INVALID_NEW_ETA, '', {
+        ...toastNotificationTimeoutOptions,
+        timeOut: '3000',
+      });
+      e.submitter.disabled = false;
       return;
     }
     //setting default values
@@ -106,19 +112,26 @@ export default class ExtensionFormComponent extends Component {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status !== 200) {
-        this.toast.error(
-          'Something went wrong!',
-          '',
-          toastNotificationTimeoutOptions
-        );
-        setTimeout(() => window.location.reload(), 1500);
+      if (response.status === 200) {
+        const data = await response.json();
+        this.toast.success(data.message, '', {
+          ...toastNotificationTimeoutOptions,
+          timeOut: '3000',
+        });
+        setTimeout(this.args.closeModel, 2000);
+        return;
       }
-      const data = await response.json();
-      this.toast.success(data.message, '', toastNotificationTimeoutOptions);
-      setTimeout(this.args.closeForm, 1500);
+      this.toast.error('Something went wrong!', '', {
+        ...toastNotificationTimeoutOptions,
+        timeOut: '3000',
+      });
+      e.submitter.disabled = false;
     } catch (error) {
-      this.toast.error(error.message, '', toastNotificationTimeoutOptions);
+      this.toast.error(error.message, '', {
+        ...toastNotificationTimeoutOptions,
+        timeOut: '3000',
+      });
+      setTimeout(this.args.closeModel, 2000);
     }
   }
 }
