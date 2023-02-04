@@ -16,36 +16,25 @@ export default class ProfileController extends Controller {
 
   @tracked isSubmitDisabled = true;
   @tracked isSubmitClicked = false;
+  @tracked showEditProfilePictureModal = false;
 
   @tracked title = 'Profile Details';
   @tracked formData = {
     first_name: '',
     last_name: '',
     username: '',
-    email: '',
-    phone: '',
     yoe: 0,
-    company: '',
-    designation: '',
-    linkedin_id: '',
-    instagram_id: '',
-    twitter_id: '',
-    website: '',
+    githubId: '',
+    githubUsername: '',
   };
 
   formErrors = {
     first_name: false,
     last_name: false,
     username: false,
-    email: false,
-    phone: false,
     yoe: false,
-    company: false,
-    designation: false,
-    linkedin_id: false,
-    instagram_id: false,
-    twitter_id: false,
-    website: false,
+    githubId: false,
+    githubUsername: false,
   };
 
   @tracked fields = [
@@ -92,6 +81,17 @@ export default class ProfileController extends Controller {
   ];
 
   timerId = undefined;
+
+  @action handleShowEditProfilePictureModal() {
+    this.showEditProfilePictureModal = true;
+  }
+  @action closeModal() {
+    this.showEditProfilePictureModal = false;
+  }
+  @action stopPropogation(event) {
+    console.log(event);
+    event.stopPropagation();
+  }
 
   @action handleFieldChange(name, value) {
     const index = this.fields.findIndex((field) => field.id === name);

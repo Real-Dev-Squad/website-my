@@ -1,8 +1,17 @@
 {{page-title 'Profile'}}
-
+<div class='profile-background'></div>
 <form class='form profile-form'>
   <h1>{{this.title}}</h1>
-  {{!-- <img class='user__pic' src={{@model.profilePictureURL}} alt='profile' /> --}}
+  <div class='picture_container'>
+    <Button
+      @onClick={{this.handleShowEditProfilePictureModal}}
+      @class='edit-btn btn'
+    >
+      <FaIcon @icon='pen-to-square' />
+    </Button>
+
+    <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
+  </div>
   <div class='profile-form-grid'>
 
     {{#each this.fields as |field|}}
@@ -22,16 +31,22 @@
       />
     {{/each}}
   </div>
-
 </form>
 
-<div class='image-upload-container'>
-  <h1>
-    Upload Image
-  </h1>
-  <p>( Max size 2MB )</p>
-  <UploadImage
-    @uploadUrl={{this.imageUploadUrl}}
-    @formKeyName={{this.formDataKeyName}}
-  />
-</div>
+{{#if this.showEditProfilePictureModal}}
+  <div class='model_background'>
+    <section
+      class='image-upload-container'
+      {{on-click-outside this.closeModal}}
+    >
+      <button class='modal__close' type="button" {{on 'click' this.closeModal}}>
+        <FaIcon @icon='xmark' @size='2x' />
+      </button>
+      <UploadImage
+        @uploadUrl={{this.imageUploadUrl}}
+        @formKeyName={{this.formDataKeyName}}
+        @outsideClickModel={{this.closeModal}}
+      />
+    </section>
+  </div>
+{{/if}}

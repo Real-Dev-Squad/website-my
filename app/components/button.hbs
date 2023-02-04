@@ -1,12 +1,12 @@
 <button
   data-test-signup-button
-  type="button"
-  class="{{if @disabled 'btn-disabled'}}"
+  type='button'
+  class={{if @disabled (concat @class ' btn-disabled') @class}}
   disabled={{@disabled}}
-  {{on "click" @onClick}}
+  {{on 'click' @onClick}}
 >
   {{#if @isLoading}}
-    <i class="fa fa-spinner fa-spin" data-test-signup-button-spinner></i>
+    <i class='fa fa-spinner fa-spin' data-test-signup-button-spinner></i>
   {{/if}}
   {{yield}}
 </button>

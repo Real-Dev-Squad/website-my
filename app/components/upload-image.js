@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+import { inject as service } from '@ember/service';
 
 export default class UploadImageComponent extends Component {
   formData;
+  @service toast;
   @tracked image;
   @tracked isImageSelected = false;
   @tracked overDropZone = false;
@@ -29,6 +32,9 @@ export default class UploadImageComponent extends Component {
     this.setImageSelected(true);
   }
 
+  @action goBack() {
+    this.setImageSelected(false);
+  }
   @action updateImage(file) {
     this.setStatusMessage('');
     const reader = new FileReader();
@@ -105,10 +111,12 @@ export default class UploadImageComponent extends Component {
   handleResponseStatusMessage(status, message) {
     if (status === 200) {
       this.setImageUploadSuccess(true);
+      this.args.outsideClickModel();
+      this.toast.success(message, '', toastNotificationTimeoutOptions);
     } else {
       this.setImageUploadSuccess(false);
+      this.setStatusMessage(message);
     }
-    this.setStatusMessage(message);
   }
 
   preventDefaults(e) {

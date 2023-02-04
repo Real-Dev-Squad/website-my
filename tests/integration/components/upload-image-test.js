@@ -12,8 +12,8 @@ module('Integration | Component | upload-image', function (hooks) {
     await render(
       hbs`<UploadImage @uploadUrl={{this.uploadUrl}}  @formKeyName = {{this.formDataKeyName}}/>`
     );
-    assert.dom('.image-upload').exists();
-    assert.dom('.image-upload').hasText('Drag and drop file here or Browse');
+    assert.dom('.drop-area').exists();
+    assert.dom('.drop-area').hasText('Drag and drop file here or Browse');
     assert
       .dom('.image-form__input')
       .hasProperty('type', 'file')
