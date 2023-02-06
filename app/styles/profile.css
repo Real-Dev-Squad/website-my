@@ -33,9 +33,9 @@
   object-fit: cover;
 }
 .edit-btn {
-  cursor: pointer;
   position: absolute;
-  right: 0;
+  right: -10px;
+  top: -10px;
   font-size: 1.6em;
 }
 .close-modal {
