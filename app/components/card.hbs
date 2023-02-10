@@ -1,0 +1,18 @@
+<article class='card'>
+  <header class='card__header'>
+    <h2>{{@title}}</h2>
+  </header>
+  <div class='card__description'>
+    <p>{{this.formattedDescription}}</p>
+  </div>
+  <div class='card__actions'>
+    {{#if this.hasButton}}
+      <button
+        type='button'
+        class='card__button'
+        {{on 'click' this.handleButtonClick}}
+      >{{@buttonText}}</button>
+    {{/if}}
+    {{yield}}
+  </div>
+</article>
