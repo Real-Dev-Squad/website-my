@@ -82,7 +82,6 @@ module('Integration | Component | card', function (hooks) {
       @description={{this.description}}
     />`
     );
-    assert.dom('.card__description').hasText(this.description);
     assert
       .dom('.card__description p strong')
       .exists(

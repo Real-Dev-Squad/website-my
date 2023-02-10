@@ -11,11 +11,6 @@ export default class CardComponent extends Component {
 
   get formattedDescription() {
     if (this.args?.description?.length < 1) return '';
-    console.log(
-      typeof this.args.description,
-      this.args.description,
-      this.args.description.replaceAll(STRONG_TEXT_REGEX, `<strong>$1</strong>`)
-    );
     return this.args.description.replaceAll(
       STRONG_TEXT_REGEX,
       `<strong>$1</strong>`
