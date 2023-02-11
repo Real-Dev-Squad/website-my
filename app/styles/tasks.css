@@ -375,7 +375,7 @@ input[type='range']:focus::-ms-fill-upper {
   margin: 10px 0px;
 }
 
-.extension-form__create-button {
+.extension-form__open-button {
   background-color: var(--button-proceed--bg);
   color: var(--button-proceed--text);
   font-size: 1.2rem;

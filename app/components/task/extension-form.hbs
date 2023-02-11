@@ -1,7 +1,7 @@
 <div class='extension-form__container-parent'>
   <div role="button" class="extension-form__container-back" {{on 'click' @closeModel}}></div>
-  <div class='extension-form__container-main'>
-    <h2>{{@title}}</h2>
+  <div class='extension-form__container-main'> 
+    <h2 data-test-title>{{@title}}</h2>
     {{#if this.createExtensionRequest}}
       <div class='extension-form__content'>
         <h3>Create Extension Request!!!</h3>
@@ -36,7 +36,7 @@
         {{else if this.extensionData.error}}
           <h4>{{this.extensionData.error}}</h4>
           <button
-            class='extension-form__create-button' type="button" {{on 'click' this.createExtensionRequestToggle}}
+            class='extension-form__open-button' data-test-create-extension-button type="button" {{on 'click' this.createExtensionRequestToggle}}
           >Create an extension request</button>
         {{/if}}
       </div>
