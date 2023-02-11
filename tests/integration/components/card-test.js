@@ -35,8 +35,8 @@ module('Integration | Component | card', function (hooks) {
     );
 
     assert.dom('.card').exists();
-    assert.dom('.card .card__header').exists();
-    assert.dom('.card .card__header').hasText(this.title);
+    assert.dom('.card .card__title').exists();
+    assert.dom('.card .card__title').hasText(this.title);
     assert.dom('.card .card__description').exists();
     assert.dom('.card .card__description').includesText(this.description);
     assert.dom('.card .card__actions').exists();
@@ -66,8 +66,8 @@ module('Integration | Component | card', function (hooks) {
     </Card>`
     );
 
-    assert.dom('.card__header h2').hasText(this.title);
-    assert.dom('.card__description p').hasText(this.description);
+    assert.dom('.card__title').hasText(this.title);
+    assert.dom('.card__description').hasText(this.description);
     assert.dom('.card .card__actions .card__button').doesNotExist();
     assert.dom('.card .card__actions').hasText(this.content);
   });
@@ -83,7 +83,7 @@ module('Integration | Component | card', function (hooks) {
     />`
     );
     assert
-      .dom('.card__description p strong')
+      .dom('.card__description strong')
       .exists(
         { count: 2 },
         'Two strong elements are present in the description'

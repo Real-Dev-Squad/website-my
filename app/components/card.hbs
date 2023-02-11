@@ -1,9 +1,9 @@
 <article class='card'>
   <header class='card__header'>
-    <h2>{{@title}}</h2>
+    <h2 class='card__title'>{{@title}}</h2>
   </header>
-  <div class='card__description'>
-    <p>{{this.formattedDescription}}</p>
+  <div class="card__description--wrapper">
+    <p class='card__description'>{{this.formattedDescription}}</p>
   </div>
   <div class='card__actions'>
     {{#if this.hasButton}}

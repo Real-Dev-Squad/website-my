@@ -1,0 +1,52 @@
+/* INFO: not adding width/max-width to let it decicde by layout */
+:root {
+  --border-color: #00000040;
+  /* TODO: get primary color from variables.css, once primary color is decided  */
+  --primary: #1d1283;
+}
+.card {
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 3rem;
+  box-shadow: 3px 3px 3px var(--border-color);
+  text-align: center;
+}
+
+.card__header {
+  margin-bottom: 0.25rem;
+}
+
+.card__title {
+  color: var(--primary);
+}
+
+.card__description--wrapper {
+  margin-bottom: 0.25rem;
+}
+
+.card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.card__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__button {
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-align: center;
+  background-color: var(--primary);
+  padding: 0.75rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
