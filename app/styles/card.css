@@ -5,6 +5,7 @@
   --primary: #1d1283;
 }
 .card {
+  max-width: 41rem;
   padding: 1.5rem 1rem;
   border: 1px solid var(--border-color);
   border-radius: 3rem;
