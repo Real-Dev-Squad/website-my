@@ -46,7 +46,6 @@ export default class ExtensionFormComponent extends Component {
             ...toastNotificationTimeoutOptions,
             timeOut: '3000',
           });
-          setTimeout(this.args.closeModel, 2000);
         } catch (error) {
           state.set('error', error.message);
           state.set('isLoading', false);
