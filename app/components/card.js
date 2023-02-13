@@ -17,6 +17,11 @@ export default class CardComponent extends Component {
     );
   }
 
+  get mergedClasses() {
+    const { class: classProp } = this.args;
+    return `card ${classProp || ''}`.trim();
+  }
+
   get hasButton() {
     return !!this.args.buttonText;
   }

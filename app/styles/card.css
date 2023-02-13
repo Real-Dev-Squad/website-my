@@ -3,6 +3,7 @@
   --border-color: #00000040;
   /* TODO: get primary color from variables.css, once primary color is decided  */
   --primary: #1d1283;
+  --white: #ffffff;
 }
 .card {
   max-width: 41rem;
@@ -42,7 +43,7 @@
 }
 
 .card__button {
-  color: white;
+  color: var(--white);
   font-weight: 700;
   font-size: 1.125rem;
   text-align: center;

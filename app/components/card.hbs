@@ -1,8 +1,8 @@
-<article class='card'>
+<article class={{this.mergedClasses}}>
   <header class='card__header'>
     <h2 class='card__title'>{{@title}}</h2>
   </header>
-  <div class="card__description--wrapper">
+  <div class='card__description--wrapper'>
     <p class='card__description'>{{this.formattedDescription}}</p>
   </div>
   <div class='card__actions'>
@@ -12,7 +12,8 @@
         class='card__button'
         {{on 'click' this.handleButtonClick}}
       >{{@buttonText}}</button>
+    {{else}}
+      {{yield}}
     {{/if}}
-    {{yield}}
   </div>
 </article>
