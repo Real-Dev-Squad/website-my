@@ -25,7 +25,7 @@ export default class ExtensionFormComponent extends Component {
         state.set('isLoading', true);
         try {
           const response = await fetch(
-            `${ENV.BASE_API_URL}/extensionRequests/self/?taskId=${this.args.task.id}`,
+            `${ENV.BASE_API_URL}/extension-requests/self/?taskId=${this.args.task.id}`,
             {
               credentials: 'include',
               signal: controller.signal,
@@ -103,7 +103,7 @@ export default class ExtensionFormComponent extends Component {
     json['status'] = 'PENDING';
 
     try {
-      const response = await fetch(`${ENV.BASE_API_URL}/extensionRequests`, {
+      const response = await fetch(`${ENV.BASE_API_URL}/extension-requests`, {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(json),
