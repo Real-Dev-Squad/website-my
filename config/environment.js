@@ -31,6 +31,9 @@ module.exports = function (environment) {
     ENV.BASE_API_URL = 'http://localhost:3000';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     ENV.BASE_API_URL = 'http://localhost:3000';
+    ENV['ember-cli-mirage'] = {
+      enabled: false,
+    };
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -51,10 +54,6 @@ module.exports = function (environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
     ENV.BASE_API_URL = 'mock-api';
-    ENV['ember-cli-mirage'] = {
-      enabled: true,
-      autostart: true,
-    };
   }
 
   if (environment === 'staging') {

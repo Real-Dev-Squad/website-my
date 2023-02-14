@@ -4,9 +4,10 @@ import {
 } from './controllers/extension-requests';
 import { extensionRequests } from 'website-my/tests/fixtures/extension-requests';
 import { Server, Model } from 'ember-cli-mirage';
+import ENV from 'website-my/config/environment';
 
 export default function () {
-  new Server({
+  let server = new Server({
     models: {
       extensionRequest: Model,
     },
@@ -18,9 +19,12 @@ export default function () {
     },
 
     routes() {
-      this.namespace = 'mock-api';
-      this.get(`extensionRequests/self`, getExtensionReuests.bind(this));
-      this.post(`extensionRequests`, createExtensionRequest.bind(this));
+      this.namespace = ENV.BASE_API_URL;
+
+      this.get('extension-requests/self', getExtensionReuests.bind(this));
+      this.post('extension-requests', createExtensionRequest.bind(this));
     },
   });
+
+  return server;
 }
