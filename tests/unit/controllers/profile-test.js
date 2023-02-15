@@ -10,7 +10,7 @@ module('Unit | Controller | profile', function (hooks) {
     assert.ok(controller);
     assert.equal(
       controller.imageUploadUrl,
-      'mock-api/users/picture',
+      '/mock-api/users/picture',
       'Profile picture upload endpoint'
     );
     assert.equal(
