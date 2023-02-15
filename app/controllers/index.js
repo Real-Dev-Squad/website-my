@@ -25,28 +25,24 @@ export default class IndexController extends Controller {
       this.toggleUserStateModal();
     }
     try {
-      const response = await fetch(`${BASE_URL}/users/status/self`, {
+      await fetch(`${BASE_URL}/users/status/self`, {
         method: 'PATCH',
         body: JSON.stringify(newStatus),
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      });
-      const { status, statusText } = response;
-      if (status === 200) {
-        this.status = newStatus.currentStatus.state;
-      } else {
-        this.toast.error(
-          `${statusText}. Status Update failed`,
-          '',
-          toastNotificationTimeoutOptions
-        );
-      }
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          if (responseData.data.currentStatus?.state) {
+            this.status = responseData.data.currentStatus.state;
+          }
+        });
     } catch (error) {
       console.error('Error : ', error);
       this.toast.error(
-        'Something went wrong.',
+        'Status Update failed. Something went wrong.',
         '',
         toastNotificationTimeoutOptions
       );
