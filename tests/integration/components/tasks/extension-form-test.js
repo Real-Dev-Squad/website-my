@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { tasks } from 'website-my/tests/fixtures/tasks';
 import { extensionRequests } from 'website-my/tests/fixtures/extension-requests';
-import { render, click, fillIn, waitUntil, find } from '@ember/test-helpers';
+import { render, click, fillIn, waitFor } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import makeServer from 'website-my/mirage/config';
 
@@ -97,7 +97,7 @@ module('Integration | Component | Extension Request Form', function (hooks) {
     await render(
       hbs`<Task::ExtensionForm @task={{this.task}} @closeForm={{this.closeExtensionForm}} @title='Form for extension Request' @closeModel={{this.closeExtensionModel}}/>`
     );
-    await waitUntil(() => find('.extension-form__open-button'));
+    await waitFor('.extension-form__open-button');
     assert
       .dom(this.element.querySelector('.extension-form__open-button'))
       .hasText('Create an extension request');
@@ -126,7 +126,7 @@ module('Integration | Component | Extension Request Form', function (hooks) {
     await render(
       hbs`<Task::ExtensionForm @task={{this.task}} @closeForm={{this.closeExtensionForm}} @title='Form for extension Request' @closeModel={{this.closeExtensionModel}}/>`
     );
-    await waitUntil(() => find('.extension-form__open-button'));
+    await waitFor('.extension-form__open-button');
     assert
       .dom(this.element.querySelector('.extension-form__open-button'))
       .hasText('Create an extension request');
@@ -146,11 +146,11 @@ module('Integration | Component | Extension Request Form', function (hooks) {
     await fillIn('input#title', 'TestingAgain');
     await click(this.element.querySelector('button[type=submit]'));
 
-    //rendering the component again to check the new data
+    // rendering the component again to check the new data
     await render(
       hbs`<Task::ExtensionForm @task={{this.task}} @closeForm={{this.closeExtensionForm}} @title='Form for extension Request' @closeModel={{this.closeExtensionModel}}/>`
     );
-    await waitUntil(() => find('.extension-info__content'));
+    await waitFor('.extension-info__content');
     assert
       .dom(this.element.querySelector('.extension-info__content'))
       .containsText('Testing')
@@ -173,7 +173,7 @@ module('Integration | Component | Extension Request Form', function (hooks) {
     await render(
       hbs`<Task::ExtensionForm @task={{this.task}} @closeForm={{this.closeExtensionForm}} @title='Form for extension Request' @closeModel={{this.closeExtensionModel}}/>`
     );
-    await waitUntil(() => find('.extension-info__content'));
+    await waitFor('.extension-info__content');
     assert
       .dom(this.element.querySelector('.extension-info__content'))
       .containsText(extensionRequestData['title'])
