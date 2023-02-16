@@ -12,12 +12,11 @@ export default class CardComponent extends Component {
 
   get formattedDescription() {
     if (!this.args?.description) return '';
-    return htmlSafe(
-      this.args.description.replaceAll(
-        STRONG_TEXT_REGEX,
-        `<strong data-test-card-description-highlighted-text>$1</strong>`
-      )
+    const highlightedDescription = this.args.description.replaceAll(
+      STRONG_TEXT_REGEX,
+      `<strong data-test-card-description-highlighted-text>$1</strong>`
     );
+    return htmlSafe(highlightedDescription);
   }
 
   get mergedClasses() {
