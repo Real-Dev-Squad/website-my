@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { LOGOUT_URL, MAIN_SITE_URL } from '../constants/url';
+import { MAIN_SITE_URL } from '../constants/url';
 import { action } from '@ember/object';
 import { GITHUB_URL } from '../constants/url';
-import ENV from 'website-my/config/environment'; // remove this when new flow goes live
+import ENV from 'website-my/config/environment';
 
 export default class ApplicationController extends Controller {
   @service router;
@@ -15,7 +15,7 @@ export default class ApplicationController extends Controller {
 
   @action async signOutHandler() {
     try {
-      const response = await fetch(LOGOUT_URL, {
+      const response = await fetch(`${this.BASE_API_URL}/auth/signout`, {
         method: 'GET',
         credentials: 'include',
       });
