@@ -13,7 +13,10 @@ export default class CardComponent extends Component {
   get formattedDescription() {
     if (!this.args?.description) return '';
     return htmlSafe(
-      this.args.description.replaceAll(STRONG_TEXT_REGEX, `<strong>$1</strong>`)
+      this.args.description.replaceAll(
+        STRONG_TEXT_REGEX,
+        `<strong data-test-card-description-highlighted-text>$1</strong>`
+      )
     );
   }
 

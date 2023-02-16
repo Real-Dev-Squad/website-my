@@ -1,16 +1,17 @@
-<article class={{this.mergedClasses}}>
+<article class={{this.mergedClasses}} data-test-card>
   <header class='card__header'>
-    <h2 class='card__title'>{{@title}}</h2>
+    <h2 class='card__title' data-test-card-title>{{@title}}</h2>
   </header>
   <div class='card__description--wrapper'>
-    <p class='card__description'>{{this.formattedDescription}}</p>
+    <p class='card__description' data-test-card-description>{{this.formattedDescription}}</p>
   </div>
-  <div class='card__actions'>
+  <div class='card__actions' data-test-card-actions>
     {{#if this.hasButton}}
       <button
         type='button'
         class='card__button'
         {{on 'click' this.handleButtonClick}}
+        data-test-card-button
       >{{@buttonText}}</button>
     {{else}}
       {{yield}}
