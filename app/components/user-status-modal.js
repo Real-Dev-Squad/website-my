@@ -15,6 +15,7 @@ import {
   UNTIL_DATE,
   REASON,
 } from '../constants/user-status';
+import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 export default class FormStatusModal extends Component {
   @service toast;
@@ -68,8 +69,8 @@ export default class FormStatusModal extends Component {
         );
         return;
       }
-      from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
-      until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
+      from = getUTCMidnightTimestampFromDate(this.fromDate);
+      until = getUTCMidnightTimestampFromDate(this.untilDate);
       const isReasonReq = !this.checkIfFromToDatesAreClose();
 
       if (isReasonReq && !this.reason.length) {
