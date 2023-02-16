@@ -82,7 +82,9 @@ export default class FormStatusModal extends Component {
         return;
       }
     } else if (this.args.newStatus === USER_STATES.IDLE) {
-      from = Date.now();
+      const currentDate = new Date();
+      const currentDateString = currentDate.toISOString().slice(0, 10);
+      from = getUTCMidnightTimestampFromDate(currentDateString);
       if (!this.reason.length) {
         this.toast.error(
           WARNING_MESSAGE_FOR_IDLE,
