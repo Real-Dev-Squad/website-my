@@ -3,12 +3,8 @@ import { inject as service } from '@ember/service';
 import ENV from 'website-my/config/environment';
 import { SIGNUP } from '../constants/analytics';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-import {
-  AUTH_URL,
-  ERROR_MESSAGES,
-  GOTO_URL,
-  REDIRECT_TEXT,
-} from '../constants/signup';
+import { ERROR_MESSAGES, REDIRECT_TEXT } from '../constants/signup';
+import { AUTH_URL, GOTO_URL } from '../constants/url';
 
 export default class SignupRoute extends Route {
   @service analytics;
