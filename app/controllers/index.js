@@ -37,6 +37,17 @@ export default class IndexController extends Controller {
         .then((responseData) => {
           if (responseData.data.currentStatus?.state) {
             this.status = responseData.data.currentStatus.state;
+            this.toast.success(
+              'Current status updated successfully.',
+              '',
+              toastNotificationTimeoutOptions
+            );
+          } else if (responseData.data.futureStatus?.state) {
+            this.toast.success(
+              'Future status updated successfully.',
+              '',
+              toastNotificationTimeoutOptions
+            );
           }
         });
     } catch (error) {
