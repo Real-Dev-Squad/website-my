@@ -2,7 +2,7 @@ import {
   getExtensionReuests,
   createExtensionRequest,
 } from './controllers/extension-requests';
-import { extensionRequests } from 'website-my/tests/fixtures/extension-requests';
+import { extensionRequests } from '../tests/fixtures/extension-requests';
 import { Server, Model } from 'ember-cli-mirage';
 import ENV from 'website-my/config/environment';
 
