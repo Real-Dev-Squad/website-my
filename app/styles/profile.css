@@ -1,9 +1,6 @@
 .profile-background {
   background: var(--nav--bg);
   height: 50vh;
-  /* position: absolute;
-  left: 0px;
-  width: 100%; */
 }
 .profile-form {
   margin-top: calc(-40vh);
