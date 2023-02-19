@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { USER_STATES } from '../constants/user-status';
+import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 export default class UserStatusComponent extends Component {
   ALL_FEASIBLE_STATUS = {
     [USER_STATES.ACTIVE]: {
@@ -57,10 +58,13 @@ export default class UserStatusComponent extends Component {
 
   @action async changeStatus(status) {
     if (status === USER_STATES.ACTIVE) {
+      const currentDate = new Date();
+      const currentDateString = currentDate.toISOString().slice(0, 10);
+      const from = getUTCMidnightTimestampFromDate(currentDateString);
       const updatedAt = Date.now();
       const activeStateData = {
         updatedAt,
-        from: updatedAt,
+        from,
         until: undefined,
         message: undefined,
         state: USER_STATES.ACTIVE,

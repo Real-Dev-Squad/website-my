@@ -15,6 +15,7 @@ import {
   UNTIL_DATE,
   REASON,
 } from '../constants/user-status';
+import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 export default class FormStatusModal extends Component {
   @service toast;
@@ -68,8 +69,8 @@ export default class FormStatusModal extends Component {
         );
         return;
       }
-      from = new Date(this.fromDate.replaceAll('-', ',')).getTime();
-      until = new Date(this.untilDate.replaceAll('-', ',')).getTime();
+      from = getUTCMidnightTimestampFromDate(this.fromDate);
+      until = getUTCMidnightTimestampFromDate(this.untilDate);
       const isReasonReq = !this.checkIfFromToDatesAreClose();
 
       if (isReasonReq && !this.reason.length) {
@@ -81,7 +82,9 @@ export default class FormStatusModal extends Component {
         return;
       }
     } else if (this.args.newStatus === USER_STATES.IDLE) {
-      from = Date.now();
+      const currentDate = new Date();
+      const currentDateString = currentDate.toISOString().slice(0, 10);
+      from = getUTCMidnightTimestampFromDate(currentDateString);
       if (!this.reason.length) {
         this.toast.error(
           WARNING_MESSAGE_FOR_IDLE,
