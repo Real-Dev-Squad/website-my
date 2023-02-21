@@ -4,22 +4,16 @@ import tasks from 'website-my/tests/fixtures/tasks';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { find, render, waitUntil } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import makeServer from 'website-my/mirage/config';
 
 module('Integration | Component | Tasks Holder', function (hooks) {
   setupRenderingTest(hooks);
-  let tasksData, DEFAULT_TASK_TYPE, server;
-
-  hooks.after(function () {
-    server.shutdown();
-  });
+  let tasksData, DEFAULT_TASK_TYPE;
 
   hooks.before(function () {
     tasksData = tasks;
     DEFAULT_TASK_TYPE = TASK_STATUS_LIST.find(
       (obj) => obj.key === TASK_KEYS.ALL
     );
-    server = makeServer({ environment: 'test' });
   });
 
   test('Render Task holder and check wether or not it has extension status button', async function (assert) {
