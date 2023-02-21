@@ -18,6 +18,9 @@ module('Integration | Component | Extension Request Form', function (hooks) {
     tasksData = tasks;
     extensionFormOpened = true;
     server = makeServer({ environment: 'test' });
+    extensionRequests.forEach((obj) => {
+      server.create('extensionRequest', obj);
+    });
   });
 
   const toggleExtensionForm = (setter, name) => {

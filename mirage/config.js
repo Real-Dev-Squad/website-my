@@ -2,7 +2,6 @@ import {
   getExtensionReuests,
   createExtensionRequest,
 } from './controllers/extension-requests';
-import { extensionRequests } from '../tests/fixtures/extension-requests';
 import { Server, Model } from 'ember-cli-mirage';
 import ENV from 'website-my/config/environment';
 
@@ -10,12 +9,6 @@ export default function () {
   let server = new Server({
     models: {
       extensionRequest: Model,
-    },
-
-    seeds(server) {
-      extensionRequests.forEach((obj) => {
-        server.create('extensionRequest', obj);
-      });
     },
 
     routes() {
