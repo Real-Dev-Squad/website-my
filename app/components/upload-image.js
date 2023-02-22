@@ -33,6 +33,7 @@ export default class UploadImageComponent extends Component {
   }
 
   @action goBack() {
+    this.image = null;
     this.setImageSelected(false);
   }
   @action updateImage(file) {
@@ -69,10 +70,8 @@ export default class UploadImageComponent extends Component {
 
   @action onSubmit(e) {
     this.preventDefaults(e);
-    const devMode = this.args.devMode;
-    if (devMode && this.imageCoordinates) {
-      this.formData.set('coordinates', JSON.stringify(this.imageCoordinates));
-    }
+
+    this.formData.set('coordinates', JSON.stringify(this.imageCoordinates));
     this.uploadImage(this.formData);
   }
 
