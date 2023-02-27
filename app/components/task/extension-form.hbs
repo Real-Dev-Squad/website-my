@@ -24,7 +24,7 @@
     {{else}}
       <div class='extension-form__content'>
         {{#if this.extensionData.value}}
-          <div class='extension-form__contentWrapper'>
+          <div class='extension-form__content-wrapper'>
             {{#each this.extensionData.value as |extension|}}
               <Task::ExtensionInfo @extension={{extension}} />
             {{/each}}
