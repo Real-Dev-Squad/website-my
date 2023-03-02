@@ -1,13 +1,29 @@
 <div class='extension-form__container-parent'>
-  <div role="button" class="extension-form__container-back" {{on 'click' @closeModel}}></div>
-  <div class='extension-form__container-main'> 
+  <div
+    role='button'
+    class='extension-form__container-back'
+    data-test-extension-form-container-back
+    {{on 'click' @closeModel}}
+  ></div>
+  <div class='extension-form__container-main'>
     <h2 data-test-title>{{@title}}</h2>
     {{#if this.createExtensionRequest}}
-      <div class='extension-form__content'>
+      <div class='extension-form__content' data-test-extension-from-content>
         <h3>Create Extension Request!!!</h3>
         <form {{on 'submit' this.submitExtensionRequest}}>
+          {{#if this.createExtensionRequestError}}
+            <h4
+              data-test-extension-from-error
+            >Error: {{this.createExtensionRequestError}}</h4>
+          {{/if}}
           <label for='reason'>Reason</label>
-          <input required type='text' id='reason' name='reason' />
+          <input
+            required
+            type='text'
+            id='reason'
+            name='reason'
+            data-test-extension-form-reason-input
+          />
           <label for='newEndsOn'>New ETA</label>
           <p>Old ETA - {{this.oldETA}}</p>
           <input
@@ -15,14 +31,22 @@
             type='datetime-local'
             id='newEndsOn'
             name='newEndsOn'
+            {{on 'change' this.changeExtensionRequestETA}}
+            data-test-extension-form-newEndsOn-input
           />
           <label for='title'>Title</label>
-          <input required type='text' id='title' name='title' />
+          <input
+            required
+            type='text'
+            id='title'
+            name='title'
+            data-test-extension-form-title-input
+          />
           <button type='submit'>Create</button>
         </form>
       </div>
     {{else}}
-      <div class='extension-form__content'>
+      <div class='extension-form__content' data-test-extension-from-content>
         {{#if this.extensionData.value}}
           <div class='extension-form__content-wrapper'>
             {{#each this.extensionData.value as |extension|}}
@@ -36,13 +60,19 @@
         {{else if this.extensionData.error}}
           <h4>{{this.extensionData.error}}</h4>
           <button
-            class='extension-form__open-button' data-test-create-extension-button type="button" {{on 'click' this.createExtensionRequestToggle}}
+            class='extension-form__open-button'
+            data-test-create-extension-button
+            type='button'
+            {{on 'click' this.createExtensionRequestToggle}}
           >Create an extension request</button>
         {{/if}}
       </div>
     {{/if}}
     <button
-      class='extension-form__container-close' type="button" {{on 'click' @closeForm}}
+      class='extension-form__container-close'
+      data-test-extension-form-container-close
+      type='button'
+      {{on 'click' @closeForm}} disabled={{this.disableExtensionRequestClose}}
     >Close Form</button>
   </div>
 </div>

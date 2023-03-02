@@ -10,6 +10,8 @@ import { inject as service } from '@ember/service';
 
 export default class ExtensionFormComponent extends Component {
   @tracked createExtensionRequest = false;
+  @tracked createExtensionRequestError = null;
+  @tracked disableExtensionRequestClose = false;
   @service toast;
   @service userState;
 
@@ -78,6 +80,8 @@ export default class ExtensionFormComponent extends Component {
   @action
   async submitExtensionRequest(e) {
     e.preventDefault();
+    this.disableExtensionRequestClose = true;
+    this.createExtensionRequestError = null;
     //submit button
     e.submitter.disabled = true;
     const formData = new FormData(e.target);
@@ -86,7 +90,6 @@ export default class ExtensionFormComponent extends Component {
     formData.forEach(function (value, key) {
       json[key] = value;
     });
-    json['newEndsOn'] = extensionTime;
 
     if (extensionTime < this.args.task.endsOn) {
       this.toast.error(WARNING_INVALID_NEW_ETA, '', {
@@ -94,8 +97,12 @@ export default class ExtensionFormComponent extends Component {
         timeOut: '3000',
       });
       e.submitter.disabled = false;
+      this.disableExtensionRequestClose = false;
+      this.createExtensionRequestError =
+        'The newEndsOn value cannot be smaller than the oldEndsOn value';
       return;
     }
+    json['newEndsOn'] = extensionTime;
     //setting default values
     json['taskId'] = this.args.task.id;
     json['assignee'] = this.userState.get('id');
@@ -111,8 +118,9 @@ export default class ExtensionFormComponent extends Component {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status === 200) {
-        const data = await response.json();
+      const data = await response.json();
+      if (data.message === 'Extension Request created successfully!') {
+        this.disableExtensionRequestClose = false;
         this.toast.success(data.message, '', {
           ...toastNotificationTimeoutOptions,
           timeOut: '3000',
@@ -131,6 +139,22 @@ export default class ExtensionFormComponent extends Component {
         timeOut: '3000',
       });
       setTimeout(this.args.closeModel, 2000);
+    }
+  }
+
+  @action
+  changeExtensionRequestETA(e) {
+    const extensionTime = new Date(e.target.value).getTime() / 1000;
+
+    if (extensionTime < this.args.task.endsOn) {
+      this.toast.error(WARNING_INVALID_NEW_ETA, '', {
+        ...toastNotificationTimeoutOptions,
+        timeOut: '3000',
+      });
+      e.target.value = '';
+      this.createExtensionRequestError =
+        'The newEndsOn value cannot be smaller than the oldEndsOn value';
+      return;
     }
   }
 }
