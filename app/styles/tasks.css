@@ -418,6 +418,12 @@ input[type='range']:focus::-ms-fill-upper {
   border-radius: 8px;
   padding: 5px 9px;
 }
+
+.extension-form__container-close:disabled{
+  opacity: 0.7;
+  background-color: #888;
+}
+
 .extension-form__content form > button:disabled {
   opacity: 0.7;
   background-color: #888;

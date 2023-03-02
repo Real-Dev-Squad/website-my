@@ -53,7 +53,7 @@
     {{/if}}
 
     <button
-      class='task-card__extensionForm-button' type="button" {{on 'click' this.toggleExtensionForm}}
+      class='task-card__extensionForm-button' data-test-task-extensionForm-button type="button" {{on 'click' this.toggleExtensionForm}}
     >Extension Status</button>
 
     {{#if @isLoading}}

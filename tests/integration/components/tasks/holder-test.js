@@ -23,11 +23,19 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
 
-    await render(hbs`<Task::Holder @task={{this.task}} @onTaskChange={{this.mock}} @onStausChange={{this.mock}} @onTaskUpdate={{this.mock}} @isLoading={{this.isLoading}} @userSelectedTask={{this.defaultType}} @disabled={{this.disabled}}
+    await render(hbs`<Task::Holder 
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
   />`);
-    await waitUntil(() => find('.task-card__extensionForm-button'));
+    await waitUntil(() => find('[data-test-task-extensionForm-button]'));
     assert.equal(
-      this.element.querySelector('.task-card__extensionForm-button').innerText,
+      this.element.querySelector('[data-test-task-extensionForm-button]')
+        .innerText,
       'Extension Status'
     );
   });
