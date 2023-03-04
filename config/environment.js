@@ -28,6 +28,7 @@ module.exports = function (environment) {
   ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
 
   if (environment === 'development') {
+    ENV.BASE_API_URL = 'http://localhost:3000';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -50,8 +51,13 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
   }
 
+  if (environment === 'staging') {
+    ENV.BASE_API_URL = 'https://api-staging.realdevsquad.com';
+  }
+
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.BASE_API_URL = 'https://api.realdevsquad.com';
   }
 
   return ENV;
