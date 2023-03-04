@@ -28,6 +28,7 @@ module.exports = function (environment) {
   ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
 
   if (environment === 'development') {
+    ENV.BASE_API_URL = 'http://localhost:3000';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
