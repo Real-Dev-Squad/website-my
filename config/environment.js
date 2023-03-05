@@ -52,7 +52,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'staging') {
-    ENV.BASE_API_URL = 'https://api-staging.realdevsquad.com';
+    ENV.BASE_API_URL = 'https://staging-api.realdevsquad.com';
   }
 
   if (environment === 'production') {
