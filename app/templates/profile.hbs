@@ -12,23 +12,15 @@
 
     <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
   </div>
+
   <div class='profile-form-grid'>
 
     {{#each this.fields as |field|}}
-      <FormInput
-        @class='input-field'
-        @id={{field.id}}
-        @for={{field.for}}
-        @label={{field.label}}
-        @type={{field.type}}
-        @value={{get @modelfield.id}}
-        @placeholder={{field.placeholder}}
-        @showError={{field.showError}}
-        @helpMsg={{field.helpMsg}}
-        @onChange={{this.handleFieldChange}}
-        @validator={{field.validator}}
-        @disabled={{field.disabled}}
-      />
+      <div class='profile-field'>
+        <label class='profile-field-label'>{{field.label}}</label>
+        <p>{{this.model}}</p>
+      </div>
+
     {{/each}}
   </div>
 </form>
