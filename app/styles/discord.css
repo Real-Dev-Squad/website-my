@@ -1,0 +1,75 @@
+.discord {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.discord__success,
+.discord__error {
+  text-align: center;
+}
+
+.success__text,
+.error__text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1rem;
+  padding: 0;
+}
+
+.discord__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1rem;
+  padding: 0;
+}
+
+.discord__card {
+  display: flex;
+  align-items: center;
+}
+
+.discord__card-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--card-border-color);
+  border-radius: 8px;
+}
+
+.card-data__img{
+  border-radius: 50%;
+}
+
+.card-data__username {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem;
+}
+
+.card-data__account {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.discord__arrow {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+.discord__btn {
+  color: var(--button--small--bg);
+  background-color: var(--button--small--text);
+  border: none;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 8px;
+}
