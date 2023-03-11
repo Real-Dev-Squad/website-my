@@ -9,6 +9,7 @@ import { AUTH_URL, GOTO_URL } from '../constants/url';
 export default class SignupRoute extends Route {
   @service analytics;
   @service router;
+  @service toast;
   beforeModel(transition) {
     if (transition?.to?.queryParams?.dev === 'true') {
       this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
@@ -39,7 +40,7 @@ export default class SignupRoute extends Route {
         );
         setTimeout(() => window.open(GOTO_URL, '_self'), 2000);
       }
-    } catch {
+    } catch (err) {
       this.toast.error(
         ERROR_MESSAGES.unknown,
         '',
