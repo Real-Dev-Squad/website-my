@@ -25,7 +25,7 @@ module.exports = function (environment) {
   };
 
   ENV.BASE_API_URL = 'https://api.realdevsquad.com';
-  ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
+  ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN || 'DUMMY_TOKEN';
 
   if (environment === 'development') {
     ENV.BASE_API_URL = 'http://localhost:3000';
