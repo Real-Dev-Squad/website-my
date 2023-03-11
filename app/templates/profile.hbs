@@ -1,4 +1,5 @@
 {{page-title 'Profile'}}
+
 <div class='profile-background'></div>
 <form class='form profile-form'>
   <h1>{{this.title}}</h1>
@@ -18,7 +19,7 @@
     {{#each this.fields as |field|}}
       <div class='profile-field'>
         <label class='profile-field-label'>{{field.label}}</label>
-        <p>{{this.model}}</p>
+        <p>{{get @model field.id}}</p>
       </div>
 
     {{/each}}

@@ -11,6 +11,7 @@ export default class ProfileController extends Controller {
   get imageUploadUrl() {
     return `${BASE_URL}/users/picture`;
   }
+  @tracked formDataKeyName = 'profile';
   @tracked showEditProfilePictureModal = false;
   @tracked title = 'Profile Details';
 

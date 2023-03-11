@@ -39,6 +39,7 @@ export default class UploadImageComponent extends Component {
   @action updateImage(file) {
     this.setStatusMessage('');
     const reader = new FileReader();
+
     if (file) {
       this.updateFormData(file, this.formKeyName);
       reader.readAsDataURL(file);
