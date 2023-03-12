@@ -168,6 +168,15 @@ module('Integration | Component | Extension Request Form', function (hooks) {
       .hasText(
         'Error: The newEndsOn value cannot be smaller than the oldEndsOn value'
       );
+
+    // if filled valid time then remove the error
+    await fillIn(
+      '[data-test-extension-form-newEndsOn-input]',
+      '2023-09-09T09:45'
+    );
+    assert
+      .dom(this.element.querySelector('[data-test-extension-from-error]'))
+      .doesNotExist();
   });
 
   test('When no extension requests found, we should be able to create one', async function (assert) {
