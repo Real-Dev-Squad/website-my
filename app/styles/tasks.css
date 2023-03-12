@@ -1,11 +1,5 @@
 :root {
-  --slider-colour: #424cc1;
-  --slider-background: #cfd3ff;
-  --thumb-background: #a1d0ff;
-  --opaque-black: #000000b3;
   --white: #ffffff;
-  --black: #000000;
-  --green: #008000;
   --light-black: rgba(0, 0, 0, 0.3);
   --gray: #f1f1f1;
   --scrollbar-thumb: #888;
