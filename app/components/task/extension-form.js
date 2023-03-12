@@ -155,6 +155,6 @@ export default class ExtensionFormComponent extends Component {
       this.createExtensionRequestError =
         'The newEndsOn value cannot be smaller than the oldEndsOn value';
       return;
-    }
+    } else this.createExtensionRequestError = null;
   }
 }
