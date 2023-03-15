@@ -53,6 +53,7 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+    //mock server url
     ENV.BASE_API_URL = '/mock-api';
   }
 
