@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "ember-click-outside": "^5.0.1",
     "mixpanel-browser": "^2.43.0",
+    "ember-click-outside": "^5.0.1",
     "webpack": "^5.74.0",
     "webpack-5": "^0.0.0"
   },
@@ -55,7 +55,6 @@
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-htmlbars": "^5.3.2",
     "ember-cli-inject-live-reload": "^2.0.2",
-    "ember-cli-qrcode": "^2.1.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.1",
     "ember-data": "~3.25.0",
