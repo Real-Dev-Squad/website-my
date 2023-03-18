@@ -1,10 +1,19 @@
-<div class="greeting">
+<div class='greeting'>
   <h1>Welcome to my site!</h1>
 </div>
 
-<UserStatus 
-  @status={{this.status}} 
-  @changeStatus={{this.changeStatus}} 
+<div class='qrSection'>
+  <QrCode
+    @text='http://example.com'
+    class='qrcode'
+    @darkColor='#00000'
+  />
+  <p>Check out our RDS mobile app</p>
+</div>
+
+<UserStatus
+  @status={{this.status}}
+  @changeStatus={{this.changeStatus}}
   @isStatusUpdating={{this.isStatusUpdating}}
   @updateStatus={{this.updateStatus}}
 />
