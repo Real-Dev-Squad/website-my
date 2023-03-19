@@ -16,10 +16,10 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <Button @onClick={{this.onClick}} @disabled={{true}}>{{inputValue}}</Button>
+      <Button @data-test-btn="signup" @onClick={{this.onClick}} @disabled={{true}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button]').isDisabled();
+    assert.dom('[data-test-btn="signup"]').isDisabled();
   });
 
   test('Button should not be disabled if @disabled is undefined', async function (assert) {
@@ -32,10 +32,10 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <Button @onClick={{this.onClick}}>{{inputValue}}</Button>
+      <Button @data-test-btn="signup" @onClick={{this.onClick}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button]').isNotDisabled();
+    assert.dom('[data-test-btn="signup"]').isNotDisabled();
   });
 
   test('Button should not be disabled if @disabled is not true', async function (assert) {
@@ -48,10 +48,10 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <Button @onClick={{this.onClick}} @disabled={{false}}>{{inputValue}}</Button>
+      <Button @data-test-btn="signup" @onClick={{this.onClick}} @disabled={{false}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button]').isNotDisabled();
+    assert.dom('[data-test-btn="signup"]').isNotDisabled();
   });
 
   test('Button should be of type button', async function (assert) {
@@ -64,10 +64,10 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <Button @onClick={{this.onClick}}>{{inputValue}}</Button>
+      <Button @data-test-btn="signup" @onClick={{this.onClick}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button]').hasAttribute('type', 'button');
+    assert.dom('[data-test-btn="signup"]').hasAttribute('type', 'button');
   });
 
   test('Button should have spinner if @isLoading is true', async function (assert) {
@@ -80,10 +80,10 @@ module('Integration | Component | new-signup/button', function (hooks) {
     });
 
     await render(hbs`
-      <Button @onClick={{this.onClick}} @isLoading={{true}}>{{inputValue}}</Button>
+      <Button @data-test-btn="signup" @onClick={{this.onClick}} @isLoading={{true}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button-spinner]').exists();
+    assert.dom('[data-test-button-spinner]').exists();
   });
 
   test('Button should not have spinner if @isLoading is not true', async function (assert) {
@@ -99,6 +99,6 @@ module('Integration | Component | new-signup/button', function (hooks) {
       <Button @onClick={{this.onClick}} @isLoading={{false}}>{{inputValue}}</Button>
     `);
 
-    assert.dom('[data-test-signup-button-spinner]').doesNotExist();
+    assert.dom('[data-test-button-spinner]').doesNotExist();
   });
 });

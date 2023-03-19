@@ -1,9 +1,8 @@
 {{#if this.isImageSelected}}
-  {{! <div class='image-upload' id='image-upload'> }}
   <h1>
     Crop Selected Image
   </h1>
-  {{! <div class='image-cropper-preview'></div> }}
+
   <ImageCropper
     @image={{this.image}}
     @setImageCoordinates={{this.setImageCoordinates}}
@@ -13,6 +12,7 @@
       class='button_secondary btn'
       type='button'
       disabled={{this.isImageUploading}}
+      data-test-btn='back'
       {{on 'click' this.goBack}}
     >
       Back
@@ -20,6 +20,7 @@
     <button
       class='image-form__button btn'
       type='button'
+      data-test-btn='upload-image'
       disabled={{this.isImageUploading}}
       {{on 'click' this.onSubmit}}
     >
@@ -39,7 +40,7 @@
   >
     {{this.statusMessage}}
   </p>
-  {{! </div> }}
+
 {{else}}
   <h1>
     Upload Image
@@ -56,13 +57,14 @@
       <p class='image-form__text'>
         Drag and drop file here or
       </p>
-      <label
+      <button
         class='image-form__button btn
           {{if this.isImageUploading "image-form__button--disabled"}}'
         for='image'
+        data-test-btn='browse' type="button"
       >
         Browse
-      </label>
+      </button>
       <input
         class='image-form__input'
         type='file'

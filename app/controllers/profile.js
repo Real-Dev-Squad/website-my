@@ -47,22 +47,7 @@ export default class ProfileController extends Controller {
     console.log(this.model.username);
   }
   @action closeModal() {
+    console.log('close');
     this.showEditProfilePictureModal = false;
-  }
-  @action stopPropogation(event) {
-    console.log(event);
-    event.stopPropagation();
-  }
-
-  removeEmptyFields(reqObject) {
-    const objectRequested = reqObject;
-    for (const field in objectRequested) {
-      if (!objectRequested[field]) {
-        delete objectRequested[field];
-      } else if (field === 'yoe') {
-        objectRequested[field] = parseInt(objectRequested[field]);
-      }
-    }
-    return objectRequested;
   }
 }

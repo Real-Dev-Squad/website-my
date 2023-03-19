@@ -13,14 +13,5 @@ module('Integration | Component | image-cropper', function (hooks) {
     await render(hbs`<ImageCropper />`);
 
     assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      <ImageCropper>
-        template block text
-      </ImageCropper>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
   });
 });

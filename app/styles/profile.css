@@ -54,7 +54,7 @@
   top: 0;
 }
 
-.image-upload-container {
+.image-upload-modal {
   display: flex;
   justify-content: center;
   flex-direction: column;
