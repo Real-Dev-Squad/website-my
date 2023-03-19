@@ -49,7 +49,6 @@ module('Integration | Component | image uploader', function (hooks) {
       'Spinner is displayed while uploading image '
     );
   });
-  test('', async () => {});
 });
 
 // this.set('uploadUrl', 'http://localhost:3000/test');
