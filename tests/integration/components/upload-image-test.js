@@ -1,10 +1,14 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, triggerEvent, click } from '@ember/test-helpers';
+import { render, find, triggerEvent, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | image uploader', function (hooks) {
   setupRenderingTest(hooks);
+
+  const file = new File(['dummy image data'], 'test-image.jpg', {
+    type: 'image/jpeg',
+  });
 
   test('it renders upload UI when no image is selected', async function (assert) {
     // Set upload url
@@ -13,13 +17,9 @@ module('Integration | Component | image uploader', function (hooks) {
     `);
     const button = this.element.querySelector('.image-form__button');
 
-    // Test handling of file input change event
-    const file = new File(['dummy image data'], 'test-image.jpg', {
-      type: 'image/jpeg',
-    });
-
     assert.dom('.drop-area').exists().hasNoClass('.drop-area__highlight');
 
+    // Test handling of file input change event
     await triggerEvent('input[type="file"]', 'change', { files: [file] });
 
     assert.dom('.drop-area').doesNotExist();
@@ -37,10 +37,6 @@ module('Integration | Component | image uploader', function (hooks) {
     // ensure the component doesn't render the crop UI by default
     assert.dom('.image-cropper').doesNotExist();
 
-    const file = new File(['dummy image data'], 'test-image.jpg', {
-      type: 'image/jpeg',
-    });
-
     await triggerEvent('input[type="file"]', 'change', { files: [file] });
 
     assert.dom('.image-cropper').exists();
@@ -48,8 +44,12 @@ module('Integration | Component | image uploader', function (hooks) {
     assert.dom('[data-test-btn="upload-image"]').exists();
 
     await click('[data-test-btn="upload-image"]');
-    assert.dom('.fa-spinner').exists();
+    assert.ok(
+      find('.fa-spinner'),
+      'Spinner is displayed while uploading image '
+    );
   });
+  test('', async () => {});
 });
 
 // this.set('uploadUrl', 'http://localhost:3000/test');

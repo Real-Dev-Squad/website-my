@@ -57,20 +57,19 @@
       <p class='image-form__text'>
         Drag and drop file here or
       </p>
-      <button
+      <label
         class='image-form__button btn
           {{if this.isImageUploading "image-form__button--disabled"}}'
         for='image'
-        data-test-btn='browse' type="button"
+        data-test-btn='browse'
       >
         Browse
-      </button>
+      </label>
       <input
         class='image-form__input'
         type='file'
         id='image'
         accept='image/png, image/jpeg'
-        disabled={{this.isImageUploading}}
         {{on 'change' this.handleBrowseImage}}
       />
     </form>

@@ -7,7 +7,7 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class ProfileController extends Controller {
   @service toast;
-
+  @service router;
   get imageUploadUrl() {
     return `${BASE_URL}/users/picture`;
   }
@@ -44,10 +44,11 @@ export default class ProfileController extends Controller {
 
   @action handleShowEditProfilePictureModal() {
     this.showEditProfilePictureModal = true;
-    console.log(this.model.username);
   }
   @action closeModal() {
-    console.log('close');
     this.showEditProfilePictureModal = false;
+  }
+  @action refreshRoute() {
+    this.send('refreshModel');
   }
 }

@@ -7,6 +7,7 @@ import { inject as service } from '@ember/service';
 export default class UploadImageComponent extends Component {
   formData;
   @service toast;
+  @service router;
   @tracked image;
   @tracked isImageSelected = false;
   @tracked overDropZone = false;
@@ -17,20 +18,6 @@ export default class UploadImageComponent extends Component {
   imageCoordinates = null;
   uploadUrl = this.args.uploadUrl;
   formKeyName = this.args.formKeyName;
-
-  @action handleDrop(e) {
-    this.preventDefaults(e); // This is used to prevent opening of image in new tab while drag and drop
-    const [file] = e.dataTransfer.files;
-    this.updateImage(file);
-    this.setImageSelected(true);
-    this.setOverDropZone(false);
-  }
-
-  @action handleBrowseImage(e) {
-    const [file] = e.target.files;
-    this.updateImage(file);
-    this.setImageSelected(true);
-  }
 
   @action goBack() {
     this.image = null;
@@ -55,6 +42,19 @@ export default class UploadImageComponent extends Component {
     this.imageCoordinates = data;
   }
 
+  @action handleBrowseImage(e) {
+    const [file] = e.target.files;
+    this.updateImage(file);
+    this.setImageSelected(true);
+  }
+
+  @action handleDrop(e) {
+    this.preventDefaults(e); // This is used to prevent opening of image in new tab while drag and drop
+    const [file] = e.dataTransfer.files;
+    this.updateImage(file);
+    this.setImageSelected(true);
+    this.setOverDropZone(false);
+  }
   @action handleDragOver(e) {
     this.preventDefaults(e);
     this.setOverDropZone(true);
@@ -89,6 +89,8 @@ export default class UploadImageComponent extends Component {
         const data = await res.json();
         const message = data.message;
         this.handleResponseStatusMessage(status, message);
+        // Refresh the model after successful upload
+        this.args.refreshModel();
       })
       .catch((err) => {
         this.setImageUploadSuccess(false);
