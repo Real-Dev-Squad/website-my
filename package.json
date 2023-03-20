@@ -15,6 +15,7 @@
     "dev:ember": "ember serve -p 3443",
     "dev:https-link": "local-ssl-proxy --source 443 --target 3443",
     "build": "ember build --environment production && cp _redirects dist/_redirects",
+    "build:staging": "ember build --environment staging && cp _redirects dist/_redirects",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",

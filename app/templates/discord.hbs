@@ -1,0 +1,44 @@
+{{page-title "Discord"}}s
+
+<section class="discord">
+  {{#if @model.isTokenExpired}}
+    <p class="error__text">Token Expired. Please generate a new token using slash commands</p>
+  {{else}}
+    {{#if (or this.isLinking)}}
+      <div class="loading">
+        <Spinner />
+      </div>
+    {{else}}
+      {{#if (or @model.userData.discordId (eq this.linkStatus "linked"))}}
+        <div class="discord__success">
+          <p class="success__text">Your Discord account has been successfully linked.</p>
+          <p class="success__text">You can close this tab now.</p>
+        </div>
+      {{else if (eq this.linkStatus "failure")}}
+        <div class="discord__error">
+          <p class="error__text">Something went wrong. Please try again.</p>
+        </div>
+      {{else if (eq this.linkStatus "not-linked")}}
+        <h1 class="discord__title">Authorize Bot</h1>
+
+        <div class="discord__card">
+          <div class="discord__card-data">
+            <img class="card-data__img" src={{@model.externalAccountData.attributes.userAvatar}} height="100px" width="100px" alt="Discord Avatar" />
+            <p class="card-data__username">{{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
+            <p class="card-data__account">Discord</p>
+          </div>
+
+          <h2 class="discord__arrow">&harr;</h2>
+
+          <div class="discord__card-data">
+            <img class="card-data__img" src={{@model.userData.picture.url}} height="100px" width="100px" alt="Real Dev Squad Avatar" />
+            <p class="card-data__username">{{@model.userData.username}}</p>
+            <p class="card-data__account">Real Dev Squad</p>
+          </div>
+        </div>
+        
+        <button type="button" class="discord__btn" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+</section>

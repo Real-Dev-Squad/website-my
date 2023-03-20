@@ -14,4 +14,5 @@ Router.map(function () {
   this.route('profile');
   this.route('identity');
   this.route('404', { path: '/*' });
+  this.route('discord');
 });
