@@ -2,6 +2,18 @@
   <h1>Welcome to my site!</h1>
 </div>
 
+<div class='qrCodeContainer'> 
+<div class='qrSection'>
+  <QrCode
+    @text='http://example.com'
+    class='qrcode'
+    @darkColor='#00000'
+  />
+  <p class='qrCodeText'>Check out our RDS mobile app</p>
+</div>
+</div>
+
+
 <UserStatus 
   @status={{this.status}} 
   @changeStatus={{this.changeStatus}} 

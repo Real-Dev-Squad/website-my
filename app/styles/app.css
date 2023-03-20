@@ -46,6 +46,17 @@ body {
   text-align: center;
   margin-top: 50px;
 }
+.qrSection {
+  max-width: 300px;
+}
+.qrCodeContainer{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.qrCodeText{
+  text-align: center;
+}
 
 .footer {
   font-weight: lighter;
