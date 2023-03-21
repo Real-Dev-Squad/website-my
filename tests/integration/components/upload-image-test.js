@@ -31,6 +31,8 @@ module('Integration | Component | image uploader', function (hooks) {
   });
 
   test('it renders crop UI when an image is selected', async function (assert) {
+    this.set('uploadUrl', `https://api.realdevsquad.com/users/picture`);
+    this.set('formDataKeyName', 'profile');
     await render(hbs`
       <UploadImage @uploadUrl={{this.uploadUrl}}  @formKeyName = {{this.formDataKeyName}}/>
       `);
@@ -44,12 +46,10 @@ module('Integration | Component | image uploader', function (hooks) {
     assert.dom('[data-test-btn="upload-image"]').exists();
 
     await click('[data-test-btn="upload-image"]');
+
     assert.ok(
       find('.fa-spinner'),
       'Spinner is displayed while uploading image '
     );
   });
 });
-
-// this.set('uploadUrl', 'http://localhost:3000/test');
-// this.set('formDataKeyName', 'profile');
