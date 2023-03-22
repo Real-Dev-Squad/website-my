@@ -2,6 +2,7 @@
   <h1>Welcome to my site!</h1>
 </div>
 
+{{#if this.isDev}}
 <div class='qrCodeContainer'> 
 <div class='qrSection'>
   <QrCode
@@ -12,7 +13,7 @@
   <p class='qrCodeText'>Check out our RDS mobile app</p>
 </div>
 </div>
-
+{{/if}}
 
 <UserStatus 
   @status={{this.status}} 
