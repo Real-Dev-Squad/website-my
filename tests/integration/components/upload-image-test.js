@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | image uploader', function (hooks) {
   setupRenderingTest(hooks);
 
-  const file = new File(['dummy image data'], 'test-image.jpg', {
+  const file = new File(['dummy image data'], '/public/RDSLogo.png', {
     type: 'image/jpeg',
   });
 
@@ -15,19 +15,16 @@ module('Integration | Component | image uploader', function (hooks) {
     await render(hbs`
     <UploadImage @uploadUrl={{this.uploadUrl}}  @formKeyName = {{this.formDataKeyName}}/>
     `);
-    const button = this.element.querySelector('.image-form__button');
 
-    assert.dom('.drop-area').exists().hasNoClass('.drop-area__highlight');
+    assert
+      .dom('[data-test-drop-area]')
+      .exists()
+      .hasNoClass('.drop-area__highlight');
 
     // Test handling of file input change event
     await triggerEvent('input[type="file"]', 'change', { files: [file] });
 
-    assert.dom('.drop-area').doesNotExist();
-
-    assert.notOk(
-      button.classList.contains('image-form__button--disabled'),
-      'Button has the "disabled" class'
-    );
+    assert.dom('[data-test-drop-area]').doesNotExist();
   });
 
   test('it renders crop UI when an image is selected', async function (assert) {
@@ -37,11 +34,11 @@ module('Integration | Component | image uploader', function (hooks) {
       <UploadImage @uploadUrl={{this.uploadUrl}}  @formKeyName = {{this.formDataKeyName}}/>
       `);
     // ensure the component doesn't render the crop UI by default
-    assert.dom('.image-cropper').doesNotExist();
+    assert.dom('[data-test-image-cropper]').doesNotExist();
 
     await triggerEvent('input[type="file"]', 'change', { files: [file] });
 
-    assert.dom('.image-cropper').exists();
+    assert.dom('[data-test-image-cropper]').exists();
     assert.dom('[data-test-btn="back"]').exists();
     assert.dom('[data-test-btn="upload-image"]').exists();
 

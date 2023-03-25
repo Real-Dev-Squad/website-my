@@ -14,7 +14,7 @@ module('Unit | Route | profile', function (hooks) {
     await visit('/profile');
 
     assert.dom('[data-test-btn="edit"]').exists();
-    click('.edit-btn');
+    click('[data-test-btn="edit"]');
     await settled();
 
     assert.dom('[data-test-modal="image-upload"]').exists();
