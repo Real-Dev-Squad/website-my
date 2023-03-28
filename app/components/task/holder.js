@@ -6,6 +6,8 @@ import { TASK_PERCENTAGE } from '../../constants/tasks';
 
 export default class TasksHolderComponent extends Component {
   @tracked percentCompleted = this.args.task.percentCompleted;
+  @tracked extensionFormOpened = false;
+
   TASK_KEYS = TASK_KEYS;
   availabletaskStatusList = TASK_STATUS_LIST;
   @action
@@ -21,5 +23,27 @@ export default class TasksHolderComponent extends Component {
   onStatusChange(e) {
     const { value } = e.target;
     this.args.onTaskChange('status', value);
+  }
+
+  @action
+  toggleExtensionForm() {
+    this.extensionFormOpened = !this.extensionFormOpened;
+  }
+
+  @action
+  closeExtensionForm() {
+    this.extensionFormOpened = false;
+  }
+
+  @action
+  closeExtensionModel(e) {
+    if (!e) {
+      this.toggleExtensionForm(e);
+      return;
+    }
+    e.stopPropagation();
+    if (e.target.classList.contains('extension-form__container-back')) {
+      this.toggleExtensionForm(e);
+    }
   }
 }
