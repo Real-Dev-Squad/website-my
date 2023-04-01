@@ -94,6 +94,7 @@ nav li a:hover {
   right: 20px;
   top: 70px;
   display: none;
+  z-index: 1;
 }
 
 .active-menu {

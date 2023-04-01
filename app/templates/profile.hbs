@@ -11,8 +11,15 @@
     >
       <FaIcon @icon='pen-to-square' />
     </Button>
-
-    <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
+    {{#if @model.picture.url}}
+      <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
+    {{else}}
+      <img
+        class='user__pic'
+        src={{'dummyProfilePicture.png'}}
+        alt='user profile '
+      />
+    {{/if}}
   </div>
 
   <div class='profile-form-grid'>
@@ -20,7 +27,11 @@
     {{#each this.fields as |field|}}
       <div class='profile-field'>
         <label class='profile-field-label'>{{field.label}}</label>
-        <p>{{get @model field.id}}</p>
+        {{#if (get @model field.id)}}
+          <p class='field-data'>{{get @model field.id}}</p>
+        {{else}}
+          <p class='not-avalibale-text'>Data Not Available</p>
+        {{/if}}
       </div>
 
     {{/each}}
@@ -41,7 +52,6 @@
         @uploadUrl={{this.imageUploadUrl}}
         @formKeyName={{this.formDataKeyName}}
         @outsideClickModel={{this.closeModal}}
-        @refreshModel={{this.refreshRoute}}
       />
     </section>
   </div>

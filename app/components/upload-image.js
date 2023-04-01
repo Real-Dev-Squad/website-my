@@ -89,8 +89,6 @@ export default class UploadImageComponent extends Component {
         const data = await res.json();
         const message = data.message;
         this.handleResponseStatusMessage(status, message);
-        // Refresh the model after successful upload
-        this.args.refreshModel?.();
       })
       .catch((err) => {
         this.setImageUploadSuccess(false);

@@ -9,6 +9,7 @@
   border-radius: 10px;
   max-height: 75vh;
   min-width: 350px;
+  max-width: 600px;
   margin-bottom: 0;
 }
 .profile-form-grid {
@@ -18,8 +19,14 @@
   margin-top: 2rem;
 }
 .profile-field p {
-  border-top: 2px solid;
+  border-top: 2px solid var(--not-assign--text);
+}
+.field-data {
   font-weight: bolder;
+}
+.not-avalibale-text {
+  color: var(--placeholder-text-color);
+  font-weight: lighter;
 }
 .profile-field-label {
   font-weight: lighter;
@@ -59,7 +66,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: 2rem;
   background: var(--body-bg-color);
   align-self: center;
   position: absolute;
@@ -67,6 +74,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
+  min-width: 400px;
 }
 
 .image-upload-link {
