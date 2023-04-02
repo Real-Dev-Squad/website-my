@@ -77,6 +77,12 @@
   min-width: 400px;
 }
 
+@media screen and (max-width: 480px) {
+  .image-upload-modal {
+    min-width: 350px;
+  }
+}
+
 .image-upload-link {
   display: block;
   text-align: center;

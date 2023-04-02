@@ -95,6 +95,12 @@
   width: 600px;
   height: 400px;
 }
+@media screen and (max-width: 480px) {
+  .image-cropper-container {
+    width: 300px;
+    height: 200px;
+  }
+}
 
 .image-cropper {
   max-height: 100%;
@@ -112,7 +118,7 @@
 @media only screen and (max-device-width: 480px) {
   .drop-area {
     width: auto;
-    margin: 20px;
+    margin: 1rem;
   }
 
   .image-preview {
