@@ -14,7 +14,7 @@ export default class IndexRoute extends Route {
       });
       const userData = await response.json();
       if (response.status === 200) {
-        return userData?.data?.currentStatus?.state ?? USER_STATES.DNE;
+        return {status : userData?.data?.currentStatus?.state ?? USER_STATES.DNE, userId:userData.userId};
       } else if (response.status === 401) {
         this.toast.error(
           'You are not logged in. Please login to continue.',
@@ -29,10 +29,12 @@ export default class IndexRoute extends Route {
           '',
           toastNotificationTimeoutOptions
         );
-        return USER_STATES.DNE;
+        return {status:USER_STATES.DNE,userId:userData.userId};
       }
     } catch (error) {
       console.error(error.message);
     }
   };
+
+  
 }
