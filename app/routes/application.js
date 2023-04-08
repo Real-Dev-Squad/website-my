@@ -7,6 +7,7 @@ import redirectAuth from '../utils/redirect-auth';
 const API_BASE_URL = ENV.BASE_API_URL;
 export default class ApplicationRoute extends Route {
   @service toast;
+  @service userState;
   model = async () => {
     const defaultName = 'User';
     const defaultPicture = 'dummyProfilePicture.png';
@@ -19,6 +20,7 @@ export default class ApplicationRoute extends Route {
       if (response.status === 200 && !userData.incompleteUserDetails) {
         const firstName = userData?.first_name || defaultName;
         const profilePictureURL = userData?.picture?.url || defaultPicture;
+        this.userState.add('id', userData.id);
         return { firstName, profilePictureURL };
       } else if (response.status === 401) {
         this.toast.error(
