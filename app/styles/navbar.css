@@ -67,6 +67,7 @@ nav li a:hover {
   border-radius: 50%;
   display: inline;
   vertical-align: middle;
+  object-fit: cover;
 }
 
 .user__msg {
@@ -84,7 +85,8 @@ nav li a:hover {
   flex-direction: column;
   justify-content: center;
   background-color: var(--menu--bg);
-  box-shadow: var(--menu--bpx-shadow--1) 0px 1px 2px 0px, var(--menu--bpx-shadow--2) 0px 2px 6px 2px;
+  box-shadow: var(--menu--bpx-shadow--1) 0px 1px 2px 0px,
+    var(--menu--bpx-shadow--2) 0px 2px 6px 2px;
   border-radius: 10px;
   width: 150px;
   padding: 15px 0px;
@@ -92,14 +94,15 @@ nav li a:hover {
   right: 20px;
   top: 70px;
   display: none;
+  z-index: 1;
 }
 
 .active-menu {
   display: flex;
 }
 
-.separator{
-  width:90%; 
+.separator {
+  width: 90%;
   margin: auto;
 }
 
