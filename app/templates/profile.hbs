@@ -1,42 +1,66 @@
 {{page-title 'Profile'}}
 
-<div class='profile-background'></div>
-<form class='form profile-form'>
-  <h1>{{this.title}}</h1>
-  <div class='picture_container'>
-    <Button
-      @onClick={{this.handleShowEditProfilePictureModal}}
-      @class='edit-btn btn'
-      @data-test-btn='edit'
-    >
-      <FaIcon @icon='pen-to-square' />
-    </Button>
-    {{#if @model.picture.url}}
+<div class="profile-container">
+  <form class="profile-form">
+    <div class='picture_container'>
+      {{#if @model.picture.url}}
       <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
-    {{else}}
-      <img
-        class='user__pic'
-        src={{'dummyProfilePicture.png'}}
-        alt='user profile '
-      />
-    {{/if}}
-  </div>
-
-  <div class='profile-form-grid'>
-
-    {{#each this.fields as |field|}}
+      {{else}}
+      <img class='user__pic' src={{'dummyProfilePicture.png'}} alt='user profile ' />
+      {{/if}}
+      <Button @onClick={{this.handleShowEditProfilePictureModal}} @class='edit-btn btn' @data-test-btn='edit'>
+        Update Picture
+      </Button>
+    </div>
+    {{!-- <div class='profile-form-grid'>
+      {{#each this.fields as |field|}}
       <div class='profile-field'>
         <label class='profile-field-label'>{{field.label}}</label>
         {{#if (get @model field.id)}}
-          <p class='field-data'>{{get @model field.id}}</p>
+        <p class='field-data'>{{get @model field.id}}</p>
         {{else}}
-          <p class='not-avalibale-text'>Data Not Available</p>
+        <p class='not-avalibale-text'>Data Not Available</p>
         {{/if}}
       </div>
-
-    {{/each}}
-  </div>
-</form>
+      {{/each}}
+    </div> --}}
+    <div class='profile-form-grid'>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="first-name">First Name*</label>
+        <input type="text" id="first-name" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="first-name">Last Name*</label>
+        <input type="text" id="last-name" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="email">Email*</label>
+        <input type="text" id="email" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="company">Company or College name*</label>
+        <input type="text" id="company" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="Designation">Designation*</label>
+        <input type="text" id="designation" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="linkedin">LinkedIn ID*</label>
+        <input type="text" id="linkedin" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="twitter">Twitter Username*</label>
+        <input type="text" id="twitter" class="profile-field-input" />
+      </section>
+      <section class='profile-field'>
+        <label class='profile-field-label' for="personal-website">Personal Website</label>
+        <input type="text" id="personal-website" class="profile-field-input" />
+      </section>
+    </div>
+    <button type="submit" class="profile-form-submit">Submit</button>
+  </form>
+</div>
 
 {{#if this.showEditProfilePictureModal}}
   <div class='model_background'>
