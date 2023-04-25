@@ -3,10 +3,10 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | qr-code', function(hooks) {
+module('Integration | Component | qr-code', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders a QR code with the correct text and dark color', async function(assert) {
+  test('it renders a QR code with the correct text and dark color', async function (assert) {
     this.set('userId', '12345');
 
     await render(hbs`
@@ -15,6 +15,6 @@ module('Integration | Component | qr-code', function(hooks) {
           />    
     `);
 
-    assert.dom('[data-test="qr-code"]').hasTagName('svg')
+    assert.dom('[data-test="qr-code"]').hasTagName('svg');
   });
 });

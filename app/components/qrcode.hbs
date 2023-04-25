@@ -1,11 +1,9 @@
-<div class='qr-code-container'> 
-<div class='qr-section'>
   <QrCode
     data-test="qr-code"
     @text= {{@userId}}
     class='qrcode'
     @darkColor='#00000'
+    style="width: 40px;"
   />
+  {{!-- <QrCode @text="http://example.com" style="width: 300px;" @darkColor="red" /> --}}
   <p class='qr-code-text'>Check out our RDS mobile app</p>
-</div>
-</div>
