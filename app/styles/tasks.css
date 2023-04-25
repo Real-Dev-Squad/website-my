@@ -338,11 +338,14 @@ input[type='range']:focus::-ms-fill-upper {
   padding: 18px;
   border-radius: 10px;
   background-color: var(--white);
-  min-width: 30%;
-  width: max-content;
-  height: max-content;
-  max-height: 50vh;
   overflow-y: scroll;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  height: max-content;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .extension-form__container-main:hover {
   cursor: default;
@@ -454,6 +457,11 @@ input[type='range']:focus::-ms-fill-upper {
 
   .tasks-container {
     margin-top: 1rem;
+  }
+
+  .extension-form__container-main{
+    left: 10px;
+    right: 10px;
   }
 }
 
