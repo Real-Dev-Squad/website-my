@@ -46,6 +46,15 @@ export default class UserStatusComponent extends Component {
       ],
     },
     {
+      status: USER_STATES.ONBOARDING,
+      message: `You are Onboarded`,
+      otherAvailableStatus: [
+        this.ALL_FEASIBLE_STATUS.ACTIVE,
+        this.ALL_FEASIBLE_STATUS.IDLE,
+        this.ALL_FEASIBLE_STATUS.OOO,
+      ],
+    },
+    {
       status: USER_STATES.DNE,
       message: `Your Status doesn't exist`,
       otherAvailableStatus: [
