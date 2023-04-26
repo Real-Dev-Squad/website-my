@@ -10,9 +10,6 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @service toast;
-  @service router;
-  @tracked status = this.model.status;
-  @tracked userId = this.model.userId;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
   @tracked newStatus;
@@ -69,10 +66,4 @@ export default class IndexController extends Controller {
     this.toggleUserStateModal();
   }
 
-  get isDev() {
-    if (this.router.currentRoute) {
-      return this.router.currentRoute.queryParams.dev;
-    }
-    return false;
-  }
 }
