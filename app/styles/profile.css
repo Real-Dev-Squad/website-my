@@ -1,9 +1,86 @@
-.profile-container {
+.profile-background {
+  background: var(--nav--bg);
+  height: 50vh;
+}
+.profile-form {
+  margin-top: calc(-45vh);
+  background-color: var(--body-bg-color);
+  box-shadow: 0px 4px 4px 2px var(--info-tab--before--box-shadow);
+  border-radius: 10px;
+  max-height: 75vh;
+  min-width: 350px;
+  max-width: 600px;
+  margin-bottom: 0;
+}
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  margin-top: 2rem;
+}
+.profile-field p {
+  border-top: 2px solid var(--not-assign--text);
+}
+.field-data {
+  font-weight: bolder;
+}
+.not-avalibale-text {
+  color: var(--placeholder-text-color);
+  font-weight: lighter;
+}
+.profile-field-label {
+  font-weight: lighter;
+}
+.picture_container {
+  position: relative;
+  height: 35%;
+  aspect-ratio: 1;
+  margin: auto;
+}
+.profile-form .user__pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.edit-btn {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 1.6em;
+}
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.model_background {
+  width: 100vw;
+  height: 100vh;
+  background: var(--overlay--bg);
+  position: fixed;
+  top: 0;
+}
+
+.image-upload-modal {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  padding: 2rem;
+  background: var(--body-bg-color);
+  align-self: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  min-width: 400px;
+}
+
+@media screen and (max-width: 480px) {
+  .image-upload-modal {
+    min-width: 350px;
+  }
 }
 
 .image-upload-link {
@@ -11,4 +88,4 @@
   text-align: center;
   position: relative;
   margin: 40px auto;
- }
+}

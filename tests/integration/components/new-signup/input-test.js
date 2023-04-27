@@ -84,8 +84,8 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
         @currentStep={{this.currentStep}}
       />`);
 
-    assert.dom('[data-test-signup-button]').exists();
-    assert.dom('[data-test-signup-button]').hasAnyText();
+    assert.dom('[data-test-btn="signup"]').exists();
+    assert.dom('[data-test-btn="signup"]').hasAnyText();
   });
 
   test('button should have text Submit if the current step is username', async function (assert) {
@@ -103,8 +103,8 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
         @currentStep={{this.currentStep}}
       />`);
 
-    assert.dom('[data-test-signup-button]').exists();
-    assert.dom('[data-test-signup-button]').hasText('Submit');
+    assert.dom('[data-test-btn="signup"]').exists();
+    assert.dom('[data-test-btn="signup"]').hasText('Submit');
   });
 
   test('It should have input field', async function (assert) {

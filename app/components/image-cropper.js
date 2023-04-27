@@ -22,7 +22,6 @@ export default class ImageCropperComponent extends Component {
       zoomOnWheel: false,
       rotatable: false,
       toggleDragModeOnDblclick: false,
-      preview: '.image-cropper-preview',
       ready: () => {
         this.setImageData();
       },

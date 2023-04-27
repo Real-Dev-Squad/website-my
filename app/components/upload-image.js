@@ -1,9 +1,13 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+import { inject as service } from '@ember/service';
 
 export default class UploadImageComponent extends Component {
   formData;
+  @service toast;
+  @service router;
   @tracked image;
   @tracked isImageSelected = false;
   @tracked overDropZone = false;
@@ -15,23 +19,14 @@ export default class UploadImageComponent extends Component {
   uploadUrl = this.args.uploadUrl;
   formKeyName = this.args.formKeyName;
 
-  @action handleDrop(e) {
-    this.preventDefaults(e); // This is used to prevent opening of image in new tab while drag and drop
-    const [file] = e.dataTransfer.files;
-    this.updateImage(file);
-    this.setImageSelected(true);
-    this.setOverDropZone(false);
+  @action goBack() {
+    this.image = null;
+    this.setImageSelected(false);
   }
-
-  @action handleBrowseImage(e) {
-    const [file] = e.target.files;
-    this.updateImage(file);
-    this.setImageSelected(true);
-  }
-
   @action updateImage(file) {
     this.setStatusMessage('');
     const reader = new FileReader();
+
     if (file) {
       this.updateFormData(file, this.formKeyName);
       reader.readAsDataURL(file);
@@ -47,6 +42,19 @@ export default class UploadImageComponent extends Component {
     this.imageCoordinates = data;
   }
 
+  @action handleBrowseImage(e) {
+    const [file] = e.target.files;
+    this.updateImage(file);
+    this.setImageSelected(true);
+  }
+
+  @action handleDrop(e) {
+    this.preventDefaults(e); // This is used to prevent opening of image in new tab while drag and drop
+    const [file] = e.dataTransfer.files;
+    this.updateImage(file);
+    this.setImageSelected(true);
+    this.setOverDropZone(false);
+  }
   @action handleDragOver(e) {
     this.preventDefaults(e);
     this.setOverDropZone(true);
@@ -63,10 +71,8 @@ export default class UploadImageComponent extends Component {
 
   @action onSubmit(e) {
     this.preventDefaults(e);
-    const devMode = this.args.devMode;
-    if (devMode && this.imageCoordinates) {
-      this.formData.set('coordinates', JSON.stringify(this.imageCoordinates));
-    }
+
+    this.formData.set('coordinates', JSON.stringify(this.imageCoordinates));
     this.uploadImage(this.formData);
   }
 
@@ -105,10 +111,12 @@ export default class UploadImageComponent extends Component {
   handleResponseStatusMessage(status, message) {
     if (status === 200) {
       this.setImageUploadSuccess(true);
+      this.args.outsideClickModel();
+      this.toast.success(message, '', toastNotificationTimeoutOptions);
     } else {
       this.setImageUploadSuccess(false);
+      this.setStatusMessage(message);
     }
-    this.setStatusMessage(message);
   }
 
   preventDefaults(e) {
