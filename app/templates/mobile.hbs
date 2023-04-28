@@ -1,19 +1,12 @@
 {{page-title "Mobile"}} 
-
-{{#if this.isDev}}
-
 <div class='qr-code-container'> 
  <QrCode
     data-test="qr-code"
     @text= {{@model.userId}}
-    class='qrcode'
     @darkColor='#00000'
     class = 'qr-code'
   />
  </div>
  <p class='qr-code-text'>Check out our RDS mobile app</p>
-
-{{/if}}
-
 {{outlet}}  
 
