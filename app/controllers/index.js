@@ -65,5 +65,4 @@ export default class IndexController extends Controller {
     this.newStatus = status;
     this.toggleUserStateModal();
   }
-
 }
