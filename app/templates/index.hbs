@@ -1,20 +1,6 @@
 <div class="greeting">
   <h1>Welcome to my site!</h1>
 </div>
-
-{{#if this.isDev}}
-<div class='qrCodeContainer'> 
-<div class='qrSection'>
-  <QrCode
-    @text= {{this.userId}}
-    class='qrcode'
-    @darkColor='#00000'
-  />
-  <p class='qrCodeText'>Check out our RDS mobile app</p>
-</div>
-</div>
-{{/if}}
-
 <UserStatus 
   @status={{this.status}} 
   @changeStatus={{this.changeStatus}} 
