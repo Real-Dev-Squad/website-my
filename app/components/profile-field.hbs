@@ -1,10 +1,20 @@
-<section class='profile-field'>
+<section class={{if this.error 'profile-field profile-field-error' 'profile-field'}}>
   <label class='profile-field-label' for={{@id}}>{{@label}}</label>
   <div class="profile-field-input-container">
     <img src={{@icon_url}} alt="" role="presentation">
-    <input type="text" id={{@id}} class="profile-field-input" placeholder={{@placeholder}} />
+    <Input 
+      type="text" 
+      id={{@id}}
+      value={{@value}}
+      placeholder={{@placeholder}} 
+      class="profile-field-input"
+      required={{@required}}
+      {{on 'input' (fn this.inputFieldChanged)}}
+      {{on 'blur' (fn this.checkInputValidation)}}
+    />
     <button type="button" class="profile-field-input-delete">
       <img src="icons/cross.svg" alt="" role="presentation">
     </button>
   </div>
+  <p class="profile-field-error-message">{{this.error}}</p>
 </section>

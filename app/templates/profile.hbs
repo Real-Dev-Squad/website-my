@@ -16,10 +16,17 @@
       {{#each this.fields as |field|}}
         <ProfileField 
           @id={{field.id}} 
-          @type={{field.type}} 
+          @type={{field.type}}
+          @value={{get @model field.id}}
           @placeholder={{field.placeholder}} 
-          @label={{field.label}} 
+          @label={{field.label}}
           @icon_url={{field.icon_url}} 
+          @errorMessage={{field.errorMessage}}
+          @showError={{field.showError}}
+          @required={{field.required}}
+          @validator={{field.validator}}
+          @onChange={{this.handleFieldChange}}
+          @onBlur={{this.handleFieldValidation}}
         />
       {{/each}}
     </div>

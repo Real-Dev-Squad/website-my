@@ -12,7 +12,6 @@ export default class ProfileRoute extends Route {
         credentials: 'include',
       });
       const userData = await response.json();
-      console.log('USerdata is: ', userData);
       if (response.status === 401) {
         throw new Error('You are not logged in. Please login to continue.');
       }
