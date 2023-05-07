@@ -23,12 +23,12 @@
 
 .onboarding-details p a{
   color: red;
-  text-decoration: none;
+  text-decoration: underline;
   text-transform: capitalize;
 }
 
 .onboarding-details p a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .heading h2 {
