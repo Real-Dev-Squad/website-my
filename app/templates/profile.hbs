@@ -1,7 +1,7 @@
 {{page-title 'Profile'}}
 
 <div class="profile-container">
-  <form class="profile-form">
+  <form class="profile-form" {{on 'submit' (fn this.handleSubmit)}}>
     <div class='picture_container'>
       {{#if @model.picture.url}}
       <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
@@ -30,7 +30,7 @@
         />
       {{/each}}
     </div>
-    <button type="submit" class="profile-form-submit">Submit</button>
+    <button type="submit" class="profile-form-submit" disabled={{this.isSubmitDisabled}}>Submit</button>
   </form>
 </div>
 

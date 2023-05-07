@@ -3,6 +3,7 @@ import ENV from 'website-my/config/environment';
 import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 const BASE_URL = ENV.BASE_API_URL;
 
 export default class ProfileController extends Controller {
@@ -14,17 +15,17 @@ export default class ProfileController extends Controller {
   @tracked formDataKeyName = 'profile';
   @tracked showEditProfilePictureModal = false;
   @tracked title = 'Profile Details';
+  @tracked isSubmitDisabled = true;
 
   @tracked formData = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    company: '',
-    designation: '',
-    linkedin_id: '',
-    instagram_id: '',
-    twitter_id: '',
-    website: '',
+    first_name: this.model.first_name,
+    last_name: this.model.last_name,
+    email: this.model.email,
+    company: this.model.company,
+    designation: this.model.designation,
+    linkedin_id: this.model.linkedin_id,
+    twitter_id: this.model.twitter_id,
+    website: this.model.website,
   };
 
   @tracked fields = [
@@ -103,7 +104,7 @@ export default class ProfileController extends Controller {
       id: 'website',
       label: 'Personal Website',
       type: 'text',
-      required: true,
+      required: false,
       placeholder: 'e.g mysite.com',
       icon_url: 'icons/website.svg',
       showError: false,
@@ -113,6 +114,20 @@ export default class ProfileController extends Controller {
 
   @action handleFieldChange(name, value) {
     set(this.formData, name, value);
+
+    const anyErrors = this.fields.map((field) => {
+      let hasError = false;
+
+      if (field.required && this.formData[field.id] === '') {
+        hasError = true;
+      } else if (field.validator) {
+        if (!field.validator(this.formData[field.id])) {
+          hasError = true;
+        }
+      }
+      return hasError;
+    });
+    this.isSubmitDisabled = anyErrors.filter(Boolean).length;
   }
 
   @action handleFieldValidation(id, isValid) {
@@ -129,6 +144,45 @@ export default class ProfileController extends Controller {
     const pattern =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     return pattern.test(email) ? true : false;
+  }
+
+  removeEmptyFields(reqObject) {
+    const objectRequested = reqObject;
+    for (const field in objectRequested) {
+      if (!objectRequested[field]) {
+        delete objectRequested[field];
+      } else if (field === 'yoe') {
+        objectRequested[field] = parseInt(objectRequested[field]);
+      }
+    }
+    return objectRequested;
+  }
+
+  @action async handleSubmit(e) {
+    e.preventDefault();
+    const cleanReqObject = this.removeEmptyFields(this.formData);
+    try {
+      const response = await fetch(`${BASE_URL}/users/self`, {
+        method: 'PATCH',
+        body: JSON.stringify(cleanReqObject),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      const { status } = response;
+      if (status !== 204) {
+        this.toast.error(
+          'Something went wrong. Please check console errors.',
+          '',
+          toastNotificationTimeoutOptions
+        );
+      }
+    } catch (error) {
+      console.error('Error : ', error);
+    }
+    //finally {}
   }
 
   @action handleShowEditProfilePictureModal() {

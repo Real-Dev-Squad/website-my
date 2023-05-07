@@ -143,6 +143,11 @@
   padding: 1rem 4rem;
 }
 
+.profile-form-submit:disabled {
+  background-color: #e5efeb;
+  color: #9ca3af;
+}
+
 .profile-field-error .profile-field-input-container {
   border-color: red;
 }
