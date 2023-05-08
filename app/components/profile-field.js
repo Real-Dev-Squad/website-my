@@ -24,9 +24,4 @@ export default class ProfileFieldComponent extends Component {
 
     onBlur(id, isValid);
   }
-
-  get error() {
-    const { showError, errorMessage } = this.args;
-    return `${showError ? errorMessage : ''}`;
-  }
 }

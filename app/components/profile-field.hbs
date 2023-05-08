@@ -1,8 +1,9 @@
-<section class={{if this.error 'profile-field profile-field-error' 'profile-field'}}>
-  <label class='profile-field-label' for={{@id}}>{{@label}}</label>
+<section data-test-profile-field class={{if @showError 'profile-field profile-field-error' 'profile-field'}}>
+  <label data-test-profile-field-label class='profile-field-label' for={{@id}}>{{@label}}</label>
   <div class="profile-field-input-container">
-    <img src={{@icon_url}} alt="" role="presentation">
+    <img data-test-profile-field-icon src={{@icon_url}} alt="" role="presentation">
     <Input 
+      data-test-profile-field-input
       type="text" 
       id={{@id}}
       value={{@value}}
@@ -16,5 +17,5 @@
       <img src="icons/cross.svg" alt="" role="presentation">
     </button>
   </div>
-  <p class="profile-field-error-message">{{this.error}}</p>
+  <p data-test-profile-field-error class="profile-field-error-message">{{if @showError @errorMessage ''}}</p>
 </section>
