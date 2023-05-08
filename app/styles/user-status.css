@@ -12,12 +12,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 0rem 1rem 0rem;
+  padding: 1rem 1.5rem 1rem 0.5rem;
   height: fit-content;
 }
 
 .onboarding-details p {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin-left: 20px;
 }
 
