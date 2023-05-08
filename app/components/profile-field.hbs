@@ -13,9 +13,6 @@
       {{on 'input' (fn this.inputFieldChanged)}}
       {{on 'blur' (fn this.checkInputValidation)}}
     />
-    <button type="button" class="profile-field-input-delete">
-      <img src="icons/cross.svg" alt="" role="presentation">
-    </button>
   </div>
   <p data-test-profile-field-error class="profile-field-error-message">{{if @showError @errorMessage ''}}</p>
 </section>
