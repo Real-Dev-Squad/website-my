@@ -11,6 +11,13 @@ module('Integration | Component | qr-code', function (hooks) {
     await render(hbs`
      <Qrcode @text = {{this.userId}} />
     `);
-    assert.ok(true);
+    assert.dom('[data-test="qr-code"]').exists();
+  });
+
+  test('QR code component and text does not render on mobile route', async function (assert) {
+    await render(hbs`
+     <Qrcode />
+    `);
+    assert.dom('[data-test="qr-code"]').doesNotExist();
   });
 });

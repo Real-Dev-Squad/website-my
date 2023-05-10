@@ -1,3 +1,3 @@
-import MobileRoute from '../routes/mobile';
+import Controller from '@ember/controller';
 
-export default class MobileController extends MobileRoute {}
+export default class MobileController extends Controller {}
