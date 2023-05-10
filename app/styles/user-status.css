@@ -3,7 +3,7 @@
   max-width: 450px;
   border-radius: 10px;
   background-color: var(--white);
-  box-shadow: 0 0 15px -7px var(--onboarding-card--box-shadow);
+  box-shadow: 0 0 14px 0 var(--onboarding-card--box-shadow);
   color: var(--onboarding--text);
   position: absolute;
   left: 0;
