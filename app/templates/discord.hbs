@@ -42,12 +42,9 @@
           <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
           <label for="authorize">I Authorize Real Dev squad to change my nickname in their server.</label>
         </div>
-        
-        {{#if this.consent}}
-          <button type="button" class="discord__btn btn-enabled" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
-        {{else}}
-          <button type="button" class="discord__btn btn-disabled" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
-        {{/if}}
+
+        <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button> 
+               
       {{/if}}
     {{/if}}
   {{/if}}
