@@ -35,7 +35,6 @@
             <p class="card-data__username">{{@model.userData.username}}</p>
             <p class="card-data__account">Real Dev Squad</p>
           </div>
-  
         </div>
 
         <div>
@@ -44,7 +43,7 @@
         </div>
 
         <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button> 
-               
+
       {{/if}}
     {{/if}}
   {{/if}}
