@@ -73,3 +73,13 @@
   font-weight: 700;
   border-radius: 8px;
 }
+
+.btn-enabled {
+  color: var(--button--small--bg);
+  background-color: var(--button--small--text);
+}
+
+.btn-disabled {
+  color: var(--fetch--button--color);
+  background-color: var(--fetch--button--bg--disabled);
+}

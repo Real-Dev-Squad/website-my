@@ -35,9 +35,19 @@
             <p class="card-data__username">{{@model.userData.username}}</p>
             <p class="card-data__account">Real Dev Squad</p>
           </div>
+  
+        </div>
+
+        <div>
+          <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
+          <label for="authorize">I Authorize Real Dev squad to change my nickname in their server.</label>
         </div>
         
-        <button type="button" class="discord__btn" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
+        {{#if this.consent}}
+          <button type="button" class="discord__btn btn-enabled" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
+        {{else}}
+          <button type="button" class="discord__btn btn-disabled" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
+        {{/if}}
       {{/if}}
     {{/if}}
   {{/if}}

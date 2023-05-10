@@ -10,24 +10,33 @@ export default class DiscordController extends Controller {
     this.model.externalAccountData.attributes.discordId || '';
   @tracked linkStatus = 'not-linked';
   @tracked isLinking = false;
+  @tracked consent = false;
+
+  @action setConsent() {
+    this.consent = !this.consent;
+  }
 
   @action async linkDiscordAccount() {
     try {
       this.isLinking = true;
 
-      const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
-        method: 'PATCH',
-        body: JSON.stringify({ discordId: this.discordId }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
+      if (this.consent) {
+        const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
+          method: 'PATCH',
+          body: JSON.stringify({ discordId: this.discordId }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
 
-      if (response.status === 204) {
-        this.linkStatus = 'linked';
+        if (response.status === 204) {
+          this.linkStatus = 'linked';
+        } else {
+          this.linkStatus = 'failure';
+        }
       } else {
-        this.linkStatus = 'failure';
+        alert('Please provide your consent by clicking the checkbox');
       }
     } catch (error) {
       this.linkStatus = 'failure';
