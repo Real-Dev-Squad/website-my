@@ -1,12 +1,4 @@
 {{page-title "Mobile"}} 
-<div class='qr-code-container'> 
- <QrCode
-    data-test="qr-code"
-    @text= {{@model.userId}}
-    @darkColor='#00000'
-    class = 'qr-code'
-  />
- </div>
- <p class='qr-code-text'>Check out our RDS mobile app</p>
+<Qrcode @text={{@model.userId}} />
 {{outlet}}  
 

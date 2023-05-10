@@ -47,25 +47,6 @@ body {
   margin-top: 50px;
 }
 
-.qr-code-container{
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-}
-
-.qr-code{
-  width: 200px ;
-  height: 200px;
-  margin-top: 50px;
-  display: flex;
-  text-align: center;
-}
-
-.qr-code-text{
-  text-align: center;
-  margin-top:15px;
-}
-
 .footer {
   font-weight: lighter;
   text-align: center;

@@ -10,6 +10,7 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @service toast;
+  @tracked status = this.model;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
   @tracked newStatus;
