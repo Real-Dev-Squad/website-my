@@ -1,4 +1,4 @@
-{{page-title "Discord"}}s
+{{page-title "Discord"}}
 
 <section class="discord">
   {{#if @model.isTokenExpired}}
@@ -36,8 +36,14 @@
             <p class="card-data__account">Real Dev Squad</p>
           </div>
         </div>
-        
-        <button type="button" class="discord__btn" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button>
+
+        <div>
+          <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
+          <label for="authorize">I Authorize Real Dev squad to change my nickname in their server.</label>
+        </div>
+
+        <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button> 
+
       {{/if}}
     {{/if}}
   {{/if}}
