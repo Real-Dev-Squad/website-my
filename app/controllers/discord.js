@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import ENV from 'website-my/config/environment';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -36,7 +37,10 @@ export default class DiscordController extends Controller {
           this.linkStatus = 'failure';
         }
       } else {
-        alert('Please provide your consent by clicking the checkbox');
+        this.toast.error(
+          'Please provide the consent by clicking the checkbox',
+          toastNotificationTimeoutOptions
+        );
       }
     } catch (error) {
       this.linkStatus = 'failure';
