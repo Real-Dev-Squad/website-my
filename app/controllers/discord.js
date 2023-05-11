@@ -39,6 +39,7 @@ export default class DiscordController extends Controller {
       } else {
         this.toast.error(
           'Please provide the consent by clicking the checkbox',
+          'ERROR',
           toastNotificationTimeoutOptions
         );
       }
