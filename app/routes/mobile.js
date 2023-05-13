@@ -2,7 +2,6 @@ import Route from '@ember/routing/route';
 import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-import { USER_STATES } from '../constants/user-status';
 import redirectAuth from '../utils/redirect-auth';
 
 const API_BASE_URL = ENV.BASE_API_URL;
@@ -12,14 +11,13 @@ export default class MobileRoute extends Route {
 
   model = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/users/status/self`, {
+      const response = await fetch(`${API_BASE_URL}/users/self`, {
         credentials: 'include',
       });
       const userData = await response.json();
       if (response.status === 200) {
         return {
-          status: userData?.data?.currentStatus?.state ?? USER_STATES.DNE,
-          userId: userData.userId,
+          userId: userData.id,
         };
       } else if (response.status === 401) {
         this.toast.error(
@@ -35,7 +33,7 @@ export default class MobileRoute extends Route {
           '',
           toastNotificationTimeoutOptions
         );
-        return { status: USER_STATES.DNE, userId: userData.userId };
+        return {} ;
       }
     } catch (error) {
       console.error(error.message);
