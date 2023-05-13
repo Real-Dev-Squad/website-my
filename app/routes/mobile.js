@@ -27,13 +27,6 @@ export default class MobileRoute extends Route {
         );
         // added setTimeout here because before new page opens user should be notified of error by toast
         setTimeout(redirectAuth, 2000);
-      } else if (response.status === 404) {
-        this.toast.error(
-          `Your Status data doesn't exist yet. Please choose your status from the options below.`,
-          '',
-          toastNotificationTimeoutOptions
-        );
-        return {} ;
       }
     } catch (error) {
       console.error(error.message);
