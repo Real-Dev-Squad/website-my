@@ -129,6 +129,9 @@
 
   --input-fill-lower--bg: #424cc1;
 
+  --onboarding-card--box-shadow: rgba(0, 0, 0, 0.65);
+  --onboarding--text: #000000;
+
   --overlay--bg: #000000b3;
 
   --modal--bg: #ffffff;

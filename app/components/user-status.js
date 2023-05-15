@@ -46,6 +46,9 @@ export default class UserStatusComponent extends Component {
       ],
     },
     {
+      status: USER_STATES.ONBOARDING,
+    },
+    {
       status: USER_STATES.DNE,
       message: `Your Status doesn't exist`,
       otherAvailableStatus: [
