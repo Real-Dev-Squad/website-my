@@ -8,6 +8,7 @@ export const USER_STATES = {
   IDLE: 'IDLE',
   ACTIVE: 'ACTIVE',
   OOO: 'OOO',
+  ONBOARDING: 'ONBOARDING',
   DNE: 'DNE',
 };
 export const WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE =
