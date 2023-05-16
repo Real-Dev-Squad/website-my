@@ -182,7 +182,6 @@ export default class ProfileController extends Controller {
     } catch (error) {
       console.error('Error : ', error);
     }
-    //finally {}
   }
 
   @action handleShowEditProfilePictureModal() {
