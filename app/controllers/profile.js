@@ -172,7 +172,12 @@ export default class ProfileController extends Controller {
       });
 
       const { status } = response;
-      if (status !== 204) {
+      if (status === 204) {
+        this.toast.success('Updated details successfully', '', {
+          ...toastNotificationTimeoutOptions,
+          timeOut: '1000',
+        });
+      } else if (status !== 204) {
         this.toast.error(
           'Something went wrong. Please check console errors.',
           '',
