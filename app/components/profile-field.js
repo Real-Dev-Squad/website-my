@@ -12,15 +12,8 @@ export default class ProfileFieldComponent extends Component {
 
   @action
   checkInputValidation(event) {
-    const { id, onBlur, validator } = this.args;
-    const value = event.target.value;
+    const { id, onBlur } = this.args;
     let isValid = event.target.validity.valid;
-
-    if (validator) {
-      if (!validator(value)) {
-        isValid = false;
-      }
-    }
 
     onBlur(id, isValid);
   }

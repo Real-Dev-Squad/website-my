@@ -20,7 +20,6 @@ export default class ProfileController extends Controller {
   @tracked formData = {
     first_name: this.model.first_name,
     last_name: this.model.last_name,
-    email: this.model.email,
     company: this.model.company,
     designation: this.model.designation,
     linkedin_id: this.model.linkedin_id,
@@ -48,17 +47,6 @@ export default class ProfileController extends Controller {
       icon_url: 'icons/user.svg',
       showError: false,
       errorMessage: 'Last name is required',
-    },
-    {
-      id: 'email',
-      label: 'Email*',
-      type: 'email',
-      required: true,
-      placeholder: 'e.g johndoe@gmail.com',
-      icon_url: 'icons/mail.svg',
-      showError: false,
-      errorMessage: 'Valid email is required',
-      validator: this.emailValidator,
     },
     {
       id: 'company',
@@ -120,10 +108,6 @@ export default class ProfileController extends Controller {
 
       if (field.required && this.formData[field.id] === '') {
         hasError = true;
-      } else if (field.validator) {
-        if (!field.validator(this.formData[field.id])) {
-          hasError = true;
-        }
       }
       return hasError;
     });
@@ -137,13 +121,6 @@ export default class ProfileController extends Controller {
     } else {
       set(this.fields[index], 'showError', true);
     }
-  }
-
-  @action emailValidator(email) {
-    if (typeof email !== 'string') return false;
-    const pattern =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    return pattern.test(email) ? true : false;
   }
 
   removeEmptyFields(reqObject) {
