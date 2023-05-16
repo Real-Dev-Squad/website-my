@@ -30,13 +30,13 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
+  border: 1px solid var(--profile-field-input-border-clr);
+  background-color: var(--profile-field-input-bg-clr);
   padding: 1rem;
 }
 
 .profile-field-input-container:focus-within {
-  border-color: #1c64f2;
+  border-color: var(--profile-input-outline-clr);
 }
 
 .profile-field-input {
@@ -47,14 +47,7 @@
 }
 
 .profile-field-input:active {
-  border-color: #1c64f2;
-}
-
-.profile-field-input-delete {
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: none;
+  border-color: var(--profile-input-outline-clr);
 }
 
 .profile-field-input-delete:nth-of-type(2) {
@@ -62,7 +55,7 @@
 }
 
 .profile-field-error-message {
-  color: red;
+  color: var(--profile-error-text-clr);
   margin: 0;
   bottom: 0;
   position: absolute;
@@ -99,7 +92,7 @@
   padding: 0;
   font-size: 1rem;
   margin-top: 0.5rem;
-  color: #1e429f;
+  color: var(--profile-edit-btn-clr);
   font-weight: 600;
 }
 
@@ -136,20 +129,20 @@
 .profile-form-submit {
   border-radius: 8px;
   border: none;
-  background-color: #1c64f2;
-  color: #fff;
+  background-color: var(--profile-input-outline-clr);
+  color: var(--body-bg-color);
   margin: 3rem auto;
   display: block;
   padding: 1rem 4rem;
 }
 
 .profile-form-submit:disabled {
-  background-color: #e5efeb;
-  color: #9ca3af;
+  background-color: var(--profile-disabled-btn-bg-clr);
+  color: var(--profile-disabled-btn-text-clr);
 }
 
 .profile-field-error .profile-field-input-container {
-  border-color: red;
+  border-color: var(--profile-error-text-clr);
 }
 
 @media screen and (max-width: 480px) {
