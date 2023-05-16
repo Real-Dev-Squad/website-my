@@ -129,7 +129,7 @@
 .profile-form-submit {
   border-radius: 8px;
   border: none;
-  background-color: var(--profile-input-outline-clr);
+  background-color: var(--profile-submit-btn-clr);
   color: var(--body-bg-color);
   margin: 3rem auto;
   display: block;
