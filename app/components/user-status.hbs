@@ -3,21 +3,21 @@
     <Spinner />
   </div>
 {{else}}
-<div class="heading">
+<div data-test-heading class="heading">
   {{#each this.currentUserStatus as |currentStatus|}}
   {{#if (eq @status currentStatus.status)}}
     {{#if (eq currentStatus.status "ONBOARDING")}}
       <div data-test-onboarding-details class="onboarding-details">
         <h2 data-test-status>You are undergoing onboarding</h2>
-        <p data-test-details>
+        <p data-test-details-p1>
           If you are a Developer, please complete your submission for 
           <a href="https://github.com/Real-Dev-Squad/lift-simulation">Lift Simulation</a>, 
           and ask for doubts in the team chat on Discord.
         </p>
-        <p data-test-details>If you are not a developer, please contact Ankush for next steps.</p>
+        <p data-test-details-p2>If you are not a developer, please contact Ankush for next steps.</p>
         <button class="buttons__active" type="button"  {disabled={{@isStatusUpdating}} {{on "click" (fn
           this.changeStatus "ACTIVE" )}} data-test-active-button>
-          <span>Change your status to Active</span>
+          <span data-test-btn-label="ACTIVE">Change your status to Active</span>
         </button>
       </div>
     {{else}}
@@ -27,12 +27,12 @@
   {{/each}}
 </div>
 
-<div class="buttons">
+<div data-test-btn-div class="buttons">
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
       {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
-        <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
-          <span>{{otherPossibleStatus.message}}</span>
+        <button data-test-btn={{otherPossibleStatus.status}} class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
+          <span data-test-btn-label={{otherPossibleStatus.status}}>{{otherPossibleStatus.message}}</span>
         </button>
       {{/each}}
     {{/if}}
