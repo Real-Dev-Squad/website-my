@@ -9,6 +9,7 @@
 .linking__logo {
   margin-top: 20px;
   display: flex;
+  align-items: center;
 }
 
 .logo{
@@ -18,9 +19,6 @@
 
 .linking__logo>.line {
   width: 300px;
-  border-top: none;
-  position: relative;
-  bottom: 50%;
   border-bottom: 4px dashed black;
 }
 
@@ -67,7 +65,7 @@
   font-size: 1.2rem;
 }
 
-hr {
+.discord__container>.break {
   width: 95%;
   opacity: 100%;
 }
