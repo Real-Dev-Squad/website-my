@@ -11,6 +11,11 @@
   display: flex;
 }
 
+.logo{
+  width: 100px;
+  height: 100px;
+}
+
 .linking__logo>.line {
   width: 300px;
   border-top: none;
@@ -39,7 +44,8 @@
   padding: 0;
 }
 
-.container {
+.discord__container {
+  padding: 8px 0;
   border: 2px solid var(--card-border-color);
   margin-top: 20px;
   display: flex;

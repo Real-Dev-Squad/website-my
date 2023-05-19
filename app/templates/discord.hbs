@@ -20,18 +20,17 @@
         </div>
       {{else if (eq this.linkStatus "not-linked")}}
         <div class="linking__logo">
-          <img src="RDSLogo.png" alt="real_dev_squad" height="100px" width="100px" />
+          <img src="RDSLogo.png" alt="real_dev_squad" class="logo" />
           <div class="line"></div>
-          <img src="DiscordLogo.png" alt="real_dev_squad" height="100px" width="100px" />
+          <img src="DiscordLogo.png" alt="discord" class="logo" />
         </div>
         <h1 class="discord__title">Authorize Bot</h1>
-        <div class="container">
+        <div class="discord__container">
           <p class="card__note"><strong>Real Dev Squad </strong>wants to access your <strong>Discord</strong></p>
           <hr>
           <div class="discord__card">
             <div class="discord__card-data">
-              <img class="card-data__img" src={{@model.externalAccountData.attributes.userAvatar}} height="100px"
-                width="100px" alt="Discord Avatar" />
+              <img class="card-data__img logo" src={{@model.externalAccountData.attributes.userAvatar}} alt="Discord Avatar" />
               <p class="card-data__username">
                 {{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
               <p class="card-data__account">Discord</p>
@@ -40,7 +39,7 @@
             <h2 class="discord__arrow">&harr;</h2>
 
             <div class="discord__card-data">
-              <img class="card-data__img" src={{@model.userData.picture.url}} height="100px" width="100px"
+              <img class="card-data__img logo" src={{@model.userData.picture.url}}
                 alt="Real Dev Squad Avatar" />
               <p class="card-data__username">{{@model.userData.username}}</p>
               <p class="card-data__account">Real Dev Squad</p>
