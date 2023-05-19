@@ -19,31 +19,46 @@
           <p class="error__text">Something went wrong. Please try again.</p>
         </div>
       {{else if (eq this.linkStatus "not-linked")}}
+        <div class="linking__logo">
+          <img src="RDSLogo.png" alt="real_dev_squad" height="100px" width="100px" />
+          <div class="line"></div>
+          <img src="DiscordLogo.png" alt="real_dev_squad" height="100px" width="100px" />
+        </div>
         <h1 class="discord__title">Authorize Bot</h1>
+        <div class="container">
+          <p class="card__note"><strong>Real Dev Squad </strong>wants to access your <strong>Discord</strong></p>
+          <hr>
+          <div class="discord__card">
+            <div class="discord__card-data">
+              <img class="card-data__img" src={{@model.externalAccountData.attributes.userAvatar}} height="100px"
+                width="100px" alt="Discord Avatar" />
+              <p class="card-data__username">
+                {{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
+              <p class="card-data__account">Discord</p>
+            </div>
 
-        <div class="discord__card">
-          <div class="discord__card-data">
-            <img class="card-data__img" src={{@model.externalAccountData.attributes.userAvatar}} height="100px" width="100px" alt="Discord Avatar" />
-            <p class="card-data__username">{{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
-            <p class="card-data__account">Discord</p>
+            <h2 class="discord__arrow">&harr;</h2>
+
+            <div class="discord__card-data">
+              <img class="card-data__img" src={{@model.userData.picture.url}} height="100px" width="100px"
+                alt="Real Dev Squad Avatar" />
+              <p class="card-data__username">{{@model.userData.username}}</p>
+              <p class="card-data__account">Real Dev Squad</p>
+            </div>
           </div>
-
-          <h2 class="discord__arrow">&harr;</h2>
-
-          <div class="discord__card-data">
-            <img class="card-data__img" src={{@model.userData.picture.url}} height="100px" width="100px" alt="Real Dev Squad Avatar" />
-            <p class="card-data__username">{{@model.userData.username}}</p>
-            <p class="card-data__account">Real Dev Squad</p>
+          <p class="card__TnC">By authorizing us you allow us to:</p>
+          <ul class="card__TnC">
+            <li>Change your name within our server.</li>
+            <li>Read/process your messages </li>
+          </ul>
+          <hr>
+          <div>
+            <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
+            <label for="authorize">I Accept the above mentioned clauses</label>
           </div>
+          <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn
+            this.linkDiscordAccount)}}>Authorize</button>
         </div>
-
-        <div>
-          <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
-          <label for="authorize">I Authorize Real Dev squad to change my nickname in their server.</label>
-        </div>
-
-        <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn this.linkDiscordAccount)}}>Authorize</button> 
-
       {{/if}}
     {{/if}}
   {{/if}}

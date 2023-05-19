@@ -6,6 +6,18 @@
   height: 100%;
 }
 
+.linking__logo {
+  display: flex;
+}
+
+.linking__logo>.line {
+  width: 300px;
+  border-top: none;
+  position: relative;
+  bottom: 50%;
+  border-bottom: 4px dashed black;
+}
+
 .discord__success,
 .discord__error {
   text-align: center;
@@ -26,6 +38,33 @@
   padding: 0;
 }
 
+.container {
+  border: 2px solid var(--card-border-color);
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  border-radius: 8px;
+}
+
+.card__note {
+  color: black;
+  font-size: 1.2rem;
+}
+
+.card__TnC {
+  width: 500px;
+  text-align: left;
+  color: black;
+  font-size: 1.2rem;
+}
+
+hr {
+  width: 95%;
+  opacity: 100%;
+}
+
 .discord__card {
   display: flex;
   align-items: center;
@@ -40,15 +79,18 @@
   padding: 1rem;
   border: 2px solid var(--card-border-color);
   border-radius: 8px;
+  width: 200px;
+  background-color: rgb(234, 232, 232);
 }
 
-.card-data__img{
+.card-data__img {
   border-radius: 50%;
 }
 
 .card-data__username {
   font-size: 1.5rem;
   font-weight: 700;
+  color: black;
   margin: 0.5rem;
 }
 
