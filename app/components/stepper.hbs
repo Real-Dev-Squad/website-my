@@ -1,0 +1,9 @@
+{{#if this.arePropsValid}}
+  <article data-test-stepper>
+    <ul>
+      {{#each this.numberOfSteps as |_ index|}}
+        <li>{{index}}</li>
+      {{/each}}
+    </ul>
+  </article>
+{{/if}}

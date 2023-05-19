@@ -9,7 +9,7 @@ module('Integration | Component | stepper', (hooks) => {
   test('it not renders the stepper component when no props passed', async function (assert) {
     await render(hbs`<Stepper />`);
 
-    assert.dom('[data-test-stpper]').doesNotExist();
+    assert.dom('[data-test-stepper]').doesNotExist();
   });
 
   test('it renders the stepper component without active steps', async function (assert) {
@@ -19,8 +19,8 @@ module('Integration | Component | stepper', (hooks) => {
     });
 
     await render(
-      hbs`<Stepper 
-      @totalSteps={{this.totalSteps}} 
+      hbs`<Stepper
+      @totalSteps={{this.totalSteps}}
       @completedSteps={{this.completedSteps}}
        />`
     );
@@ -41,8 +41,8 @@ module('Integration | Component | stepper', (hooks) => {
     });
 
     await render(
-      hbs`<Stepper 
-      @totalSteps={{this.totalSteps}} 
+      hbs`<Stepper
+      @totalSteps={{this.totalSteps}}
       @completedSteps={{this.completedSteps}}
        />`
     );
