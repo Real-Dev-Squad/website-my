@@ -23,16 +23,22 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
+    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="IDLE"]').exists();
+    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
       .hasText('Change your status to Idle');
 
     assert.dom('[data-test-btn="OOO"]').exists();
+    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
       .hasText('Change your status to OOO');
@@ -64,6 +70,8 @@ module('Integration | Component | user-status-modal', function (hooks) {
         'If you are not a developer, please contact Ankush for next steps.'
       );
     assert.dom('[data-test-active-button]').exists();
+    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-active-button]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
@@ -85,11 +93,15 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="IDLE"]').exists();
+    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
       .hasText('Change your status to Idle');
 
     assert.dom('[data-test-btn="OOO"]').exists();
+    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
       .hasText('Change your status to OOO');
@@ -111,11 +123,15 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
+    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="OOO"]').exists();
+    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
       .hasText('Change your status to OOO');
@@ -138,11 +154,15 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
+    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="IDLE"]').exists();
+    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
       .hasText('Change your status to Idle');
