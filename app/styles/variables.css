@@ -20,7 +20,6 @@
   --button-identity--text: white;
   --button-identity--bg: rgb(81, 81, 245);
 
-  
   --button-image-form--bg: #1d1283;
   --button-image-form--bg--disabled: #ddd;
   --button-image-form--bg--hover: #ddd;
@@ -174,4 +173,12 @@
 
   --placeholder-text-color: grey;
 
+  --profile-field-input-bg-clr: #f9fafb;
+  --profile-field-input-border-clr: #d1d5db;
+  --profile-input-outline-clr: #1c64f2;
+  --profile-submit-btn-clr: #1d1283;
+  --profile-error-text-clr: red;
+  --profile-edit-btn-clr: #1e429f;
+  --profile-disabled-btn-bg-clr: #e5efeb;
+  --profile-disabled-btn-text-clr: #9ca3af;
 }
