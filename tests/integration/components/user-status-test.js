@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | user-status-modal', function (hooks) {
+module('Integration | Component | user-status', function (hooks) {
   setupRenderingTest(hooks);
 
   test('status is "DNE"', async function (assert) {
@@ -23,21 +23,21 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
-    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').hasClass('buttons__active');
     assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="IDLE"]').exists();
-    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').hasClass('buttons__idle');
     assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
       .hasText('Change your status to Idle');
 
     assert.dom('[data-test-btn="OOO"]').exists();
-    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').hasClass('buttons__ooo');
     assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
@@ -70,7 +70,7 @@ module('Integration | Component | user-status-modal', function (hooks) {
         'If you are not a developer, please contact Ankush for next steps.'
       );
     assert.dom('[data-test-active-button]').exists();
-    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-active-button]').hasClass('buttons__active');
     assert.dom('[data-test-active-button]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
@@ -93,14 +93,14 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="IDLE"]').exists();
-    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').hasClass('buttons__idle');
     assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
       .hasText('Change your status to Idle');
 
     assert.dom('[data-test-btn="OOO"]').exists();
-    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').hasClass('buttons__ooo');
     assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
@@ -123,14 +123,14 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
-    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').hasClass('buttons__active');
     assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="OOO"]').exists();
-    assert.dom('.buttons__ooo').exists();
+    assert.dom('[data-test-btn="OOO"]').hasClass('buttons__ooo');
     assert.dom('[data-test-btn="OOO"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="OOO"]')
@@ -154,14 +154,14 @@ module('Integration | Component | user-status-modal', function (hooks) {
 
     assert.dom('[data-test-btn-div]').exists();
     assert.dom('[data-test-btn="ACTIVE"]').exists();
-    assert.dom('.buttons__active').exists();
+    assert.dom('[data-test-btn="ACTIVE"]').hasClass('buttons__active');
     assert.dom('[data-test-btn="ACTIVE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="ACTIVE"]')
       .hasText('Change your status to Active');
 
     assert.dom('[data-test-btn="IDLE"]').exists();
-    assert.dom('.buttons__idle').exists();
+    assert.dom('[data-test-btn="IDLE"]').hasClass('buttons__idle');
     assert.dom('[data-test-btn="IDLE"]').isNotDisabled();
     assert
       .dom('[data-test-btn-label="IDLE"]')
