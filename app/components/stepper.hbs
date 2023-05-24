@@ -1,17 +1,17 @@
 {{#if this.arePropsValid}}
-<article data-test-stepper class='stepper--container'>
+<article data-test-stepper class='stepper'>
   <div class='stepper-progress--container'>
     <div class='progress'></div>
     {{#each this.numberOfSteps as |_ index|}}
     <div data-test-stepper-step={{getStepperStepDataTestSelector index completedSteps=@completedSteps }}
       class='stepper__step'>
-      {{#if (eq index this.completedSteps)}}
+      {{#if (eq index this.parsedCompletedSteps)}}
       <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#1d1283' viewBox='0 0 256 256'>
         <path d='M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z'>
         </path>
       </svg>
       {{else if
-      (and (gt this.completedSteps -1) (lt index this.completedSteps))
+      (lt index this.parsedCompletedSteps)
       }}
       <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#1d1283' viewBox='0 0 256 256'>
         <path

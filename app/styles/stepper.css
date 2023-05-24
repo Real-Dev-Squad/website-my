@@ -1,9 +1,4 @@
-:root {
-  --line-border-fill: #1d1283;
-  --line-border-empty: #e0e0e0;
-}
-
-.stepper--container {
+.stepper {
   text-align: center;
 }
 
@@ -11,9 +6,6 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-bottom: 30px;
-  max-width: 100%;
-  width: 350px;
 }
 
 .progress {

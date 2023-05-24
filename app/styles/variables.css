@@ -20,7 +20,6 @@
   --button-identity--text: white;
   --button-identity--bg: rgb(81, 81, 245);
 
-  
   --button-image-form--bg: #1d1283;
   --button-image-form--bg--disabled: #ddd;
   --button-image-form--bg--hover: #ddd;
@@ -174,4 +173,6 @@
 
   --placeholder-text-color: grey;
 
+  --line-border-fill: #1d1283;
+  --line-border-empty: #e0e0e0;
 }
