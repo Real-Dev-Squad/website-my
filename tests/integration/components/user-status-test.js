@@ -12,7 +12,7 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       updateStatus: (statusPayLoad) => {
         const {
-          currentStatus: { updatedAt, from, state  },
+          currentStatus: { updatedAt, from, state },
         } = statusPayLoad;
         assert.equal(state, 'ACTIVE', 'new state present in the payload');
         assert.ok(typeof from === 'number', 'from is a numeric timestamp');
@@ -22,7 +22,7 @@ module('Integration | Component | user-status', function (hooks) {
         );
       },
       changeStatus: () => {
-        assert.ok('true','button is clicked');
+        assert.ok('true', 'button is clicked');
       },
     });
     await render(hbs`
@@ -69,7 +69,7 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       updateStatus: (statusPayLoad) => {
         const {
-          currentStatus: { updatedAt, from, state  },
+          currentStatus: { updatedAt, from, state },
         } = statusPayLoad;
         assert.equal(state, 'ACTIVE', 'new state present in the payload');
         assert.ok(typeof from === 'number', 'from is a numeric timestamp');
@@ -114,7 +114,7 @@ module('Integration | Component | user-status', function (hooks) {
       status: 'ACTIVE',
       isStatusUpdating: false,
       changeStatus: () => {
-        assert.ok('true','button is clicked');
+        assert.ok('true', 'button is clicked');
       },
     });
     await render(hbs`
@@ -151,7 +151,7 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       updateStatus: (statusPayLoad) => {
         const {
-          currentStatus: { updatedAt, from, state  },
+          currentStatus: { updatedAt, from, state },
         } = statusPayLoad;
         assert.equal(state, 'ACTIVE', 'new state present in the payload');
         assert.ok(typeof from === 'number', 'from is a numeric timestamp');
@@ -161,7 +161,7 @@ module('Integration | Component | user-status', function (hooks) {
         );
       },
       changeStatus: () => {
-        assert.ok('true','button is clicked');
+        assert.ok('true', 'button is clicked');
       },
     });
     await render(hbs`
@@ -199,7 +199,7 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       updateStatus: (statusPayLoad) => {
         const {
-          currentStatus: { updatedAt, from, state  },
+          currentStatus: { updatedAt, from, state },
         } = statusPayLoad;
         assert.equal(state, 'ACTIVE', 'new state present in the payload');
         assert.ok(typeof from === 'number', 'from is a numeric timestamp');
@@ -209,7 +209,7 @@ module('Integration | Component | user-status', function (hooks) {
         );
       },
       changeStatus: () => {
-        assert.ok('true','button is clicked');
+        assert.ok('true', 'button is clicked');
       },
     });
     await render(hbs`
