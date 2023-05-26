@@ -7,9 +7,10 @@
 }
 
 .linking__logo {
-  margin-top: 20px;
+  margin: 20px auto;
   display: flex;
   align-items: center;
+  width: 50%;
 }
 
 .logo{
@@ -18,7 +19,7 @@
 }
 
 .linking__logo>.line {
-  width: 300px;
+  width: 90%;
   border-bottom: 4px dashed black;
 }
 
@@ -49,7 +50,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: max-content;
+  width: 30%;
   border-radius: 8px;
 }
 
@@ -59,7 +60,7 @@
 }
 
 .card__TnC {
-  width: 500px;
+  width: 90%;
   text-align: left;
   color: black;
   font-size: 1.2rem;
@@ -84,7 +85,7 @@
   padding: 1rem;
   border: 2px solid var(--card-border-color);
   border-radius: 8px;
-  width: 200px;
+  width: 40%;
   background-color: rgb(234, 232, 232);
 }
 
@@ -129,4 +130,19 @@
 .btn-disabled {
   color: var(--fetch--button--color);
   background-color: var(--fetch--button--bg--disabled);
+}
+
+@media (max-width: 550px) {
+  .discord__container{
+    width: 90%;
+  }
+
+  .logo{
+    width: 50px;
+    height: 50px;
+  }
+
+  .discord__card-data{
+    width: 30%;
+  }
 }
