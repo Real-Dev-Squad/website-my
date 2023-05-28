@@ -1,6 +1,6 @@
-{{page-title "Discord"}}
+{{page-title 'Discord'}}
 
-<section class="discord">
+<section class='discord vertical-flex mx-auto' id='discord'>
   {{#if @model.isTokenExpired}}
     <p class="error__text">Token Expired. Please generate a new token using slash commands</p>
   {{else}}
@@ -19,47 +19,75 @@
           <p class="error__text">Something went wrong. Please try again.</p>
         </div>
       {{else if (eq this.linkStatus "not-linked")}}
-        <div class="linking__logo">
-          <img src="RDSLogo.png" alt="real_dev_squad" class="logo" />
-          <div class="line"></div>
-          <img src="DiscordLogo.png" alt="discord" class="logo" />
-        </div>
-        <h1 class="discord__title">Authorize Bot</h1>
-        <div class="discord__container">
-          <p class="card__note"><strong>Real Dev Squad </strong>wants to access your <strong>Discord</strong></p>
-          <hr class="break">
-          <div class="discord__card">
-            <div class="discord__card-data">
-              <img class="card-data__img logo" src={{@model.externalAccountData.attributes.userAvatar}} alt="Discord Avatar" />
-              <p class="card-data__username">
+        <header class='header horizontal-flex w-100'>
+          <img src='RDSLogo.png' alt='real_dev_squad' class='logo' />
+          <div class='line w-100'></div>
+          <img src='DiscordLogo.png' alt='discord' class='logo' />
+        </header>
+
+        <h2 class='heading'>Authorize Bot</h2>
+
+        <main class='discord-card vertical-flex w-100'>
+
+          <p class='my-same'><strong>Real Dev Squad</strong>
+            wants to access your
+            <strong>Discord</strong>.</p>
+
+          <hr class='w-100 dark mx-auto' />
+
+          <div class='profiles horizontal-flex w-100'>
+            <div class='profile-card vertical-flex'>
+              <img
+                class='logo'
+                src={{@model.externalAccountData.attributes.userAvatar}}
+                alt='Discord Avatar'
+              />
+              <p class='username'>
                 {{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
-              <p class="card-data__account">Discord</p>
+              <p class='account'>Discord</p>
             </div>
 
-            <h2 class="discord__arrow">&harr;</h2>
+            <img src='DiscordConnector.svg' class='logo' alt='connectingline' />
 
-            <div class="discord__card-data">
-              <img class="card-data__img logo" src={{@model.userData.picture.url}}
-                alt="Real Dev Squad Avatar" />
-              <p class="card-data__username">{{@model.userData.username}}</p>
-              <p class="card-data__account">Real Dev Squad</p>
+            <div class='profile-card vertical-flex my-same'>
+              <img
+                class='logo'
+                src={{@model.userData.picture.url}}
+                alt='Real Dev Squad Avatar'
+              />
+              <p class='username'>{{@model.userData.username}}</p>
+              <p class='account'>Real Dev Squad</p>
             </div>
           </div>
-          <hr class="break">
-          <p class="card__TnC">By authorizing us you allow us to:</p>
-          <ul class="card__TnC">
-            <li>Change your name within our server.</li>
-            <li>Read/process your messages.</li>
-          </ul>
-          <hr class="break">
-          <div>
-            <input name="authorize" id="authorize" type="checkbox" {{on 'input' (fn this.setConsent)}} />
-            <label for="authorize">I Accept the above mentioned clauses</label>
+
+          <hr class='w-100 dark mx-auto' />
+
+          <div class='TnC w-100 my-same'>
+            <p>By authorizing us you allow us to:</p>
+            <ul class='mx-auto'>
+              <li>Change your name within our server.</li>
+              <li>Read/process your messages.</li>
+            </ul>
           </div>
-          <button type="button" class="discord__btn {{if this.consent 'btn-enabled' 'btn-disabled'}}" {{on 'click' (fn
-            this.linkDiscordAccount)}}>Authorize</button>
-        </div>
+
+          <hr class='w-100 dark mx-auto' />
+
+          <div class="my-same">
+            <input
+              name='authorize'
+              id='authorize'
+              type='checkbox'
+              {{on 'input' (fn this.setConsent)}}
+            />
+            <label for='authorize'>I Accept the above mentioned clauses</label>
+          </div>
+          <button
+            type='button'
+            class='button my-same {{if this.consent "btn-enabled" "btn-disabled"}}'
+            {{on 'click' (fn this.linkDiscordAccount)}}
+          >Authorize</button>
+        </main>
       {{/if}}
     {{/if}}
-  {{/if}}
+  {{/if}}  
 </section>
