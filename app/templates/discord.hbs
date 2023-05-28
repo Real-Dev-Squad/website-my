@@ -39,7 +39,7 @@
             <div class='profile-card vertical-flex'>
               <img
                 class='logo'
-                src={{@model.externalAccountData.attributes.userAvatar}}
+                src={{if @model.externalAccountData.attributes.userAvatar @model.externalAccountData.attributes.userAvatar "dummyProfilePicture.png"}}
                 alt='Discord Avatar'
               />
               <p class='username'>
@@ -52,7 +52,7 @@
             <div class='profile-card vertical-flex my-same'>
               <img
                 class='logo'
-                src={{@model.userData.picture.url}}
+                src={{if @model.userData.picture.url @model.userData.picture.url "dummyProfilePicture.png"}}
                 alt='Real Dev Squad Avatar'
               />
               <p class='username'>{{@model.userData.username}}</p>
