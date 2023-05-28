@@ -2,23 +2,25 @@
 
 <section class='discord vertical-flex mx-auto' id='discord'>
   {{#if @model.isTokenExpired}}
-    <p class="error__text">Token Expired. Please generate a new token using slash commands</p>
+    <p class='error__text'>Token Expired. Please generate a new token using
+      slash commands</p>
   {{else}}
     {{#if (or this.isLinking)}}
-      <div class="loading">
+      <div class='loading'>
         <Spinner />
       </div>
     {{else}}
-      {{#if (or @model.userData.discordId (eq this.linkStatus "linked"))}}
-        <div class="discord__success">
-          <p class="success__text">Your Discord account has been successfully linked.</p>
-          <p class="success__text">You can close this tab now.</p>
+      {{#if (or @model.userData.discordId (eq this.linkStatus 'linked'))}}
+        <div class='discord__success'>
+          <p class='success__text'>Your Discord account has been successfully
+            linked.</p>
+          <p class='success__text'>You can close this tab now.</p>
         </div>
-      {{else if (eq this.linkStatus "failure")}}
-        <div class="discord__error">
-          <p class="error__text">Something went wrong. Please try again.</p>
+      {{else if (eq this.linkStatus 'failure')}}
+        <div class='discord__error'>
+          <p class='error__text'>Something went wrong. Please try again.</p>
         </div>
-      {{else if (eq this.linkStatus "not-linked")}}
+      {{else if (eq this.linkStatus 'not-linked')}}
         <header class='header horizontal-flex w-100'>
           <img src='RDSLogo.png' alt='real_dev_squad' class='logo' />
           <div class='line w-100'></div>
@@ -39,7 +41,11 @@
             <div class='profile-card vertical-flex'>
               <img
                 class='logo'
-                src={{if @model.externalAccountData.attributes.userAvatar @model.externalAccountData.attributes.userAvatar "dummyProfilePicture.png"}}
+                src={{if
+                  @model.externalAccountData.attributes.userAvatar
+                  @model.externalAccountData.attributes.userAvatar
+                  'dummyProfilePicture.png'
+                }}
                 alt='Discord Avatar'
               />
               <p class='username'>
@@ -52,7 +58,11 @@
             <div class='profile-card vertical-flex my-same'>
               <img
                 class='logo'
-                src={{if @model.userData.picture.url @model.userData.picture.url "dummyProfilePicture.png"}}
+                src={{if
+                  @model.userData.picture.url
+                  @model.userData.picture.url
+                  'dummyProfilePicture.png'
+                }}
                 alt='Real Dev Squad Avatar'
               />
               <p class='username'>{{@model.userData.username}}</p>
@@ -72,7 +82,7 @@
 
           <hr class='w-100 dark mx-auto' />
 
-          <div class="my-same">
+          <div class='my-same'>
             <input
               name='authorize'
               id='authorize'
@@ -83,11 +93,12 @@
           </div>
           <button
             type='button'
-            class='button my-same {{if this.consent "btn-enabled" "btn-disabled"}}'
+            class='button my-same
+              {{if this.consent "btn-enabled" "btn-disabled"}}'
             {{on 'click' (fn this.linkDiscordAccount)}}
           >Authorize</button>
         </main>
       {{/if}}
     {{/if}}
-  {{/if}}  
+  {{/if}}
 </section>
