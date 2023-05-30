@@ -21,26 +21,40 @@
           <p class='error__text'>Something went wrong. Please try again.</p>
         </div>
       {{else if (eq this.linkStatus 'not-linked')}}
-        <header class='header horizontal-flex w-100'>
-          <img src='RDSLogo.png' alt='real_dev_squad' class='logo' />
-          <div class='line w-100'></div>
-          <img src='DiscordLogo.png' alt='discord' class='logo' />
+        <header class='header horizontal-flex w-100' data-test-header>
+          <img
+            src='RDSLogo.png'
+            alt='real_dev_squad'
+            class='logo'
+            data-test-rds-logo
+          />
+          <div class='line w-100' data-test-platform-link-line></div>
+          <img
+            src='DiscordLogo.png'
+            alt='discord'
+            class='logo'
+            data-test-discord-logo
+          />
         </header>
 
-        <h2 class='heading'>Authorize Bot</h2>
+        <h2 class='heading' data-test-heading>Authorize Bot</h2>
 
-        <main class='discord-card vertical-flex w-100'>
+        <main class='discord-card vertical-flex w-100' data-test-main-content>
 
-          <p class='my-same'><strong>Real Dev Squad</strong>
+          <p class='my-same' data-test-card-header><strong>Real Dev Squad</strong>
             wants to access your
             <strong>Discord</strong>.</p>
 
           <hr class='w-100 dark mx-auto' />
 
           <div class='profiles horizontal-flex w-100'>
-            <div class='profile-card vertical-flex'>
+            <div
+              class='profile-card vertical-flex'
+              data-test-discord-profile-card
+            >
               <img
                 class='logo'
+                data-test-discord-profile-image
                 src={{if
                   @model.externalAccountData.attributes.userAvatar
                   @model.externalAccountData.attributes.userAvatar
@@ -48,16 +62,25 @@
                 }}
                 alt='Discord Avatar'
               />
-              <p class='username'>
+              <p class='username' data-test-discord-username>
                 {{@model.externalAccountData.attributes.userName}}#{{@model.externalAccountData.attributes.discriminator}}</p>
-              <p class='account'>Discord</p>
+              <p class='account' data-test-discord-account>Discord</p>
             </div>
 
-            <img src='DiscordConnector.svg' class='logo' alt='connectingline' />
+            <img
+              src='DiscordConnector.svg'
+              class='logo'
+              alt='connectingline'
+              data-test-profile-connector
+            />
 
-            <div class='profile-card vertical-flex my-same'>
+            <div
+              class='profile-card vertical-flex my-same'
+              data-test-rds-profile-card
+            >
               <img
                 class='logo'
+                data-test-rds-profile-image
                 src={{if
                   @model.userData.picture.url
                   @model.userData.picture.url
@@ -65,16 +88,19 @@
                 }}
                 alt='Real Dev Squad Avatar'
               />
-              <p class='username'>{{@model.userData.username}}</p>
-              <p class='account'>Real Dev Squad</p>
+              <p
+                class='username'
+                data-test-rds-username
+              >{{@model.userData.username}}</p>
+              <p class='account' data-test-rds-account>Real Dev Squad</p>
             </div>
           </div>
 
           <hr class='w-100 dark mx-auto' />
 
-          <div class='TnC w-100 my-same'>
+          <div class='TnC w-100 my-same' data-test-tnc>
             <p>By authorizing us you allow us to:</p>
-            <ul class='mx-auto'>
+            <ul class='mx-auto' data-test-tnc-points>
               <li>Change your name within our server.</li>
               <li>Read/process your messages.</li>
             </ul>
@@ -82,16 +108,19 @@
 
           <hr class='w-100 dark mx-auto' />
 
-          <div class='my-same consent'>
+          <div class='my-same' data-test-consent>
             <input
+              data-test-consent-checkbox
               name='authorize'
               id='authorize'
               type='checkbox'
               {{on 'input' (fn this.setConsent)}}
             />
-            <label for='authorize'>I Accept the above mentioned clauses</label>
+            <label for='authorize' data-test-consent-label>I Accept the above
+              mentioned clauses</label>
           </div>
           <button
+            data-test-authorize-button
             type='button'
             class='button my-same
               {{if this.consent "btn-enabled" "btn-disabled"}}'
