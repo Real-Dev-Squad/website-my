@@ -113,13 +113,9 @@ export default class FormStatusModal extends Component {
         toastNotificationTimeoutOptions
       );
     } else {
-      const response = await this.args.updateStatus({
+      await this.args.updateStatus({
         currentStatus: newStateObj,
       });
-      const responseData = await response.json();
-      this.userStatus.updateCurrentUserStatus(
-        responseData.data.currentStatus.state
-      );
     }
     this.resetInputFields();
     this.disableSubmitButton = true;

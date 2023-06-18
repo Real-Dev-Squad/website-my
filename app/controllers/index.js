@@ -38,6 +38,7 @@ export default class IndexController extends Controller {
         .then((responseData) => {
           if (responseData.data.currentStatus?.state) {
             this.status = responseData.data.currentStatus.state;
+            console.log('response', responseData);
             this.userStatus.updateCurrentUserStatus(
               responseData.data.currentStatus.state
             );

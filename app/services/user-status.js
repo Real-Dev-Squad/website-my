@@ -1,13 +1,15 @@
 import Service from '@ember/service';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class UserStatusService extends Service {
-  currentUserStatus = '';
+  @tracked currentUserStatus = '';
 
-  updateCurrentUserStatus(status) {
+  @action updateCurrentUserStatus(status) {
     this.currentUserStatus = status;
   }
 
-  getCurrentUserStatus() {
+  @action getCurrentUserStatus() {
     return this.currentUserStatus;
   }
 }

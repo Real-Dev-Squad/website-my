@@ -9,7 +9,8 @@
     <Spinner data-test-spinner />
     {{/if}}
     {{#if @showIdleReasonTextarea}}
-    <textarea name='reason' class="modal__text-area" value={{this.reason}} {{on "input" this.handleInput}}
+    <label for="reason">Please write the skills you want to learn.</label>
+    <textarea name='reason' id="reason" class="modal__text-area" value={{this.reason}} {{on "input" this.handleInput}}
       data-test-textarea-reason></textarea>
     {{/if}}
     {{#if @buttonRequired}}

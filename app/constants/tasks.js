@@ -101,9 +101,11 @@ export const TASK_MESSAGES = {
   MARK_DONE:
     'This task will be marked as complete and a new task will be assigned to you',
   INACTIVE:
-    'Task completed, You have no inprogres or any other tasks assigned to you so your status will be marked IDLE',
+    'Task completed, You have no IN_PROGRESS or any other tasks ASSIGNED to you so your status will be marked IDLE',
   UPDATE_TASK: 'Updating task',
   FIND_TASK: 'Finding new task for you!',
+  UPDATE_STATUS: 'Updated Status Successfully!',
+  UPDATING_STATUS: 'Updating Status!',
 };
 
 export const TASK_PERCENTAGE = {

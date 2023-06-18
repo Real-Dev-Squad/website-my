@@ -273,9 +273,17 @@ export default class TasksController extends Controller {
     }
   }
 
+  @action updateModalPropertiesOnStatusChange() {
+    this.message = TASK_MESSAGES.UPDATING_STATUS;
+    this.isUpdating = true;
+    this.closeDisabled = true;
+    this.buttonRequired = false;
+    this.showIdleReasonTextarea = false;
+  }
+
   @action updateModalProperties() {
-    this.message = TASK_MESSAGES.UPDATE_TASK;
-    this.sisUpdating = false;
+    this.message = TASK_MESSAGES.UPDATE_STATUS;
+    this.isUpdating = false;
     this.closeDisabled = false;
     this.buttonRequired = false;
     this.showIdleReasonTextarea = false;
