@@ -7,12 +7,15 @@ import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+import { USER_STATES } from '../constants/user-status';
+import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksController extends Controller {
   queryParams = ['dev'];
   @service toast;
+  @service userStatus;
   TASK_KEYS = TASK_KEYS;
   taskStatusList = TASK_STATUS_LIST;
   allTasksObject = this.taskStatusList.find(
@@ -20,6 +23,8 @@ export default class TasksController extends Controller {
   );
   DEFAULT_TASK_TYPE = this.allTasksObject;
 
+  @tracked isUpdatingStatus = false;
+  @tracked showIdleReasonTextarea = false;
   @tracked dev = false;
   @tracked isUpdating = false;
   @tracked assignTask = false;
@@ -130,6 +135,16 @@ export default class TasksController extends Controller {
     this.taskFields[key] = value;
   }
 
+  isUserIdle() {
+    let userStatus = 'IDLE';
+    this.allTasks.forEach((task) => {
+      if (task.status === 'IN_PROGRESS' || task.status === 'ASSIGNED') {
+        userStatus = 'ACTIVE';
+      }
+    });
+    return userStatus;
+  }
+
   @action async updateTask(taskId) {
     this.isLoading = true;
     this.disabled = true;
@@ -167,6 +182,36 @@ export default class TasksController extends Controller {
             this.closeDisabled = false;
             this.setShowFetchButton();
           }
+          const statusIdle = this.isUserIdle();
+          if (
+            statusIdle === USER_STATES.ACTIVE &&
+            this.userStatus.getCurrentUserStatus() !== USER_STATES.ACTIVE
+          ) {
+            const currentDate = new Date();
+            const currentDateString = currentDate.toISOString().slice(0, 10);
+            const from = getUTCMidnightTimestampFromDate(currentDateString);
+            const updatedAt = Date.now();
+            const activeStateData = {
+              updatedAt,
+              from,
+              until: undefined,
+              message: undefined,
+              state: USER_STATES.ACTIVE,
+            };
+            await this.updateStatus({ currentStatus: activeStateData });
+          }
+
+          if (
+            statusIdle === USER_STATES.IDLE &&
+            this.userStatus.getCurrentUserStatus() !== USER_STATES.OOO
+          ) {
+            this.showIdleReasonTextarea = true;
+            this.message = TASK_MESSAGES.INACTIVE;
+            this.showModal = true;
+            this.closeDisabled = true;
+            this.buttonRequired = true;
+            this.isUpdatingStatus = true;
+          }
         } else {
           this.toast.error(
             'Failed to update the task',
@@ -187,6 +232,53 @@ export default class TasksController extends Controller {
         this.disabled = false;
       }
     }
+  }
+
+  @action async updateStatus(newStatus) {
+    try {
+      await fetch(`${API_BASE_URL}/users/status/self`, {
+        method: 'PATCH',
+        body: JSON.stringify(newStatus),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          if (responseData.data.currentStatus?.state) {
+            this.userStatus.updateCurrentUserStatus(
+              responseData.data.currentStatus.state
+            );
+            this.toast.success(
+              'Current status updated successfully.',
+              '',
+              toastNotificationTimeoutOptions
+            );
+          } else if (responseData.data.futureStatus?.state) {
+            this.toast.success(
+              'Future status updated successfully.',
+              '',
+              toastNotificationTimeoutOptions
+            );
+          }
+        });
+    } catch (error) {
+      console.error('Error : ', error);
+      this.toast.error(
+        'Status Update failed. Something went wrong.',
+        '',
+        toastNotificationTimeoutOptions
+      );
+    }
+  }
+
+  @action updateModalProperties() {
+    this.message = TASK_MESSAGES.UPDATE_TASK;
+    this.sisUpdating = false;
+    this.closeDisabled = false;
+    this.buttonRequired = false;
+    this.showIdleReasonTextarea = false;
   }
 
   // function for fetching task after clicking on fetch task button

@@ -17,7 +17,7 @@ export default class ApplicationRoute extends Route {
         credentials: 'include',
       });
       const userData = await response.json();
-      if (response.status === 200 && !userData.incompleteUserDetails) {
+      if (response.status === 200 && userData.incompleteUserDetails) {
         const firstName = userData?.first_name || defaultName;
         const profilePictureURL = userData?.picture?.url || defaultPicture;
         this.userState.add('id', userData.id);

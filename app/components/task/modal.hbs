@@ -8,11 +8,22 @@
     {{#if @isUpdating}}
     <Spinner data-test-spinner />
     {{/if}}
+    {{#if @showIdleReasonTextarea}}
+    <textarea name='reason' class="modal__text-area" value={{this.reason}} {{on "input" this.handleInput}}
+      data-test-textarea-reason></textarea>
+    {{/if}}
     {{#if @buttonRequired}}
+    {{#if @showIdleReasonTextarea}}
+    <button type="button" class={{if (eq @dev true) "not-assign" "proceed-btn" }} {{on "click" this.markStatusChange}}
+      data-test-notAssignBtn>
+      {{if (eq @dev true) "Don't assign task" "Proceed" }}
+    </button>
+    {{else}}
     <button type="button" class={{if (eq @dev true) "not-assign" "proceed-btn" }} {{on "click" @markComplete}}
       data-test-notAssignBtn>
       {{if (eq @dev true) "Don't assign task" "Proceed" }}
     </button>
+    {{/if}}
     {{#if @dev}}
     <button type="button" class="proceed-btn" {{on "click" @markCompleteAndAssignTask}} data-test-assignBtn>
       Assign task

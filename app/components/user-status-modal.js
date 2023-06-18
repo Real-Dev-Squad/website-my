@@ -19,6 +19,7 @@ import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 export default class FormStatusModal extends Component {
   @service toast;
+  @service userStatus;
   @tracked currentStatus;
   @tracked fromDate = '';
   @tracked untilDate = '';
@@ -102,7 +103,24 @@ export default class FormStatusModal extends Component {
       message: this.reason,
       state: this.args.newStatus,
     };
-    await this.args.updateStatus({ currentStatus: newStateObj });
+    if (
+      this.userStatus.getCurrentUserStatus() === USER_STATES.IDLE &&
+      this.args.newStatus === USER_STATES.IDLE
+    ) {
+      this.toast.error(
+        'You are already Idle',
+        '',
+        toastNotificationTimeoutOptions
+      );
+    } else {
+      const response = await this.args.updateStatus({
+        currentStatus: newStateObj,
+      });
+      const responseData = await response.json();
+      this.userStatus.updateCurrentUserStatus(
+        responseData.data.currentStatus.state
+      );
+    }
     this.resetInputFields();
     this.disableSubmitButton = true;
   }

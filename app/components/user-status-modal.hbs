@@ -11,8 +11,10 @@
         value={{this.untilDate}} {{on "change" this.updateValue}} data-test-date-picker-until />
       <label class="modal__inputs--description" data-test-label-reason>Reason</label>
       {{else if (eq @newStatus this.USER_STATES.IDLE)}}
-      <label class="modal__inputs--description" data-test-label-missing-skills>What skills are you willing to
-        learn</label>
+      <label class="modal__inputs--description" data-test-label-missing-skills>
+        Can't update the status to ACTIVE as you have no IN_PROGRESS task or any task ASSIGNED! 
+        Please write the skills are you willing to learn?
+      </label>
       {{/if}}
 
       <textarea name='reason' class="modal__text-area" value={{this.reason}} {{on "input" this.handleInput}}

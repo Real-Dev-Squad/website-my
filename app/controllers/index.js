@@ -10,6 +10,7 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @service toast;
+  @service userStatus;
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
@@ -37,6 +38,9 @@ export default class IndexController extends Controller {
         .then((responseData) => {
           if (responseData.data.currentStatus?.state) {
             this.status = responseData.data.currentStatus.state;
+            this.userStatus.updateCurrentUserStatus(
+              responseData.data.currentStatus.state
+            );
             this.toast.success(
               'Current status updated successfully.',
               '',

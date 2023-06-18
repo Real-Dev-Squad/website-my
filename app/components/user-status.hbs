@@ -1,11 +1,11 @@
-{{#if @isStatusUpdating}}
+{{#if this.showLoader}}
   <div class="loading">
     <Spinner />
   </div>
 {{else}}
 <div class="heading">
   {{#each this.currentUserStatus as |currentStatus|}}
-  {{#if (eq @status currentStatus.status)}}
+  {{#if (eq this.getCurrentUserStatus currentStatus.status)}}
     {{#if (eq currentStatus.status "ONBOARDING")}}
       <div data-test-onboarding-details class="onboarding-details">
         <h2 data-test-status>You are undergoing onboarding</h2>
@@ -29,7 +29,7 @@
 
 <div class="buttons">
   {{#each this.currentUserStatus as |currentStatus|}}
-    {{#if (eq @status currentStatus.status)}}
+    {{#if (eq this.getCurrentUserStatus currentStatus.status)}}
       {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
         <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
           <span>{{otherPossibleStatus.message}}</span>
