@@ -187,18 +187,20 @@ export default class TasksController extends Controller {
             statusIdle === USER_STATES.ACTIVE &&
             this.userStatus.getCurrentUserStatus() !== USER_STATES.ACTIVE
           ) {
-            const currentDate = new Date();
-            const currentDateString = currentDate.toISOString().slice(0, 10);
-            const from = getUTCMidnightTimestampFromDate(currentDateString);
-            const updatedAt = Date.now();
-            const activeStateData = {
-              updatedAt,
-              from,
-              until: undefined,
-              message: undefined,
-              state: USER_STATES.ACTIVE,
-            };
-            await this.updateStatus({ currentStatus: activeStateData });
+            if (this.userStatus.getCurrentUserStatus() !== USER_STATES.OOO) {
+              const currentDate = new Date();
+              const currentDateString = currentDate.toISOString().slice(0, 10);
+              const from = getUTCMidnightTimestampFromDate(currentDateString);
+              const updatedAt = Date.now();
+              const activeStateData = {
+                updatedAt,
+                from,
+                until: undefined,
+                message: undefined,
+                state: USER_STATES.ACTIVE,
+              };
+              await this.updateStatus({ currentStatus: activeStateData });
+            }
           }
 
           if (
