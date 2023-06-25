@@ -10,6 +10,17 @@ export default class TasksHolderComponent extends Component {
 
   TASK_KEYS = TASK_KEYS;
   availabletaskStatusList = TASK_STATUS_LIST;
+
+  get taskStyleClass() {
+    if (this.args.task.status === TASK_KEYS.VERIFIED) {
+      return 'task-completed';
+    }
+    if (this.args.task.endsOn * 1000 < Date.now()) {
+      return 'task-late';
+    }
+
+    return 'task-on-time';
+  }
   @action
   onPercentageChange(e) {
     const { value } = e.target;
