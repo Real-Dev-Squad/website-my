@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render, find, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { TASK_STATUS_LIST, TASK_KEYS } from 'website-my/constants/tasks';
 
@@ -33,8 +33,11 @@ module('Integration | Component | select-input', function (hooks) {
     // Assert
     assert.dom('select').exists();
 
+    const selectElement = this.element.querySelector('#task-update');
     const selectOptions = find('#task-update').querySelectorAll('option');
-
+    const firstOption = selectOptions[0];
+    await click(firstOption);
+    assert.dom(selectElement).hasValue('AVAILABLE');
     assert.equal(
       selectOptions.length,
       this.availabletaskStatusList.length - 1,
