@@ -37,7 +37,9 @@ module('Integration | Component | select-input', function (hooks) {
     const selectOptions = find('#task-update').querySelectorAll('option');
     const firstOption = selectOptions[0];
     await click(firstOption);
-    assert.dom(selectElement).hasValue('AVAILABLE');
+
+    assert.dom(selectElement).hasValue(TASK_STATUS_LIST[1].key);
+
     assert.equal(
       selectOptions.length,
       this.availabletaskStatusList.length - 1,
