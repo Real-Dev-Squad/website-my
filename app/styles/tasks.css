@@ -43,6 +43,10 @@
     0 6px 20px 0 var(--task-card--box-shadow-2--hover);
 }
 
+.toast {
+  opacity: 0.9;
+}
+
 .dates-info {
   text-align: center;
 }
@@ -416,7 +420,7 @@ input[type='range']:focus::-ms-fill-upper {
   padding: 5px 9px;
 }
 
-.extension-form__container-close:disabled{
+.extension-form__container-close:disabled {
   opacity: 0.7;
   background-color: #888;
 }
@@ -459,7 +463,7 @@ input[type='range']:focus::-ms-fill-upper {
     margin-top: 1rem;
   }
 
-  .extension-form__container-main{
+  .extension-form__container-main {
     left: 10px;
     right: 10px;
   }

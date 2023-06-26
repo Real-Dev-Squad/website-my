@@ -149,7 +149,11 @@ export default class TasksController extends Controller {
         });
 
         if (response.ok) {
-          this.showModal = true;
+          this.toast.success('Successfully updated the task', '', {
+            timeOut: '3000',
+            extendedTimeOut: '0',
+            preventDuplicates: false,
+          });
           const res = await response.json();
           const { message } = res;
           this.message = message;
