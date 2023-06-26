@@ -43,7 +43,7 @@
     0 6px 20px 0 var(--task-card--box-shadow-2--hover);
 }
 
-#toast-container .toast {
+.toast {
   opacity: 0.9;
 }
 
