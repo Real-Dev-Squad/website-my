@@ -3,7 +3,11 @@ import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
 import { action } from '@ember/object';
 import ENV from 'website-my/config/environment';
-import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
+import {
+  TASK_KEYS,
+  TASK_STATUS_LIST,
+  TABS_TASK_STATUS_LIST,
+} from 'website-my/constants/tasks';
 import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
@@ -14,6 +18,7 @@ export default class TasksController extends Controller {
   @service toast;
   TASK_KEYS = TASK_KEYS;
   taskStatusList = TASK_STATUS_LIST;
+  tabsTaskStatusList = TABS_TASK_STATUS_LIST;
   allTasksObject = this.taskStatusList.find(
     (obj) => obj.key === this.TASK_KEYS.ALL
   );
@@ -34,6 +39,7 @@ export default class TasksController extends Controller {
   @tracked buttonRequired = false;
   @tracked disabled = false;
   @tracked findingTask = false;
+  @tracked showTasks = false;
   @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
   alreadyFetched = localStorage.getItem('already-fetched');
 
@@ -118,8 +124,12 @@ export default class TasksController extends Controller {
   @action changeUserSelectedTask(statusObject) {
     this.userSelectedTask = statusObject;
     this.filterTasksByStatus();
+    if (this.showTasks) this.showTasks = false;
   }
 
+  @action toggleTasks() {
+    this.showTasks = !this.showTasks;
+  }
   @tracked tasksToShow = this.allTasks;
 
   @action onTaskChange(key, value) {

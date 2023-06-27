@@ -1,18 +1,21 @@
-{{page-title "My Tasks"}}
+{{page-title 'My Tasks'}}
 
-<div class="tasks-page">
-  <SideBar 
-    @taskStatusList={{this.taskStatusList}} 
+<div class='tasks-page'>
+  <SideBar
+    @taskStatusList={{this.tabsTaskStatusList}}
     @showDropDown={{this.showDropDown}}
-    @toggleDropDown={{this.toggleDropDown}} 
-    @changeUserSelectedTask={{this.changeUserSelectedTask}} 
+    @toggleDropDown={{this.toggleDropDown}}
+    @changeUserSelectedTask={{this.changeUserSelectedTask}}
+    @userSelectedTaskText={{this.userSelectedTask.displayLabel}}
+    @showTasks={{this.showTasks}}
+    @toggleTasks={{this.toggleTasks}}
   />
 
-  <Tasks 
-    @userSelectedTask={{this.userSelectedTask}} 
+  <Tasks
+    @userSelectedTask={{this.userSelectedTask}}
     @tasksToShow={{this.tasksToShow}}
-    @onTaskChange={{this.onTaskChange}} 
-    @onTaskUpdate={{this.handleUpdateTask}} 
+    @onTaskChange={{this.onTaskChange}}
+    @onTaskUpdate={{this.handleUpdateTask}}
     @isLoading={{this.isLoading}}
     @disabled={{this.disabled}}
     @noInProgressTask={{this.showFetchButton}}
@@ -20,16 +23,16 @@
     @findingTask={{this.findingTask}}
     @dev={{this.dev}}
   />
-  
-  <Task::Modal 
-    @goBack={{this.goBack}} 
+
+  <Task::Modal
+    @goBack={{this.goBack}}
     @markComplete={{this.markComplete}}
-    @markCompleteAndAssignTask={{this.markCompleteAndAssignTask}} 
+    @markCompleteAndAssignTask={{this.markCompleteAndAssignTask}}
     @buttonRequired={{this.buttonRequired}}
-    @message={{this.message}} 
-    @showModal={{this.showModal}} 
+    @message={{this.message}}
+    @showModal={{this.showModal}}
     @isUpdating={{this.isUpdating}}
-    @closeDisabled={{this.closeDisabled}} 
-    @dev={{this.dev}} 
+    @closeDisabled={{this.closeDisabled}}
+    @dev={{this.dev}}
   />
 </div>
