@@ -9,7 +9,6 @@ const TASK_KEYS = {
   NEEDS_REVIEW: 'NEEDS_REVIEW',
   IN_REVIEW: 'IN_REVIEW',
   APPROVED: 'APPROVED',
-  MERGED: 'MERGED',
   SANITY_CHECK: 'SANITY_CHECK',
   REGRESSION_CHECK: 'REGRESSION_CHECK',
   RELEASED: 'RELEASED',
@@ -27,7 +26,6 @@ const {
   NEEDS_REVIEW,
   IN_REVIEW,
   APPROVED,
-  MERGED,
   SANITY_CHECK,
   REGRESSION_CHECK,
   RELEASED,
@@ -74,10 +72,6 @@ const TASK_STATUS_LIST = [
   {
     displayLabel: 'Approved',
     key: APPROVED,
-  },
-  {
-    displayLabel: 'Merged',
-    key: MERGED,
   },
   {
     displayLabel: 'Sanity Check',
