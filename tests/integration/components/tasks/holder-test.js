@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { tasks } from 'website-my/tests/fixtures/tasks';
+import { tasks, overDueTask } from 'website-my/tests/fixtures/tasks';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { find, render, waitUntil } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -41,7 +41,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     );
   });
 
-  test('Render Task holder and check wether it has progress slider', async function (assert) {
+  test('Render Task holder and check wether it has progress bar', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
     this.set('isLoading', false);
@@ -61,7 +61,88 @@ module('Integration | Component | Tasks Holder', function (hooks) {
 
     assert.ok(
       find('[data-test-task-progress-bar]'),
-      'Progress slider is rendered'
+      'Progress bar is rendered'
     );
+  });
+
+  test('Render Task holder and verify progress bar style', async function (assert) {
+    this.set('task', overDueTask);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+  />`);
+
+    const progressBarElement = this.element.querySelector(
+      '[data-test-task-progress-bar]'
+    );
+    assert.dom(progressBarElement).hasClass('progress-bar-red');
+  });
+
+  test('Render Task holder and verify style for on-time task', async function (assert) {
+    const onTimeTask = tasksData[3];
+    onTimeTask.startedOn = Date.now() / 1000;
+
+    //Current time + 5days in seconds
+    onTimeTask.endsOn = (Date.now() + 1000 * 60 * 60 * 24 * 5) / 1000;
+
+    this.set('task', onTimeTask);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+  />`);
+
+    const taskCardElement = this.element.querySelector('[data-test-task-card]');
+    assert.dom(taskCardElement).doesNotHaveClass('task-late');
+
+    assert.dom(taskCardElement).hasStyle({
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      border: '2px solid rgb(217, 217, 217)',
+    });
+  });
+
+  test('Render Task holder and verify style for overdue task', async function (assert) {
+    this.set('task', overDueTask);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+  />`);
+
+    const taskCardElement = this.element.querySelector('[data-test-task-card]');
+    assert.dom(taskCardElement).hasClass('task-late');
+
+    assert.dom(taskCardElement).hasStyle({
+      backgroundColor: 'rgb(255, 235, 238)',
+      border: '2px solid rgb(255, 0, 0)',
+    });
   });
 });

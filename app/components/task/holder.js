@@ -12,23 +12,57 @@ export default class TasksHolderComponent extends Component {
   availabletaskStatusList = TASK_STATUS_LIST;
 
   get taskStyleClass() {
+    const statusNotOverDueList = [
+      TASK_KEYS.COMPLETED,
+      TASK_KEYS.VERIFIED,
+      TASK_KEYS.AVAILABLE,
+    ];
     if (
       this.args.task.endsOn * 1000 < Date.now() &&
-      this.args.task.status !== TASK_KEYS.VERIFIED
+      !statusNotOverDueList.includes(this.args.task.status)
     ) {
       return 'task-late';
     } else return '';
   }
 
   get progressBarClass() {
-    if (this.args.task.endsOn * 1000 < Date.now()) {
-      return 'progress-bar-late';
+    const startDate = this.args.task.startedOn * 1000;
+    const endDate = this.args.task.endsOn * 1000;
+    if (!startDate || !endDate) {
+      console.log(this.args.task.title);
+      return 'progress-bar-yellow';
     }
-    if (this.percentCompleted === 100) {
-      return 'progress-bar-completed';
+    // It provides us with total days that are there for the the project and number of days left
+    const totalDays = endDate - startDate;
+
+    const daysLeft = endDate - Date.now();
+
+    let percentageOfDaysLeft = 0;
+    if (daysLeft > 0) {
+      percentageOfDaysLeft = (daysLeft / totalDays) * 100;
     }
 
-    return 'progress-bar-on-time';
+    const percentIncomplete = 100 - this.percentCompleted;
+
+    if (
+      this.percentCompleted === 100 ||
+      percentageOfDaysLeft >= percentIncomplete
+    ) {
+      return 'progress-bar-green';
+    }
+
+    if (
+      (percentageOfDaysLeft < 25 && percentIncomplete > 35) ||
+      (percentageOfDaysLeft <= 0 && percentIncomplete > 0)
+    ) {
+      return 'progress-bar-red';
+    }
+
+    if (percentageOfDaysLeft < 50 && percentIncomplete > 75) {
+      return 'progress-bar-orange';
+    }
+
+    return 'progress-bar-yellow';
   }
 
   @action

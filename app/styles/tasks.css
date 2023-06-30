@@ -5,6 +5,7 @@
   --scrollbar-thumb: #888;
   --scrollbar-thumb-hover: #555;
   --primary-text-color: #041187;
+  --task-card-border: 2px solid #d9d9d9;
 }
 
 .task-late {
@@ -13,15 +14,18 @@
   --task-card-border: 2px solid var(--primary-text-color);
 }
 
-.progress-bar-late {
+.progress-bar-red {
   --progress-bar-color: red;
 }
-.progress-bar-on-time {
+.progress-bar-yellow {
   --progress-bar-color: #ecef08;
 }
 
-.progress-bar-completed {
+.progress-bar-green {
   --progress-bar-color: green;
+}
+.progress-bar-orange {
+  --progress-bar-color: orange;
 }
 
 .tasks-page {
