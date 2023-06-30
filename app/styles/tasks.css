@@ -70,7 +70,9 @@
   text-align: left;
   width: max-content;
 }
-
+.toast {
+  opacity: 0.9;
+}
 /* progress bar */
 
 .wrapper-div {
