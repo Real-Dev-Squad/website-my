@@ -12,15 +12,25 @@ export default class TasksHolderComponent extends Component {
   availabletaskStatusList = TASK_STATUS_LIST;
 
   get taskStyleClass() {
-    if (this.args.task.status === TASK_KEYS.VERIFIED) {
-      return 'task-completed';
-    }
-    if (this.args.task.endsOn * 1000 < Date.now()) {
+    if (
+      this.args.task.endsOn * 1000 < Date.now() &&
+      this.args.task.status !== TASK_KEYS.VERIFIED
+    ) {
       return 'task-late';
+    } else return '';
+  }
+
+  get progressBarClass() {
+    if (this.args.task.endsOn * 1000 < Date.now()) {
+      return 'progress-bar-late';
+    }
+    if (this.percentCompleted === 100) {
+      return 'progress-bar-completed';
     }
 
-    return 'task-on-time';
+    return 'progress-bar-on-time';
   }
+
   @action
   onPercentageChange(e) {
     const { value } = e.target;

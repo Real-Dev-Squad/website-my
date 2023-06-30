@@ -4,23 +4,24 @@
   --gray: #f1f1f1;
   --scrollbar-thumb: #888;
   --scrollbar-thumb-hover: #555;
-}
-
-.task-on-time {
   --primary-text-color: #041187;
-  --task-card-border: 1px solid var(--primary-text-color);
 }
 
 .task-late {
-  --primary-text-color: #ff4c30;
+  --primary-text-color: red;
   --task-back-ground-color: rgb(255, 235, 238);
-  --task-card-border: 1px solid var(--primary-text-color);
+  --task-card-border: 2px solid var(--primary-text-color);
 }
 
-.task-completed {
-  --primary-text-color: var(--tasks-page--text);
-  --task-back-ground-color: rgb(236, 230, 230);
-  --task-card-border: 1px solid var(--primary-text-color);
+.progress-bar-late {
+  --progress-bar-color: red;
+}
+.progress-bar-on-time {
+  --progress-bar-color: #ecef08;
+}
+
+.progress-bar-completed {
+  --progress-bar-color: green;
 }
 
 .tasks-page {
@@ -63,6 +64,7 @@
 
 .status-details {
   text-align: left;
+  width: max-content;
 }
 
 /* progress bar */
@@ -91,35 +93,36 @@
   -webkit-appearance: none;
   appearance: none;
   width: 80%;
-  height: 1rem;
+  height: 9px;
   cursor: pointer;
   outline: none;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 9px;
+  border: 2px solid #252525;
 }
 
 .progress-bar__input::-webkit-slider-runnable-track {
-  height: 1rem;
-  background: #ccc;
-  border-radius: 1rem;
+  height: 9px;
+  background: #e5e5e5;
+  border-radius: 9px;
 }
 
 .progress-bar__input::-moz-range-track {
-  height: 1rem;
-  background: #ccc;
-  border-radius: 1rem;
+  height: 9px;
+  background: #e5e5e5;
+  border-radius: 9px;
 }
 
 .progress-bar__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: 1rem;
-  width: 1rem;
-  background-color: var(--primary-text-color);
+  height: 9px;
+  width: 9px;
+  background-color: var(--progress-bar-color);
   border-radius: 50%;
-  border: 2px solid var(--primary-text-color);
+  border: 2px solid var(--progress-bar-color);
   transition: 0.25s ease-in-out;
-  box-shadow: -407px 0 0 400px var(--primary-text-color);
+  box-shadow: -407px 0 0 400px var(--progress-bar-color);
 }
 
 .progress-bar__input::-webkit-slider-thumb:active,
@@ -129,17 +132,21 @@
 }
 
 .progress-bar__input::-moz-range-thumb {
-  background-color: var(--primary-text-color);
+  background-color: var(--progress-bar-color);
   border-radius: 50%;
-  height: 75%;
-  border: 3px solid var(--primary-text-color);
+  /* height: 50%;
+  width: 50%; */
+  /* height: 75%; */
+  height: 4.5px;
+  width: 4.5px;
+  border: 2px solid var(--progress-bar-color);
   transition: 0.25s ease-in-out;
-  box-shadow: -407px 0 0 400px var(--primary-text-color);
+  box-shadow: -407px 0 0 400px var(--progress-bar-color);
 }
-.progress-bar__input::-moz-range-thumb:hover,
+/* .progress-bar__input::-moz-range-thumb:hover,
 .progress-bar__input::-moz-range-thumb:active {
   background-color: #fff;
-}
+} */
 
 .progress-bar__input::-moz-range-thumb:active,
 .task-card__progress-bar-container__progress-bar:hover
@@ -220,6 +227,7 @@
   margin-bottom: 1em;
   max-height: 5rem;
   overflow: auto;
+  text-align: left;
 }
 .task-details__purpose > b {
   font-size: 1.1rem;

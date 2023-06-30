@@ -4,7 +4,8 @@
     <div class='task-card__progress-bar-container'>
       <div class='task-card__progress-bar-container__progress-bar'>
         <input
-          class='progress-bar__input'
+          data-test-task-progress-bar
+          class='progress-bar__input {{@progressBarClass}}'
           id='input'
           type='range'
           name='percentCompleted'

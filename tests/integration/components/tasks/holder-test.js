@@ -40,4 +40,28 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       'Extension Status'
     );
   });
+
+  test('Render Task holder and check wether it has progress slider', async function (assert) {
+    this.set('task', tasksData[3]);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+  />`);
+    await waitUntil(() => find('[data-test-task-progress-bar]'));
+
+    assert.ok(
+      find('[data-test-task-progress-bar]'),
+      'Progress slider is rendered'
+    );
+  });
 });
