@@ -7,8 +7,8 @@
   --scrollbar-thumb-hover: #555;
   --primary-text-color: #041187;
   --task-card-border: 2px solid #d9d9d9;
-  --range-slider-background:#e5e5e5;
-  --black-grey:#252525;
+  --range-slider-background: #e5e5e5;
+  --black-grey: #252525;
 }
 
 .task-late {
@@ -109,7 +109,9 @@
   border-radius: 9px;
   border: 2px solid var(--black-grey);
 }
-
+.progress-bar__input:disabled {
+  pointer-events: none;
+}
 .progress-bar__input::-webkit-slider-runnable-track {
   height: 9px;
   background: var(--range-slider-background);
@@ -136,7 +138,7 @@
 
 .progress-bar__input::-webkit-slider-thumb:active,
 .task-card__progress-bar-container__progress-bar:hover
-  .progress-bar__input::-webkit-slider-thumb {
+  .progress-bar__input:not(:disabled)::-webkit-slider-thumb {
   background-color: var(--white);
 }
 
@@ -152,7 +154,7 @@
 
 .progress-bar__input::-moz-range-thumb:active,
 .task-card__progress-bar-container__progress-bar:hover
-  .progress-bar__input::-moz-range-thumb {
+  .progress-bar__input:not(:disabled)::-moz-range-thumb {
   background-color: var(--white);
 }
 

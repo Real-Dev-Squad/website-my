@@ -3,19 +3,19 @@
     <p class='task-details__title'>{{@task.title}}</p>
     <div class='task-card__progress-bar-container'>
       <div class='task-card__progress-bar-container__progress-bar'>
-        <input
+        <Input
           data-test-task-progress-bar
           class='progress-bar__input {{@progressBarClass}}'
           id='input'
           type='range'
           name='percentCompleted'
-          disabled={{@disabled}}
           value={{@percentCompleted}}
           min='0'
           max='100'
           step='10'
           {{on 'change' @onPercentageChange}}
           {{on 'change' (fn @onTaskUpdate @task.id)}}
+          disabled={{@isProgressBarDisabled}}
         />
         {{@percentCompleted}}%
       </div>
