@@ -51,16 +51,16 @@
   width: 15rem;
 }
 .arrow-down {
-    margin: auto;
-    margin-left: 0.5rem;
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: solid var(--tabs-border-color);
-    border-width: 0 3px 3px 0;
-    padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+  margin: auto;
+  margin-left: 0.5rem;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: solid var(--tabs-border-color);
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
 
 .sidebar__task-selector > button {
