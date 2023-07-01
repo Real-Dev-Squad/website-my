@@ -54,7 +54,7 @@
   border: var(--task-card-border);
   border-radius: 10px;
   box-shadow: 0 0 15px -7px var(--task-card--box-shadow);
-  max-width: 720px;
+  max-width: 45rem;
   margin: auto;
   padding: 1rem;
   margin-bottom: 2rem;
