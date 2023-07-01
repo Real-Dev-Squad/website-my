@@ -1,14 +1,30 @@
-<div class="sidebar">
-  <div class="sidebar__dropdown-container">
+<div class='sidebar'>
+  <div
+    class='sidebar__dropdown-container
+      {{if @showTasks "sidebar__dropdown-active"}}'
+  >
     {{#each @taskStatusList as |status|}}
       <button
-        href="#"
-        class="sidebar__dropdown-container__button"
-        {{on "click" (fn @changeUserSelectedTask status)}}
-        type="button"
+        href='#'
+        class='sidebar__dropdown-container__button
+          {{if
+            (eq @userSelectedTaskText status.displayLabel)
+            "sidebar__dropdown-container__button-active"
+          }}'
+        {{on 'click' (fn @changeUserSelectedTask status)}}
+        type='button'
       >
         {{status.displayLabel}}
       </button>
     {{/each}}
   </div>
+  {{#unless @showTasks}}
+    <div class='sidebar__task-selector'>
+      <button href='#' {{on 'click' @toggleTasks}} type='button'>
+        {{@userSelectedTaskText}}
+        <i class='arrow-down'></i>
+      </button>
+              
+    </div>
+  {{/unless}}
 </div>
