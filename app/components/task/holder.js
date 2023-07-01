@@ -29,7 +29,6 @@ export default class TasksHolderComponent extends Component {
     const startDate = this.args.task.startedOn * 1000;
     const endDate = this.args.task.endsOn * 1000;
     if (!startDate || !endDate) {
-      console.log(this.args.task.title);
       return 'progress-bar-yellow';
     }
     // It provides us with total days that are there for the the project and number of days left

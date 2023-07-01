@@ -1,11 +1,14 @@
 :root {
   --white: #ffffff;
   --light-black: rgba(0, 0, 0, 0.3);
+  --grey-white: rgb(174, 174, 174);
   --gray: #f1f1f1;
   --scrollbar-thumb: #888;
   --scrollbar-thumb-hover: #555;
   --primary-text-color: #041187;
   --task-card-border: 2px solid #d9d9d9;
+  --range-slider-background:#e5e5e5;
+  --black-grey:#252525;
 }
 
 .task-late {
@@ -104,18 +107,18 @@
   outline: none;
   overflow: hidden;
   border-radius: 9px;
-  border: 2px solid #252525;
+  border: 2px solid var(--black-grey);
 }
 
 .progress-bar__input::-webkit-slider-runnable-track {
   height: 9px;
-  background: #e5e5e5;
+  background: var(--range-slider-background);
   border-radius: 9px;
 }
 
 .progress-bar__input::-moz-range-track {
   height: 9px;
-  background: #e5e5e5;
+  background: var(--range-slider-background);
   border-radius: 9px;
 }
 
@@ -134,30 +137,23 @@
 .progress-bar__input::-webkit-slider-thumb:active,
 .task-card__progress-bar-container__progress-bar:hover
   .progress-bar__input::-webkit-slider-thumb {
-  background-color: #fff;
+  background-color: var(--white);
 }
 
 .progress-bar__input::-moz-range-thumb {
   background-color: var(--progress-bar-color);
   border-radius: 50%;
-  /* height: 50%;
-  width: 50%; */
-  /* height: 75%; */
   height: 4.5px;
   width: 4.5px;
   border: 2px solid var(--progress-bar-color);
   transition: 0.25s ease-in-out;
   box-shadow: -407px 0 0 400px var(--progress-bar-color);
 }
-/* .progress-bar__input::-moz-range-thumb:hover,
-.progress-bar__input::-moz-range-thumb:active {
-  background-color: #fff;
-} */
 
 .progress-bar__input::-moz-range-thumb:active,
 .task-card__progress-bar-container__progress-bar:hover
   .progress-bar__input::-moz-range-thumb {
-  background-color: #fff;
+  background-color: var(--white);
 }
 
 /* Status Container */
@@ -200,7 +196,7 @@
 
 #task-update:hover {
   background-color: var(--primary-text-color);
-  color: #fff;
+  color: var(--white);
 }
 
 .task-details__title {
@@ -225,7 +221,7 @@
 .status-details__dates-info__end {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(174, 174, 174);
+  color: var(--grey-white);
 }
 .task-details__purpose {
   font-size: 1.1rem;
@@ -239,7 +235,7 @@
   font-size: 1.1rem;
 }
 .task-details__purpose > span {
-  color: rgb(174, 174, 174);
+  color: var(--grey-white);
   font-size: 1rem;
 }
 
@@ -259,7 +255,7 @@
 .status-details__dates-info__start {
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(174, 174, 174);
+  color: var(--grey-white);
 }
 
 .task-card__current-task-status {
@@ -389,7 +385,7 @@
 
 .task-card__extensionForm-button:hover {
   background-color: var(--primary-text-color);
-  color: #fff;
+  color: var(--white);
 }
 
 .extension-form__container-parent {
