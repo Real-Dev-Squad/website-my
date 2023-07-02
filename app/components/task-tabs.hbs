@@ -1,15 +1,15 @@
-<div class='sidebar'>
+<div class='task-tabs'>
   <div
-    class='sidebar__dropdown-container
-      {{if @showTasks "sidebar__dropdown-active"}}'
+    class='task-tabs__dropdown-container
+      {{if @showTasks "task-tabs__dropdown-active"}}'
   >
     {{#each @taskStatusList as |status|}}
       <button
         href='#'
-        class='sidebar__dropdown-container__button
+        class='task-tabs__dropdown-container__button
           {{if
             (eq @userSelectedTaskText status.displayLabel)
-            "sidebar__dropdown-container__button-active"
+            "task-tabs__dropdown-container__button-active"
           }}'
         {{on 'click' (fn @changeUserSelectedTask status)}}
         type='button'
@@ -19,7 +19,7 @@
     {{/each}}
   </div>
   {{#unless @showTasks}}
-    <div class='sidebar__task-selector'>
+    <div class='task-tabs__task-selector'>
       <button href='#' {{on 'click' @toggleTasks}} type='button'>
         {{@userSelectedTaskText}}
         <i class='arrow-down'></i>
