@@ -13,7 +13,7 @@
           max='100'
           step='25'
           {{on 'change' this.onPercentageChange}}
-          {{on 'change' (fn @onTaskUpdate @task.id)}}
+          {{on 'change' (fn this.onUpdate @task.id)}}
         />
       </div>
     </div>
@@ -22,7 +22,7 @@
     {{#if (eq @userSelectedTask.key this.TASK_KEYS.ALL)}}
       <div class='task-card__current-task-status'>
         <strong>Current task status:</strong>
-        {{@task.status}}
+        {{this.status}}
       </div>
     {{/if}}
 
@@ -40,7 +40,7 @@
       <select
         id='task-update'
         {{on 'change' this.onStatusChange}}
-        {{on 'change' (fn @onTaskUpdate @task.id)}}
+        {{on 'change' (fn this.onUpdate @task.id)}}
       >
         {{#each this.availabletaskStatusList as |taskStatus|}}
           {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
@@ -53,10 +53,13 @@
     {{/if}}
 
     <button
-      class='task-card__extensionForm-button' data-test-task-extensionForm-button type="button" {{on 'click' this.toggleExtensionForm}}
+      class='task-card__extensionForm-button'
+      data-test-task-extensionForm-button
+      type='button'
+      {{on 'click' this.toggleExtensionForm}}
     >Extension Status</button>
 
-    {{#if @isLoading}}
+    {{#if this.isLoading}}
       <div class='task-card__loader-container'>
         <Spinner />
       </div>
