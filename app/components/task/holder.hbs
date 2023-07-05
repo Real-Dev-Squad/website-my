@@ -4,6 +4,7 @@
     <div class='task-card__progress-bar-container'>
       <div class='task-card__progress-bar-container__progress-bar'>
         <input
+          data-test-task-progress-bar
           id='input'
           type='range'
           name='percentCompleted'
@@ -38,6 +39,7 @@
     {{#if (not-eq @task.status this.TASK_KEYS.VERIFIED)}}
       <label for='task-update'>Change task status:</label>
       <select
+        data-test-task-status-select
         id='task-update'
         {{on 'change' this.onStatusChange}}
         {{on 'change' (fn this.onUpdate @task.id)}}
@@ -60,7 +62,7 @@
     >Extension Status</button>
 
     {{#if this.isLoading}}
-      <div class='task-card__loader-container'>
+      <div data-test-task-spinner class='task-card__loader-container'>
         <Spinner />
       </div>
     {{/if}}
