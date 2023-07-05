@@ -211,6 +211,8 @@
   color: var(--primary-text-color);
   margin-bottom: 0;
   white-space: nowrap;
+  width: 100%;
+  text-align: left;
 }
 
 .task-details__status-purpose-container {
