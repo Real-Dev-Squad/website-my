@@ -9,6 +9,7 @@ const TASK_KEYS = {
   NEEDS_REVIEW: 'NEEDS_REVIEW',
   IN_REVIEW: 'IN_REVIEW',
   APPROVED: 'APPROVED',
+  MERGED: 'MEGRED',
   SANITY_CHECK: 'SANITY_CHECK',
   REGRESSION_CHECK: 'REGRESSION_CHECK',
   RELEASED: 'RELEASED',
@@ -26,6 +27,7 @@ const {
   NEEDS_REVIEW,
   IN_REVIEW,
   APPROVED,
+  MERGED,
   SANITY_CHECK,
   REGRESSION_CHECK,
   RELEASED,
@@ -91,6 +93,44 @@ const TASK_STATUS_LIST = [
   },
 ];
 
+const TABS_TASK_STATUS_LIST = [
+  {
+    displayLabel: 'All',
+    key: ALL,
+  },
+  {
+    displayLabel: 'Assigned',
+    key: ASSIGNED,
+  },
+  {
+    displayLabel: 'In Progress',
+    key: IN_PROGRESS,
+  },
+  {
+    displayLabel: 'Blocked',
+    key: BLOCKED,
+  },
+  {
+    displayLabel: 'Needs Review',
+    key: NEEDS_REVIEW,
+  },
+  {
+    displayLabel: 'In Review',
+    key: IN_REVIEW,
+  },
+  {
+    displayLabel: 'Approved',
+    key: APPROVED,
+  },
+  {
+    displayLabel: 'Merged',
+    key: MERGED,
+  },
+  {
+    displayLabel: 'Verified',
+    key: VERIFIED,
+  },
+];
 export const TASK_MESSAGES = {
   MARK_DONE:
     'This task will be marked as complete and a new task will be assigned to you',
@@ -102,4 +142,4 @@ export const TASK_PERCENTAGE = {
   completedPercentage: '100',
 };
 
-export { TASK_KEYS, TASK_STATUS_LIST };
+export { TASK_KEYS, TASK_STATUS_LIST, TABS_TASK_STATUS_LIST };
