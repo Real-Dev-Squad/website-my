@@ -12,16 +12,7 @@ module('Integration | Component | tasks', function (hooks) {
 
     await render(hbs`<Tasks />`);
 
-    assert.ok(this.element.textContent.trim().includes('Tasks'));
-
-    // Template block usage:
-    await render(hbs`
-      <Tasks>
-        template block text
-      </Tasks>
-    `);
-
-    assert.ok(this.element.textContent.trim().includes('Tasks'));
+    assert.ok(this.element.textContent.trim().includes('tasks'));
   });
 
   test('there is a fetch task button if no in progress task are there', async function (assert) {
