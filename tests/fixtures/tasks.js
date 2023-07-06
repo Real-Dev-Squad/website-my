@@ -53,4 +53,18 @@ const tasks = [
   },
 ];
 
-export { tasks };
+const overDueTask = {
+  id: 't5',
+  title: 'Task Object 1',
+  startedOn: 1662800000,
+  isNoteworthy: true,
+  endsOn: 1662803133,
+  percentCompleted: 25,
+  type: 'eu',
+  status: 'IN_PROGRESS',
+  assignee: 'user1',
+  featureUrl: 'aliqua non minim',
+  purpose: 'quis nostrud deserunt',
+};
+
+export { tasks, overDueTask };

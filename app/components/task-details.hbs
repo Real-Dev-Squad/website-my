@@ -1,12 +1,47 @@
-<div class="task-details">
-  <p class="task-details__title"><b>Title: </b>{{@task.title}}</p>
-  <p class="task-details__purpose"><b>Purpose: </b>{{@task.purpose}}</p>
-  <div class="dates-info">
-    <div class="dates-info__end">
-      <p><b>Deadline: </b>{{convertDate @task.endsOn end_date=1}}</p>
+<div class='task-details'>
+  <div class='task-details__title-container'>
+    <p class='task-details__title'>{{@task.title}}</p>
+    <div class='task-card__progress-bar-container'>
+      <div class='task-card__progress-bar-container__progress-bar'>
+        <Input
+          data-test-task-progress-bar
+          class='progress-bar__input {{@progressBarClass}}'
+          id='input'
+          type='range'
+          name='percentCompleted'
+          value={{@percentCompleted}}
+          min='0'
+          max='100'
+          step='10'
+          {{on 'change' @onPercentageChange}}
+          {{on 'change' (fn @onTaskUpdate @task.id)}}
+          disabled={{@isProgressBarDisabled}}
+        />
+        {{@percentCompleted}}%
+      </div>
     </div>
-    <div class="dates-info__start">
-      <p><b>Started: </b> {{convertDate @task.startedOn end_date=0}}</p>
+  </div>
+  <div class='task-details__status-purpose-container'>
+    <div class='status-details'>
+      <div>
+        <span class='status-details__dates-info__end'>{{if
+            (eq @task.status 'VERIFIED')
+            'Completed'
+            'Estimated completion'
+          }}</span>
+        <span class='status-details__dates-info__end-date'>{{convertDate
+            @task.endsOn
+            end_date=1
+          }}</span>
+      </div>
+      <div class='status-details__dates-info__start'>
+        <span class='status-details__dates-info__start'>Started
+          {{convertDate @task.startedOn end_date=0}}</span>
+      </div>
     </div>
+    {{#if @task.purpose}}
+      <p class='task-details__purpose'><b>Purpose: </b><span
+        >{{@task.purpose}}</span></p>
+    {{/if}}
   </div>
 </div>

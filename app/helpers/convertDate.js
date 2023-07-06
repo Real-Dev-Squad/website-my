@@ -43,11 +43,12 @@ const timeDifference = (timestamp, timeNow) => {
 };
 
 function convertDate([timestamp], { end_date, timeNow = Date.now() }) {
+  if (!timestamp) return 'TBD';
   if (end_date == 1 && timestamp * 1000 < timeNow) {
     const time_value = timeDifference(timestamp, timeNow);
-    return `Overdue by ${time_value.result} ${time_value.cycle}${
+    return `${time_value.result} ${time_value.cycle}${
       time_value.result > 1 ? 's' : ''
-    }`;
+    } ago`;
   }
   const time_value = timeDifference(timestamp, timeNow);
   if (timestamp * 1000 < timeNow)

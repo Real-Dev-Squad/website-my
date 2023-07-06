@@ -11,7 +11,6 @@ import {
 import { TASK_MESSAGES, TASK_PERCENTAGE } from '../constants/tasks';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-
 const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksController extends Controller {
@@ -147,6 +146,7 @@ export default class TasksController extends Controller {
     const taskData = this.taskFields;
     this.isLoading = true;
     const cleanBody = this.constructReqBody(taskData);
+
     if (taskData.status || taskData.percentCompleted) {
       try {
         const response = await fetch(
