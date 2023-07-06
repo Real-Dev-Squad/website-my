@@ -149,14 +149,17 @@ export default class TasksController extends Controller {
     const cleanBody = this.constructReqBody(taskData);
     if (taskData.status || taskData.percentCompleted) {
       try {
-        const response = await fetch(`${API_BASE_URL}/tasks/self/${taskId}`, {
-          method: 'PATCH',
-          body: JSON.stringify(cleanBody),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/tasks/self/${taskId}?userStatusFlag=true`,
+          {
+            method: 'PATCH',
+            body: JSON.stringify(cleanBody),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          }
+        );
 
         if (response.ok) {
           this.toast.success('Successfully updated the task', '', {
