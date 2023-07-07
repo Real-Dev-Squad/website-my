@@ -31,7 +31,6 @@ export default class TasksController extends Controller {
   @tracked showDropDown = true;
   @tracked taskFields = {};
   @tracked allTasks = this.model;
-  @tracked isLoading = false;
   @tracked userSelectedTask = this.DEFAULT_TASK_TYPE;
   @tracked showModal = false;
   @tracked tempTaskId = ''; // this Id will be used to update task which are completed 100%
@@ -139,12 +138,10 @@ export default class TasksController extends Controller {
     this.taskFields[key] = value;
   }
 
-  @action async updateTask(taskId) {
-    this.isLoading = true;
+  @action async updateTask(taskId, error) {
     this.disabled = true;
     this.buttonRequired = false;
     const taskData = this.taskFields;
-    this.isLoading = true;
     const cleanBody = this.constructReqBody(taskData);
 
     if (taskData.status || taskData.percentCompleted) {
@@ -191,6 +188,7 @@ export default class TasksController extends Controller {
             toastNotificationTimeoutOptions
           );
           this.disabled = false;
+          error();
         }
       } catch (err) {
         this.toast.error(
@@ -199,8 +197,8 @@ export default class TasksController extends Controller {
           toastNotificationTimeoutOptions
         );
         console.error('Error : ', err);
+        error();
       } finally {
-        this.isLoading = false;
         this.disabled = false;
       }
     }
@@ -258,16 +256,15 @@ export default class TasksController extends Controller {
     }
   }
 
-  @action async handleUpdateTask(taskId) {
+  @action async handleUpdateTask(taskId, error) {
     const taskData = this.taskFields;
     if (taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage) {
       this.message = TASK_MESSAGES.MARK_DONE;
       this.showModal = true;
       this.buttonRequired = true;
       this.tempTaskId = taskId;
-      return;
     } else {
-      this.updateTask(taskId);
+      return this.updateTask(taskId, error);
     }
   }
 }

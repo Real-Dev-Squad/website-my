@@ -6,7 +6,9 @@ import { TASK_PERCENTAGE } from '../../constants/tasks';
 
 export default class TasksHolderComponent extends Component {
   @tracked percentCompleted = this.args.task.percentCompleted;
+  @tracked status = this.args.task.status;
   @tracked extensionFormOpened = false;
+  @tracked isLoading = false;
 
   TASK_KEYS = TASK_KEYS;
   availabletaskStatusList = TASK_STATUS_LIST;
@@ -75,6 +77,16 @@ export default class TasksHolderComponent extends Component {
     if (value === TASK_PERCENTAGE.completedPercentage) {
       this.percentCompleted = this.args.task.percentCompleted;
     }
+  }
+
+  @action
+  async onUpdate(taskId) {
+    this.isLoading = true;
+    await this.args.onTaskUpdate(taskId, () => {
+      this.percentCompleted = this.args.task.percentCompleted;
+      this.status = this.args.task.status;
+    });
+    this.isLoading = false;
   }
 
   @action

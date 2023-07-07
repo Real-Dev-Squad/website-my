@@ -2,7 +2,7 @@
   <Task-Details
     @task={{@task}}
     @disabled={{@disabled}}
-    @onTaskUpdate={{@onTaskUpdate}}
+    @onTaskUpdate={{this.onUpdate}}
     @onPercentageChange={{this.onPercentageChange}}
     @percentCompleted={{this.percentCompleted}}
     @progressBarClass={{this.progressBarClass}}
@@ -24,9 +24,10 @@
       <div class='task-update-container'>
         <label id='task-update-label' for='task-update'><b>Status:</b></label>
         <select
+          data-test-task-status-select
           id='task-update'
           {{on 'change' this.onStatusChange}}
-          {{on 'change' (fn @onTaskUpdate @task.id)}}
+        {{on 'change' (fn this.onUpdate @task.id)}}
         >
           {{#each this.availabletaskStatusList as |taskStatus|}}
             {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
@@ -52,8 +53,8 @@
       {{on 'click' this.toggleExtensionForm}}
     >Extension Status</button>
 
-    {{#if @isLoading}}
-      <div class='task-card__loader-container'>
+    {{#if this.isLoading}}
+      <div data-test-task-spinner class='task-card__loader-container'>
         <Spinner />
       </div>
     {{/if}}
