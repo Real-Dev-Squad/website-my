@@ -73,6 +73,7 @@ export default class TasksHolderComponent extends Component {
   @action
   onPercentageChange(e) {
     const { value } = e.target;
+    this.percentCompleted = value;
     this.args.onTaskChange('percentCompleted', value);
     if (value === TASK_PERCENTAGE.completedPercentage) {
       this.percentCompleted = this.args.task.percentCompleted;
@@ -92,6 +93,7 @@ export default class TasksHolderComponent extends Component {
   @action
   onStatusChange(e) {
     const { value } = e.target;
+    this.status = value;
     this.args.onTaskChange('status', value);
   }
 

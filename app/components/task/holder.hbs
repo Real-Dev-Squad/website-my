@@ -20,18 +20,18 @@
       />
     {{/if}}
 
-    {{#if (not-eq @task.status this.TASK_KEYS.VERIFIED)}}
+    {{#if (not-eq this.status this.TASK_KEYS.VERIFIED)}}
       <div class='task-update-container'>
         <label id='task-update-label' for='task-update'><b>Status:</b></label>
         <select
           data-test-task-status-select
           id='task-update'
           {{on 'change' this.onStatusChange}}
-        {{on 'change' (fn this.onUpdate @task.id)}}
+          {{on 'change' (fn this.onUpdate @task.id)}}
         >
           {{#each this.availabletaskStatusList as |taskStatus|}}
             {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-              {{#if (eq taskStatus.key @task.status)}}
+              {{#if (eq taskStatus.key this.status)}}
                 <option value={{taskStatus.key}} selected>
                   {{taskStatus.displayLabel}}
                 </option>
