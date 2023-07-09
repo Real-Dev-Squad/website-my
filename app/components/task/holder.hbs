@@ -31,15 +31,12 @@
         >
           {{#each this.availabletaskStatusList as |taskStatus|}}
             {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-              {{#if (eq taskStatus.key this.status)}}
-                <option value={{taskStatus.key}} selected>
-                  {{taskStatus.displayLabel}}
-                </option>
-              {{else}}
-                <option value={{taskStatus.key}}>
-                  {{taskStatus.displayLabel}}
-                </option>
-              {{/if}}
+              <option
+                value={{taskStatus.key}}
+                selected={{eq taskStatus.key this.status}}
+              >
+                {{taskStatus.displayLabel}}
+              </option>
             {{/if}}
           {{/each}}
         </select>
