@@ -32,6 +32,13 @@ module('Unit | Controller | new-signup', function (hooks) {
       'username',
       'current step updated to username'
     );
+
+    controller.send('changeStepToFive');
+    assert.equal(
+      controller.currentStep,
+      'role',
+      'current step updated to role'
+    );
   });
 
   test('testing handleInput change function', function (assert) {
@@ -78,5 +85,15 @@ module('Unit | Controller | new-signup', function (hooks) {
       'vinayak',
       'username value updated'
     );
+
+    controller.send('handleInputChange', 'role', 'developer');
+    assert.equal(controller.developer, true, 'developer set to true');
+
+    assert.equal(controller.designer, false, 'designer set to false');
+
+    controller.send('handleInputChange', 'role', 'designer');
+    assert.equal(controller.designer, true, 'designer set to true');
+
+    assert.equal(controller.developer, false, 'developer set to false');
   });
 });

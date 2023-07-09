@@ -1,0 +1,28 @@
+<div class='user-details'>
+  <h2 class='user-details__heading' data-test-signup-form-label>
+    {{this.label}}
+  </h2>
+  <div class='user-details__field role-details__field'>
+    <select
+      name='role'
+      id='role'
+      {{on 'change' this.selectFieldChanged}}
+      data-test-signup-form-select
+    >
+      <option disabled selected>Choose role</option>
+      <option value='developer' selected={{this.developer}}>Developer</option>
+      <option value='designer' selected={{this.designer}}>Designer</option>
+    </select>
+  </div>
+
+  <div class='signup-action__btn'>
+    <Button
+      @data-test-btn='signup'
+      @onClick={{@onClick}}
+      @disabled={{@isButtonDisabled}}
+      @isLoading={{@isLoading}}
+    >
+      Submit
+    </Button>
+  </div>
+</div>

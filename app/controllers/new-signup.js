@@ -7,6 +7,9 @@ import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
+import ENV from 'website-my/config/environment';
+
+const { BASE_API_URL } = ENV;
 
 export default class NewSignUpController extends Controller {
   @service analytics;
@@ -21,13 +24,18 @@ export default class NewSignUpController extends Controller {
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
   THIRD_STEP = NEW_SIGNUP_STEPS[2];
   FOURTH_STEP = NEW_SIGNUP_STEPS[3];
-  LAST_STEP = NEW_SIGNUP_STEPS[4];
+  FIFTH_STEP = NEW_SIGNUP_STEPS[4];
+  LAST_STEP = NEW_SIGNUP_STEPS[5];
 
   @tracked signupDetails = {
     firstName: '',
     lastName: '',
     username: '',
   };
+
+  @tracked selectDeveloper = '';
+
+  @tracked selectDesigner = '';
 
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
@@ -46,8 +54,14 @@ export default class NewSignUpController extends Controller {
     this.isButtonDisabled = true;
   }
 
-  @action register() {
+  @action changeStepToFive() {
+    this.currentStep = this.FIFTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_USERNAME);
+    this.isButtonDisabled = true;
+  }
+
+  @action register() {
+    this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_ROLE);
     this.isButtonDisabled = true;
     this.signup();
   }
@@ -59,12 +73,31 @@ export default class NewSignUpController extends Controller {
 
   @action handleInputChange(key, value) {
     this.error = '';
-    set(this.signupDetails, key, value);
+    if (key === 'role') {
+      if (value === 'developer') {
+        this.developer = true;
+        this.designer = false;
+      } else if (value === 'designer') {
+        this.developer = false;
+        this.designer = true;
+      }
+    } else {
+      set(this.signupDetails, key, value);
+    }
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
-    else this.isButtonDisabled = true;
+    else if (this.developer > '' || this.designer > '') {
+      this.isButtonDisabled = false;
+    } else this.isButtonDisabled = true;
   }
 
   @action async signup() {
+    let roles;
+
+    if (this.developer) {
+      roles = { developer: this.developer };
+    } else {
+      roles = { designer: this.designer };
+    }
     const signupDetails = {
       first_name: this.signupDetails.firstName,
       last_name: this.signupDetails.lastName,
@@ -80,7 +113,23 @@ export default class NewSignUpController extends Controller {
       return (this.error = ERROR_MESSAGES.userName);
     }
 
-    registerUser(signupDetails)
+    fetch(`${BASE_API_URL}/users/self`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((getResponse) => getResponse.json())
+      .then((userData) => {
+        return registerUser({
+          ...signupDetails,
+          roles: {
+            ...userData.roles,
+            ...roles,
+          },
+        });
+      })
       .then((res) => {
         if (res.status === 204) {
           this.analytics.identifyUser();

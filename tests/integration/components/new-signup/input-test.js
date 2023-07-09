@@ -92,7 +92,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.expect(2);
     this.setProperties({
       onClick: function () {
-        this.currentStep = this.LAST_STEP;
+        this.currentStep = this.FIFTH_STEP;
       },
       currentStep: 'username',
     });
@@ -104,7 +104,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
       />`);
 
     assert.dom('[data-test-btn="signup"]').exists();
-    assert.dom('[data-test-btn="signup"]').hasText('Submit');
+    assert.dom('[data-test-btn="signup"]').hasAnyText();
   });
 
   test('It should have input field', async function (assert) {

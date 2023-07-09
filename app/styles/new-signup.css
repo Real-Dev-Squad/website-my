@@ -20,10 +20,15 @@
   padding: 1rem;
 }
 
+.role-details__field {
+  padding: 1rem 5rem;
+}
+
 .user-details__heading {
   font-size: 2rem;
   color: var(--user-details--heading--bg);
   margin-bottom: 0;
+  text-align: center;
 }
 
 .user-details__field input {
@@ -32,6 +37,15 @@
   border-radius: 10px;
   border: 2px solid var(--user-details--input--border);
   font-size: 2rem;
+}
+
+.user-details__field select {
+  padding: 0.8rem; 
+  border-radius: 10px;
+  border: 2px solid var(--user-details--input--border);
+  font-size: 2rem;
+  width: 100%;
+  transition: all 0.1s;
 }
 
 .signup-action__btn button {
@@ -68,6 +82,10 @@
   .signup-action__btn button {
     font-size: 1.5rem;
   }
+
+  .user-details__field select {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -78,5 +96,9 @@
   .user-details__field input,
   .signup-action__btn button {
     font-size: 1.2rem;
+  }
+
+  .user-details__field select {
+    font-size: 0.6rem;
   }
 }

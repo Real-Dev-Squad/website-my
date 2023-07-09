@@ -2,6 +2,7 @@ const GET_STARTED = 'get-started';
 const FIRST_NAME = 'firstName';
 const LAST_NAME = 'lastName';
 const USERNAME = 'username';
+const ROLE = 'role';
 const THANK_YOU = 'thank-you';
 
 export const NEW_SIGNUP_STEPS = [
@@ -9,6 +10,7 @@ export const NEW_SIGNUP_STEPS = [
   FIRST_NAME,
   LAST_NAME,
   USERNAME,
+  ROLE,
   THANK_YOU,
 ];
 
@@ -16,6 +18,7 @@ export const LABEL_TEXT = {
   firstName: 'What is your first name?',
   lastName: 'And what is your last name?',
   username: 'Now choose your awesome username!',
+  role: 'Select your role',
 };
 
 export const ERROR_MESSAGES = {
