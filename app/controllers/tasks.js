@@ -264,7 +264,7 @@ export default class TasksController extends Controller {
       this.buttonRequired = true;
       this.tempTaskId = taskId;
     } else {
-      this.updateTask(taskId, error);
+      return this.updateTask(taskId, error);
     }
   }
 }
