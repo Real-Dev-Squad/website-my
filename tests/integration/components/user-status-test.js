@@ -6,7 +6,7 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | user-status', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('show relevant data when status changed to ONBOARDING', async function (assert) {
+  test('show relevant data when status is ONBOARDING', async function (assert) {
     this.setProperties({
       changeStatus: () => {},
       updateStatus: () => {},
@@ -27,7 +27,7 @@ module('Integration | Component | user-status', function (hooks) {
     assert.dom('[data-test-status]').hasText('You are undergoing onboarding');
   });
 
-  test('show relevant data when status changed to IDLE', async function (assert) {
+  test('show relevant data when status is IDLE', async function (assert) {
     this.setProperties({
       changeStatus: () => {},
       updateStatus: () => {},
@@ -45,9 +45,12 @@ module('Integration | Component | user-status', function (hooks) {
     `);
 
     assert.dom('[data-test-status]').hasText(`You are Idle`);
+    assert
+      .dom('[data-test-update-status-OOO]')
+      .hasText('Change your status to OOO');
   });
 
-  test('show relevant data when status changed to OOO', async function (assert) {
+  test('show relevant data when status is OOO', async function (assert) {
     this.setProperties({
       status: 'OOO',
       isStatusUpdating: false,
