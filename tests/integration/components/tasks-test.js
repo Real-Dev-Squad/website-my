@@ -1,7 +1,9 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { find, render, waitUntil, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { tasks } from 'website-my/tests/fixtures/tasks';
+import { TASK_KEYS } from 'website-my/constants/tasks';
 
 module('Integration | Component | tasks', function (hooks) {
   setupRenderingTest(hooks);
@@ -37,5 +39,45 @@ module('Integration | Component | tasks', function (hooks) {
     `);
 
     assert.dom('[data-test-fetchSection]').exists();
+  });
+
+  test('Spinner should be visible only on the current updating card', async function (assert) {
+    tasks[0].status = 'IN_PROGRESS';
+    this.setProperties({
+      onTaskChange: () => {},
+      onTaskUpdate: () => {},
+      showFetchButton: false,
+      handleUpdateTask: async () => new Promise((res) => setTimeout(res, 1000)),
+      handleAssignment: () => {},
+      findingTask: false,
+      dev: true,
+      tasksToShow: tasks,
+    });
+
+    await render(hbs`
+      <Tasks
+        @tasksToShow={{this.tasksToShow}}
+        @onTaskChange={{this.onTaskChange}}
+        @onTaskUpdate={{this.handleUpdateTask}}
+        @noInProgressTask={{this.showFetchButton}}
+        @handleAssignment={{this.handleAssignment}}
+        @findingTask={{this.findingTask}}
+        @dev={{this.dev}}
+      />
+    `);
+
+    assert.dom('[data-test-task-spinner]').doesNotExist();
+
+    await fillIn('[data-test-task-status-select]', TASK_KEYS.COMPLETED);
+
+    assert.dom('[data-test-task-spinner]').exists({ count: 1 });
+
+    await waitUntil(
+      () => {
+        return !find('[data-test-task-spinner]');
+      },
+      { timeout: 1000 }
+    );
+    assert.dom('[data-test-task-spinner]').doesNotExist();
   });
 });
