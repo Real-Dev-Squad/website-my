@@ -14,7 +14,7 @@ const { BASE_API_URL } = ENV;
 export default class NewSignUpController extends Controller {
   @service analytics;
 
-  queryParams = ['currentStep'];
+  queryParams = ['currentStep', 'dev'];
 
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
@@ -93,10 +93,12 @@ export default class NewSignUpController extends Controller {
   @action async signup() {
     let roles;
 
-    if (this.developer) {
-      roles = { developer: this.developer };
-    } else {
-      roles = { designer: this.designer };
+    if (this.dev) {
+      if (this.developer) {
+        roles = { developer: this.developer };
+      } else {
+        roles = { designer: this.designer };
+      }
     }
     const signupDetails = {
       first_name: this.signupDetails.firstName,
@@ -113,41 +115,64 @@ export default class NewSignUpController extends Controller {
       return (this.error = ERROR_MESSAGES.userName);
     }
 
-    fetch(`${BASE_API_URL}/users/self`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-      .then((getResponse) => getResponse.json())
-      .then((userData) => {
-        return registerUser({
-          ...signupDetails,
-          roles: {
-            ...userData.roles,
-            ...roles,
-          },
-        });
+    if (this.dev) {
+      fetch(`${BASE_API_URL}/users/self`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
       })
-      .then((res) => {
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          this.currentStep = this.LAST_STEP;
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
+        .then((getResponse) => getResponse.json())
+        .then((userData) => {
+          return registerUser({
+            ...signupDetails,
+            roles: {
+              ...userData.roles,
+              ...roles,
+            },
+          });
+        })
+        .then((res) => {
+          if (res.status === 204) {
+            this.analytics.identifyUser();
+            this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
+            this.currentStep = this.LAST_STEP;
+          } else {
+            this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
+            this.error = ERROR_MESSAGES.others;
+            this.isButtonDisabled = false;
+          }
+        })
+        .catch(() => {
+          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
           this.error = ERROR_MESSAGES.others;
           this.isButtonDisabled = false;
-        }
-      })
-      .catch(() => {
-        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-        this.error = ERROR_MESSAGES.others;
-        this.isButtonDisabled = false;
-      })
-      .finally(() => {
-        this.isLoading = false;
-      });
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
+    } else {
+      registerUser(signupDetails)
+        .then((res) => {
+          if (res.status === 204) {
+            this.analytics.identifyUser();
+            this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
+            this.currentStep = this.LAST_STEP;
+          } else {
+            this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
+            this.error = ERROR_MESSAGES.others;
+            this.isButtonDisabled = false;
+          }
+        })
+        .catch(() => {
+          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
+          this.error = ERROR_MESSAGES.others;
+          this.isButtonDisabled = false;
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
+    }
   }
 }
