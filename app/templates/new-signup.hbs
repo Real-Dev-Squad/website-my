@@ -1,4 +1,4 @@
-{{page-title "New Sign Up"}}
+{{page-title 'New Sign Up'}}
 
 {{#if (eq this.currentStep this.FIRST_STEP)}}
   <NewSignup::Info
@@ -23,19 +23,42 @@
     @currentStep={{this.currentStep}}
     @onChange={{this.handleInputChange}}
     @isButtonDisabled={{this.isButtonDisabled}}
-    @isLoading={{this.isLoading}}  
+    @isLoading={{this.isLoading}}
   />
 {{/if}}
 
 {{#if (eq this.currentStep this.FOURTH_STEP)}}
-  <NewSignup::Input
-    @onClick={{this.register}}
-    @currentStep={{this.currentStep}}
-    @onChange={{this.handleInputChange}}
-    @isButtonDisabled={{this.isButtonDisabled}}
-    @isLoading={{this.isLoading}}
-    @error={{this.error}}
-  />
+  {{#if this.dev}}
+    <NewSignup::Input
+      @onClick={{this.changeStepToFive}}
+      @currentStep={{this.currentStep}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+      @error={{this.error}}
+    />
+  {{else}}
+    <NewSignup::Input
+      @onClick={{this.register}}
+      @currentStep={{this.currentStep}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+      @error={{this.error}}
+    />
+  {{/if}}
+{{/if}}
+
+{{#if this.dev}}
+  {{#if (eq this.currentStep this.FIFTH_STEP)}}
+    <NewSignup::Select
+      @onClick={{this.register}}
+      @currentStep={{this.currentStep}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+    />
+  {{/if}}
 {{/if}}
 
 {{#if (eq this.currentStep this.LAST_STEP)}}
