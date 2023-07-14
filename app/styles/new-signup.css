@@ -21,7 +21,8 @@
 }
 
 .role-details__field {
-  padding: 1rem 5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .user-details__heading {
@@ -44,7 +45,7 @@
   border-radius: 10px;
   border: 2px solid var(--user-details--input--border);
   font-size: 2rem;
-  width: 100%;
+  width: 24rem;
   transition: all 0.1s;
 }
 
@@ -79,12 +80,9 @@
   }
   
   .user-details__field input,
+  .user-details__field select,
   .signup-action__btn button {
     font-size: 1.5rem;
-  }
-
-  .user-details__field select {
-    font-size: 1rem;
   }
 }
 
@@ -94,11 +92,8 @@
   }
 
   .user-details__field input,
+  .user-details__field select,
   .signup-action__btn button {
     font-size: 1.2rem;
-  }
-
-  .user-details__field select {
-    font-size: 0.6rem;
   }
 }
