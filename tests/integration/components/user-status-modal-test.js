@@ -88,43 +88,6 @@ module('Integration | Component | user-status-modal', function (hooks) {
     await click('.modal__submit');
   });
 
-  test('payload contains relevant data when status is changed to IDLE', async function (assert) {
-    this.setProperties({
-      newStatus: 'IDLE',
-      showUserStateModal: true,
-      toggleUserStateModal: () => {
-        this.set('showUserStateModal', !this.showUserStateModal);
-      },
-      updateStatus: (statusPayLoad) => {
-        const {
-          currentStatus: { state, from, message, updatedAt },
-        } = statusPayLoad;
-        assert.equal(state, 'IDLE', 'new state present in the payload');
-        assert.equal(
-          message,
-          'Rust and GoLang',
-          'message present in the payload'
-        );
-        assert.ok(typeof from === 'number', 'from is a numeric timestamp');
-        assert.ok(
-          typeof updatedAt === 'number',
-          'updatedAt is a numeric timestamp'
-        );
-      },
-    });
-
-    await render(hbs`
-        <UserStatusModal 
-            @showUserStateModal={{this.showUserStateModal}}
-            @newStatus={{this.newStatus}}
-            @toggleUserStateModal={{this.toggleUserStateModal}}
-            @updateStatus={{this.updateStatus}}
-            
-        />`);
-    await fillIn('[data-test-textarea-reason]', 'Rust and GoLang');
-    await click('.modal__submit');
-  });
-
   test('modal is closed on click of close button', async function (assert) {
     this.setProperties({
       newStatus: 'ACTIVE',

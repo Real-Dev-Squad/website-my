@@ -15,10 +15,6 @@
           and ask for doubts in the team chat on Discord.
         </p>
         <p data-test-details>If you are not a developer, please contact Ankush for next steps.</p>
-        <button class="buttons__active" type="button"  {disabled={{@isStatusUpdating}} {{on "click" (fn
-          this.changeStatus "ACTIVE" )}} data-test-active-button>
-          <span>Change your status to Active</span>
-        </button>
       </div>
     {{else}}
     <h2 data-test-status>{{currentStatus.message}}</h2>
@@ -31,7 +27,7 @@
   {{#each this.currentUserStatus as |currentStatus|}}
     {{#if (eq @status currentStatus.status)}}
       {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
-        <button class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
+        <button data-test-update-status-OOO class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
           <span>{{otherPossibleStatus.message}}</span>
         </button>
       {{/each}}
