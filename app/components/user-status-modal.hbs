@@ -10,9 +10,6 @@
       <Input name='untilDate' type='date' min={{if this.fromDate this.fromDate this.disableDatesPrior}}
         value={{this.untilDate}} {{on "change" this.updateValue}} data-test-date-picker-until />
       <label class="modal__inputs--description" data-test-label-reason>Reason</label>
-      {{else if (eq @newStatus this.USER_STATES.IDLE)}}
-      <label class="modal__inputs--description" data-test-label-missing-skills>What skills are you willing to
-        learn</label>
       {{/if}}
 
       <textarea name='reason' class="modal__text-area" value={{this.reason}} {{on "input" this.handleInput}}
