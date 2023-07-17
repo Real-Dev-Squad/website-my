@@ -24,26 +24,17 @@ export default class UserStatusComponent extends Component {
     {
       status: USER_STATES.ACTIVE,
       message: 'You are Active',
-      otherAvailableStatus: [
-        this.ALL_FEASIBLE_STATUS.IDLE,
-        this.ALL_FEASIBLE_STATUS.OOO,
-      ],
+      otherAvailableStatus: [this.ALL_FEASIBLE_STATUS.OOO],
     },
     {
       status: USER_STATES.IDLE,
       message: 'You are Idle',
-      otherAvailableStatus: [
-        this.ALL_FEASIBLE_STATUS.ACTIVE,
-        this.ALL_FEASIBLE_STATUS.OOO,
-      ],
+      otherAvailableStatus: [this.ALL_FEASIBLE_STATUS.OOO],
     },
     {
       status: USER_STATES.OOO,
       message: 'You are OOO',
-      otherAvailableStatus: [
-        this.ALL_FEASIBLE_STATUS.ACTIVE,
-        this.ALL_FEASIBLE_STATUS.IDLE,
-      ],
+      otherAvailableStatus: [],
     },
     {
       status: USER_STATES.ONBOARDING,
@@ -51,11 +42,7 @@ export default class UserStatusComponent extends Component {
     {
       status: USER_STATES.DNE,
       message: `Your Status doesn't exist`,
-      otherAvailableStatus: [
-        this.ALL_FEASIBLE_STATUS.ACTIVE,
-        this.ALL_FEASIBLE_STATUS.IDLE,
-        this.ALL_FEASIBLE_STATUS.OOO,
-      ],
+      otherAvailableStatus: [this.ALL_FEASIBLE_STATUS.OOO],
     },
   ];
 
