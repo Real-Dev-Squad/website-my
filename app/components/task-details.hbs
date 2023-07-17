@@ -3,9 +3,34 @@
     <p class='task-details__title'>{{@task.title}}</p>
     <div class='task-card__progress-bar-container'>
       <div class='task-card__progress-bar-container__progress-bar'>
+        {{#if @progressBarDev}}
+          {{#if (eq @task.status 'IN_PROGRESS')}}
+            <ProgressBar
+              class='{{@progressBarClass}}'
+              @value={{@percentCompleted}}
+              @onChange={{@onPercentageChange}}
+              @onInput={{@onInputChange}}
+            />
+          {{/if}}
+        {{else}}
+          <Input
+            data-test-task-progress-bar
+            class='progress-bar__input {{@progressBarClass}}'
+            id='input'
+            type='range'
+            name='percentCompleted'
+            value={{@percentCompleted}}
+            min='0'
+            max='100'
+            step='10'
+            {{on 'change' @onPercentageChange}}
+            {{on 'change' (fn @onTaskUpdate @task.id)}}
+            disabled={{@isProgressBarDisabled}}
+          />
+          {{@percentCompleted}}%
+        {{/if}}
 
-        <ProgressBar class='{{@progressBarClass}}' @value={{@percentCompleted}} @onUpdate={{@onPercentageChange}}/>     
-         </div>
+      </div>
     </div>
   </div>
   <div class='task-details__status-purpose-container'>
