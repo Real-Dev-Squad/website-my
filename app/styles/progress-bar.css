@@ -1,0 +1,119 @@
+/* .progress-bar__input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80%;
+    height: 9px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 9px;
+    border: 2px solid var(--black-grey);
+}
+
+.progress-bar__input:disabled {
+    pointer-events: none;
+}
+
+.progress-bar__input::-webkit-slider-runnable-track {
+    height: 9px;
+    background: var(--range-slider-background);
+    border-radius: 9px;
+}
+
+.progress-bar__input::-moz-range-track {
+    height: 9px;
+    background: var(--range-slider-background);
+    border-radius: 9px;
+}
+
+.progress-bar__input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 9px;
+    width: 9px;
+    background-color: var(--progress-bar-color);
+    border-radius: 50%;
+    border: 2px solid var(--progress-bar-color);
+    transition: 0.25s ease-in-out;
+    box-shadow: -407px 0 0 400px var(--progress-bar-color);
+}
+
+.progress-bar__input::-webkit-slider-thumb:active,
+.task-card__progress-bar-container__progress-bar:hover .progress-bar__input:not(:disabled)::-webkit-slider-thumb {
+    background-color: var(--white);
+}
+
+.progress-bar__input::-moz-range-thumb {
+    background-color: var(--progress-bar-color);
+    border-radius: 50%;
+    height: 4.5px;
+    width: 4.5px;
+    border: 2px solid var(--progress-bar-color);
+    transition: 0.25s ease-in-out;
+    box-shadow: -407px 0 0 400px var(--progress-bar-color);
+}
+
+.progress-bar__input::-moz-range-thumb:active,
+.task-card__progress-bar-container__progress-bar:hover .progress-bar__input:not(:disabled)::-moz-range-thumb {
+    background-color: var(--white);
+} */
+/* 
+.progress-bar__input-slider {
+        -webkit-appearance: none;
+            appearance: none;
+            width: 80%;
+            height: 16px;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+            border: 2px solid var(--black-grey);
+    border-radius: 0.5rem;
+    cursor: row-resize;
+
+}
+
+.progress-bar__input-slider[step] {
+    background-color: transparent;
+    background-image: repeating-linear-gradient(to right, green);
+}
+.progress-bar__input-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    box-shadow: -20rem 0 0 20rem rgba(#000, 0.2);
+}
+.progress-bar__input-slider::-moz-range-thumb {
+    border: none;
+    width: 12px;
+    box-shadow: -20rem 0 0 20rem rgba(#000, 0.2);
+} */
+
+.progress-bar__input-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20rem;
+    height: 16px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    cursor: row-resize;
+}
+
+.progress-bar__input-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    box-shadow: -20rem 0 0 20rem rgba(black, 0.5);
+}
+
+.progress-bar__input-slider::-moz-range-thumb {
+    border: none;
+    width: 0;
+    box-shadow: -20rem 0 0 20rem rgba(black, 0.5);
+}
+
+.progress-bar__input-slider[step] {
+    background-color: transparent;
+    background: repeating-linear-gradient(to right, #e66465, #e66465 20px, black 25px);
+    /* background: repeating-linear-gradient(to right, , rgba(green, .2) calc(10% - 1px), black 10%); */
+}

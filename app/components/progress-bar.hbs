@@ -1,0 +1,18 @@
+<div>
+  <input
+    ...attributes
+    data-test-task-progress-bar
+    class='progress-bar__input-slider'
+    id='input'
+    type='range'
+    value={{@value}}
+    min="0"
+    max="100"
+    step="10"
+    {{on 'change' @onUpdate}}
+  />
+  {{@value}}
+  <button type="button">
+
+  </button>
+</div> 
