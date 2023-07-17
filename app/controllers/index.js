@@ -25,7 +25,7 @@ export default class IndexController extends Controller {
       this.toggleUserStateModal();
     }
     try {
-      await fetch(`${BASE_URL}/users/status/self`, {
+      await fetch(`${BASE_URL}/users/status/self?userStatusFlag=true`, {
         method: 'PATCH',
         body: JSON.stringify(newStatus),
         headers: {
