@@ -1,4 +1,4 @@
-<div>
+<div class="progress-bar-container">
   <input
     ...attributes
     data-test-task-progress-bar
@@ -11,8 +11,9 @@
     step="10"
     {{on 'change' @onUpdate}}
   />
-  {{@value}}
-  <button type="button">
-
+  <button
+      data-text-progress-bar-button
+ class="progress-bar__button" type="button">
+   {{@value}}
   </button>
-</div> 
+</div>

@@ -3,7 +3,6 @@
     <p class='task-details__title'>{{@task.title}}</p>
     <div class='task-card__progress-bar-container'>
       <div class='task-card__progress-bar-container__progress-bar'>
-
         <ProgressBar class='{{@progressBarClass}}' @value={{@percentCompleted}} @onUpdate={{@onPercentageChange}}/>     
          </div>
     </div>
@@ -27,8 +26,7 @@
       </div>
     </div>
     {{#if @task.purpose}}
-      <p class='task-details__purpose'><b>Purpose: </b><span
-        >{{@task.purpose}}</span></p>
+      <p class='task-details__purpose'><b>Purpose: </b><span>{{@task.purpose}}</span></p>
     {{/if}}
   </div>
 </div>

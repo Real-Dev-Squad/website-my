@@ -88,14 +88,14 @@
   flex-shrink: 0;
 }
 
-.task-card__progress-bar-container__progress-bar {
+/* .task-card__progress-bar-container__progress-bar {
   background-color: transparent;
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
-}
+} */
 
 .progress-bar__input {
   -webkit-appearance: none;
