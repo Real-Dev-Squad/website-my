@@ -1,19 +1,30 @@
-<div class="progress-bar-container">
+<div     ...attributes
+class="progress-bar-container">
   <input
-    ...attributes
     data-test-task-progress-bar
     class='progress-bar__input-slider'
-    id='input'
+    id='progress-bar-input'
     type='range'
     value={{@value}}
     min="0"
     max="100"
     step="10"
-    {{on 'change' @onUpdate}}
+    {{on 'change' this.onChange}}
+    {{on 'input' this.onInput}}
+    {{did-update this.something}}
+    {{on 'mousemove' this.onHover}}
+    disabled={{not this.isEditable}}
+    focus={{this.isEditable}}
   />
   <button
       data-text-progress-bar-button
- class="progress-bar__button" type="button">
-   {{@value}}
+      {{on 'click' this.turnEditModeOn}}
+ class="progress-bar__button {{unless this.isEditable 'progress-bar__edit-hover'}}" type="button">
+   {{#if this.isEditable}}
+   {{this.value}}
+   {{else}}
+         <img class="progress-bar__edit-icon" src='/icons/edit-icon.svg' alt="" role="presentation">
+         {{/if}}
   </button>
+
 </div>

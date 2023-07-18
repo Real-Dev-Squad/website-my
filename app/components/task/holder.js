@@ -71,13 +71,14 @@ export default class TasksHolderComponent extends Component {
   }
 
   @action
-  onPercentageChange(e) {
+  async onPercentageChange(e) {
     const { value } = e.target;
     this.percentCompleted = value;
     this.args.onTaskChange('percentCompleted', value);
     if (value === TASK_PERCENTAGE.completedPercentage) {
       this.percentCompleted = this.args.task.percentCompleted;
     }
+    await this.onUpdate(this.args.task.id);
   }
 
   @action
