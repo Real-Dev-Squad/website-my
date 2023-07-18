@@ -33,10 +33,6 @@ export default class NewSignUpController extends Controller {
     username: '',
   };
 
-  @tracked selectDeveloper = '';
-
-  @tracked selectDesigner = '';
-
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
@@ -77,15 +73,34 @@ export default class NewSignUpController extends Controller {
       if (value === 'developer') {
         this.developer = true;
         this.designer = false;
+        this.mavens = false;
+        this.productManger = false;
       } else if (value === 'designer') {
         this.developer = false;
         this.designer = true;
+        this.mavens = false;
+        this.productManger = false;
+      } else if (value === 'mavens') {
+        this.developer = false;
+        this.designer = false;
+        this.mavens = true;
+        this.productManger = false;
+      } else if (value === 'productManager') {
+        this.developer = false;
+        this.designer = false;
+        this.mavens = false;
+        this.productManger = true;
       }
     } else {
       set(this.signupDetails, key, value);
     }
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
-    else if (this.developer > '' || this.designer > '') {
+    else if (
+      this.developer > '' ||
+      this.designer > '' ||
+      this.mavens > '' ||
+      this.productManger > ''
+    ) {
       this.isButtonDisabled = false;
     } else this.isButtonDisabled = true;
   }
@@ -96,8 +111,12 @@ export default class NewSignUpController extends Controller {
     if (this.dev) {
       if (this.developer) {
         roles = { developer: this.developer };
-      } else {
+      } else if (this.designer) {
         roles = { designer: this.designer };
+      } else if (this.mavens) {
+        roles = { mavens: this.mavens };
+      } else {
+        roles = { productManager: this.productManger };
       }
     }
     const signupDetails = {
