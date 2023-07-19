@@ -66,6 +66,10 @@ export default class TasksHolderComponent extends Component {
     return 'progress-bar-yellow';
   }
 
+  @action progressBarInputChange(value) {
+    this.percentCompleted = value;
+  }
+
   get isProgressBarDisabled() {
     return this.args.task.status !== TASK_KEYS.IN_PROGRESS;
   }

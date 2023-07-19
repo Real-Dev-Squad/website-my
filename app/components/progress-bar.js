@@ -4,39 +4,42 @@ import { action } from '@ember/object';
 import { debounce } from 'lodash';
 export default class ProgressBarComponent extends Component {
   @tracked isEditable = false;
-
   @tracked value = this.args.value;
+  lastEditTime = null;
 
   @action turnEditModeOn() {
     this.isEditable = true;
-    // document.getElementById('progress-bar-input').focus();
+    this.lastEditTime = Date.now();
+    this.setEditableToFalse();
+  }
+
+  setEditableToFalse() {
+    setTimeout(() => {
+      if (this.isEditable && Date.now() - this.lastEditTime >= 5000) {
+        this.isEditable = false;
+      } else {
+        this.setEditableToFalse();
+      }
+    }, 5000);
   }
 
   @action onInput(e) {
+    this.lastEditTime = Date.now();
     this.value = e.target.value;
-    // this.args.onInput(e);
-  }
-  @action something() {
-    console.log('helo');
+    if (this.args.onInput) {
+      this.args.onInput(this.value);
+    }
   }
 
-  @action onHover(e) {
-    this.debouncedHover(e);
-  }
   @action onChange(e) {
-    this.debouncedChange(e);
+    this.lastEditTime = Date.now();
+    if (this.args.onChange) {
+      this.debouncedChange(e);
+    }
   }
-
-  debouncedHover = debounce(async (e) => {
-    const rangeWidth = e.target.offsetWidth;
-    const offsetX = e.offsetX;
-    let newValue = Math.round((offsetX / rangeWidth) * 100);
-    newValue = newValue + (10 - (newValue % 10));
-    this.value = newValue;
-  }, 0);
 
   debouncedChange = debounce(async (e) => {
-    await this.args.onUpdate(e);
+    await this.args.onChange(e);
     this.isEditable = false;
   }, 1000);
 }
