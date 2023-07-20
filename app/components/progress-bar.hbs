@@ -2,7 +2,7 @@
   <input
     {{focus-when this.isEditable}}
     aria-label='progress slider for IN-Progress tasks'
-    data-test-task-progress-bar
+    data-test-progress-bar
     class='progress-bar__input-slider'
     id='progress-bar-input'
     type='range'
@@ -15,7 +15,7 @@
     disabled={{not this.isEditable}}
   />
   <button
-    data-text-progress-bar-button
+    data-test-progress-bar-button
     {{on 'click' this.turnEditModeOn}}
     class='progress-bar__button
       {{unless this.isEditable "progress-bar__edit-hover"}}'

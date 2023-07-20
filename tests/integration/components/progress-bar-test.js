@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { find, render, fillIn, click } from '@ember/test-helpers';
+import { find, render, fillIn, click, waitFor } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | progress-bar', function (hooks) {
@@ -15,16 +15,23 @@ module('Integration | Component | progress-bar', function (hooks) {
   test('it has edit button', async function (assert) {
     await render(hbs`<ProgressBar />`);
 
-    assert.dom('[data-text-progress-bar-button]').exists();
+    assert.dom('[data-test-progress-bar-button]').exists();
   });
 
   test('verify edit button click', async function (assert) {
-    await render(hbs`<ProgressBar />`);
-
-    const editButton = find('[data-text-progress-bar-button]');
+    this.setProperties({
+      percentageCompleted: '10',
+      onUpdate: (value) => {
+        this.percentageCompleted = value;
+      },
+    });
+    await render(
+      hbs`<ProgressBar @value={{this.percentageCompleted}} @onUpdate={{this.onUpdate}} />`
+    );
+    const editButton = find('[data-test-progress-bar-button]');
 
     await click(editButton);
-    assert.dom(editButton).containsText('%');
+    assert.dom(editButton).containsText('10');
   });
 
   test('verify update success', async function (assert) {
@@ -38,7 +45,7 @@ module('Integration | Component | progress-bar', function (hooks) {
       hbs`<ProgressBar @value={{this.percentageCompleted}} @onUpdate={{this.onUpdate}} />`
     );
 
-    const editButton = find('[data-text-progress-bar-button]');
+    const editButton = find('[data-test-progress-bar-button]');
 
     await click(editButton);
 
@@ -46,34 +53,34 @@ module('Integration | Component | progress-bar', function (hooks) {
 
     await fillIn(progressBarInput, '50');
 
-    assert.dom('[data-text-progress-bar-button]').exists();
+    assert.dom('[data-test-progress-bar-button]').exists();
     assert.equal(progressBarInput.value, '50', "The value should be '50'.");
   });
 
   test('verify update error', async function (assert) {
     this.setProperties({
       percentageCompleted: '10',
-      onUpdate: () => {
+      onChange: () => {
         this.percentageCompleted = '10';
       },
     });
     await render(
-      hbs`<ProgressBar @value={{this.percentageCompleted}} @onUpdate={{this.onUpdate}} />`
+      hbs`<ProgressBar @value={{this.percentageCompleted}} @onChange={{this.onChange}} />`
     );
 
-    const editButton = find('[data-text-progress-bar-button]');
+    const editButton = find('[data-test-progress-bar-button]');
 
     await click(editButton);
-    const progressBarInput = find('[data-test-progress-bar]');
+    let progressBarInput = find('[data-test-progress-bar]');
 
     await fillIn(progressBarInput, '50');
 
-    assert.dom('[data-text-progress-bar-button]').exists();
-    assert.notEqual(
-      progressBarInput.value,
-      '50',
-      "The value should not be '50'."
-    );
-    assert.equal(progressBarInput.value, '10', "The value should be '10'.");
+    assert.dom('[data-test-progress-bar-button]').exists();
+
+    await waitFor(editButton);
+
+    await click(editButton);
+
+    assert.dom('[data-test-progress-bar-button]').hasText('10');
   });
 });

@@ -41,5 +41,5 @@ export default class ProgressBarComponent extends Component {
   debouncedChange = debounce(async (e) => {
     await this.args.onChange(e);
     this.isEditable = false;
-  }, 1000);
+  }, 750);
 }
