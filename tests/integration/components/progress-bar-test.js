@@ -60,7 +60,7 @@ module('Integration | Component | progress-bar', function (hooks) {
   test('verify update error', async function (assert) {
     this.setProperties({
       percentageCompleted: '10',
-      onChange: (e) => {
+      onChange: () => {
         this.percentageCompleted = '10';
       },
     });
