@@ -2,7 +2,12 @@
   <div class='task-details__title-container'>
     <p class='task-details__title'>{{@task.title}}</p>
     <div class='task-card__progress-bar-container'>
-      <div class='task-card__progress-bar-container__progress-bar'>
+      <div
+        class='{{unless
+            @progressBarDev
+            "task-card__progress-bar-container__progress-bar"
+          }}'
+      >
         {{#if @progressBarDev}}
           {{#if (eq @task.status 'IN_PROGRESS')}}
             <ProgressBar
@@ -24,7 +29,6 @@
             max='100'
             step='10'
             {{on 'change' @onPercentageChange}}
-            {{on 'change' (fn @onTaskUpdate @task.id)}}
             disabled={{@isProgressBarDisabled}}
           />
           {{@percentCompleted}}%
