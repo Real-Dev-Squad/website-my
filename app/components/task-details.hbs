@@ -4,11 +4,11 @@
     <div class='task-card__progress-bar-container'>
       <div
         class='{{unless
-            @progressBarDev
+            @dev
             "task-card__progress-bar-container__progress-bar"
           }}'
       >
-        {{#if @progressBarDev}}
+        {{#if @dev}}
           {{#if (eq @task.status 'IN_PROGRESS')}}
             <ProgressBar
               class='{{@progressBarClass}}'

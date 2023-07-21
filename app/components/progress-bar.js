@@ -17,7 +17,7 @@ export default class ProgressBarComponent extends Component {
     setTimeout(() => {
       if (this.isEditable && Date.now() - this.lastEditTime >= 5000) {
         this.isEditable = false;
-      } else {
+      } else if (this.isEditable) {
         this.setEditableToFalse();
       }
     }, 5000);
@@ -41,5 +41,5 @@ export default class ProgressBarComponent extends Component {
   debouncedChange = debounce(async (e) => {
     await this.args.onChange(e);
     this.isEditable = false;
-  }, 750);
+  }, 600);
 }
