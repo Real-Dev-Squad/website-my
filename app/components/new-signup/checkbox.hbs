@@ -1,0 +1,58 @@
+<div class='user-details'>
+  <h2 class='user-details__heading' data-test-signup-form-label>
+    {{this.label}}
+  </h2>
+  <div class='role-details__field'>
+    <label class='checkbox-label'>
+      <input
+        type='checkbox'
+        name='developer'
+        checked={{@roles.developer}}
+        {{on 'change' this.checkboxFieldChanged}}
+        class='checkbox-input'
+      />
+      Developer
+    </label>
+    <label class='checkbox-label'>
+      <input
+        type='checkbox'
+        name='designer'
+        checked={{@roles.designer}}
+        {{on 'change' this.checkboxFieldChanged}}
+        class='checkbox-input'
+      />
+      Designer
+    </label>
+    <label class='checkbox-label'>
+      <input
+        type='checkbox'
+        name='mavens'
+        checked={{@roles.mavens}}
+        {{on 'change' this.checkboxFieldChanged}}
+        class='checkbox-input'
+      />
+      Mavens
+    </label>
+    <label class='checkbox-label'>
+      <input
+        type='checkbox'
+        name='productmanager'
+        checked={{@roles.productmanager}}
+        {{on 'change' this.checkboxFieldChanged}}
+        class='checkbox-input'
+      />
+      Product Manager
+    </label>
+  </div>
+
+  <div class='signup-action__btn'>
+    <Button
+      @data-test-btn='signup'
+      @onClick={{@onClick}}
+      @disabled={{@isButtonDisabled}}
+      @isLoading={{@isLoading}}
+    >
+      Submit
+    </Button>
+  </div>
+</div>

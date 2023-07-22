@@ -33,6 +33,8 @@ export default class NewSignUpController extends Controller {
     username: '',
   };
 
+  @tracked roles = {};
+
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
@@ -69,56 +71,26 @@ export default class NewSignUpController extends Controller {
 
   @action handleInputChange(key, value) {
     this.error = '';
-    if (key === 'role') {
-      if (value === 'developer') {
-        this.developer = true;
-        this.designer = false;
-        this.mavens = false;
-        this.productManger = false;
-      } else if (value === 'designer') {
-        this.developer = false;
-        this.designer = true;
-        this.mavens = false;
-        this.productManger = false;
-      } else if (value === 'mavens') {
-        this.developer = false;
-        this.designer = false;
-        this.mavens = true;
-        this.productManger = false;
-      } else if (value === 'productManager') {
-        this.developer = false;
-        this.designer = false;
-        this.mavens = false;
-        this.productManger = true;
-      }
-    } else {
-      set(this.signupDetails, key, value);
-    }
+    set(this.signupDetails, key, value);
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
-    else if (
-      this.developer > '' ||
-      this.designer > '' ||
-      this.mavens > '' ||
-      this.productManger > ''
-    ) {
+    else this.isButtonDisabled = true;
+  }
+
+  @action handleCheckboxInputChange(key, value) {
+    this.error = '';
+    if (value) {
+      set(this.roles, key, true);
+    } else {
+      delete this.roles[key];
+    }
+    if (Object.keys(this.roles).length > 0) {
       this.isButtonDisabled = false;
-    } else this.isButtonDisabled = true;
+    } else {
+      this.isButtonDisabled = true;
+    }
   }
 
   @action async signup() {
-    let roles;
-
-    if (this.dev) {
-      if (this.developer) {
-        roles = { developer: this.developer };
-      } else if (this.designer) {
-        roles = { designer: this.designer };
-      } else if (this.mavens) {
-        roles = { mavens: this.mavens };
-      } else {
-        roles = { productManager: this.productManger };
-      }
-    }
     const signupDetails = {
       first_name: this.signupDetails.firstName,
       last_name: this.signupDetails.lastName,
@@ -148,7 +120,7 @@ export default class NewSignUpController extends Controller {
             ...signupDetails,
             roles: {
               ...userData.roles,
-              ...roles,
+              ...this.roles,
             },
           });
         })

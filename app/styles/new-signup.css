@@ -20,11 +20,6 @@
   padding: 1rem;
 }
 
-.role-details__field {
-  display: flex;
-  justify-content: center;
-}
-
 .user-details__heading {
   font-size: 2rem;
   color: var(--user-details--heading--bg);
@@ -40,13 +35,21 @@
   font-size: 2rem;
 }
 
-.user-details__field select {
-  padding: 0.8rem; 
-  border-radius: 10px;
-  border: 2px solid var(--user-details--input--border);
-  font-size: 2rem;
-  width: 24rem;
-  transition: all 0.1s;
+.role-details__field {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+}
+
+.checkbox-label{
+  display: flex;
+  width: 12rem;
+  margin: 0 auto;
+  font-size: 1.3rem;
+}
+
+.checkbox-label .checkbox-input{
+  margin-right: 10px;
 }
 
 .signup-action__btn button {
@@ -57,7 +60,7 @@
   color: var(--button-signup--text);
   text-decoration: none;
   cursor: pointer;
-  width: 70%;
+  width: 75%;
   display: block;
   margin: auto;
   font-size: 2rem;
@@ -75,12 +78,8 @@
 }
 
 @media (max-width: 600px) {
-  .user-details__heading {
-    font-size: 1.4rem;
-  }
   
   .user-details__field input,
-  .user-details__field select,
   .signup-action__btn button {
     font-size: 1.5rem;
   }
@@ -88,11 +87,10 @@
 
 @media (max-width: 480px) {
   .user-details__heading {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
   }
 
   .user-details__field input,
-  .user-details__field select,
   .signup-action__btn button {
     font-size: 1.2rem;
   }

@@ -52,10 +52,10 @@
 
 {{#if this.dev}}
   {{#if (eq this.currentStep this.FIFTH_STEP)}}
-    <NewSignup::Select
+    <NewSignup::Checkbox
       @onClick={{this.register}}
       @currentStep={{this.currentStep}}
-      @onChange={{this.handleInputChange}}
+      @onChange={{this.handleCheckboxInputChange}}
       @isButtonDisabled={{this.isButtonDisabled}}
       @isLoading={{this.isLoading}}
     />

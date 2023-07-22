@@ -9,8 +9,10 @@ export default class SignupComponent extends Component {
     return LABEL_TEXT[currentStep];
   }
 
-  @action selectFieldChanged({ target: { value } }) {
-    const { onChange, currentStep } = this.args;
-    onChange(currentStep, value);
+  @action checkboxFieldChanged(event) {
+    const { onChange } = this.args;
+    const roleKey = event.target.name;
+    const value = event.target.checked;
+    onChange(roleKey, value);
   }
 }
