@@ -19,7 +19,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Select
+      <NewSignup::Checkbox
         @onClick={{this.onClick}} 
         @currentStep={{this.currentStep}}
         @dev={{this.dev}}
@@ -39,7 +39,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Select
+      <NewSignup::Checkbox
         @onClick={{this.onClick}} 
         @currentStep={{this.currentStep}}
         @dev={{this.dev}}
@@ -49,8 +49,8 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('[data-test-btn="signup"]').hasText('Submit');
   });
 
-  test('It should have select field(currently behind dev flag)', async function (assert) {
-    assert.expect(3);
+  test('It should have label and checkbox(currently behind dev flag)', async function (assert) {
+    assert.expect(10);
 
     this.setProperties({
       onClick: function () {
@@ -61,16 +61,23 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     });
 
     await render(hbs`
-      <NewSignup::Select
+      <NewSignup::Checkbox
         @onClick={{this.onClick}} 
         @currentStep={{this.currentStep}}
         @dev={{this.dev}}
       />`);
 
-    assert.dom('[data-test-signup-form-select]').exists();
-    assert
-      .dom('[data-test-signup-form-select]')
-      .hasAttribute('name', 'role')
-      .hasAttribute('id', 'role');
+    assert.dom('.checkbox-label').exists({ count: 4 });
+    assert.dom('.checkbox-input').exists({ count: 4 });
+
+    assert.dom('.checkbox-input[name="developer"]').isNotChecked();
+    assert.dom('.checkbox-input[name="designer"]').isNotChecked();
+    assert.dom('.checkbox-input[name="mavens"]').isNotChecked();
+    assert.dom('.checkbox-input[name="productmanager"]').isNotChecked();
+
+    assert.dom('.checkbox-label:nth-child(1)').hasText('Developer');
+    assert.dom('.checkbox-label:nth-child(2)').hasText('Designer');
+    assert.dom('.checkbox-label:nth-child(3)').hasText('Mavens');
+    assert.dom('.checkbox-label:nth-child(4)').hasText('Product Manager');
   });
 });

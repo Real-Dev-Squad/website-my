@@ -85,15 +85,25 @@ module('Unit | Controller | new-signup', function (hooks) {
       'vinayak',
       'username value updated'
     );
+  });
 
-    controller.send('handleInputChange', 'role', 'developer');
-    assert.equal(controller.developer, true, 'developer set to true');
+  test('testing handleCheckboxInput change function', function (assert) {
+    let controller = this.owner.lookup('controller:new-signup');
+    let developer = 'developer';
+    let designer = 'designer';
+    let mavens = 'mavens';
+    let productmanager = 'productmanager';
 
-    assert.equal(controller.designer, false, 'designer set to false');
+    controller.send('handleCheckboxInputChange', 'developer', true);
+    assert.equal(controller.roles[developer], true);
 
-    controller.send('handleInputChange', 'role', 'designer');
-    assert.equal(controller.designer, true, 'designer set to true');
+    controller.send('handleCheckboxInputChange', 'designer', true);
+    assert.equal(controller.roles[designer], true);
 
-    assert.equal(controller.developer, false, 'developer set to false');
+    controller.send('handleCheckboxInputChange', 'mavens', true);
+    assert.equal(controller.roles[mavens], true);
+
+    controller.send('handleCheckboxInputChange', 'productmanager', true);
+    assert.equal(controller.roles[productmanager], true);
   });
 });
