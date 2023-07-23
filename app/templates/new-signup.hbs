@@ -28,7 +28,7 @@
 {{/if}}
 
 {{#if (eq this.currentStep this.FOURTH_STEP)}}
-  {{#if this.dev}}
+  {{#if (eq this.dev 'true')}}
     <NewSignup::Input
       @onClick={{this.changeStepToFive}}
       @currentStep={{this.currentStep}}
@@ -50,7 +50,7 @@
   {{/if}}
 {{/if}}
 
-{{#if this.dev}}
+{{#if (eq this.dev 'true')}}
   {{#if (eq this.currentStep this.FIFTH_STEP)}}
     <NewSignup::Checkbox
       @onClick={{this.register}}

@@ -106,7 +106,7 @@ export default class NewSignUpController extends Controller {
       return (this.error = ERROR_MESSAGES.userName);
     }
 
-    if (this.dev) {
+    if (this.dev === 'true') {
       fetch(`${BASE_API_URL}/users/self`, {
         method: 'GET',
         headers: {
