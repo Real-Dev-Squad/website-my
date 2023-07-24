@@ -1,29 +1,36 @@
 :root {
   --progress-bar-color: rgba(0, 128, 0, 0.9);
-  --light-grey:rgba(128, 128, 128, 0.5);
+  --light-grey: rgba(128, 128, 128, 0.5);
   --black: black;
   --white: white;
 }
-.progress-bar-container {
+.progress-bar {
   display: flex;
+  flex-direction: row;
   gap: 4px;
 }
 
 .progress-bar__button {
-  width: 1.4rem;
+  width: 1.5rem;
   height: 1.1rem;
-  font-size: 60%;
-  font-weight: bolder;
-  text-justify: auto;
   border: 2px solid var(--black);
   border-radius: 4px;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-items: center;
 }
 
-.progress-bar__edit-icon {
-  width: 95%;
-  height: 95%;
-  margin-bottom: 2px;
+.progress-bar__button__text {
+  font-size: 0.6em;
+  font-weight: bolder;
+  margin: auto;
+}
+
+.progress-bar__button__edit-icon {
+  width: 1rem;
+  height: 1rem;
+  margin: 3px;
 }
 .progress-bar__input-slider {
   -webkit-appearance: none;
@@ -36,6 +43,7 @@
   border: 2px solid var(--black);
   border-radius: 4px;
 }
+
 .progress-bar__input-slider:focus {
   box-shadow: 0 0 0 1px var(--progress-bar-color);
 }
@@ -65,10 +73,10 @@
   );
 }
 
-.progress-bar__edit-hover:hover {
+.progress-bar__button--hover:hover {
   background-color: var(--light-grey);
 }
 
-.progress-bar__edit-icon-path-inner {
+.progress-bar__button__edit-icon__inner {
   fill: var(--progress-bar-color);
 }

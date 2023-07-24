@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { debounce } from 'lodash';
+import { debounce } from '../utils/debounce';
 export default class ProgressBarComponent extends Component {
   @tracked isEditable = false;
   @tracked value = this.args.value;
@@ -15,7 +15,8 @@ export default class ProgressBarComponent extends Component {
 
   setEditableToFalse() {
     setTimeout(() => {
-      if (this.isEditable && Date.now() - this.lastEditTime >= 5000) {
+      const timeDelta = Date.now() - this.lastEditedTime;
+      if (this.isEditable && timeDelta >= 5000) {
         this.isEditable = false;
       } else if (this.isEditable) {
         this.setEditableToFalse();
