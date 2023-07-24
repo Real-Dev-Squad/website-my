@@ -7,9 +7,6 @@ import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
-import ENV from 'website-my/config/environment';
-
-const { BASE_API_URL } = ENV;
 
 export default class NewSignUpController extends Controller {
   @service analytics;
