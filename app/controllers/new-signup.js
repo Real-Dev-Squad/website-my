@@ -31,9 +31,8 @@ export default class NewSignUpController extends Controller {
     firstName: '',
     lastName: '',
     username: '',
+    roles: {},
   };
-
-  @tracked roles = {};
 
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
@@ -77,13 +76,8 @@ export default class NewSignUpController extends Controller {
   }
 
   @action handleCheckboxInputChange(key, value) {
-    this.error = '';
-    if (value) {
-      set(this.roles, key, true);
-    } else {
-      delete this.roles[key];
-    }
-    if (Object.keys(this.roles).length > 0) {
+    set(this.signupDetails.roles, key, value);
+    if (Object.values(this.signupDetails.roles).includes(true)) {
       this.isButtonDisabled = false;
     } else {
       this.isButtonDisabled = true;
@@ -96,6 +90,13 @@ export default class NewSignUpController extends Controller {
       last_name: this.signupDetails.lastName,
       username: this.signupDetails.username,
     };
+    const roles = {};
+    Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
+      if (value === true) {
+        roles[key] = value;
+      }
+    });
+    console.log(roles);
     this.isLoading = true;
 
     const isUsernameAvailable = await checkUserName(signupDetails.username);
@@ -120,7 +121,7 @@ export default class NewSignUpController extends Controller {
             ...signupDetails,
             roles: {
               ...userData.roles,
-              ...this.roles,
+              ...roles,
             },
           });
         })
