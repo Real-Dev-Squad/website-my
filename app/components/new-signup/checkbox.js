@@ -3,6 +3,25 @@ import { action } from '@ember/object';
 import { LABEL_TEXT } from '../../constants/new-signup';
 
 export default class SignupComponent extends Component {
+  checkboxData = [
+    {
+      label: 'Developer',
+      name: 'developer',
+    },
+    {
+      label: 'Designer',
+      name: 'designer',
+    },
+    {
+      label: 'Mavens',
+      name: 'mavens',
+    },
+    {
+      label: 'Product Manager',
+      name: 'productmanager',
+    },
+  ];
+
   get label() {
     const { currentStep } = this.args;
 

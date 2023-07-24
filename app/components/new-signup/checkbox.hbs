@@ -2,47 +2,20 @@
   <h2 class='user-details__heading' data-test-signup-form-label>
     {{this.label}}
   </h2>
+
   <div class='role-details__field'>
-    <label class='checkbox-label'>
-      <input
-        type='checkbox'
-        name='developer'
-        checked={{false}}
-        {{on 'change' this.checkboxFieldChanged}}
-        class='checkbox-input'
-      />
-      Developer
-    </label>
-    <label class='checkbox-label'>
-      <input
-        type='checkbox'
-        name='designer'
-        checked={{false}}
-        {{on 'change' this.checkboxFieldChanged}}
-        class='checkbox-input'
-      />
-      Designer
-    </label>
-    <label class='checkbox-label'>
-      <input
-        type='checkbox'
-        name='mavens'
-        checked={{false}}
-        {{on 'change' this.checkboxFieldChanged}}
-        class='checkbox-input'
-      />
-      Mavens
-    </label>
-    <label class='checkbox-label'>
-      <input
-        type='checkbox'
-        name='productmanager'
-        checked={{false}}
-        {{on 'change' this.checkboxFieldChanged}}
-        class='checkbox-input'
-      />
-      Product Manager
-    </label>
+    {{#each this.checkboxData as |data|}}
+      <label class='checkbox-label'>
+        <input
+          type='checkbox'
+          name={{data.name}}
+          checked={{false}}
+          {{on 'change' this.checkboxFieldChanged}}
+          class='checkbox-input'
+        />
+        {{data.label}}
+      </label>
+    {{/each}}
   </div>
 
   <div class='signup-action__btn'>
