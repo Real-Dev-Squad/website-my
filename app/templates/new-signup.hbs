@@ -28,11 +28,11 @@
 {{/if}}
 
 {{#if (eq this.currentStep this.FOURTH_STEP)}}
-  {{#if (eq this.dev 'true')}}
+  {{#if this.isDevMode}}
     <NewSignup::Input
       @onClick={{this.changeStepToFive}}
       @currentStep={{this.currentStep}}
-      @dev={{this.dev}}
+      @dev={{this.isDevMode}}
       @onChange={{this.handleInputChange}}
       @isButtonDisabled={{this.isButtonDisabled}}
       @isLoading={{this.isLoading}}
@@ -50,7 +50,7 @@
   {{/if}}
 {{/if}}
 
-{{#if (eq this.dev 'true')}}
+{{#if this.isDevMode}}
   {{#if (eq this.currentStep this.FIFTH_STEP)}}
     <NewSignup::Checkbox
       @onClick={{this.register}}

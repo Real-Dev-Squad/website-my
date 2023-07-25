@@ -22,7 +22,6 @@ const newRegisterUser = async (signupDetails, roles) => {
   });
 
   const userData = await getResponse.json();
-  console.log(userData);
 
   const res = await registerUser({
     ...signupDetails,
@@ -31,7 +30,6 @@ const newRegisterUser = async (signupDetails, roles) => {
       ...roles,
     },
   });
-  console.log(res);
 
   return res;
 };

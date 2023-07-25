@@ -24,6 +24,13 @@ export default class NewSignUpController extends Controller {
   FIFTH_STEP = NEW_SIGNUP_STEPS[4];
   LAST_STEP = NEW_SIGNUP_STEPS[5];
 
+  get isDevMode() {
+    if (this.dev === 'true') {
+      return true;
+    }
+    return false;
+  }
+
   @tracked signupDetails = {
     firstName: '',
     lastName: '',
@@ -104,7 +111,7 @@ export default class NewSignUpController extends Controller {
       return (this.error = ERROR_MESSAGES.userName);
     }
 
-    if (this.dev === 'true') {
+    if (this.isDevMode) {
       try {
         const res = await newRegisterUser(signupDetails, roles);
         if (res.status === 204) {
