@@ -95,6 +95,7 @@ export default class TasksHolderComponent extends Component {
     const { value } = e.target;
     this.status = value;
     this.args.onTaskChange('status', value);
+    this.onUpdate(this.args.task.id);
   }
 
   @action
