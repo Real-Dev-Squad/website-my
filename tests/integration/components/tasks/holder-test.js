@@ -218,7 +218,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     let onTaskUpdateCalled = 0;
 
     this.set('task', testTask);
-    this.set('onTaskUpdate', (taskId, error) => {
+    this.set('onTaskUpdate', () => {
       onTaskUpdateCalled++;
     });
     this.set('mock', () => {});
