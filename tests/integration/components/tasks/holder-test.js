@@ -209,4 +209,37 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .dom('[data-test-task-status-select]')
       .hasValue(TASK_KEYS.IN_PROGRESS);
   });
+
+  test('Verify status change to VERIFIED', async function (assert) {
+    const testTask = tasksData[3];
+
+    testTask.status = TASK_KEYS.IN_PROGRESS;
+
+    let onTaskUpdateCalled = 0;
+
+    this.set('task', testTask);
+    this.set('onTaskUpdate', (taskId, error) => {
+      onTaskUpdateCalled++;
+    });
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}}
+    @onTaskUpdate={{onTaskUpdate}}
+    @onTaskChange={{this.mock}}
+    @userSelectedTask={{this.defaultType}}
+    @disabled={{this.disabled}}
+  />`);
+
+    assert
+      .dom('[data-test-task-status-select]')
+      .hasValue(TASK_KEYS.IN_PROGRESS);
+
+    await select('[data-test-task-status-select]', TASK_KEYS.VERIFIED);
+
+    assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
+  });
 });
