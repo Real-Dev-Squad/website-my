@@ -95,15 +95,15 @@ module('Unit | Controller | new-signup', function (hooks) {
     let productmanager = 'productmanager';
 
     controller.send('handleCheckboxInputChange', 'developer', true);
-    assert.equal(controller.roles[developer], true);
+    assert.equal(controller.signupDetails.roles[developer], true);
 
     controller.send('handleCheckboxInputChange', 'designer', true);
-    assert.equal(controller.roles[designer], true);
+    assert.equal(controller.signupDetails.roles[designer], true);
 
     controller.send('handleCheckboxInputChange', 'mavens', true);
-    assert.equal(controller.roles[mavens], true);
+    assert.equal(controller.signupDetails.roles[mavens], true);
 
     controller.send('handleCheckboxInputChange', 'productmanager', true);
-    assert.equal(controller.roles[productmanager], true);
+    assert.equal(controller.signupDetails.roles[productmanager], true);
   });
 });
