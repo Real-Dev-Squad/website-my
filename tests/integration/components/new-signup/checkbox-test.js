@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 // handler functions are creating some problems need to fix em
@@ -79,5 +79,37 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('.checkbox-label:nth-child(2)').hasText('Designer');
     assert.dom('.checkbox-label:nth-child(3)').hasText('Mavens');
     assert.dom('.checkbox-label:nth-child(4)').hasText('Product Manager');
+  });
+
+  test('should call the onChange function with the correct parameters when checkbox is clicked', async function (assert) {
+    assert.expect(1);
+
+    this.setProperties({
+      onClick: function () {
+        this.currentStep = this.LAST_STEP;
+      },
+      currentStep: 'role',
+      dev: true,
+    });
+
+    this.set('onChange', (key, value) => {
+      assert.deepEqual(
+        { key, value },
+        { key: 'developer', value: true },
+        'onChange function called with correct parameters'
+      );
+    });
+
+    await render(hbs`
+    <NewSignup::Checkbox
+      @onClick={{this.onClick}} 
+      @onChange={{this.onChange}}
+      @currentStep={{this.currentStep}}
+      @dev={{this.dev}}
+    />`);
+
+    const checkboxElement = find('.checkbox-input');
+
+    await click(checkboxElement);
   });
 });
