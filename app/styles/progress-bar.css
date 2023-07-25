@@ -4,13 +4,12 @@
   --black: black;
   --white: white;
 }
-.progress-bar {
+.progress-slider {
   display: flex;
-  flex-direction: row;
   gap: 4px;
 }
 
-.progress-bar__button {
+.progress-slider__button {
   width: 1.5rem;
   height: 1.1rem;
   border: 2px solid var(--black);
@@ -21,18 +20,18 @@
   justify-items: center;
 }
 
-.progress-bar__button__text {
+.progress-slider__button__text {
   font-size: 0.6em;
   font-weight: bolder;
   margin: auto;
 }
 
-.progress-bar__button__edit-icon {
+.progress-slider__button__edit-icon {
   width: 1rem;
   height: 1rem;
   margin: 3px;
 }
-.progress-bar__input-slider {
+.progress-slider__input-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 90%;
@@ -44,26 +43,26 @@
   border-radius: 4px;
 }
 
-.progress-bar__input-slider:focus {
-  box-shadow: 0 0 0 1px var(--progress-bar-color);
+.progress-slider__input-slider:focus {
+  box-shadow: 0 0 0 2px var(--progress-bar-color);
 }
-.progress-bar__input-slider:disabled {
+.progress-slider__input-slider:disabled {
   cursor: auto;
 }
 
-.progress-bar__input-slider::-webkit-slider-thumb {
+.progress-slider__input-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 0;
   box-shadow: -20rem 0 0 20rem var(--progress-bar-color);
 }
 
-.progress-bar__input-slider::-moz-range-thumb {
+.progress-slider__input-slider::-moz-range-thumb {
   border: none;
   width: 0;
   box-shadow: -20rem 0 0 20rem var(--progress-bar-color);
 }
 
-.progress-bar__input-slider[step] {
+.progress-slider__input-slider[step] {
   background-color: transparent;
   background: repeating-linear-gradient(
     to right,
@@ -73,10 +72,10 @@
   );
 }
 
-.progress-bar__button--hover:hover {
+.progress-slider__button--hover:hover {
   background-color: var(--light-grey);
 }
 
-.progress-bar__button__edit-icon__inner {
+.progress-slider__button__edit-icon__inner {
   fill: var(--progress-bar-color);
 }

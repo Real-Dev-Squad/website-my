@@ -1,10 +1,10 @@
-<div ...attributes class='progress-bar'>
+<div ...attributes class='progress-slider'>
   <input
     {{focus-when this.isEditable}}
     aria-label='progress slider for IN-Progress tasks'
     data-test-progress-bar
-    class='progress-bar__input-slider'
-    id='progress-bar-input'
+    class='progress-slider__input-slider'
+    id='progress-slider-input'
     type='range'
     value={{@value}}
     min='0'
@@ -17,27 +17,27 @@
   <button
     data-test-progress-bar-button
     {{on 'click' this.turnEditModeOn}}
-    class='progress-bar__button
-      {{unless this.isEditable "progress-bar__button--hover"}}'
+    class='progress-slider__button
+      {{unless this.isEditable "progress-slider__button--hover"}}'
     type='button'
   >
     {{#if this.isEditable}}
-      <span class='progress-bar__button__text'>{{@value}}</span>
+      <span class='progress-slider__button__text'>{{@value}}</span>
     {{else}}
       <svg
-        class='progress-bar__button__edit-icon'
+        class='progress-slider__button__edit-icon'
         viewBox='0 0 24 24'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
       >
         <path
-          class='progress-bar__button__edit-icon__inner'
+          class='progress-slider__button__edit-icon__inner'
           opacity='0.5'
           d='M4 20H8L18 10L14 6L4 16V20Z'
           fill='#000000'
         />
         <path
-          class='progress-bar__button__edit-icon__outer'
+          class='progress-slider__button__edit-icon__outer'
           d='M18 10L21 7L17 3L14 6M18 10L8 20H4V16L14 6M18 10L14 6'
           stroke='#000000'
           stroke-width='1.5'
