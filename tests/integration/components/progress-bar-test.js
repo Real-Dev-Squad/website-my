@@ -18,7 +18,7 @@ module('Integration | Component | progress-bar', function (hooks) {
     assert.dom('[data-test-progress-bar-button]').exists();
   });
 
-  test('verify edit button click', async function (assert) {
+  test('it has clickable edit button', async function (assert) {
     this.setProperties({
       percentageCompleted: '10',
       onUpdate: (value) => {
@@ -34,7 +34,7 @@ module('Integration | Component | progress-bar', function (hooks) {
     assert.dom(editButton).containsText('10');
   });
 
-  test('verify update success', async function (assert) {
+  test('it should display the correct value on update', async function (assert) {
     this.setProperties({
       percentageCompleted: '10',
       onUpdate: (value) => {
@@ -57,7 +57,7 @@ module('Integration | Component | progress-bar', function (hooks) {
     assert.equal(progressBarInput.value, '50', "The value should be '50'.");
   });
 
-  test('verify update error', async function (assert) {
+  test('it should display the old value when an update fails', async function (assert) {
     this.setProperties({
       percentageCompleted: '10',
       onChange: () => {
