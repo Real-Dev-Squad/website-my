@@ -72,12 +72,12 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
 
     assert.dom('.checkbox-input[name="developer"]').isNotChecked();
     assert.dom('.checkbox-input[name="designer"]').isNotChecked();
-    assert.dom('.checkbox-input[name="mavens"]').isNotChecked();
+    assert.dom('.checkbox-input[name="maven"]').isNotChecked();
     assert.dom('.checkbox-input[name="productmanager"]').isNotChecked();
 
     assert.dom('.checkbox-label:nth-child(1)').hasText('Developer');
     assert.dom('.checkbox-label:nth-child(2)').hasText('Designer');
-    assert.dom('.checkbox-label:nth-child(3)').hasText('Mavens');
+    assert.dom('.checkbox-label:nth-child(3)').hasText('Maven');
     assert.dom('.checkbox-label:nth-child(4)').hasText('Product Manager');
   });
 

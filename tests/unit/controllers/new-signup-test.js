@@ -91,7 +91,7 @@ module('Unit | Controller | new-signup', function (hooks) {
     let controller = this.owner.lookup('controller:new-signup');
     let developer = 'developer';
     let designer = 'designer';
-    let mavens = 'mavens';
+    let maven = 'maven';
     let productmanager = 'productmanager';
 
     controller.send('handleCheckboxInputChange', 'developer', true);
@@ -100,8 +100,8 @@ module('Unit | Controller | new-signup', function (hooks) {
     controller.send('handleCheckboxInputChange', 'designer', true);
     assert.equal(controller.signupDetails.roles[designer], true);
 
-    controller.send('handleCheckboxInputChange', 'mavens', true);
-    assert.equal(controller.signupDetails.roles[mavens], true);
+    controller.send('handleCheckboxInputChange', 'maven', true);
+    assert.equal(controller.signupDetails.roles[maven], true);
 
     controller.send('handleCheckboxInputChange', 'productmanager', true);
     assert.equal(controller.signupDetails.roles[productmanager], true);

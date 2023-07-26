@@ -13,8 +13,8 @@ export default class SignupComponent extends Component {
       name: 'designer',
     },
     {
-      label: 'Mavens',
-      name: 'mavens',
+      label: 'Maven',
+      name: 'maven',
     },
     {
       label: 'Product Manager',
