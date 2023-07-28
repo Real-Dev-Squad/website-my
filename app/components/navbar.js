@@ -31,10 +31,11 @@ export default class NavbarComponent extends Component {
       siteName: 'Members',
       url: RDS_MEMBERS_URL,
     },
-    {
-      siteName: 'Crypto',
-      url: RDS_CRYPTO_URL,
-    },
+    //TODO: Uncomment when we have the crypto site up and running.
+    // {
+    //   siteName: 'Crypto',
+    //   url: RDS_CRYPTO_URL,
+    // },
     {
       siteName: 'Status',
       url: RDS_STATUS_URL,
