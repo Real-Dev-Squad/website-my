@@ -18,17 +18,17 @@
 }
 
 .progress-bar-red {
-  --progress-bar-color: red;
+  --progress-bar-color:rgba(255, 0, 0, 0.8);
 }
 .progress-bar-yellow {
-  --progress-bar-color: #ecef08;
+  --progress-bar-color: rgba(255, 255, 0, 0.9);
 }
 
 .progress-bar-green {
-  --progress-bar-color: green;
+  --progress-bar-color: rgba(0, 128, 0, 0.9);
 }
 .progress-bar-orange {
-  --progress-bar-color: orange;
+  --progress-bar-color: rgba(255, 165, 0,0.9);
 }
 
 .tasks-page {
@@ -83,8 +83,9 @@
 }
 
 .task-card__progress-bar-container {
-  padding: 1em;
-  width: 15rem;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+  width: 14.5rem;
   flex-shrink: 0;
 }
 
