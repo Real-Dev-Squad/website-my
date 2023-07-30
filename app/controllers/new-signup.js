@@ -25,10 +25,7 @@ export default class NewSignUpController extends Controller {
   LAST_STEP = NEW_SIGNUP_STEPS[5];
 
   get isDevMode() {
-    if (this.dev === 'true') {
-      return true;
-    }
-    return false;
+    return this.dev || false;
   }
 
   @tracked signupDetails = {
