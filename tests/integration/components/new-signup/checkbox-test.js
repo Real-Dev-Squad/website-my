@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, find, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-// handler functions are creating some problems need to fix em
 module('Integration | Component | new-sign-up/form', function (hooks) {
   setupRenderingTest(hooks);
 
