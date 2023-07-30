@@ -17,6 +17,7 @@
 @import 'card.css';
 @import 'discord.css';
 @import 'qrcode.css';
+@import 'progress-bar.css';
 
 html,
 body {
