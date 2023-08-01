@@ -8,6 +8,8 @@ import { AUTH_URL, GOTO_URL } from '../constants/url';
 export default class NewSignupRoute extends Route {
   @service analytics;
   @service toast;
+  @service featureFlag;
+
   async model() {
     try {
       this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
@@ -30,7 +32,15 @@ export default class NewSignupRoute extends Route {
           '',
           toastNotificationTimeoutOptions
         );
-        setTimeout(() => window.open(GOTO_URL, '_self'), 2000);
+        if (this.featureFlag.isDevMode) {
+          setTimeout(
+            () =>
+              window.open('http://localhost:5500/goto.html?dev=true', '_self'),
+            2000
+          );
+        } else {
+          setTimeout(() => window.open(GOTO_URL, '_self'), 2000);
+        }
       }
     } catch {
       this.toast.error(

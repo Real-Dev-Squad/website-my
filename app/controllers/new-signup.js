@@ -66,7 +66,11 @@ export default class NewSignUpController extends Controller {
 
   @action completeSignUp() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.NEW_SIGNUP_FLOW_DONE);
-    window.open(GOTO_URL, '_self');
+    if (this.isDevMode) {
+      window.open('http://localhost:5500/goto.html?dev=true', '_self');
+    } else {
+      window.open(GOTO_URL, '_self');
+    }
   }
 
   @action handleInputChange(key, value) {
