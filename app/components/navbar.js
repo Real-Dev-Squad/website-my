@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import {
-  RDS_CRYPTO_URL,
+  // RDS_CRYPTO_URL,  : Uncomment when crypto site is up and running.
   RDS_EVENTS_URL,
   RDS_MAIN_URL,
   RDS_MEMBERS_URL,
