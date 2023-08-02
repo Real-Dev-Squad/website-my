@@ -48,7 +48,7 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('[data-test-btn="signup"]').hasText('Submit');
   });
 
-  test('It should have label and checkbox(currently behind dev flag)', async function (assert) {
+  test('render label and checkbox(currently behind dev flag)', async function (assert) {
     assert.expect(10);
 
     this.setProperties({
@@ -80,8 +80,8 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('.checkbox-label:nth-child(4)').hasText('Product Manager');
   });
 
-  test('should call the onChange function with the correct parameters when checkbox is clicked', async function (assert) {
-    assert.expect(1);
+  test('checkbox is checked after clicking checkbox', async function (assert) {
+    assert.expect(4);
 
     this.setProperties({
       onClick: function () {
@@ -91,12 +91,13 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
       dev: true,
     });
 
-    this.set('onChange', (key, value) => {
-      assert.deepEqual(
-        { key, value },
-        { key: 'developer', value: true },
-        'onChange function called with correct parameters'
+    this.set('onChange', function (roleKey, value) {
+      assert.equal(
+        roleKey,
+        'developer',
+        'onChange action called with correct roleKey'
       );
+      assert.equal(value, true, 'onChange action called with correct value');
     });
 
     await render(hbs`
@@ -107,8 +108,12 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
       @dev={{this.dev}}
     />`);
 
-    const checkboxElement = find('.checkbox-input');
+    const developerCheckbox = find('.checkbox-input[name="developer"]');
 
-    await click(checkboxElement);
+    assert.notOk(developerCheckbox.checked, 'Checkbox is unchecked');
+
+    await click(developerCheckbox);
+
+    assert.ok(developerCheckbox.checked, 'Checkbox is checked');
   });
 });
