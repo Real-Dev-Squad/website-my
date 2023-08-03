@@ -35,7 +35,7 @@ export default class NewSignupRoute extends Route {
         if (this.featureFlag.isDevMode) {
           setTimeout(
             () =>
-              window.open('http://localhost:5500/goto.html?dev=true', '_self'),
+              window.open('https://realdevsquad.com/goto?dev=true', '_self'),
             2000
           );
         } else {
