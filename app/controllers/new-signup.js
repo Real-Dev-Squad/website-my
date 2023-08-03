@@ -10,6 +10,7 @@ import checkUserName from '../utils/check-username';
 
 export default class NewSignUpController extends Controller {
   @service analytics;
+  @service featureFlag;
 
   queryParams = ['currentStep', 'dev'];
 
@@ -25,7 +26,7 @@ export default class NewSignUpController extends Controller {
   LAST_STEP = NEW_SIGNUP_STEPS[5];
 
   get isDevMode() {
-    return this.dev || false;
+    return this.featureFlag.isDevMode;
   }
 
   @tracked signupDetails = {
