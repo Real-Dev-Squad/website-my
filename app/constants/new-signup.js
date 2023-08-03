@@ -26,6 +26,25 @@ export const ERROR_MESSAGES = {
   others: 'something went wrong',
 };
 
+export const CHECK_BOX_DATA = [
+  {
+    label: 'Developer',
+    name: 'developer',
+  },
+  {
+    label: 'Designer',
+    name: 'designer',
+  },
+  {
+    label: 'Maven',
+    name: 'maven',
+  },
+  {
+    label: 'Product Manager',
+    name: 'productmanager',
+  },
+];
+
 export const GET_STARTED_MAIN_HEADING = 'Thank you for connecting your GitHub!';
 export const GET_STARTED_SUB_HEADING =
   'Please complete the signup in order to:';

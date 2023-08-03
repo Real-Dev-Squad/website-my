@@ -1,26 +1,11 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { LABEL_TEXT } from '../../constants/new-signup';
+import { LABEL_TEXT, CHECK_BOX_DATA } from '../../constants/new-signup';
 
 export default class SignupComponent extends Component {
-  checkboxData = [
-    {
-      label: 'Developer',
-      name: 'developer',
-    },
-    {
-      label: 'Designer',
-      name: 'designer',
-    },
-    {
-      label: 'Maven',
-      name: 'maven',
-    },
-    {
-      label: 'Product Manager',
-      name: 'productmanager',
-    },
-  ];
+  get checkboxData() {
+    return CHECK_BOX_DATA;
+  }
 
   get label() {
     const { currentStep } = this.args;
