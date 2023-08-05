@@ -24,6 +24,7 @@
   font-size: 2rem;
   color: var(--user-details--heading--bg);
   margin-bottom: 0;
+  text-align: center;
 }
 
 .user-details__field input {
@@ -34,6 +35,23 @@
   font-size: 2rem;
 }
 
+.role-details__field {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+}
+
+.checkbox-label{
+  display: flex;
+  width: 12rem;
+  margin: 0 auto;
+  font-size: 1.3rem;
+}
+
+.checkbox-label .checkbox-input{
+  margin-right: 10px;
+}
+
 .signup-action__btn button {
   padding: .75rem 2rem;
   border-radius: 10px;
@@ -42,7 +60,7 @@
   color: var(--button-signup--text);
   text-decoration: none;
   cursor: pointer;
-  width: 70%;
+  width: 75%;
   display: block;
   margin: auto;
   font-size: 2rem;
@@ -60,9 +78,6 @@
 }
 
 @media (max-width: 600px) {
-  .user-details__heading {
-    font-size: 1.4rem;
-  }
   
   .user-details__field input,
   .signup-action__btn button {
@@ -72,7 +87,11 @@
 
 @media (max-width: 480px) {
   .user-details__heading {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
+  }
+
+  .checkbox-label{
+    font-size: 1rem;
   }
 
   .user-details__field input,

@@ -4,6 +4,7 @@ export const NEW_SIGNUP_FLOW = {
   USER_FIRST_NAME: 'User entered First Name - New SignUp Flow',
   USER_LAST_NAME: 'User entered Last Name - New SignUp Flow',
   USER_USERNAME: 'User entered Username - New SignUp Flow',
+  USER_ROLE: 'User select Role - New SignUp Flow',
   SOMETHING_WENT_WRONG: 'Something went wrong - New SignUp Flow',
   USERNAME_NOT_AVAILABLE:
     'User entered a username which was already taken - New SignUp Flow',

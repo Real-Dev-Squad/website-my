@@ -32,6 +32,13 @@ module('Unit | Controller | new-signup', function (hooks) {
       'username',
       'current step updated to username'
     );
+
+    controller.send('changeStepToFive');
+    assert.equal(
+      controller.currentStep,
+      'role',
+      'current step updated to role'
+    );
   });
 
   test('testing handleInput change function', function (assert) {
@@ -78,5 +85,25 @@ module('Unit | Controller | new-signup', function (hooks) {
       'vinayak',
       'username value updated'
     );
+  });
+
+  test('testing handleCheckboxInput change function', function (assert) {
+    let controller = this.owner.lookup('controller:new-signup');
+    let developer = 'developer';
+    let designer = 'designer';
+    let maven = 'maven';
+    let productmanager = 'productmanager';
+
+    controller.send('handleCheckboxInputChange', 'developer', true);
+    assert.equal(controller.signupDetails.roles[developer], true);
+
+    controller.send('handleCheckboxInputChange', 'designer', true);
+    assert.equal(controller.signupDetails.roles[designer], true);
+
+    controller.send('handleCheckboxInputChange', 'maven', true);
+    assert.equal(controller.signupDetails.roles[maven], true);
+
+    controller.send('handleCheckboxInputChange', 'productmanager', true);
+    assert.equal(controller.signupDetails.roles[productmanager], true);
   });
 });
