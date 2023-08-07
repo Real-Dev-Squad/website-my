@@ -1,35 +1,50 @@
-<nav class="nav">
-  <button type="button" class="hamburger--toggle" {{on "click" this.toggleNav}}>
-    <i class="fas fa-bars fa-2x"></i>
+<nav class='nav'>
+  <button type='button' class='hamburger--toggle' {{on 'click' this.toggleNav}}>
+    <i class='fas fa-bars fa-2x'></i>
   </button>
 
-  <ul class="nav-menu {{if this.isNavOpen "active-nav" ""}}">
-    <li class="nav__menu__logo">
+  <ul class='nav-menu {{if this.isNavOpen "active-nav" ""}}'>
+    <li class='nav__menu__logo'>
       <a href={{this.HOME_PAGE_URL}}>
-        <img src="RDSLogo.png" alt="real_dev_squad" height="50px" width="50px" />
+        <img
+          src='RDSLogo.png'
+          alt='real_dev_squad'
+          height='50px'
+          width='50px'
+        />
       </a>
     </li>
-    <li class="nav__menu__home"><a href={{this.HOME_PAGE_URL}}>Home</a></li>
+    <li class='nav__menu__home'><a href={{this.HOME_PAGE_URL}}>Home</a></li>
     {{#each this.RDS_APPS_MAPPING as |siteURL|}}
       <li><a href={{siteURL.url}}>{{siteURL.siteName}}</a></li>
     {{/each}}
   </ul>
 
-  <div role="button" class="user" {{on "click" this.toggleMenu}} {{on-click-outside this.outsideClickMenu}}>
-    <div class="user__msg">Hello, {{@firstName}}!</div>
-    <img class="user__pic" src={{@profilePictureURL}} alt="profile" />
-    <i class="fa-solid fa-chevron-down"></i>
+  <div
+    role='button'
+    class='user'
+    {{on 'click' this.toggleMenu}}
+    {{on-click-outside this.outsideClickMenu}}
+  >
+    <div class='user__msg'>Hello, {{@firstName}}!</div>
+    <img class='user__pic' src={{@profilePictureURL}} alt='profile' />
+    <i class='fa-solid fa-chevron-down'></i>
   </div>
 
-  <section class="menu {{if this.isMenuOpen "active-menu" ""}}">
-    <LinkTo class="menu__link" @route="index">Home</LinkTo>
-    <LinkTo class="menu__link" @route="profile">Profile</LinkTo>
-    <LinkTo class="menu__link" @route="tasks">Tasks</LinkTo>
+  <section class='menu {{if this.isMenuOpen "active-menu" ""}}'>
+    <a href='https://www.realdevsquad.com' class='menu__link'>Home</a>
+    <LinkTo class='menu__link' @route='index'>Status</LinkTo>
+    <LinkTo class='menu__link' @route='profile'>Profile</LinkTo>
+    <LinkTo class='menu__link' @route='tasks'>Tasks</LinkTo>
     {{#if this.isDev}}
-      <LinkTo class="menu__link" @route="notifications">Notifications</LinkTo>
+      <LinkTo class='menu__link' @route='notifications'>Notifications</LinkTo>
     {{/if}}
-    <LinkTo class="menu__link" @route="identity">Identity</LinkTo>
-    <hr class="separator"/>
-    <span role="button" class="menu__link text-primary" {{on "click" @signOutHandler}}>Sign Out</span>
+    <LinkTo class='menu__link' @route='identity'>Identity</LinkTo>
+    <hr class='separator' />
+    <span
+      role='button'
+      class='menu__link text-primary'
+      {{on 'click' @signOutHandler}}
+    >Sign Out</span>
   </section>
 </nav>
