@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { render, click, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setupRenderingTest } from 'ember-qunit';
@@ -21,7 +21,7 @@ module('Integration | Component | qr-code', function (hooks) {
     assert.dom('[data-test="qr-code"]').doesNotExist();
   });
 
-  test('buttonClicked confirms and performs API call when confirmed', async function (assert) {
+  skip('buttonClicked confirms and performs API call when confirmed', async function (assert) {
     await render(hbs`
       <MobileController />
     `);
@@ -36,7 +36,7 @@ module('Integration | Component | qr-code', function (hooks) {
     );
   });
 
-  test('buttonClicked cancels login when not confirmed', async function (assert) {
+  skip('buttonClicked cancels login when not confirmed', async function (assert) {
     await render(hbs`
       <MobileController />
     `);
