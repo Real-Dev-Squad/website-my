@@ -1,4 +1,4 @@
-import { module, skip, test } from 'qunit';
+import { module, skip } from 'qunit';
 import {
   visit,
   currentURL,
