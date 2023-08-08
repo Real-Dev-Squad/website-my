@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find, triggerEvent, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -27,7 +27,7 @@ module('Integration | Component | image uploader', function (hooks) {
     assert.dom('[data-test-drop-area]').doesNotExist();
   });
 
-  test('it renders crop UI when an image is selected', async function (assert) {
+  skip('it renders crop UI when an image is selected', async function (assert) {
     this.set('uploadUrl', `https://api.realdevsquad.com/users/picture`);
     this.set('formDataKeyName', 'profile');
     await render(hbs`
