@@ -26,15 +26,10 @@ export default class MobileController extends Controller {
             credentials: 'include',
           }
         );
-        if (response.status === 200) {
-          this.router.transitionTo('/');
-        } else {
-          this.toast.error(
-            'Something went wrong. Please try again later',
-            '',
-            toastNotificationTimeoutOptions
-          );
+        if (response !== 200) {
+          this.toast.error('Something went wrong. Please try again later');
         }
+        this.router.transitionTo('/');
       } catch (error) {
         this.toast.error(
           'Something went wrong. Please try again later',
