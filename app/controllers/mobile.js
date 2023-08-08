@@ -41,7 +41,6 @@ export default class MobileController extends Controller {
           '',
           toastNotificationTimeoutOptions
         );
-        console.error(error.message);
       }
     } else {
       // will cancel the login
