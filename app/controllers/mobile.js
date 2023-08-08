@@ -27,7 +27,7 @@ export default class MobileController extends Controller {
           }
         );
         if (response !== 200) {
-          this.toast.error('Something went wrong. Please try again later');
+          throw Error('Something went wrong. Please try again later');
         }
         this.router.transitionTo('/');
       } catch (error) {
