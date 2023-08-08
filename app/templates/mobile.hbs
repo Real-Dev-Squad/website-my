@@ -1,4 +1,5 @@
 {{page-title "Mobile"}} 
 <Qrcode @text={{@model.userId}} />
+<button type="button" {{on "click" this.buttonClicked}} data-test-verify-button>Verify Status</button>
 {{outlet}}  
 

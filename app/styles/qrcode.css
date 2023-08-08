@@ -16,3 +16,13 @@
     text-align: center;
     margin-top:15px;
   }
+
+  .btn{
+    width: 200px ;
+    border:1px solid black;
+    align-content: center;
+    background-color: #1C1282;
+    color:white;
+    margin-top:20px;
+    border-radius: 5px;
+  }
