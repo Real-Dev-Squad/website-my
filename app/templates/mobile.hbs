@@ -1,5 +1,11 @@
-{{page-title "Mobile"}} 
-<Qrcode @text={{@model.userId}} />
-<button type="button" {{on "click" this.buttonClicked}} data-test-verify-button>Verify Status</button>
-{{outlet}}  
-
+{{page-title 'Mobile'}}
+<div class='mobile'>
+  <Qrcode @text={{@model.userId}} />
+  <button
+    type='button'
+    class='verify__btn'
+    {{on 'click' this.buttonClicked}}
+    data-test-verify-button
+  >Verify Status</button>
+</div>
+{{outlet}}
