@@ -8,7 +8,7 @@ export default class MobileController extends Controller {
   @service toast;
   @service router;
 
-  @action async buttonClicked() {
+  @action async verifyAuth() {
     if (
       confirm(
         'Are you sure you are the one who scanned this QR code?  Do you want to proceed?'
@@ -41,6 +41,28 @@ export default class MobileController extends Controller {
       }
     } else {
       // will cancel the login
+    }
+  }
+
+  @action async buttonClicked() {
+    const response = await fetch(
+      `${ENV.BASE_API_URL}/users?id=${this.model.userId}`, // TODO: replace the get url
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
+    if (response.status) {
+      this.verifyAuth();
+    } else {
+      this.toast.error(
+        'Please scan the QR code to continue',
+        'Not verified',
+        toastNotificationTimeoutOptions
+      );
     }
   }
 }
