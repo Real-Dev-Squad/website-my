@@ -26,10 +26,12 @@ export default class MobileController extends Controller {
             credentials: 'include',
           }
         );
-        if (response !== 200) {
+
+        if (response.status !== 200) {
           throw Error('Something went wrong. Please try again later');
         }
         this.router.transitionTo('/');
+        this.toast.success('Mobile login successful', 'Success');
       } catch (error) {
         this.toast.error(
           'Something went wrong. Please try again later',
