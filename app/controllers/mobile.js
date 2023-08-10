@@ -56,8 +56,6 @@ export default class MobileController extends Controller {
       }
     );
     if (response.status.ok) {
-      const res = await response.json();
-      console.log('response', res);
       this.verifyAuth();
     } else {
       this.toast.error(
