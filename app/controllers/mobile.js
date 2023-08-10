@@ -45,24 +45,28 @@ export default class MobileController extends Controller {
   }
 
   @action async buttonClicked() {
-    const response = await fetch(
-      `${ENV.BASE_API_URL}/auth/qr-code-auth-get-device-info?user_id=${this.model.userId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
-    if (response.status.ok) {
-      this.verifyAuth();
-    } else {
-      this.toast.error(
-        'Please scan the QR code to continue',
-        'Not verified',
-        toastNotificationTimeoutOptions
+    try {
+      const response = await fetch(
+        `${ENV.BASE_API_URL}/auth/qr-code-auth-get-device-info?user_id=${this.model.userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
       );
+      if (response.ok) {
+        await this.verifyAuth();
+      } else {
+        this.toast.error(
+          'Please scan the QR code to continue',
+          'Not verified',
+          toastNotificationTimeoutOptions
+        );
+      }
+    } catch (error) {
+      this.toast.error('error');
     }
   }
 }
