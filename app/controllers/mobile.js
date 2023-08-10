@@ -8,7 +8,7 @@ export default class MobileController extends Controller {
   @service toast;
   @service router;
 
-  @action async buttonClicked() {
+  @action async verifyAuth() {
     if (
       confirm(
         'Are you sure you are the one who scanned this QR code?  Do you want to proceed?'
@@ -26,10 +26,12 @@ export default class MobileController extends Controller {
             credentials: 'include',
           }
         );
-        if (response !== 200) {
+
+        if (response.status !== 200) {
           throw Error('Something went wrong. Please try again later');
         }
         this.router.transitionTo('/');
+        this.toast.success('Mobile login successful', 'Success');
       } catch (error) {
         this.toast.error(
           'Something went wrong. Please try again later',
@@ -39,6 +41,32 @@ export default class MobileController extends Controller {
       }
     } else {
       // will cancel the login
+    }
+  }
+
+  @action async buttonClicked() {
+    try {
+      const response = await fetch(
+        `${ENV.BASE_API_URL}/auth/qr-code-auth-get-device-info?user_id=${this.model.userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      );
+      if (response.ok) {
+        await this.verifyAuth();
+      } else {
+        this.toast.error(
+          'Please scan the QR code to continue',
+          'Not verified',
+          toastNotificationTimeoutOptions
+        );
+      }
+    } catch (error) {
+      this.toast.error('error');
     }
   }
 }
