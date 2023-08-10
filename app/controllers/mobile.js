@@ -46,7 +46,7 @@ export default class MobileController extends Controller {
 
   @action async buttonClicked() {
     const response = await fetch(
-      `${ENV.BASE_API_URL}/users?id=${this.model.userId}`, // TODO: replace the get url
+      `${ENV.BASE_API_URL}/auth/qr-code-auth-get-device-info?user_id=${this.model.userId}`,
       {
         method: 'GET',
         headers: {
@@ -55,7 +55,9 @@ export default class MobileController extends Controller {
         credentials: 'include',
       }
     );
-    if (response.status) {
+    if (response.status.ok) {
+      const res = await response.json();
+      console.log('response', res);
       this.verifyAuth();
     } else {
       this.toast.error(
