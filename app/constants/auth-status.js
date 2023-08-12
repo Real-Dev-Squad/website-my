@@ -1,0 +1,4 @@
+export const AUTH_STATUS = {
+  REJECTED: 'REJECTED',
+  AUTHORIZED: 'AUTHORIZED',
+};
