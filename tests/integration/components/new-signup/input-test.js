@@ -107,6 +107,48 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('[data-test-btn="signup"]').hasText('Submit');
   });
 
+  test('button should have text Submit if the current step is username and if dev is set to false', async function (assert) {
+    assert.expect(2);
+    this.setProperties({
+      onClick: function () {
+        this.currentStep = this.LAST_STEP;
+      },
+      currentStep: 'username',
+      dev: false,
+    });
+
+    await render(hbs`
+      <NewSignup::Input
+        @onClick={{this.onClick}} 
+        @currentStep={{this.currentStep}}
+        @dev={{this.dev}}
+      />`);
+
+    assert.dom('[data-test-btn="signup"]').exists();
+    assert.dom('[data-test-btn="signup"]').hasText('Submit');
+  });
+
+  test('button should have text Next if the current step is username and if dev is set to true', async function (assert) {
+    assert.expect(2);
+    this.setProperties({
+      onClick: function () {
+        this.currentStep = this.FIFTH_STEP;
+      },
+      currentStep: 'username',
+      dev: true,
+    });
+
+    await render(hbs`
+      <NewSignup::Input
+        @onClick={{this.onClick}} 
+        @currentStep={{this.currentStep}}
+        @dev={{this.dev}}
+      />`);
+
+    assert.dom('[data-test-btn="signup"]').exists();
+    assert.dom('[data-test-btn="signup"]').hasText('Next');
+  });
+
   test('It should have input field', async function (assert) {
     assert.expect(3);
 

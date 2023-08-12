@@ -18,6 +18,7 @@
 @import 'discord.css';
 @import 'qrcode.css';
 @import 'progress-bar.css';
+@import 'mobile.css';
 
 html,
 body {

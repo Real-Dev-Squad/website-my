@@ -12,4 +12,26 @@ const registerUser = (user) =>
     credentials: 'include',
   });
 
-export default registerUser;
+const newRegisterUser = async (signupDetails, roles) => {
+  const getResponse = await fetch(`${BASE_API_URL}/users/self`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+
+  const userData = await getResponse.json();
+
+  const res = await registerUser({
+    ...signupDetails,
+    roles: {
+      ...userData.roles,
+      ...roles,
+    },
+  });
+
+  return res;
+};
+
+export { registerUser, newRegisterUser };

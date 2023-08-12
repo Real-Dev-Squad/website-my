@@ -22,7 +22,11 @@
       @disabled={{@isButtonDisabled}}
       @isLoading={{@isLoading}}
     >
-      {{if (eq @currentStep 'username') 'Submit' 'Next'}}
+      {{#if @dev}}
+        Next
+      {{else}}
+        {{if (eq @currentStep 'username') 'Submit' 'Next'}}
+      {{/if}}
     </Button>
   </div>
 </div>
