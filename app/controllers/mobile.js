@@ -30,7 +30,7 @@ export default class MobileController extends Controller {
       )
     ) {
       try {
-        const checkStatus = this.fetchAuthStatus(AUTH_STATUS.AUTHORIZED);
+        const checkStatus = await this.fetchAuthStatus(AUTH_STATUS.AUTHORIZED);
         if (checkStatus.status !== 200) {
           throw Error('Something went wrong. Please try again later');
         }
@@ -46,7 +46,7 @@ export default class MobileController extends Controller {
     } else {
       // will cancel the login
       try {
-        const checkStatus = this.fetchAuthStatus(AUTH_STATUS.REJECTED);
+        const checkStatus = await this.fetchAuthStatus(AUTH_STATUS.REJECTED);
         if (checkStatus.response.status !== 200) {
           throw Error('Something went wrong. Please try again later');
         }
