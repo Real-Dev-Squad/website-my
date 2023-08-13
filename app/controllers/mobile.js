@@ -3,21 +3,14 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { AUTH_STATUS } from '../constants/auth-status';
-import { FETCH_AUTH_STATUS, FETCH_DEVICE_INFO } from '../constants/url';
+import { getAuthStatus, getDeviceInfo } from '../utils/qr-code-auth';
 
 export default class MobileController extends Controller {
   @service toast;
   @service router;
 
   async fetchAuthStatus(authStatus) {
-    const response = await fetch(`${FETCH_AUTH_STATUS}${authStatus}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
-    return response;
+    return getAuthStatus(authStatus);
   }
 
   @action async verifyAuth() {
@@ -59,25 +52,6 @@ export default class MobileController extends Controller {
   }
 
   @action async buttonClicked() {
-    try {
-      const response = await fetch(FETCH_DEVICE_INFO, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      if (response.ok) {
-        await this.verifyAuth();
-      } else {
-        this.toast.error(
-          'Please scan the QR code to continue',
-          'Not verified',
-          toastNotificationTimeoutOptions
-        );
-      }
-    } catch (error) {
-      this.toast.error('error');
-    }
+    return getDeviceInfo(this.verifyAuth);
   }
 }
