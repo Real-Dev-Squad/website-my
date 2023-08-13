@@ -1,16 +1,26 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import ENV from 'website-my/config/environment';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { AUTH_STATUS } from '../constants/auth-status';
-import { getAuthStatus, getDeviceInfo } from '../utils/qr-code-auth';
 
 export default class MobileController extends Controller {
   @service toast;
   @service router;
 
   async fetchAuthStatus(authStatus) {
-    return getAuthStatus(authStatus);
+    const response = await fetch(
+      `${ENV.BASE_API_URL}/auth/qr-code-auth/authorization_status/${authStatus}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
+    return response;
   }
 
   @action async verifyAuth() {
@@ -52,6 +62,25 @@ export default class MobileController extends Controller {
   }
 
   @action async buttonClicked() {
-    return getDeviceInfo(this.verifyAuth);
+    try {
+      const response = await fetch(`${ENV.BASE_API_URL}/auth/device`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      if (response.ok) {
+        await this.verifyAuth();
+      } else {
+        this.toast.error(
+          'Please scan the QR code to continue',
+          'Not verified',
+          toastNotificationTimeoutOptions
+        );
+      }
+    } catch (error) {
+      this.toast.error('error');
+    }
   }
 }
