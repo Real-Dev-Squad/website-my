@@ -4,13 +4,15 @@ import { LABEL_TEXT } from '../../constants/new-signup';
 
 export default class SignupComponent extends Component {
   get label() {
-    const { currentStep } = this.args;
+    const { currentStep, dev } = this.args;
 
-    return LABEL_TEXT[currentStep];
-  }
-
-  get username() {
-    return this.args.username;
+    if (dev) {
+      if (currentStep === 'username') {
+        return 'Your Auto-generated Username!';
+      }
+    } else {
+      return LABEL_TEXT[currentStep];
+    }
   }
 
   @action inputFieldChanged({ target: { value } }) {

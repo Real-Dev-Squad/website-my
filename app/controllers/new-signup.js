@@ -73,7 +73,9 @@ export default class NewSignUpController extends Controller {
     let firstname = this.signupDetails.firstName;
     let lastname = this.signupDetails.lastName;
     let dev = this.isDevMode;
+    this.error = 'Hold Tight! Your Username is Almost Ready...';
     let username = await generateUsername(firstname, lastname, dev);
+    this.error = '';
     return (this.generateUsername = username);
   }
 
