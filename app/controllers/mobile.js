@@ -1,25 +1,22 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import ENV from 'website-my/config/environment';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { AUTH_STATUS } from '../constants/auth-status';
+import { FETCH_AUTH_STATUS, FETCH_DEVICE_INFO } from '../constants/url';
 
 export default class MobileController extends Controller {
   @service toast;
   @service router;
 
   async fetchAuthStatus(authStatus) {
-    const response = await fetch(
-      `${ENV.BASE_API_URL}/auth/qr-code-auth/authorization_status/${authStatus}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
+    const response = await fetch(`${FETCH_AUTH_STATUS}${authStatus}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
     return response;
   }
 
@@ -63,7 +60,7 @@ export default class MobileController extends Controller {
 
   @action async buttonClicked() {
     try {
-      const response = await fetch(`${ENV.BASE_API_URL}/auth/device`, {
+      const response = await fetch(FETCH_DEVICE_INFO, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
