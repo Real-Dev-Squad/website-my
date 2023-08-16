@@ -6,7 +6,7 @@ import { registerUser, newRegisterUser } from '../utils/register-api';
 import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
-import checkUserName from '../utils/check-username';
+import { checkUserName, generateUsername } from '../utils/check-username';
 
 export default class NewSignUpController extends Controller {
   @service analytics;
@@ -17,6 +17,7 @@ export default class NewSignUpController extends Controller {
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
   @tracked error = '';
+  @tracked generateUsername = '';
   @tracked currentStep = NEW_SIGNUP_STEPS[0];
   FIRST_STEP = NEW_SIGNUP_STEPS[0];
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
@@ -51,6 +52,9 @@ export default class NewSignUpController extends Controller {
     this.currentStep = this.FOURTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_LAST_NAME);
     this.isButtonDisabled = true;
+    if (this.isDevMode) {
+      this.username();
+    }
   }
 
   @action changeStepToFive() {
@@ -63,6 +67,14 @@ export default class NewSignUpController extends Controller {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_ROLE);
     this.isButtonDisabled = true;
     this.signup();
+  }
+
+  @action async username() {
+    let firstname = this.signupDetails.firstName;
+    let lastname = this.signupDetails.lastName;
+    let dev = this.isDevMode;
+    let username = await generateUsername(firstname, lastname, dev);
+    return (this.generateUsername = username);
   }
 
   @action completeSignUp() {

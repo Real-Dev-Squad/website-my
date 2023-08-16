@@ -9,6 +9,10 @@ export default class SignupComponent extends Component {
     return LABEL_TEXT[currentStep];
   }
 
+  get username() {
+    return this.args.username;
+  }
+
   @action inputFieldChanged({ target: { value } }) {
     const { onChange, currentStep } = this.args;
     onChange(currentStep, value);
