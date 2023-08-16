@@ -17,7 +17,6 @@ export default class NewSignUpController extends Controller {
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
   @tracked error = '';
-  @tracked generateUsername = '';
   @tracked currentStep = NEW_SIGNUP_STEPS[0];
   FIRST_STEP = NEW_SIGNUP_STEPS[0];
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
@@ -76,7 +75,8 @@ export default class NewSignUpController extends Controller {
     this.error = 'Hold Tight! Your Username is Almost Ready...';
     let username = await generateUsername(firstname, lastname, dev);
     this.error = '';
-    return (this.generateUsername = username);
+    this.signupDetails = { ...this.signupDetails, username };
+    if (this.signupDetails['username']) this.isButtonDisabled = false;
   }
 
   @action completeSignUp() {
@@ -106,9 +106,9 @@ export default class NewSignUpController extends Controller {
 
   @action async signup() {
     const signupDetails = {
-      first_name: this.signupDetails.firstName,
-      last_name: this.signupDetails.lastName,
-      username: this.signupDetails.username,
+      first_name: this.signupDetails.firstName.toLowerCase(),
+      last_name: this.signupDetails.lastName.toLowerCase(),
+      username: this.signupDetails.username.toLowerCase(),
     };
     const roles = {};
     Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
