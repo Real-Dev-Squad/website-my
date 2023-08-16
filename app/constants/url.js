@@ -9,3 +9,6 @@ export const MAIN_SITE_URL = 'https://realdevsquad.com/';
 export const GOTO_URL = 'https://realdevsquad.com/goto';
 export const AUTH_URL =
   'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97';
+export const FETCH_AUTH_STATUS =
+  'https://realdevsquad.com/auth/qr-code-auth/authorization_status/';
+export const FETCH_DEVICE_INFO = 'https://realdevsquad.com/auth/device';
