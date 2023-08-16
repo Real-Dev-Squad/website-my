@@ -6,10 +6,8 @@ export default class SignupComponent extends Component {
   get label() {
     const { currentStep, dev } = this.args;
 
-    if (dev) {
-      if (currentStep === 'username') {
-        return 'Your Auto-generated Username!';
-      }
+    if (dev && currentStep === 'username') {
+      return 'Your Auto-generated Username!';
     } else {
       return LABEL_TEXT[currentStep];
     }
