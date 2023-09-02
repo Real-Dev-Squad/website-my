@@ -55,14 +55,15 @@
 
     <label class="identity-check-label">
         I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
-        <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}} />
+        <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}} {{on 'mouseenter' (fn this.setError "CHECKBOX")}} {{on 'mouseleave' this.resetError}}/>
     </label>
     <button type="submit" class="identity-verify-btn" disabled={{not this.isChecked}} {{on 'click' (fn
-        this.handleVerify)}}>
+        this.handleVerify)}} {{on 'mouseenter' (fn this.setError "BUTTON")}} {{on 'mouseleave' this.resetError}}>
         {{#if this.isVerifyClicked}}
         <i class="fa fa-spinner fa-spin"></i>
         {{/if}}
         Link Chaincode
     </button>
+    <p class="identity-error-message">{{this.identityError}}</p>
     {{/if}}
 </div>

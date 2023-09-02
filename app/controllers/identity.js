@@ -22,9 +22,32 @@ export default class IdentityController extends Controller {
   @tracked generateChainCodeDisabled = this.model.profileURL === undefined;
   @tracked checkboxDisabled =
     this.generateChainCodeDisabled || this.model.chaincode === undefined;
+  @tracked identityError = '';
 
   @action async handleRefresh() {
     window.location.reload();
+  }
+
+  @action resetError() {
+    this.identityError = '';
+  }
+
+  @action setError(type) {
+    if (
+      (this.saveDisabled && type === 'BUTTON') ||
+      (this.checkboxDisabled && type === 'CHECKBOX')
+    ) {
+      let error = 'Error: ';
+      if (type === 'CHECKBOX') {
+        if (!this.isChaincodeClicked) error += 'Generate Chaincode Not Clicked';
+        if (!this.isCopyClicked) error += ', Copy Button Not Clicked';
+      } else if (type === 'BUTTON') {
+        if (!this.isChaincodeClicked) error += 'Generate Chaincode Not Clicked';
+        if (!this.isCopyClicked) error += ', Copy Button Not Clicked';
+        if (!this.isChecked) error += ', Checkbox Not Clicked';
+      }
+      this.identityError = error;
+    }
   }
 
   @action changeSaveDisabled() {

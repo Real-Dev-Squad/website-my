@@ -44,13 +44,17 @@
 }
 
 .identity-verify-btn {
-    background-color: var(--button-color);  /*Found this pre defined variable but the color is not defined anywhere */
-    color: var(--button-verify--text);
+    background-color: green;
+    color: white;
     cursor: pointer;
     border-radius: 3px;
     padding: 8px 20px;
     border: none;
     margin-top: 1rem;
+}
+
+.identity-error-message {
+    color: red;
 }
 
 .identity-label,
