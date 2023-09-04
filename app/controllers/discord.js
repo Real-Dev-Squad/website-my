@@ -24,7 +24,10 @@ export default class DiscordController extends Controller {
       if (this.consent) {
         const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
           method: 'PATCH',
-          body: JSON.stringify({ discordId: this.discordId }),
+          body: JSON.stringify({
+            discordId: this.discordId,
+            roles: { archived: false, in_discord: true },
+          }),
           headers: {
             'Content-Type': 'application/json',
           },
