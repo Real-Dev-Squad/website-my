@@ -38,9 +38,6 @@
               {{on 'click' (fn this.handleGenerateChaincode)}}
               disabled={{this.generateChainCodeDisabled}}
             />
-            {{#if this.generateChainCodeDisabled}}
-              <BsTooltip @title='Profile Url is empty !' @placement='right' />
-            {{/if}}
           </div>
         {{/if}}
       </label>
