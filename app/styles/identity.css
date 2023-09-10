@@ -1,113 +1,156 @@
-
-
 .identity-heading {
-    margin-top: 25px;
-    text-align: center;
+  margin-top: 25px;
+  text-align: center;
 }
 
 .identity-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .input-div {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .identity-Buttons {
-    background-color: var(--button-identity--bg);
-    color: var(--button-identity--text);
-    display: inline;
-    cursor: pointer;
-    border-radius: 3px;
-    padding: 4px 15px;
+  background-color: var(--button-identity--bg);
+  color: var(--button-identity--text);
+  display: inline;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 4px 15px;
 }
 
 .copy-button {
-    margin-left: 0.75rem;
-    background-color: var(--button-copy--bg);
-    color: var(--button-copy--text);
-    border: 2px solid var(--button-copy--border);
-    padding: 2px 5px;
+  margin-left: 0.75rem;
+  background-color: var(--button-copy--bg);
+  color: var(--button-copy--text);
+  border: 2px solid var(--button-copy--border);
+  padding: 2px 5px;
 }
 
 .identity-verify-btn-div {
-    display: flex;
-    align-items: center;
-    margin-top: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
 }
 
 .identity-verify-btn {
-    background-color: green;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    padding: 8px 20px;
-    border: none;
-    margin-top: 1rem;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 8px 20px;
+  border: none;
+  margin-top: 1rem;
 }
 
 .identity-error-message {
-    color: red;
+  color: red;
 }
 
 .identity-label,
 .identity-check-label {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .input-url {
-    height: 2rem;
+  height: 2rem;
 }
 
 .identity-Buttons:disabled,
 .identity-verify-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .chaincode {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+.identity__input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.identity__input-container:focus-within label {
+  transform: translate(0, 12px) scale(0.8);
+  color: #0a53e4;
+}
+
+.identity__input-container .identity__profileURL-filled {
+  transform: translate(0, 12px) scale(0.8);
+}
+
+.identity__input-container label {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(0, 23px) scale(1);
+  transform-origin: top left;
+  transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  color: #6f81a5;
+  font-size: 16px;
+  line-height: 1;
+  left: 16px;
+}
+
+.identity__input-container input {
+  height: 64px;
+  width: 300px;
+  border-radius: 4px;
+  border: solid 1px black;
+  padding: 24px 16px 4px 16px;
+  font-size: 16px;
+  line-height: 1;
+  outline: none;
+  box-shadow: none;
+  transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+
+.identity__input-container input:focus {
+  border: none;
+  box-shadow: 0 0 0 2px #79b1ff;
 }
 
 @media (max-width: 460px) {
-    .identity-container {
-        gap: 2rem;
-    }
+  .identity-container {
+    gap: 2rem;
+  }
 
-    .input-div {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-        gap: 0.5rem;
-    }
+  .input-div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 0.5rem;
+  }
 
-    .identity-label {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .identity-label {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-    .identity-check-label {
-        gap: 0.5rem;
-        padding: 0 1rem;
-        font-size: 0.8rem;
-    }
+  .identity-check-label {
+    gap: 0.5rem;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+  }
 
-    .identity-verify-btn {
-        margin-top: 0;
-    }
+  .identity-verify-btn {
+    margin-top: 0;
+  }
 
-    .identity-Buttons {
-        width: 100%;
-    }
+  .identity-Buttons {
+    width: 100%;
+  }
 }

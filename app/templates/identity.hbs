@@ -1,69 +1,102 @@
 {{page-title 'Identity'}}
 
-<h1 class="identity-heading">
-    Identity Service Verification
+<h1 class='identity-heading'>
+  Identity Service Verification
 </h1>
-<div class="identity-container">
-    {{#if (eq @model.profileStatus "PENDING")}}
+<div class='identity-container'>
+  {{#if (eq @model.profileStatus 'PENDING')}}
     <p>Verification process is Pending!</p>
-    <button type="button" {{on 'click' (fn this.handleRefresh)}}>Refresh</button>
-    {{else if (eq @model.profileStatus "VERIFIED")}}
+    <button
+      type='button'
+      {{on 'click' (fn this.handleRefresh)}}
+    >Refresh</button>
+  {{else if (eq @model.profileStatus 'VERIFIED')}}
     <p>Verification Done!</p>
-    {{else}}
-    {{#if (eq @model.profileStatus "BLOCKED")}}
-    <p>Your previous chaincode is blocked for some reason. Please generate a new chaincode.</p>
+  {{else}}
+    {{#if (eq @model.profileStatus 'BLOCKED')}}
+      <p>Your previous chaincode is blocked for some reason. Please generate a
+        new chaincode.</p>
     {{/if}}
-    <div class="input-div">
-        <label>Profile Url</label>
-        <Input class="input-url" @value={{this.profileURL}} type="text" placeholder="Profile URL"
-            onkeyup={{this.changeSaveDisabled}} />
-        <div class='btn-container'>
-            <button disabled={{this.saveDisabled}} type="submit" class="identity-Buttons edit" {{on 'click' (fn
-                this.handleEdit)}}>
-                {{#if this.isEditClicked}}
-                <i class="fa fa-spinner fa-spin"></i>
-                {{/if}}
-                Save
-            </button>
-            {{#if (eq this.profileURL this.model.profileURL)}}
-            <BsTooltip @title='This URL is already in use.' @placement='right' />
-            {{else if this.saveDisabled}}
-            <BsTooltip @title='Profile URL is empty!' @placement='right' />
+    <div class='chaincode-div'>
+      <label class='identity-label'>
+        {{#if this.isChaincodeClicked}}
+          <label class='chaincode'>{{this.Chaincode}}</label>
+
+          <Input
+            class='copy-button'
+            type='button'
+            @value='Copy'
+            {{on 'click' (fn this.handleCopy)}}
+          />
+
+        {{else}}
+          <div class='btn-container'>
+            <Input
+              class='identity-Buttons'
+              type='button'
+              @value={{this.Chaincode}}
+              {{on 'click' (fn this.handleGenerateChaincode)}}
+              disabled={{this.generateChainCodeDisabled}}
+            />
+            {{#if this.generateChainCodeDisabled}}
+              <BsTooltip @title='Profile Url is empty !' @placement='right' />
             {{/if}}
-        </div>
-    </div>
-
-    <div class="chaincode-div">
-        <label class="identity-label">
-            Generate Chaincode
-            {{#if this.isChaincodeClicked}}
-            <label class="chaincode">{{this.Chaincode}}</label>
-
-            <Input class='copy-button' type='button' @value='Copy' {{on 'click' (fn this.handleCopy)}} />
-
-            {{else}}
-            <div class='btn-container'>
-                <Input class='identity-Buttons' type='button' @value={{this.Chaincode}} {{on 'click' (fn
-                    this.handleGenerateChaincode)}} disabled={{this.generateChainCodeDisabled}} />
-                {{#if this.generateChainCodeDisabled}}
-                <BsTooltip @title='Profile Url is empty !' @placement='right' />
-                {{/if}}
-            </div>
-            {{/if}}
-        </label>
-    </div>
-
-    <label class="identity-check-label">
-        I have saved my profile URL, generated a chaincode<br />and successfully added that to my service.
-        <Input @type="checkbox" @checked={{this.isChecked}} disabled={{this.checkboxDisabled}} {{on 'mouseenter' (fn this.setError "CHECKBOX")}} {{on 'mouseleave' this.resetError}}/>
-    </label>
-    <button type="submit" class="identity-verify-btn" disabled={{not this.isChecked}} {{on 'click' (fn
-        this.handleVerify)}} {{on 'mouseenter' (fn this.setError "BUTTON")}} {{on 'mouseleave' this.resetError}}>
-        {{#if this.isVerifyClicked}}
-        <i class="fa fa-spinner fa-spin"></i>
+          </div>
         {{/if}}
-        Link Chaincode
+      </label>
+    </div>
+
+    <div class='input-div'>
+      <div class="identity__input-container">  
+        <label class={{if this.profileURL "identity__profileURL-filled"}}>Profile URL</label>
+        <Input
+            class='input-url'
+            @value={{this.profileURL}}
+            type='text'
+            onkeyup={{this.changeSaveDisabled}}
+        />
+      </div>  
+      <div class='btn-container'>
+        <button
+          disabled={{this.saveDisabled}}
+          {{on 'mouseenter' (fn this.setError 'SAVE_BUTTON')}}
+          {{on 'mouseleave' this.resetError}}
+          type='submit'
+          class='identity-Buttons edit'
+          {{on 'click' (fn this.handleEdit)}}
+        >
+          {{#if this.isEditClicked}}
+            <i class='fa fa-spinner fa-spin'></i>
+          {{/if}}
+          Save
+        </button>
+      </div>
+    </div>
+
+    <label class='identity-check-label'>
+      I have saved my profile URL, generated a chaincode<br />and successfully
+      added that to my service.
+      <Input
+        @type='checkbox'
+        @checked={{this.isChecked}}
+        disabled={{this.checkboxDisabled}}
+        {{on 'mouseenter' (fn this.setError 'CHECKBOX')}}
+        {{on 'mouseleave' this.resetError}}
+      />
+    </label>
+    <button
+      type='submit'
+      class='identity-verify-btn'
+      disabled={{not this.isChecked}}
+      {{on 'click' (fn this.handleVerify)}}
+      {{on 'mouseenter' (fn this.setError 'VERIFY_BUTTON')}}
+      {{on 'mouseleave' this.resetError}}
+    >
+      {{#if this.isVerifyClicked}}
+        <i class='fa fa-spinner fa-spin'></i>
+      {{/if}}
+      Link Chaincode
     </button>
-    <p class="identity-error-message">{{this.identityError}}</p>
-    {{/if}}
+    <p class='identity-error-message'>{{this.identityError}}</p>
+  {{/if}}
 </div>
