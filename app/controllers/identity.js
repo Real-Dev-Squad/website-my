@@ -5,6 +5,7 @@ import ENV from 'website-my/config/environment';
 import isValidUrl from '../utils/checkURL';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+import { ELEMENT_TYPE, ERROR_TYPE } from '../constants/identity';
 
 const BASE_URL = ENV.BASE_API_URL;
 
@@ -22,9 +23,42 @@ export default class IdentityController extends Controller {
   @tracked generateChainCodeDisabled = this.model.profileURL === undefined;
   @tracked checkboxDisabled =
     this.generateChainCodeDisabled || this.model.chaincode === undefined;
+  @tracked identityError = '';
 
   @action async handleRefresh() {
     window.location.reload();
+  }
+
+  @action resetError() {
+    this.identityError = '';
+  }
+
+  @action setError(type) {
+    if (
+      (this.saveDisabled && type === ELEMENT_TYPE.SAVE_BUTTON) ||
+      (!this.isChecked && type === ELEMENT_TYPE.VERIFY_BUTTON) ||
+      (this.checkboxDisabled && type === ELEMENT_TYPE.CHECKBOX)
+    ) {
+      let error = 'Error: ';
+      if (type === ELEMENT_TYPE.SAVE_BUTTON) {
+        if (this.profileURL === '') {
+          error += ERROR_TYPE.PROFILE_URL_NOT_FOUND;
+        } else if (this.profileURL === this.model.profileURL) {
+          error += ERROR_TYPE.SAME_PROFILE_URL;
+        }
+      } else if (type === ELEMENT_TYPE.CHECKBOX) {
+        error += `${
+          !this.isChaincodeClicked ? ERROR_TYPE.GENERATE_CHAINCODE : ''
+        } ${!this.isCopyClicked ? ', ' + ERROR_TYPE.COPY_BUTTON : ''}.`;
+      } else if (type === ELEMENT_TYPE.VERIFY_BUTTON) {
+        error += `${
+          !this.isChaincodeClicked ? ERROR_TYPE.GENERATE_CHAINCODE : ''
+        }${!this.isCopyClicked ? ', ' + ERROR_TYPE.COPY_BUTTON : ''}${
+          !this.isChecked ? ', ' + ERROR_TYPE.CHECKBOX : ''
+        }.`;
+      }
+      this.identityError = error;
+    }
   }
 
   @action changeSaveDisabled() {
