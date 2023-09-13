@@ -48,12 +48,14 @@ export default class IdentityController extends Controller {
         }
       } else if (type === ELEMENT_TYPE.CHECKBOX) {
         error += `${
-          !this.isChaincodeClicked && ERROR_TYPE.GENERATE_CHAINCODE
-        } ${!this.isCopyClicked && ', ' + ERROR_TYPE.COPY_BUTTON}.`;
+          !this.isChaincodeClicked ? ERROR_TYPE.GENERATE_CHAINCODE : ''
+        } ${!this.isCopyClicked ? ', ' + ERROR_TYPE.COPY_BUTTON : ''}.`;
       } else if (type === ELEMENT_TYPE.VERIFY_BUTTON) {
-        error += `${!this.isChaincodeClicked && ERROR_TYPE.GENERATE_CHAINCODE}${
-          !this.isCopyClicked && ', ' + ERROR_TYPE.COPY_BUTTON
-        }${!this.isChecked && ', ' + ERROR_TYPE.CHECKBOX}.`;
+        error += `${
+          !this.isChaincodeClicked ? ERROR_TYPE.GENERATE_CHAINCODE : ''
+        }${!this.isCopyClicked ? ', ' + ERROR_TYPE.COPY_BUTTON : ''}${
+          !this.isChecked ? ', ' + ERROR_TYPE.CHECKBOX : ''
+        }.`;
       }
       this.identityError = error;
     }
