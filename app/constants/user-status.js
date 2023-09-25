@@ -11,6 +11,8 @@ export const USER_STATES = {
   ONBOARDING: 'ONBOARDING',
   DNE: 'DNE',
 };
+export const WARNING_INVALID_NEW_ETA =
+  'The newEndsOn value cannot be smaller than the oldEndsOn value';
 export const WARNING_FROM_DATE_EXCEEDS_UNTIL_DATE =
   'Until date cant lie before the From date. Please recheck the dates again.';
 export const THREE_DAYS_TIME_DIFFERENCE_MS = 172800000;
