@@ -84,7 +84,6 @@
 
 .task-card__progress-bar-container {
   padding-right: 0.5em;
-  padding-bottom: 0.5em;
   width: 14.5rem;
   flex-shrink: 0;
 }
@@ -150,6 +149,7 @@
   border: 2px solid var(--progress-bar-color);
   transition: 0.25s ease-in-out;
   box-shadow: -407px 0 0 400px var(--progress-bar-color);
+  transition: 1s ease-in-out;
 }
 
 .progress-bar__input::-moz-range-thumb:active,

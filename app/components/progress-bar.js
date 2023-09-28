@@ -1,47 +1,62 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { debounce } from '@ember/runloop';
 
 export default class ProgressBarComponent extends Component {
-  @tracked isEditable = false;
   @tracked value = this.args.value;
-  lastEditTime = null;
 
-  @action turnEditModeOn() {
-    this.isEditable = true;
-    this.lastEditTime = Date.now();
-    this.setEditableToFalse();
+  @action onMouseLeave() {
+    this.value = this.args.value;
   }
-
-  setEditableToFalse() {
-    setTimeout(() => {
-      const timeDelta = Date.now() - this.lastEditTime;
-      if (this.isEditable && timeDelta >= 5000) {
-        this.isEditable = false;
-      } else if (this.isEditable) {
-        this.setEditableToFalse();
-      }
-    }, 5000);
-  }
-
   @action onInput(e) {
-    this.lastEditTime = Date.now();
     this.value = e.target.value;
     if (this.args.onInput) {
       this.args.onInput(this.value);
     }
   }
+  constructor(...args) {
+    super(...args);
 
-  @action onChange(e) {
-    this.lastEditTime = Date.now();
+    // Additional constructor logic can be added here if needed
+    console.log('ProgressBarComponent constructor called');
+
+    // You can also access arguments passed to the component constructor here
+    console.log('Component args:', this.args);
+  }
+
+  @action async onClick(event) {
+    console.log(event);
+    const rangeWidth = event.target.offsetWidth;
+    const offsetX = event.offsetX;
+    console.log(offsetX / rangeWidth);
+    let newValue = Math.round((offsetX / rangeWidth) * 100);
+    newValue = newValue - (newValue % 10) + 10;
+    event.target.value = newValue;
+    this.onInput(event);
+    await this.onChange(event);
+  }
+
+  @action
+  async handleHover(event) {
+    const rangeWidth = event.target.offsetWidth;
+    const offsetX = event.offsetX;
+    console.log(offsetX / rangeWidth);
+    let newValue = Math.round((offsetX / rangeWidth) * 100);
+    newValue = newValue - (newValue % 10) + 10;
+    if (newValue === this.value) return;
+
+    await new Promise((r) => setTimeout(r, 100));
+
+    this.value = newValue;
+  }
+
+  @action async onChange(e) {
     if (this.args.onChange) {
-      debounce(this, this.debouncedChange, e, 600);
+      await this.args.onChange(e);
     }
   }
 
   async debouncedChange(e) {
     await this.args.onChange(e);
-    this.isEditable = false;
   }
 }

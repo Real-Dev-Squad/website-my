@@ -7,59 +7,59 @@
 .progress-slider {
   display: flex;
   gap: 4px;
+    transition: all 1s;
 }
 
-.progress-slider__button {
+.progress-slider__text{
   width: 1.5rem;
-  height: 1.1rem;
+  height: 1.2rem;
   border: 2px solid var(--black);
   border-radius: 4px;
   background-color: transparent;
   display: flex;
   align-items: center;
   justify-items: center;
+    transition: all 1s;
 }
 
-.progress-slider__button__text {
+.progress-slider__text-value {
   font-size: 0.6em;
   font-weight: bolder;
   margin: auto;
-}
-
-.progress-slider__button__edit-icon {
-  width: 1rem;
-  height: 1rem;
-  margin: 3px;
+    transition: all 1s;
 }
 .progress-slider__input-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 90%;
-  height: 1.1rem;
+  height: 1.2rem;
   cursor: pointer;
   outline: none;
   overflow: hidden;
   border: 2px solid var(--black);
   border-radius: 4px;
+    transition: all 1s;
+
 }
 
 .progress-slider__input-slider:focus {
   box-shadow: 0 0 0 2px var(--progress-bar-color);
-}
-.progress-slider__input-slider:disabled {
-  cursor: auto;
+    transition: all 1s;
 }
 
 .progress-slider__input-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 0;
+  width: 1px;
   box-shadow: -20rem 0 0 20rem var(--progress-bar-color);
+    transition: all 1s;
 }
 
 .progress-slider__input-slider::-moz-range-thumb {
   border: none;
   width: 0;
   box-shadow: -20rem 0 0 20rem var(--progress-bar-color);
+  transition: all 1s;
+  
 }
 
 .progress-slider__input-slider[step] {
@@ -70,12 +70,6 @@
     var(--white) calc(10.05% - 1.5px),
     var(--black) 10.05%
   );
+    transition: all 1s;
 }
 
-.progress-slider__button--hover:hover {
-  background-color: var(--light-grey);
-}
-
-.progress-slider__button__edit-icon__inner {
-  fill: var(--progress-bar-color);
-}
