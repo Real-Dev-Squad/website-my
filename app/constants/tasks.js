@@ -2,7 +2,6 @@ const TASK_KEYS = {
   ALL: 'ALL',
   AVAILABLE: 'AVAILABLE',
   ASSIGNED: 'ASSIGNED',
-  UNASSIGNED: 'UNASSIGNED',
   IN_PROGRESS: 'IN_PROGRESS',
   BLOCKED: 'BLOCKED',
   SMOKE_TESTING: 'SMOKE_TESTING',
@@ -22,7 +21,6 @@ const {
   ALL,
   AVAILABLE,
   ASSIGNED,
-  UNASSIGNED,
   IN_PROGRESS,
   BLOCKED,
   SMOKE_TESTING,
@@ -50,10 +48,6 @@ const TASK_STATUS_LIST = [
   {
     displayLabel: 'Assigned',
     key: ASSIGNED,
-  },
-  {
-    displayLabel: 'Unassigned',
-    key: UNASSIGNED,
   },
   {
     displayLabel: 'In Progress',
@@ -157,4 +151,4 @@ export const TASK_PERCENTAGE = {
 export { TASK_KEYS, TASK_STATUS_LIST, TABS_TASK_STATUS_LIST };
 
 export const oldTaskStatus = { AVAILABLE: 'AVAILABLE', COMPLETED: 'COMPLETED' };
-export const newTaskStatus = { UNASSIGNED: 'UNASSIGNED', DONE: 'DONE' };
+export const newTaskStatus = { DONE: 'DONE' };
