@@ -248,6 +248,35 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });
 
+  test('Check if AVAILABLE is not displayed when dev is true', async function (assert) {
+    this.set('task', tasksData[3]);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{true}}
+  />`);
+
+    const taskStatusList = this.element.querySelector(
+      '[data-test-task-status-select]'
+    );
+
+    const displayedTaskStatus = [];
+    for (let i = 0; i < taskStatusList.options.length; i++) {
+      displayedTaskStatus.push(taskStatusList.options[i].value);
+    }
+    assert.ok(!displayedTaskStatus.includes('AVAILABLE'));
+  });
+
   test('Check if old task status options are displayed when dev is false', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
