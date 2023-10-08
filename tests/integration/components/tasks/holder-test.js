@@ -248,7 +248,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });
 
-  test('Check if UNASSIGNED and DONE is not in task status options when dev is false', async function (assert) {
+  test('Check if old task status options are displayed when dev is false', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
     this.set('isLoading', false);
@@ -281,7 +281,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     }
   });
 
-  test('Check if UNASSIGNED and DONE is in task status options when dev is true', async function (assert) {
+  test('Check if new task status options are displayed when dev is true', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
     this.set('isLoading', false);
