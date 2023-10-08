@@ -248,6 +248,35 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });
 
+  test('Check if UNASSIGNED is not displayed when dev is true', async function (assert) {
+    this.set('task', tasksData[3]);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{true}}
+  />`);
+
+    const taskStatusList = this.element.querySelector(
+      '[data-test-task-status-select]'
+    );
+
+    const displayedTaskStatus = [];
+    for (let i = 0; i < taskStatusList.options.length; i++) {
+      displayedTaskStatus.push(taskStatusList.options[i].textContent);
+    }
+    assert.ok(!displayedTaskStatus.includes('UNASSIGNED'));
+  });
+
   test('Check if old task status options are displayed when dev is false', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
@@ -264,8 +293,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     @userSelectedTask={{this.defaultType}} 
     @disabled={{this.disabled}}
   />`);
-
-    await waitUntil(() => find('[data-test-task-status-select]'));
 
     const taskStatusList = this.element.querySelector(
       '[data-test-task-status-select]'
@@ -299,8 +326,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     @dev={{true}}
   />`);
 
-    await waitUntil(() => find('[data-test-task-status-select]'));
-
     const taskStatusList = this.element.querySelector(
       '[data-test-task-status-select]'
     );
@@ -313,40 +338,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       const optionValue = taskStatusList.options[i].value;
       assert.ok(updatedTaskKeys.includes(optionValue));
     }
-  });
-
-  test('Verify task status update to UNASSIGNED when dev is true', async function (assert) {
-    const testTask = tasksData[3];
-
-    testTask.status = TASK_KEYS.IN_PROGRESS;
-
-    let onTaskUpdateCalled = 0;
-
-    this.set('task', testTask);
-    this.set('onTaskUpdate', () => {
-      onTaskUpdateCalled++;
-    });
-    this.set('mock', () => {});
-    this.set('isLoading', false);
-    this.set('disabled', false);
-    this.set('defaultType', DEFAULT_TASK_TYPE);
-
-    await render(hbs`<Task::Holder
-    @task={{this.task}}
-    @onTaskUpdate={{onTaskUpdate}}
-    @onTaskChange={{this.mock}}
-    @userSelectedTask={{this.defaultType}}
-    @disabled={{this.disabled}}
-    @dev={{true}}
-  />`);
-
-    assert
-      .dom('[data-test-task-status-select]')
-      .hasValue(TASK_KEYS.IN_PROGRESS);
-
-    await select('[data-test-task-status-select]', TASK_KEYS.UNASSIGNED);
-
-    assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });
 
   test('Verify task status update to DONE when dev is true', async function (assert) {
