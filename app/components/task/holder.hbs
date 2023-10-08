@@ -32,12 +32,25 @@
         >
           {{#each this.availabletaskStatusList as |taskStatus|}}
             {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-              <option
-                value={{taskStatus.key}}
-                selected={{eq taskStatus.key this.status}}
-              >
-                {{taskStatus.displayLabel}}
-              </option>
+              {{#if @dev}}
+                  {{#if (not (or (eq taskStatus.key this.TASK_KEYS.AVAILABLE) (eq taskStatus.key this.TASK_KEYS.COMPLETED)))}}
+                    <option
+                      value={{taskStatus.key}}
+                      selected={{eq taskStatus.key this.status}}
+                    >
+                      {{taskStatus.displayLabel}}
+                    </option>
+                {{/if}}
+              {{else}}
+                  {{#if (not (or (eq taskStatus.key this.TASK_KEYS.UNASSIGNED) (eq taskStatus.key this.TASK_KEYS.DONE)))}}
+                    <option
+                      value={{taskStatus.key}}
+                      selected={{eq taskStatus.key this.status}}
+                    >
+                      {{taskStatus.displayLabel}}
+                    </option>
+                {{/if}}
+              {{/if}}
             {{/if}}
           {{/each}}
         </select>
