@@ -108,7 +108,7 @@ export default class ExtensionFormComponent extends Component {
       e.submitter.disabled = false;
       this.disableExtensionRequestClose = false;
       this.createExtensionRequestError =
-        'The newEndsOn value cannot be smaller than the oldEndsOn value';
+        'New ETA must be later than the existing ETA.';
       return;
     }
     json['newEndsOn'] = extensionTime;
@@ -165,7 +165,7 @@ export default class ExtensionFormComponent extends Component {
       });
       e.target.value = '';
       this.createExtensionRequestError =
-        'The newEndsOn value cannot be smaller than the oldEndsOn value';
+        'New ETA must be later than the existing ETA.';
       return;
     } else this.createExtensionRequestError = null;
   }

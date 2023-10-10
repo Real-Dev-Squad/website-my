@@ -7,19 +7,27 @@
   >
   </div>
   <div class='extension-form__container-main'>
-    <h2 data-test-title>{{@title}}</h2>
+    <h2 data-test-title>
+      {{#if this.createExtensionRequest}}
+        Extension Request Form
+      {{else}}
+        Extension Details
+      {{/if}}
+    </h2>
     {{#if this.createExtensionRequest}}
       <div class='extension-form__content' data-test-extension-from-content>
-        <h3>Create Extension Request!!!</h3>
+        {{!-- <h3>Create Extension Request!!!</h3> --}}
         <form {{on 'submit' this.submitExtensionRequest}}>
           {{#if this.createExtensionRequestError}}
-            <h4 data-test-extension-from-error>Error:
+            <div class="error-container">
+            <h4 class= "error-message" data-test-extension-from-error>Error:
               {{this.createExtensionRequestError}}</h4>
+            </div>
           {{/if}}
           <label for='reason'>Reason</label>
           <input
             required
-            type='text'
+            type='text-box'
             id='reason'
             name='reason'
             data-test-extension-form-reason-input
@@ -37,12 +45,12 @@
           <label for='title'>Title</label>
           <input
             required
-            type='text'
+            type='text-box'
             id='title'
             name='title'
             data-test-extension-form-title-input
           />
-          <button type='submit'>Create</button>
+          <button class ='multiple-extension-form__create-button primary-button-style' type='submit'>Submit Request</button>
         </form>
       </div>
     {{else}}
@@ -60,7 +68,7 @@
         {{else if this.extensionData.error}}
           <h4>{{this.extensionData.error}}</h4>
           <button
-            class='extension-form__open-button'
+            class='multiple-extension-form__open-button primary-button-style'
             data-test-create-extension-button
             type='button'
             {{on 'click' this.createNewExtensionRequest}}
@@ -76,20 +84,24 @@
     }}
       {{#unless this.createExtensionRequest}}
         <button
-          class='extension-form__open-button'
+          class='multiple-extension-form__open-button primary-button-style'
           data-test-create-another-extension type="button" {{on 'click' this.createNewExtensionRequest}}
         >
-          Create New Extension
+          Request Extension
         </button>
       {{/unless}}
     {{/if}}
     <button
-      class='extension-form__container-close'
+      class='multiple-extension-form__container-close'
       data-test-extension-form-container-close
       type='button'
       {{on 'click' @closeForm}}
     >
-      Close Form
+      {{#if this.createExtensionRequest}}
+        Cancel
+      {{else}}
+        Close Details
+      {{/if}}
     </button>
   </div>
 </div>

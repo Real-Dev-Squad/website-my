@@ -420,7 +420,7 @@
   padding: 18px;
   border-radius: 10px;
   background-color: var(--white);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   position: absolute;
   left: 30%;
   right: 30%;
@@ -452,6 +452,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   flex-direction: column;
   margin: 10px 0px;
 }
@@ -479,7 +480,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 80%;
+  width: 100%;
 }
 .extension-form__content form > label {
   font-weight: bold;
@@ -494,7 +495,9 @@
   color: var(--button-proceed--text);
   font-size: 1.2rem;
   border: none;
+  width: 100%;
   border-radius: 8px;
+  margin-top: 1rem;
   padding: 5px 9px;
 }
 
@@ -511,8 +514,8 @@
   margin: 5px 0px 15px 0px;
   padding: 5px;
   width: 100%;
-  border: none;
-  border-bottom: 1px solid var(--input-field-border);
+  border: 1px solid var(--input-field-border);
+  /* border-bottom: 1px solid var(--input-field-border); */
 }
 
 .extension-info__content > table,
@@ -581,4 +584,70 @@
     flex-direction: column;
     align-items: center;
   }
+}
+
+.extension-info__content table td {
+  white-space: normal;
+}
+
+.primary-button-style {
+  background-color: #008000;
+  color: var(--button-proceed--text);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+  transition: background-color 0.3s ease;
+}
+.multiple-extension-form__open-button {
+  background-color: #008000;
+  color: var(--button-proceed--text);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+  transition: background-color 0.3s ease;
+}
+
+.multiple-extension-form__create-button {
+  background-color: #008000;
+  color: var(--button-proceed--text);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+  transition: background-color 0.3s ease;
+}
+
+.multiple-extension-form__open-button:hover {
+  background-color: #01ad01;
+  color: #fff;
+}
+
+.multiple-extension-form__create-button:hover {
+  background-color: #01ad01;
+  color: #fff;
+}
+
+.multiple-extension-form__container-close:hover{
+  background-color: #d50707;
+  color:#fff
+}
+
+.multiple-extension-form__container-close {
+  background-color:#a70606;
+  color: var(--button-proceed--text);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+}
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-message {
+  color: red;
+  text-align: center;
 }
