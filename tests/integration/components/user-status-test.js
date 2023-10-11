@@ -68,5 +68,32 @@ module('Integration | Component | user-status', function (hooks) {
     `);
 
     assert.dom('[data-test-status]').hasText(`You are OOO`);
+    assert
+      .dom('[data-test-cancel-status-OOO]')
+      .hasText('Cancel OOO');
   });
+
+  test('payload contains relevant data when status is changed from OOO to IDLE or ACTIVE', async function (assert) {
+    this.setProperties({
+      status: 'OOO',
+      isStatusUpdating: false,
+      changeStatus: () => {},
+      updateStatus: (cancelOOOPayload) => {
+        const {cancelOoo} = cancelOOOPayload
+        assert.equal(cancelOoo, true, 'cancel OOO status')
+      },
+    });
+
+    await render(hbs`
+        <UserStatus 
+          @status={{this.status}} 
+          @changeStatus={{this.changeStatus}} 
+          @isStatusUpdating={{this.isStatusUpdating}}
+          @updateStatus={{this.updateStatus}}
+        />
+    `);
+
+    await click('.buttons__cancel--ooo');
+  });
+
 });

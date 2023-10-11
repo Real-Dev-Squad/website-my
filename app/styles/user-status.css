@@ -77,6 +77,19 @@
   width: 25rem;
 }
 
+.buttons__cancel--ooo {
+  font-size: 1.25rem;
+  color: var(--button--color--text);
+  font-weight: 700;
+  border: 3px solid var(--button--color--border);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  background: var( --button--color--bg);
+  cursor: pointer;
+  width: 15rem;
+}
+
 .buttons__ooo:hover {
   color: var(--button--ooo--bg);
   background: var(--button--ooo--text);

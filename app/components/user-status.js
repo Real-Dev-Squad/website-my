@@ -64,4 +64,10 @@ export default class UserStatusComponent extends Component {
       this.args.changeStatus(status);
     }
   }
+
+  @action async cancelOOOStatus(status) {
+    if (status === USER_STATES.OOO) {
+      await this.args.updateStatus({ cancelOoo: true });
+    }
+  }
 }
