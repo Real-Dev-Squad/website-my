@@ -21,11 +21,11 @@ export default class IndexController extends Controller {
 
   @action async updateStatus(newStatus) {
     this.isStatusUpdating = true;
-    if(!("cancelOoo" in newStatus)){
+    if (!('cancelOoo' in newStatus)) {
       if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
         this.toggleUserStateModal();
       }
-    }  
+    }
     try {
       await fetch(`${BASE_URL}/users/status/self?userStatusFlag=true`, {
         method: 'PATCH',

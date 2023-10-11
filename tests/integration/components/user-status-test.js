@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | user-status', function (hooks) {
@@ -68,9 +68,7 @@ module('Integration | Component | user-status', function (hooks) {
     `);
 
     assert.dom('[data-test-status]').hasText(`You are OOO`);
-    assert
-      .dom('[data-test-cancel-status-OOO]')
-      .hasText('Cancel OOO');
+    assert.dom('[data-test-cancel-status-OOO]').hasText('Cancel OOO');
   });
 
   test('payload contains relevant data when status is changed from OOO to IDLE or ACTIVE', async function (assert) {
@@ -79,8 +77,8 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       changeStatus: () => {},
       updateStatus: (cancelOOOPayload) => {
-        const {cancelOoo} = cancelOOOPayload
-        assert.equal(cancelOoo, true, 'cancel OOO status')
+        const { cancelOoo } = cancelOOOPayload;
+        assert.equal(cancelOoo, true, 'cancel OOO status');
       },
     });
 
@@ -95,5 +93,4 @@ module('Integration | Component | user-status', function (hooks) {
 
     await click('.buttons__cancel--ooo');
   });
-
 });
