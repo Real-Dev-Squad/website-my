@@ -14,6 +14,7 @@ export default class ExtensionFormComponent extends Component {
   @tracked disableExtensionRequestClose = false;
   // Add a property to track the status of the previous extension request
   @tracked previousExtensionStatus = null;
+  @tracked isSubmitButtonDisabled = false;
 
   @service toast;
   @service userState;
@@ -91,8 +92,8 @@ export default class ExtensionFormComponent extends Component {
     e.preventDefault();
     this.disableExtensionRequestClose = true;
     this.createExtensionRequestError = null;
+    this.isSubmitButtonDisabled = true;
     //submit button
-    e.submitter.disabled = true;
     const formData = new FormData(e.target);
     const extensionTime = new Date(formData.get('newEndsOn')).getTime() / 1000;
     const json = {};
@@ -105,12 +106,13 @@ export default class ExtensionFormComponent extends Component {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-      e.submitter.disabled = false;
+
+      //e.submitter.disabled = false;
       this.disableExtensionRequestClose = false;
-      this.createExtensionRequestError =
-        'New ETA must be later than the existing ETA.';
+      this.createExtensionRequestError = 'New ETA must be greater than Old ETA';
       return;
     }
+
     json['newEndsOn'] = extensionTime;
     //setting default values
     json['taskId'] = this.args.task.id;
@@ -144,29 +146,48 @@ export default class ExtensionFormComponent extends Component {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-      e.submitter.disabled = false;
+      //e.submitter.disabled = false;
     } catch (error) {
       this.toast.error(error.message, '', {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
       setTimeout(this.args.closeModel, 2000);
+    } finally {
+      this.isSubmitButtonDisabled = false;
     }
   }
 
   @action
   changeExtensionRequestETA(e) {
     const extensionTime = new Date(e.target.value).getTime() / 1000;
-
+    // const submitButton = document.getElementById(
+    //   'extension-form-submit-button'
+    // );
     if (extensionTime < this.args.task.endsOn) {
       this.toast.error(WARNING_INVALID_NEW_ETA, '', {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-      e.target.value = '';
-      this.createExtensionRequestError =
-        'New ETA must be later than the existing ETA.';
+
+      this.isSubmitButtonDisabled = true;
+      //e.target.value = '';
+      // if (e.submitter && e.submitter.disabled !== undefined) {
+      //   e.submitter.disabled = true;
+      // }
+
+      // if (submitButton) {
+      //   submitButton.disabled = true;
+      // }
+      this.createExtensionRequestError = 'New ETA must be greater than Old ETA';
+
       return;
-    } else this.createExtensionRequestError = null;
+    } else {
+      this.createExtensionRequestError = null;
+      this.isSubmitButtonDisabled = false;
+      // if (submitButton) {
+      //   submitButton.disabled = false;
+      // }
+    }
   }
 }

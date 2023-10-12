@@ -25,15 +25,15 @@
             </div>
           {{/if}}
           <label for='reason'>Reason</label>
-          <input
+          <textarea
             required
             type='text-box'
             id='reason'
             name='reason'
             data-test-extension-form-reason-input
           />
-          <label for='newEndsOn'>New ETA</label>
           <p>Old ETA - {{this.oldETA}}</p>
+          <label for='newEndsOn'>New ETA</label>
           <input
             required
             type='datetime-local'
@@ -43,14 +43,14 @@
             data-test-extension-form-newEndsOn-input
           />
           <label for='title'>Title</label>
-          <input
+          <textarea
             required
             type='text-box'
             id='title'
             name='title'
             data-test-extension-form-title-input
           />
-          <button class ='multiple-extension-form__create-button primary-button-style' type='submit'>Submit Request</button>
+          <button class ='multiple-extension-form__create-button primary-button-style' disabled={{this.isSubmitButtonDisabled}} type='submit'>Submit</button>
         </form>
       </div>
     {{else}}
@@ -72,7 +72,7 @@
             data-test-create-extension-button
             type='button'
             {{on 'click' this.createNewExtensionRequest}}
-          >Create an extension request</button>
+          >Create request</button>
         {{/if}}
       </div>
     {{/if}}
@@ -87,6 +87,7 @@
           class='multiple-extension-form__open-button primary-button-style'
           data-test-create-another-extension type="button" {{on 'click' this.createNewExtensionRequest}}
         >
+        
           Request Extension
         </button>
       {{/unless}}
@@ -100,7 +101,7 @@
       {{#if this.createExtensionRequest}}
         Cancel
       {{else}}
-        Close Details
+        Close
       {{/if}}
     </button>
   </div>
