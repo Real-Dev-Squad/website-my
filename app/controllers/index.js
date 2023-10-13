@@ -10,10 +10,15 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @service toast;
+  @service featureFlag;
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
   @tracked newStatus;
+
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
+  }
 
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
@@ -21,8 +26,10 @@ export default class IndexController extends Controller {
 
   @action async updateStatus(newStatus) {
     this.isStatusUpdating = true;
-    if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
-      this.toggleUserStateModal();
+    if (!('cancelOoo' in newStatus)) {
+      if (newStatus.currentStatus.state !== USER_STATES.ACTIVE) {
+        this.toggleUserStateModal();
+      }
     }
     try {
       await fetch(`${BASE_URL}/users/status/self?userStatusFlag=true`, {
