@@ -76,14 +76,14 @@ module('Integration | Component | user-status', function (hooks) {
       isStatusUpdating: false,
       changeStatus: () => {},
       updateStatus: () => {},
-      dev:true
+      dev: true,
     });
 
     await render(hbs`
         <UserStatus 
           @status={{this.status}} 
           @changeStatus={{this.changeStatus}} 
-          @dev={{this.isDevMode}} 
+          @dev={{this.dev}} 
           @isStatusUpdating={{this.isStatusUpdating}}
           @updateStatus={{this.updateStatus}}
         />
@@ -103,6 +103,7 @@ module('Integration | Component | user-status', function (hooks) {
         const { cancelOoo } = cancelOOOPayload;
         assert.equal(cancelOoo, true, 'cancel OOO status');
       },
+      dev: true,
     });
 
     await render(hbs`
@@ -110,6 +111,7 @@ module('Integration | Component | user-status', function (hooks) {
           @status={{this.status}} 
           @changeStatus={{this.changeStatus}} 
           @isStatusUpdating={{this.isStatusUpdating}}
+          @dev={{this.dev}} 
           @updateStatus={{this.updateStatus}}
         />
     `);
