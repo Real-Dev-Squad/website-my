@@ -68,6 +68,7 @@ module('Integration | Component | user-status', function (hooks) {
     `);
 
     assert.dom('[data-test-status]').hasText(`You are OOO`);
+    assert.dom('[data-test-cancel-status-OOO]').hasProperty('button');
     assert.dom('[data-test-cancel-status-OOO]').hasText('Cancel OOO');
   });
 

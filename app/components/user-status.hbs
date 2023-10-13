@@ -27,15 +27,17 @@
     {{#each this.currentUserStatus as |currentStatus|}}
       {{#if (eq @status currentStatus.status)}}
         {{#if (eq currentStatus.status "OOO")}}
-          <button
-            data-test-cancel-status-OOO
-            class='buttons__cancel--ooo'
-            type='button'
-            disabled={{@isStatusUpdating}}
-            {{on 'click' (fn this.cancelOOOStatus currentStatus.status)}}
-          >
-            <span>Cancel OOO</span>
-          </button>
+          {{#if this.isDevMode}}
+            <button
+              data-test-cancel-status-OOO
+              class='buttons__cancel--ooo'
+              type='button'
+              disabled={{@isStatusUpdating}}
+              {{on 'click' (fn this.cancelOOOStatus currentStatus.status)}}
+            >
+              <span>Cancel OOO</span>
+            </button>
+          {{/if}}
           {{else}}
             {{#each currentStatus.otherAvailableStatus as |otherPossibleStatus|}}
           <button data-test-update-status-OOO class={{otherPossibleStatus.class}} type="button" disabled={{@isStatusUpdating}} {{on "click" (fn this.changeStatus otherPossibleStatus.status )}}>
