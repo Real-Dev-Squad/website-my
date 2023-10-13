@@ -1,12 +1,22 @@
 <div class="greeting">
   <h1>Welcome to my site!</h1>
 </div>
-<UserStatus 
-  @status={{this.status}} 
-  @changeStatus={{this.changeStatus}} 
-  @isStatusUpdating={{this.isStatusUpdating}}
-  @updateStatus={{this.updateStatus}}
-/>
+{{#if this.isDevMode}}
+  <UserStatus 
+    @status={{this.status}} 
+    @changeStatus={{this.changeStatus}}
+    @dev={{this.isDevMode}} 
+    @isStatusUpdating={{this.isStatusUpdating}}
+    @updateStatus={{this.updateStatus}}
+  />
+  {{else}}
+  <UserStatus 
+    @status={{this.status}} 
+    @changeStatus={{this.changeStatus}} 
+    @isStatusUpdating={{this.isStatusUpdating}}
+    @updateStatus={{this.updateStatus}}
+  />
+{{/if}}
 <UserStatusModal
   @isStatusUpdating={{this.isStatusUpdating}}
   @newStatus={{this.newStatus}}

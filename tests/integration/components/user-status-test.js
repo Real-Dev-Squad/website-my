@@ -50,7 +50,7 @@ module('Integration | Component | user-status', function (hooks) {
       .hasText('Change your status to OOO');
   });
 
-  test('show relevant data when status is OOO', async function (assert) {
+  test('show relevant data when status is OOO and dev is false', async function (assert) {
     this.setProperties({
       status: 'OOO',
       isStatusUpdating: false,
@@ -68,8 +68,30 @@ module('Integration | Component | user-status', function (hooks) {
     `);
 
     assert.dom('[data-test-status]').hasText(`You are OOO`);
-    assert.dom('[data-test-cancel-status-OOO]').hasProperty('button');
-    assert.dom('[data-test-cancel-status-OOO]').hasText('Cancel OOO');
+  });
+
+  test('show relevant data when status is OOO and dev is true', async function (assert) {
+    this.setProperties({
+      status: 'OOO',
+      isStatusUpdating: false,
+      changeStatus: () => {},
+      updateStatus: () => {},
+      dev:true
+    });
+
+    await render(hbs`
+        <UserStatus 
+          @status={{this.status}} 
+          @changeStatus={{this.changeStatus}} 
+          @dev={{this.isDevMode}} 
+          @isStatusUpdating={{this.isStatusUpdating}}
+          @updateStatus={{this.updateStatus}}
+        />
+    `);
+
+    assert.dom('[data-test-status]').hasText(`You are OOO`);
+    assert.dom('[ data-test-cancel-status-OOO]').hasProperty('button');
+    assert.dom('[ data-test-cancel-status-OOO]').hasText('Cancel OOO');
   });
 
   test('payload contains relevant data when status is changed from OOO to IDLE or ACTIVE', async function (assert) {

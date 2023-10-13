@@ -1,14 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import { USER_STATES } from '../constants/user-status';
 import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 export default class UserStatusComponent extends Component {
-  @service featureFlag;
-
-  get isDevMode() {
-    return this.featureFlag.isDevMode;
-  }
 
   ALL_FEASIBLE_STATUS = {
     [USER_STATES.ACTIVE]: {

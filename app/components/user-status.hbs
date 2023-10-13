@@ -27,7 +27,7 @@
     {{#each this.currentUserStatus as |currentStatus|}}
       {{#if (eq @status currentStatus.status)}}
         {{#if (eq currentStatus.status "OOO")}}
-          {{#if this.isDevMode}}
+          {{#if @dev}}
             <button
               data-test-cancel-status-OOO
               class='buttons__cancel--ooo'

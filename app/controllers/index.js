@@ -10,10 +10,15 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
   @service toast;
+  @service featureFlag;
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
   @tracked newStatus;
+
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
+  }
 
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
