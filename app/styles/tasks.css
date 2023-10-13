@@ -511,6 +511,8 @@
   border-radius: 8px;
   margin-top: 1rem;
   padding: 5px 9px;
+  display: flex;
+  align-items: center;
 }
 
 .extension-form__container-close:disabled {
@@ -622,14 +624,27 @@
 .error-message {
   color: red;
 }
+.error-container {
+  align-items: center;
+  height: 25px;
+  width: 100%; /* Initially, set the fixed height */ /* Initially, hide the container */
+}
+
+
+.error-placeholder {
+  color: red;
+  text-align: center;
+  visibility: hidden;
+}
+
 .multiple-extension-form__create-button[disabled] {
   cursor: not-allowed;
-  pointer-events: none;
+
+  background-color: #888;
 }
 
 .multiple-extension-form__create-button[disabled]:hover {
-  background-color: #0f120f;
-  color: var(--button-proceed--text);
+  background-color: #888;
 }
 
 
@@ -666,6 +681,10 @@
     text-align: right;
     width: 50%;
   }
+  /* .latest-extension-info__content{
+    width: 100%;
+    justify-content: center;
+  } */
 
   .latest-extension-info__content td {
     text-align: left;
@@ -686,4 +705,20 @@ textarea {
   width: 100%;
   height: 50%;
   overflow-y: auto;
+}
+
+div.buttons{
+  display: flex;
+  flex-direction:row;
+  min-width: 100%;
+  align-content: center;
+  justify-content: center;
+}
+
+.extension-reason{
+  display: flex;
+  margin: 0px !important;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 100%;
 }

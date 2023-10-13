@@ -12,7 +12,6 @@ export default class ExtensionFormComponent extends Component {
   @tracked createExtensionRequest = false;
   @tracked createExtensionRequestError = null;
   @tracked disableExtensionRequestClose = false;
-  // Add a property to track the status of the previous extension request
   @tracked previousExtensionStatus = null;
   @tracked isSubmitButtonDisabled = false;
 
@@ -93,7 +92,6 @@ export default class ExtensionFormComponent extends Component {
     this.disableExtensionRequestClose = true;
     this.createExtensionRequestError = null;
     this.isSubmitButtonDisabled = true;
-    //submit button
     const formData = new FormData(e.target);
     const extensionTime = new Date(formData.get('newEndsOn')).getTime() / 1000;
     const json = {};
@@ -106,8 +104,6 @@ export default class ExtensionFormComponent extends Component {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-
-      //e.submitter.disabled = false;
       this.disableExtensionRequestClose = false;
       this.createExtensionRequestError = 'New ETA must be greater than Old ETA';
       return;
@@ -139,20 +135,18 @@ export default class ExtensionFormComponent extends Component {
           ...toastNotificationTimeoutOptions,
           timeOut: '3000',
         });
-        setTimeout(this.args.closeModel, 2000);
+        setTimeout(this.args.closeModel, 1000);
         return;
       }
       this.toast.error('Something went wrong!', '', {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-      //e.submitter.disabled = false;
     } catch (error) {
       this.toast.error(error.message, '', {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-      setTimeout(this.args.closeModel, 2000);
     } finally {
       this.isSubmitButtonDisabled = false;
     }
@@ -160,34 +154,29 @@ export default class ExtensionFormComponent extends Component {
 
   @action
   changeExtensionRequestETA(e) {
+    const errorPlaceholder = document.querySelector('.error-placeholder');
     const extensionTime = new Date(e.target.value).getTime() / 1000;
-    // const submitButton = document.getElementById(
-    //   'extension-form-submit-button'
-    // );
     if (extensionTime < this.args.task.endsOn) {
       this.toast.error(WARNING_INVALID_NEW_ETA, '', {
         ...toastNotificationTimeoutOptions,
         timeOut: '3000',
       });
-
       this.isSubmitButtonDisabled = true;
-      //e.target.value = '';
-      // if (e.submitter && e.submitter.disabled !== undefined) {
-      //   e.submitter.disabled = true;
-      // }
-
-      // if (submitButton) {
-      //   submitButton.disabled = true;
-      // }
       this.createExtensionRequestError = 'New ETA must be greater than Old ETA';
-
+      errorPlaceholder.textContent = this.createExtensionRequestError;
+      errorPlaceholder.style.visibility = 'visible';
+      // errorContainer.style.height = '25px'; // Set the fixed height
+      // errorContainer.classList.add('show');
       return;
     } else {
       this.createExtensionRequestError = null;
       this.isSubmitButtonDisabled = false;
-      // if (submitButton) {
-      //   submitButton.disabled = false;
-      // }
+      errorPlaceholder.textContent = this.createExtensionRequestError;
+      errorPlaceholder.style.visibility = 'hidden';
+      //errorContainer.visibility='hidden';
+      // errorContainer.style.height = '0'; // Set the height to 0
+      // errorContainer.classList.remove('show');
+      return;
     }
   }
 }
