@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { USER_STATES } from '../constants/user-status';
 import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 export default class UserStatusComponent extends Component {
-
   ALL_FEASIBLE_STATUS = {
     [USER_STATES.ACTIVE]: {
       status: USER_STATES.ACTIVE,
