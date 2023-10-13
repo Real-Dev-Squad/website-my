@@ -50,18 +50,20 @@ module('Integration | Component | user-status', function (hooks) {
       .hasText('Change your status to OOO');
   });
 
-  test('show relevant data when status is OOO and dev is false', async function (assert) {
+  test('show relevant data when status is OOO and not have feature flag', async function (assert) {
     this.setProperties({
       status: 'OOO',
       isStatusUpdating: false,
       changeStatus: () => {},
       updateStatus: () => {},
+      dev: false,
     });
 
     await render(hbs`
         <UserStatus 
           @status={{this.status}} 
-          @changeStatus={{this.changeStatus}} 
+          @changeStatus={{this.changeStatus}}
+          @dev={{this.dev}}  
           @isStatusUpdating={{this.isStatusUpdating}}
           @updateStatus={{this.updateStatus}}
         />
@@ -70,7 +72,7 @@ module('Integration | Component | user-status', function (hooks) {
     assert.dom('[data-test-status]').hasText(`You are OOO`);
   });
 
-  test('show relevant data when status is OOO and dev is true', async function (assert) {
+  test('show relevant data when status is OOO and have feature flag', async function (assert) {
     this.setProperties({
       status: 'OOO',
       isStatusUpdating: false,
