@@ -468,7 +468,7 @@
 
 .extension-form__content-wrapper {
   width: 100%;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -627,7 +627,7 @@
 .error-container {
   align-items: center;
   height: 25px;
-  width: 100%; /* Initially, set the fixed height */ /* Initially, hide the container */
+  width: 100%;
 }
 
 
@@ -681,26 +681,28 @@
     text-align: right;
     width: 50%;
   }
-  /* .latest-extension-info__content{
-    width: 100%;
-    justify-content: center;
-  } */
 
-  .latest-extension-info__content td {
-    text-align: left;
-    width: 50%;
-  }
-.latest-extension-info__content th,
-.latest-extension-info__content td {
-  
-  /* height: 50%;
-  width: 50%; */
-  /* overflow:hidden; */
-  box-sizing: border-box;
-  word-wrap: break-word;
-  padding: 5px;
-  max-width: 100%;
+.latest-extension-info__content th, td {
+  padding: 8px 8px;
+  vertical-align: top;
+  min-width: 50%;
+  gap: 10px;
 }
+.latest-table{
+  width: 100%;
+}
+.latest-extension-info__content th {
+  text-align: right;
+}
+.latest-extension-info__content td {
+  text-align: left;
+  word-wrap: normal;
+}
+tr>th,tr>td{
+  vertical-align: top;
+  padding:2px;
+}
+
 textarea {
   width: 100%;
   height: 50%;
@@ -713,12 +715,4 @@ div.buttons{
   min-width: 100%;
   align-content: center;
   justify-content: center;
-}
-
-.extension-reason{
-  display: flex;
-  margin: 0px !important;
-  justify-content: flex-end;
-  align-items: center;
-  min-width: 100%;
 }

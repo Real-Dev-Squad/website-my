@@ -135,7 +135,11 @@ export default class ExtensionFormComponent extends Component {
           ...toastNotificationTimeoutOptions,
           timeOut: '3000',
         });
-        setTimeout(this.args.closeModel, 1000);
+        setTimeout(
+          (this.isSubmitButtonDisabled = true),
+          this.args.closeModel(),
+          2000
+        );
         return;
       }
       this.toast.error('Something went wrong!', '', {
@@ -165,17 +169,12 @@ export default class ExtensionFormComponent extends Component {
       this.createExtensionRequestError = 'New ETA must be greater than Old ETA';
       errorPlaceholder.textContent = this.createExtensionRequestError;
       errorPlaceholder.style.visibility = 'visible';
-      // errorContainer.style.height = '25px'; // Set the fixed height
-      // errorContainer.classList.add('show');
       return;
     } else {
       this.createExtensionRequestError = null;
       this.isSubmitButtonDisabled = false;
       errorPlaceholder.textContent = this.createExtensionRequestError;
       errorPlaceholder.style.visibility = 'hidden';
-      //errorContainer.visibility='hidden';
-      // errorContainer.style.height = '0'; // Set the height to 0
-      // errorContainer.classList.remove('show');
       return;
     }
   }
