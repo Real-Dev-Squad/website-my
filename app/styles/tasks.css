@@ -683,10 +683,9 @@
   }
 
 .latest-extension-info__content th, td {
-  padding: 8px 8px;
+  padding: 8px 2px;
   vertical-align: top;
   min-width: 50%;
-  gap: 10px;
 }
 .latest-table{
   width: 100%;
@@ -700,7 +699,6 @@
 }
 tr>th,tr>td{
   vertical-align: top;
-  padding:2px;
 }
 
 textarea {
