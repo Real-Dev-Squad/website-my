@@ -49,7 +49,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
   };
 
   test('When Clicked /"Close Form/" button or background task extension form should unmount', async function (assert) {
-    this.set('task', tasksData[0]);
+    this.set('task', tasksData[3]);
     this.set(
       'closeExtensionModel',
       closeExtensionModel(this.set, 'extensionFormOpened')
@@ -59,7 +59,6 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
       closeExtensionForm(this.set, 'extensionFormOpened')
     );
     this.set('extensionFormOpened', extensionFormOpened);
-
     await render(
       hbs`
       {{#if this.extensionFormOpened}}
@@ -71,22 +70,20 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
       />
       {{/if}}`
     );
+    await waitFor('[data-test-create-extension-button]');
     assert
-      .dom(this.element.querySelector('[data-test-title]'))
-      .hasText('Form for extension Request');
-    await click(
-      this.element.querySelector('[data-test-extension-form-container-close]')
-    );
-    assert.dom(this.element.querySelector('[data-test-title]')).doesNotExist();
+      .dom(this.element.querySelector('[data-test-create-extension-button]'))
+      .hasText('Request Extension');
 
-    extensionFormOpened = true;
-    this.set('extensionFormOpened', extensionFormOpened);
-    assert
-      .dom(this.element.querySelector('[data-test-title]'))
-      .hasText('Form for extension Request');
     await click(
-      this.element.querySelector('[data-test-extension-form-container-back]')
+      this.element.querySelector('[data-test-create-extension-button]')
     );
+    assert.dom('[data-test-extension-form-container-close]').exists();
+    const closeButton = this.element.querySelector(
+      '[data-test-extension-form-container-close]'
+    );
+    assert.ok(closeButton, 'Close button should exist');
+    await click(closeButton);
     assert.dom(this.element.querySelector('[data-test-title]')).doesNotExist();
   });
 
@@ -111,7 +108,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
     await waitFor('[data-test-create-extension-button]');
     assert
       .dom(this.element.querySelector('[data-test-create-extension-button]'))
-      .hasText('Create an extension request');
+      .hasText('Request Extension');
 
     await click(
       this.element.querySelector('[data-test-create-extension-button]')
@@ -195,7 +192,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
       hbs`<Task::ExtensionForm 
       @task={{this.task}} 
       @closeForm={{this.closeExtensionForm}} 
-      @title='Form for extension Request' 
+      @title='Extension Details' 
       @closeModel={{this.closeExtensionModel}}/>`
     );
     await waitFor('[data-test-create-extension-button]');
@@ -228,7 +225,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
       hbs`<Task::ExtensionForm 
       @task={{this.task}} 
       @closeForm={{this.closeExtensionForm}} 
-      @title='Form for extension Request' 
+      @title='Extension Details' 
       @closeModel={{this.closeExtensionModel}}/>`
     );
     await waitFor('[data-test-extension-info-content]');
