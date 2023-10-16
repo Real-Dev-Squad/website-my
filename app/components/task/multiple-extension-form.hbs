@@ -1,6 +1,7 @@
 <div class='extension-form__container-parent'>
   <div
-    role='button' id='create'
+    role='button'
+    id='create'
     class='extension-form__container-back'
     data-test-extension-form-container-back
     {{on 'click' @closeModel}}
@@ -42,24 +43,27 @@
             name='title'
             data-test-extension-form-title-input
           ></textarea>
-          <div class="error-container" id='error'>
-          <span class='error-placeholder' data-test-extension-from-error></span>
+          <div class='error-container' id='error'>
+            <span
+              class='error-placeholder'
+              data-test-extension-from-error
+            ></span>
           </div>
           <div class='buttons' id='form'>
-          <button
-            class='multiple-extension-form__container-close'
-            data-test-extension-form-container-close
-            type='button'
-            {{on 'click' @closeForm}}
-          >
-            Cancel
-          </button>
+            <button
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
+              type='button'
+              {{on 'click' @closeForm}}
+            >
+              Cancel
+            </button>
 
-          <button
-            class='multiple-extension-form__create-button primary-button-style'
-            disabled={{this.isSubmitButtonDisabled}}
-            type='submit'
-          >Submit</button>
+            <button
+              class='multiple-extension-form__create-button primary-button-style'
+              disabled={{this.isSubmitButtonDisabled}}
+              type='submit'
+            >Submit</button>
           </div>
         </form>
       </div>
@@ -69,28 +73,44 @@
           <div class='extension-form__content-wrapper'>
             {{#each this.extensionData.value as |extension|}}
               <Task::LatestExtensionInfo @extension={{extension}} />
+              {{#if extension.reviewedBy}}
+                <p>Your request was
+                  {{#if
+                    (eq extension.status 'APPROVED')
+                  }}approved{{else}}denied{{/if}}
+                  by
+                  {{extension.reviewedBy}}
+                  {{convertDate (array extension.timestamp) end_date=0}}.
+                </p>
+              {{/if}}
             {{/each}}
           </div>
+
           <div class='buttons' id='detail'>
-          <button
-            class='multiple-extension-form__container-close'
-            data-test-extension-form-container-close
-            type='button'
-            {{on 'click' @closeForm}}
-          >
-            Close
-          </button>
-          
-          {{#if (or (eq this.previousExtensionStatus 'APPROVED') (eq this.previousExtensionStatus 'DENIED'))}}
             <button
-              class='multiple-extension-form__open-button primary-button-style'
-              data-test-create-another-extension
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
               type='button'
-              {{on 'click' this.createNewExtensionRequest}}
+              {{on 'click' @closeForm}}
             >
-              Request Extension
+              Close
             </button>
-          {{/if}}
+
+            {{#if
+              (or
+                (eq this.previousExtensionStatus 'APPROVED')
+                (eq this.previousExtensionStatus 'DENIED')
+              )
+            }}
+              <button
+                class='multiple-extension-form__open-button primary-button-style'
+                data-test-create-another-extension
+                type='button'
+                {{on 'click' this.createNewExtensionRequest}}
+              >
+                Request Extension
+              </button>
+            {{/if}}
           </div>
         {{else if this.extensionData.isLoading}}
           <div class='task-card__loader-container'>
@@ -99,22 +119,22 @@
         {{else if this.extensionData.error}}
           <h4>{{this.extensionData.error}}</h4>
           <div class='buttons' id='create'>
-          <button
-            class='multiple-extension-form__container-close'
-            data-test-extension-form-container-close
-            type='button'
-            {{on 'click' @closeForm}}
-          >
-            Close
-          </button>
-          <button
-            class='multiple-extension-form__open-button primary-button-style'
-            data-test-create-extension-button
-            type='button'
-            {{on 'click' this.createNewExtensionRequest}}
-          >
-            Request Extension
-          </button>
+            <button
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
+              type='button'
+              {{on 'click' @closeForm}}
+            >
+              Close
+            </button>
+            <button
+              class='multiple-extension-form__open-button primary-button-style'
+              data-test-create-extension-button
+              type='button'
+              {{on 'click' this.createNewExtensionRequest}}
+            >
+              Request Extension
+            </button>
           </div>
         {{/if}}
       </div>
