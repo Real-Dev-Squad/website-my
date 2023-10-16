@@ -9,6 +9,7 @@ const extensionRequests = [
     id: 'T0S56aa3zaNsNghEPLeS',
     timestamp: 1673784012,
     assignee: 'ivinayakg',
+    reviewedBy: 'Joy Gupta',
   },
   {
     oldEndsOn: 57658796,

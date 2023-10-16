@@ -74,7 +74,7 @@
             {{#each this.extensionData.value as |extension|}}
               <Task::LatestExtensionInfo @extension={{extension}} />
               {{#if extension.reviewedBy}}
-                <p>Your request was
+                <p data-reviewed-log>Your request was
                   {{#if
                     (eq extension.status 'APPROVED')
                   }}approved{{else}}denied{{/if}}

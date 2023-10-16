@@ -283,6 +283,73 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
     }
   });
 
+  test('Review log should present if extension status is either approved or denied and reviewedBy field is present', async function (assert) {
+    const extensionRequestData = extensionRequests[0];
+    this.set('task', tasksData[0]);
+    this.set('value', [extensionRequestData]);
+    this.set('previousExtensionStatus', extensionRequestData.status);
+    this.set(
+      'closeExtensionModel',
+      closeExtensionModel(this.set, 'extensionFormOpened')
+    );
+    this.set(
+      'closeExtensionForm',
+      closeExtensionForm(this.set, 'extensionFormOpened')
+    );
+
+    await render(
+      hbs`<Task::MultipleExtensionForm 
+      @task={{this.task}} 
+      @closeForm={{this.closeExtensionForm}} 
+      @title='Form for extension Request'
+      @closeModel={{this.closeExtensionModel}}/>
+      }`
+    );
+    await waitFor('[data-test-extension-info-content]');
+
+    // Assert the initial state
+    if (['APPROVED', 'DENIED'].includes(this.previousExtensionStatus)) {
+      assert
+        .dom(this.element.querySelector('[data-reviewed-log]'))
+        .containsText(extensionRequestData['reviewedBy'])
+        .exists();
+    } else {
+      assert
+        .dom(this.element.querySelector('[data-reviewed-log]'))
+        .doesNotExist();
+    }
+  });
+
+  test('Review log should not be present as extensionRequestData does not contains reviewedBy field', async function (assert) {
+    const extensionRequestData = extensionRequests[2];
+    this.set('task', tasksData[2]);
+    this.set('value', [extensionRequestData]);
+    this.set('previousExtensionStatus', extensionRequestData.status);
+    this.set(
+      'closeExtensionModel',
+      closeExtensionModel(this.set, 'extensionFormOpened')
+    );
+    this.set(
+      'closeExtensionForm',
+      closeExtensionForm(this.set, 'extensionFormOpened')
+    );
+
+    await render(
+      hbs`<Task::MultipleExtensionForm 
+      @task={{this.task}} 
+      @closeForm={{this.closeExtensionForm}} 
+      @title='Form for extension Request'
+      @closeModel={{this.closeExtensionModel}}/>
+      }`
+    );
+    await waitFor('[data-test-extension-info-content]');
+
+    // Assert the initial state
+    assert
+      .dom(this.element.querySelector('[data-reviewed-log]'))
+      .doesNotExist();
+  });
+
   test('When previous extension request is pending, the option to create extension request should show and then later open form', async function (assert) {
     // Set up test data and conditions, such as setting this.previousExtensionStatus
     let extensionRequestData = extensionRequests[1];
