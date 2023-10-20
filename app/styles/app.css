@@ -56,6 +56,34 @@ body {
   width: 100%;
   padding: 16px;
 }
+.appDialog {
+  display: block;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-weight: 900;
+  margin: 0 auto;
+  font-size: x-large;
+  text-align: center;
+  background-color: lightgray;
+  border: 1px solid lightgrey;
+  box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+
+  & button {
+    padding: 8px 16px;
+    margin: 20px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+  }
+}
+#okayBt {
+  background-color: dodgerblue;
+}
+#cancleBt {
+  background-color: white;
+  color: black;
+}
 
 .loading {
   flex-grow: 1;
