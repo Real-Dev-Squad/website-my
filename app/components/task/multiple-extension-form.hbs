@@ -1,0 +1,143 @@
+<div class='extension-form__container-parent'>
+  <div
+    role='button'
+    id='create'
+    class='extension-form__container-back'
+    data-test-extension-form-container-back
+    {{on 'click' @closeModel}}
+  ></div>
+  <div class='extension-form__container-main'>
+    <h2 data-test-title>
+      {{#if this.createExtensionRequest}}
+        Extension Request Form
+      {{else}}
+        Extension Details
+      {{/if}}
+    </h2>
+    {{#if this.createExtensionRequest}}
+      <div class='extension-form__content' data-test-extension-from-content>
+        <form {{on 'submit' this.submitExtensionRequest}}>
+          <label for='reason'>Reason</label>
+          <textarea
+            required
+            type='text-box'
+            id='reason'
+            name='reason'
+            data-test-extension-form-reason-input
+          ></textarea>
+          <p>Old ETA - {{this.oldETA}}</p>
+          <label for='newEndsOn'>New ETA</label>
+          <input
+            required
+            type='datetime-local'
+            id='newEndsOn'
+            name='newEndsOn'
+            {{on 'change' this.changeExtensionRequestETA}}
+            data-test-extension-form-newEndsOn-input
+          />
+          <label for='title'>Title</label>
+          <textarea
+            required
+            type='text-box'
+            id='title'
+            name='title'
+            data-test-extension-form-title-input
+          ></textarea>
+          <div class='error-container' id='error'>
+            <span
+              class='error-placeholder'
+              data-test-extension-from-error
+            ></span>
+          </div>
+          <div class='buttons' id='form'>
+            <button
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
+              type='button'
+              {{on 'click' @closeForm}}
+            >
+              Cancel
+            </button>
+
+            <button
+              class='multiple-extension-form__create-button primary-button-style'
+              disabled={{this.isSubmitButtonDisabled}}
+              type='submit'
+            >Submit</button>
+          </div>
+        </form>
+      </div>
+    {{else}}
+      <div class='extension-form__content' data-test-extension-from-content>
+        {{#if this.extensionData.value}}
+          <div class='extension-form__content-wrapper'>
+            {{#each this.extensionData.value as |extension|}}
+              <Task::LatestExtensionInfo @extension={{extension}} />
+              {{#if extension.reviewedBy}}
+                <p data-reviewed-log>Your request was
+                  {{#if
+                    (eq extension.status 'APPROVED')
+                  }}approved{{else}}denied{{/if}}
+                  by
+                  {{extension.reviewedBy}}
+                  {{convertDate (array extension.timestamp) end_date=0}}.
+                </p>
+              {{/if}}
+            {{/each}}
+          </div>
+
+          <div class='buttons' id='detail'>
+            <button
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
+              type='button'
+              {{on 'click' @closeForm}}
+            >
+              Close
+            </button>
+
+            {{#if
+              (or
+                (eq this.previousExtensionStatus 'APPROVED')
+                (eq this.previousExtensionStatus 'DENIED')
+              )
+            }}
+              <button
+                class='multiple-extension-form__open-button primary-button-style'
+                data-test-create-another-extension
+                type='button'
+                {{on 'click' this.createNewExtensionRequest}}
+              >
+                Request Extension
+              </button>
+            {{/if}}
+          </div>
+        {{else if this.extensionData.isLoading}}
+          <div class='task-card__loader-container'>
+            <Spinner />
+          </div>
+        {{else if this.extensionData.error}}
+          <h4>{{this.extensionData.error}}</h4>
+          <div class='buttons' id='create'>
+            <button
+              class='multiple-extension-form__container-close'
+              data-test-extension-form-container-close
+              type='button'
+              {{on 'click' @closeForm}}
+            >
+              Close
+            </button>
+            <button
+              class='multiple-extension-form__open-button primary-button-style'
+              data-test-create-extension-button
+              type='button'
+              {{on 'click' this.createNewExtensionRequest}}
+            >
+              Request Extension
+            </button>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</div>

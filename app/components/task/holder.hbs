@@ -14,12 +14,21 @@
   <div class='task-card__status-update-container'>
 
     {{#if this.extensionFormOpened}}
-      <Task::ExtensionForm
-        @task={{@task}}
-        @closeForm={{this.closeExtensionForm}}
-        @title='Form for extension Request'
-        @closeModel={{this.closeExtensionModel}}
-      />
+      {{#if @dev}}
+        <Task::MultipleExtensionForm
+          @task={{@task}}
+          @closeForm={{this.closeExtensionForm}}
+          @title='Extension Details'
+          @closeModel={{this.closeExtensionModel}}
+        />
+      {{else}}
+        <Task::ExtensionForm
+          @task={{@task}}
+          @closeForm={{this.closeExtensionForm}}
+          @title='Form for extension Request'
+          @closeModel={{this.closeExtensionModel}}
+        />
+      {{/if}}
     {{/if}}
 
     {{#if (not-eq this.status this.TASK_KEYS.VERIFIED)}}
