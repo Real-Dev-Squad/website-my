@@ -143,6 +143,10 @@ const TASK_STATUS_LIST_NEW = [
     key: DONE,
   },
   {
+    displayLabel: 'Done',
+    key: DONE,
+  },
+  {
     displayLabel: 'Needs Review',
     key: NEEDS_REVIEW,
   },
