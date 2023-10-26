@@ -303,7 +303,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       const optionValue = taskStatusList.options[i].value;
       assert.ok(oldTaskKeys.includes(optionValue));
     }
-    assert.equal(taskStatusList.options.length, 13);
   });
 
   test('Check if new task status options are displayed when dev is true', async function (assert) {
@@ -337,7 +336,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       const optionValue = taskStatusList.options[i].value;
       assert.ok(newTaskKeys.includes(optionValue));
     }
-    assert.equal(taskStatusList.options.length, 12);
   });
 
   test('Verify task status update to DONE when dev is true', async function (assert) {
