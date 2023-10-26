@@ -4,11 +4,11 @@ import { tasks, overDueTask } from 'website-my/tests/fixtures/tasks';
 import {
   TASK_KEYS,
   TASK_STATUS_LIST,
-  oldTaskStatus,
-  newTaskStatus,
+  TASK_KEYS_NEW,
 } from 'website-my/constants/tasks';
 import { find, render, waitUntil, fillIn, select } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import Service from '@ember/service';
 
 module('Integration | Component | Tasks Holder', function (hooks) {
   setupRenderingTest(hooks);
@@ -27,7 +27,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -52,7 +55,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -76,7 +82,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -96,7 +105,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
   test('Render Task holder and verify style for on-time task', async function (assert) {
     const onTimeTask = tasksData[3];
     onTimeTask.startedOn = Date.now() / 1000;
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     //Current time + 5days in seconds
     onTimeTask.endsOn = (Date.now() + 1000 * 60 * 60 * 24 * 5) / 1000;
 
@@ -131,7 +143,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -155,7 +170,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     const testTask = tasksData[3];
     testTask.percentCompleted = '50';
     testTask.status = TASK_KEYS.IN_PROGRESS;
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     this.set('task', testTask);
     this.set('mock', () => {});
     this.set('onTaskUpdate', (taskId, error) => {
@@ -185,7 +203,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
   test('Verify values of task status upon api failures', async function (assert) {
     const testTask = tasksData[3];
     testTask.status = TASK_KEYS.IN_PROGRESS;
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     this.set('task', testTask);
     this.set('mock', () => {});
     this.set('onTaskUpdate', (taskId, error) => {
@@ -221,6 +242,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     testTask.status = TASK_KEYS.IN_PROGRESS;
 
     let onTaskUpdateCalled = 0;
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
 
     this.set('task', testTask);
     this.set('onTaskUpdate', () => {
@@ -248,42 +273,16 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });
 
-  test('Check if AVAILABLE is not displayed when dev is true', async function (assert) {
-    this.set('task', tasksData[3]);
-    this.set('mock', () => {});
-    this.set('isLoading', false);
-    this.set('disabled', false);
-    this.set('defaultType', DEFAULT_TASK_TYPE);
-
-    await render(hbs`<Task::Holder
-    @task={{this.task}} 
-    @onTaskChange={{this.mock}} 
-    @onStausChange={{this.mock}} 
-    @onTaskUpdate={{this.mock}} 
-    @isLoading={{this.isLoading}} 
-    @userSelectedTask={{this.defaultType}} 
-    @disabled={{this.disabled}}
-    @dev={{true}}
-  />`);
-
-    const taskStatusList = this.element.querySelector(
-      '[data-test-task-status-select]'
-    );
-
-    const displayedTaskStatus = [];
-    for (let i = 0; i < taskStatusList.options.length; i++) {
-      displayedTaskStatus.push(taskStatusList.options[i].value);
-    }
-    assert.ok(!displayedTaskStatus.includes('AVAILABLE'));
-  });
-
   test('Check if old task status options are displayed when dev is false', async function (assert) {
     this.set('task', tasksData[3]);
     this.set('mock', () => {});
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = false;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -298,14 +297,13 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       '[data-test-task-status-select]'
     );
 
-    const updatedTaskKeys = Object.keys(TASK_KEYS).filter(
-      (key) => !(key in newTaskStatus)
-    );
+    const oldTaskKeys = Object.keys(TASK_KEYS);
 
     for (let i = 0; i < taskStatusList.options.length; i++) {
       const optionValue = taskStatusList.options[i].value;
-      assert.ok(updatedTaskKeys.includes(optionValue));
+      assert.ok(oldTaskKeys.includes(optionValue));
     }
+    assert.equal(taskStatusList.options.length, 13);
   });
 
   test('Check if new task status options are displayed when dev is true', async function (assert) {
@@ -314,7 +312,10 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-
+    class MockFeatureFlagService extends Service {
+      isDevMode = true;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
@@ -330,20 +331,19 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       '[data-test-task-status-select]'
     );
 
-    const updatedTaskKeys = Object.keys(TASK_KEYS).filter(
-      (key) => !(key in oldTaskStatus)
-    );
+    const newTaskKeys = Object.keys(TASK_KEYS_NEW);
 
     for (let i = 0; i < taskStatusList.options.length; i++) {
       const optionValue = taskStatusList.options[i].value;
-      assert.ok(updatedTaskKeys.includes(optionValue));
+      assert.ok(newTaskKeys.includes(optionValue));
     }
+    assert.equal(taskStatusList.options.length, 12);
   });
 
   test('Verify task status update to DONE when dev is true', async function (assert) {
     const testTask = tasksData[3];
 
-    testTask.status = TASK_KEYS.IN_PROGRESS;
+    testTask.status = TASK_KEYS_NEW.IN_PROGRESS;
 
     let onTaskUpdateCalled = 0;
 
@@ -355,6 +355,11 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    class MockFeatureFlagService extends Service {
+      isDevMode = true;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
 
     await render(hbs`<Task::Holder
     @task={{this.task}}
@@ -369,7 +374,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .dom('[data-test-task-status-select]')
       .hasValue(TASK_KEYS.IN_PROGRESS);
 
-    await select('[data-test-task-status-select]', TASK_KEYS.DONE);
+    await select('[data-test-task-status-select]', TASK_KEYS_NEW.DONE);
 
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
   });

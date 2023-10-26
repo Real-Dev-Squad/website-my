@@ -17,6 +17,23 @@ const TASK_KEYS = {
   DONE: 'DONE',
 };
 
+const TASK_KEYS_NEW = {
+  ALL: 'ALL',
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  BLOCKED: 'BLOCKED',
+  SMOKE_TESTING: 'SMOKE_TESTING',
+  DONE: 'DONE',
+  NEEDS_REVIEW: 'NEEDS_REVIEW',
+  IN_REVIEW: 'IN_REVIEW',
+  APPROVED: 'APPROVED',
+  MERGED: 'MERGED',
+  SANITY_CHECK: 'SANITY_CHECK',
+  REGRESSION_CHECK: 'REGRESSION_CHECK',
+  RELEASED: 'RELEASED',
+  VERIFIED: 'VERIFIED',
+};
+
 const {
   ALL,
   AVAILABLE,
@@ -25,7 +42,6 @@ const {
   BLOCKED,
   SMOKE_TESTING,
   COMPLETED,
-  DONE,
   NEEDS_REVIEW,
   IN_REVIEW,
   APPROVED,
@@ -35,6 +51,8 @@ const {
   RELEASED,
   VERIFIED,
 } = TASK_KEYS;
+
+const { DONE } = TASK_KEYS_NEW;
 
 const TASK_STATUS_LIST = [
   {
@@ -64,6 +82,61 @@ const TASK_STATUS_LIST = [
   {
     displayLabel: 'Completed',
     key: COMPLETED,
+  },
+  {
+    displayLabel: 'Done',
+    key: DONE,
+  },
+  {
+    displayLabel: 'Needs Review',
+    key: NEEDS_REVIEW,
+  },
+  {
+    displayLabel: 'In Review',
+    key: IN_REVIEW,
+  },
+  {
+    displayLabel: 'Approved',
+    key: APPROVED,
+  },
+  {
+    displayLabel: 'Sanity Check',
+    key: SANITY_CHECK,
+  },
+  {
+    displayLabel: 'Regression Check',
+    key: REGRESSION_CHECK,
+  },
+  {
+    displayLabel: 'Released',
+    key: RELEASED,
+  },
+  {
+    displayLabel: 'Verified',
+    key: VERIFIED,
+  },
+];
+
+const TASK_STATUS_LIST_NEW = [
+  {
+    displayLabel: 'All',
+    key: ALL,
+  },
+  {
+    displayLabel: 'Assigned',
+    key: ASSIGNED,
+  },
+  {
+    displayLabel: 'In Progress',
+    key: IN_PROGRESS,
+  },
+  {
+    displayLabel: 'Blocked',
+    key: BLOCKED,
+  },
+  {
+    displayLabel: 'Smoke Testing',
+    key: SMOKE_TESTING,
   },
   {
     displayLabel: 'Done',
@@ -148,7 +221,10 @@ export const TASK_PERCENTAGE = {
   completedPercentage: '100',
 };
 
-export { TASK_KEYS, TASK_STATUS_LIST, TABS_TASK_STATUS_LIST };
-
-export const oldTaskStatus = { AVAILABLE: 'AVAILABLE', COMPLETED: 'COMPLETED' };
-export const newTaskStatus = { DONE: 'DONE' };
+export {
+  TASK_KEYS,
+  TASK_STATUS_LIST,
+  TABS_TASK_STATUS_LIST,
+  TASK_KEYS_NEW,
+  TASK_STATUS_LIST_NEW,
+};
