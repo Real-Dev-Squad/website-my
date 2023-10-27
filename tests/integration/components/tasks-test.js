@@ -4,6 +4,7 @@ import { find, render, waitUntil, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { tasks } from 'website-my/tests/fixtures/tasks';
 import { TASK_KEYS } from 'website-my/constants/tasks';
+import Service from '@ember/service';
 
 module('Integration | Component | tasks', function (hooks) {
   setupRenderingTest(hooks);
@@ -43,6 +44,10 @@ module('Integration | Component | tasks', function (hooks) {
 
   test('Spinner should be visible only on the current updating card', async function (assert) {
     tasks[0].status = 'IN_PROGRESS';
+    class MockFeatureFlagService extends Service {
+      isDevMode = true;
+    }
+    this.owner.register('service:featureFlag', MockFeatureFlagService);
     this.setProperties({
       onTaskChange: () => {},
       onTaskUpdate: () => {},

@@ -1,18 +1,34 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { tracked } from '@glimmer/tracking';
-import { TASK_PERCENTAGE } from '../../constants/tasks';
+import {
+  TASK_KEYS,
+  TASK_STATUS_LIST,
+  TASK_KEYS_NEW,
+  TASK_STATUS_LIST_NEW,
+  TASK_PERCENTAGE,
+} from '../../constants/tasks';
+import { inject as service } from '@ember/service';
 
 export default class TasksHolderComponent extends Component {
   @tracked percentCompleted = this.args.task.percentCompleted;
   @tracked status = this.args.task.status;
   @tracked extensionFormOpened = false;
   @tracked isLoading = false;
+  @service featureFlag;
   queryParams = ['dev'];
 
-  TASK_KEYS = TASK_KEYS;
-  availabletaskStatusList = TASK_STATUS_LIST;
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
+  }
+
+  get TASK_KEYS() {
+    return this.isDevMode ? TASK_KEYS_NEW : TASK_KEYS;
+  }
+
+  get availabletaskStatusList() {
+    return this.isDevMode ? TASK_STATUS_LIST_NEW : TASK_STATUS_LIST;
+  }
 
   get taskStyleClass() {
     const statusNotOverDueList = [
