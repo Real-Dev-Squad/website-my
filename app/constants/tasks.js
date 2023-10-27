@@ -84,10 +84,6 @@ const TASK_STATUS_LIST = [
     key: COMPLETED,
   },
   {
-    displayLabel: 'Done',
-    key: DONE,
-  },
-  {
     displayLabel: 'Needs Review',
     key: NEEDS_REVIEW,
   },
@@ -137,10 +133,6 @@ const TASK_STATUS_LIST_NEW = [
   {
     displayLabel: 'Smoke Testing',
     key: SMOKE_TESTING,
-  },
-  {
-    displayLabel: 'Done',
-    key: DONE,
   },
   {
     displayLabel: 'Done',
