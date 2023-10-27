@@ -1,20 +1,17 @@
 {{page-title "My | Real Dev Squad"}}
 
 <MobileDialog/>
+<Navbar
+  @firstName={{@model.firstName}}
+  @profilePictureURL={{@model.profilePictureURL}}
+  @signOutHandler={{this.signOutHandler}}
+/>
 
-{{#unless this.rdsdialogState.dialogstate}} 
-  <Navbar
-    @firstName={{@model.firstName}}
-    @profilePictureURL={{@model.profilePictureURL}}
-    @signOutHandler={{this.signOutHandler}}
-  />
-
-  <div class="main-container">
+<div class="main-container">
     {{outlet}}
-  </div>
-  <footer class="footer">Contents of this website are deployed from this
+</div>
+<footer class="footer">Contents of this website are deployed from this
     <a href={{this.GITHUB_URL}} target="_blank" rel="noopener noreferrer">
       open sourced repo
     </a>
-  </footer>
-{{/unless}}
+</footer>
