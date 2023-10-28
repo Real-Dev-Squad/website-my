@@ -78,7 +78,6 @@
 
     {{#if @dev}}
       {{#if (not-eq @task.status 'COMPLETED')}}
-        {{log 'inside if loop' @task.status}}
         <button
           class='task-card__extensionForm-button'
           data-test-task-extensionForm-button
