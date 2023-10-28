@@ -22,23 +22,20 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
 
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
     @onStausChange={{this.mock}} 
     @onTaskUpdate={{this.mock}} 
-    @isLoading={{this.isLoading}} 
     @userSelectedTask={{this.defaultType}} 
     @disabled={{this.disabled}}
+    @dev={{this.dev}}
   />`);
-    await waitUntil(() => find('[data-test-task-extensionForm-button]'));
-
-    assert.equal(
-      this.element.querySelector('[data-test-task-extensionForm-button]')
-        .innerText,
-      'Extension Status'
-    );
+    assert
+      .dom('[data-test-task-extensionForm-button]')
+      .hasText('Request Extension');
   });
 
   test('Render Task holder and check wether it has progress bar', async function (assert) {

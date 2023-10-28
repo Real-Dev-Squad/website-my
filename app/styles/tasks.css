@@ -384,7 +384,7 @@
   color: var(--primary-text-color);
   transition: 0.25s ease-in-out;
   height: 2.5rem;
-  width: 10rem;
+  width: auto;
   flex-shrink: 0;
 }
 

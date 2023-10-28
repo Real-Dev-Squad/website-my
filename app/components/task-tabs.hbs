@@ -4,19 +4,50 @@
       {{if @showTasks "task-tabs__dropdown-active"}}'
   >
     {{#each @taskStatusList as |status|}}
-      <button
-        data-test-task-tabs-button
-        href='#'
-        class='task-tabs__dropdown-container__button
-          {{if
-            (eq @userSelectedTaskText status.displayLabel)
-            "task-tabs__dropdown-container__button-active"
-          }}'
-        {{on 'click' (fn @changeUserSelectedTask status)}}
-        type='button'
-      >
-        {{status.displayLabel}}
-      </button>
+      {{#if @dev}}
+
+        {{#if
+          (and
+            (not-eq status.key 'VERIFIED')
+            (not-eq status.key 'RELEASED')
+            (not-eq status.key 'REGRESSION_CHECK')
+            (not-eq status.key 'SANITY_CHECK')
+            (not-eq status.key 'APPROVED')
+            (not-eq status.key 'SMOKE_TESTING')
+            (not-eq status.key 'NEEDS_REVIEW')
+          )
+        }}
+          <button
+            data-test-task-tabs-button
+            href='#'
+            class='task-tabs__dropdown-container__button
+              {{if
+                (eq @userSelectedTaskText status.displayLabel)
+                "task-tabs__dropdown-container__button-active"
+              }}'
+            {{on 'click' (fn @changeUserSelectedTask status)}}
+            type='button'
+          >
+            {{status.displayLabel}}
+          </button>
+        {{/if}}
+
+      {{else}}
+        <button
+          data-test-task-tabs-button
+          href='#'
+          class='task-tabs__dropdown-container__button
+            {{if
+              (eq @userSelectedTaskText status.displayLabel)
+              "task-tabs__dropdown-container__button-active"
+            }}'
+          {{on 'click' (fn @changeUserSelectedTask status)}}
+          type='button'
+        >
+          {{status.displayLabel}}
+        </button>
+      {{/if}}
+
     {{/each}}
   </div>
   {{#unless @showTasks}}
