@@ -15,11 +15,20 @@ export default class TasksHolderComponent extends Component {
   availabletaskStatusList = TASK_STATUS_LIST;
 
   get taskStyleClass() {
-    const statusNotOverDueList = [
-      TASK_KEYS.DONE,
-      TASK_KEYS.VERIFIED,
-      TASK_KEYS.AVAILABLE,
-    ];
+    let statusNotOverDueList;
+    if (this.args.dev === 'true') {
+      statusNotOverDueList = [
+        TASK_KEYS.DONE,
+        TASK_KEYS.VERIFIED,
+        TASK_KEYS.AVAILABLE,
+      ];
+    } else {
+      statusNotOverDueList = [
+        TASK_KEYS.COMPLETED,
+        TASK_KEYS.VERIFIED,
+        TASK_KEYS.AVAILABLE,
+      ];
+    }
     if (
       this.args.task.endsOn * 1000 < Date.now() &&
       !statusNotOverDueList.includes(this.args.task.status)
