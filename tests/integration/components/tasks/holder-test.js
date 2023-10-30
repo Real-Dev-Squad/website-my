@@ -65,6 +65,27 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     );
   });
 
+  test('Render Task holder and check whether it has select tag with option DONE', async function (assert) {
+    this.set('task', tasksData[3]);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+  />`);
+
+    assert.dom('[data-test-task-status-select]').exists();
+    assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
+  });
+
   test('Render Task holder and verify progress bar style', async function (assert) {
     this.set('task', overDueTask);
     this.set('mock', () => {});
