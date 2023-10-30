@@ -42,6 +42,7 @@
           {{#each this.availabletaskStatusList as |taskStatus|}}
             {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
               <option
+                data-test-dropdown-option={{taskStatus.displayLabel}}
                 value={{taskStatus.key}}
                 selected={{eq taskStatus.key this.status}}
               >

@@ -16,7 +16,7 @@ export default class TasksHolderComponent extends Component {
 
   get taskStyleClass() {
     const statusNotOverDueList = [
-      TASK_KEYS.COMPLETED,
+      TASK_KEYS.DONE,
       TASK_KEYS.VERIFIED,
       TASK_KEYS.AVAILABLE,
     ];

@@ -93,7 +93,7 @@ export default class TasksController extends Controller {
     const taskCompletionPercentage = object.percentCompleted;
     if (taskCompletionPercentage) {
       if (taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage) {
-        requestBody.status = 'COMPLETED';
+        requestBody.status = 'DONE';
       }
       requestBody.percentCompleted = parseInt(taskCompletionPercentage);
     }

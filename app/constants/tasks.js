@@ -5,7 +5,7 @@ const TASK_KEYS = {
   IN_PROGRESS: 'IN_PROGRESS',
   BLOCKED: 'BLOCKED',
   SMOKE_TESTING: 'SMOKE_TESTING',
-  COMPLETED: 'COMPLETED',
+  DONE: 'DONE',
   NEEDS_REVIEW: 'NEEDS_REVIEW',
   IN_REVIEW: 'IN_REVIEW',
   APPROVED: 'APPROVED',
@@ -23,7 +23,7 @@ const {
   IN_PROGRESS,
   BLOCKED,
   SMOKE_TESTING,
-  COMPLETED,
+  DONE,
   NEEDS_REVIEW,
   IN_REVIEW,
   APPROVED,
@@ -60,8 +60,8 @@ const TASK_STATUS_LIST = [
     key: SMOKE_TESTING,
   },
   {
-    displayLabel: 'Completed',
-    key: COMPLETED,
+    displayLabel: 'Done',
+    key: DONE,
   },
   {
     displayLabel: 'Needs Review',
@@ -133,7 +133,7 @@ const TABS_TASK_STATUS_LIST = [
 ];
 export const TASK_MESSAGES = {
   MARK_DONE:
-    'This task will be marked as complete and a new task will be assigned to you',
+    'This task will be marked as done and a new task will be assigned to you',
   UPDATE_TASK: 'Updating task',
   FIND_TASK: 'Finding new task for you!',
 };
