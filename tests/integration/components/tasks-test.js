@@ -68,7 +68,7 @@ module('Integration | Component | tasks', function (hooks) {
 
     assert.dom('[data-test-task-spinner]').doesNotExist();
 
-    await fillIn('[data-test-task-status-select]', TASK_KEYS.COMPLETED);
+    await fillIn('[data-test-task-status-select]', TASK_KEYS.DONE);
 
     assert.dom('[data-test-task-spinner]').exists({ count: 1 });
 

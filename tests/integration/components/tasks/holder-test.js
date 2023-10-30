@@ -203,7 +203,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .dom('[data-test-task-status-select]')
       .hasValue(TASK_KEYS.IN_PROGRESS);
 
-    await select('[data-test-task-status-select]', TASK_KEYS.COMPLETED);
+    await select('[data-test-task-status-select]', TASK_KEYS.DONE);
 
     assert
       .dom('[data-test-task-status-select]')
