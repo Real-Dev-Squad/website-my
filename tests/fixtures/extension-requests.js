@@ -10,6 +10,7 @@ const extensionRequests = [
     timestamp: 1673784012,
     assignee: 'ivinayakg',
     reviewedBy: 'Joy Gupta',
+    reviewedAt: 1698555808,
   },
   {
     oldEndsOn: 57658796,
