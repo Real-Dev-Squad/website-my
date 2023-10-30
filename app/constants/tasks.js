@@ -127,6 +127,10 @@ const TABS_TASK_STATUS_LIST = [
     key: MERGED,
   },
   {
+    displayLabel: 'Done',
+    key: COMPLETED,
+  },
+  {
     displayLabel: 'Verified',
     key: VERIFIED,
   },
