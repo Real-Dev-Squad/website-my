@@ -1,8 +1,10 @@
-{{#if this.toShow}}
-  <dialog class="appDialog">
-      Open RDS in app
-    <br />
-    <button id="cancleBt" type="button" {{on 'click' (fn this.closeDialog)}} >Cancle</button>
-    <button id="okayBt" type="button" {{on 'click' (fn this.openRDSApp)}}>Okay</button>
-  </dialog>
+{{#if @dev}}
+  {{#if this.toShow}}
+    <dialog class="mobile-dialog__dialog">
+        Open RDS in app
+      <br/>
+      <button id="mobile-dialog__close-button" type="button" {{on 'click' (fn this.closeDialog)}} >Cancle</button>
+      <button id="mobile-dialog__open-button" type="button" {{on 'click' (fn this.openRDSApp)}}>Okay</button>
+    </dialog>
+  {{/if}}
 {{/if}}

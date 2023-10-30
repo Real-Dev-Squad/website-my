@@ -7,10 +7,16 @@ import ENV from 'website-my/config/environment';
 
 export default class ApplicationController extends Controller {
   @service router;
+  @service featureFlag;
+
   GITHUB_URL = GITHUB_URL;
   BASE_API_URL = ENV.BASE_API_URL;
   get canShowNavBar() {
     return this.router.currentRouteName != 'signup';
+  }
+
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
   }
 
   @action async signOutHandler() {

@@ -7,9 +7,14 @@ module('Integration | Component | mobile-dialog', function (hooks) {
   setupRenderingTest(hooks);
 
   test('Mobile-Dialog does not renders', async function (assert) {
+    this.setProperties({
+      dev: false,
+    });
+    await render(hbs`
+    <MobileDialog
+    @dev={{this.dev}}  
+    />`);
 
-    await render(hbs`<MobileDialog/>`); 
-
-    assert.dom('.appDialog').doesNotExist()
+    assert.dom('.mobile-dialog__dialog').doesNotExist();
   });
 });

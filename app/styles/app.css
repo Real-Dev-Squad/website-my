@@ -56,33 +56,34 @@ body {
   width: 100%;
   padding: 16px;
 }
-.appDialog {
+.mobile-dialog__dialog {
   display: block;
   border-radius: 3px;
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   font-weight: 900;
   margin: 0 auto;
-  font-size: x-large;
+  font-size:large;
   text-align: center;
   background-color: lightgray;
-  border: 1px solid lightgrey;
-  box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+  border: none;
+  box-shadow: 4px 8px 8px var(--mobile-dialog-box-shadow);
 
   & button {
-    padding: 8px 16px;
-    margin: 20px;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    font-size:medium;
     border: none;
     border-radius: 3px;
-    color: white;
+    color: var(--body-bg-color);
     font-weight: 600;
   }
 }
-#okayBt {
-  background-color: dodgerblue;
+#mobile-dialog__open-button {
+  background-color: var(--mobile-dialog--open-button);
 }
-#cancleBt {
-  background-color: white;
-  color: black;
+#mobile-dialog__close-button {
+  background-color: var(--body-bg-color);
+  color: var(--landing-page--main-heading);
 }
 
 .loading {

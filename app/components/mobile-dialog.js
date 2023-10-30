@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+
 export default class MobileDialogComponent extends Component {
   @tracked toShow = this.checkDeviceType();
 
@@ -18,26 +19,25 @@ export default class MobileDialogComponent extends Component {
     let regexp = /android|iphone|kindle|ipad/i;
     let details = navigator.userAgent;
     let isMobileDevice = regexp.test(details);
-  
+
     if (isMobileDevice) {
-      console.log('true');
       return true;
     } else {
-      console.log('false');
       return false;
     }
-  };
+  }
 
   openApp() {
     var flag = false;
-    var appScheme = 'app://realdevsquad.com';
-    var fallbackURL =
-      'https://play.google.com/store/apps/details?id=com.github.android'; // For demo. It will replace with app playstore url
-  
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const appScheme = 'app://realdevsquad.com';
+    const fallbackURL =
+      'https://play.google.com/store/apps/details?id=com.github.android';
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const MAXTIME = 1000;
+
     if (/android/i.test(userAgent)) {
-      var startTime = Date.now();
-      var iframe = document.createElement('iframe');
+      const startTime = Date.now();
+      const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       iframe.src = appScheme;
       document.body.appendChild(iframe);
@@ -45,13 +45,13 @@ export default class MobileDialogComponent extends Component {
 
       window.addEventListener('blur', function () {
         document.body.removeChild(iframe);
-        
-        var timeTaken = Date.now() - startTime;
-        if (timeTaken <= 1000) {
+
+        const timeTaken = Date.now() - startTime;
+        if (timeTaken <= MAXTIME) {
           flag = true;
         }
       });
-  
+
       setTimeout(function () {
         if (!flag) {
           document.body.removeChild(iframe);
@@ -59,8 +59,6 @@ export default class MobileDialogComponent extends Component {
         }
         this.toShow = false;
       }, 1000);
-    } else {
-      // If the user is not on an Android device, provide a fallback action
     }
-  };
+  }
 }

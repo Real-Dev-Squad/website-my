@@ -1,6 +1,8 @@
 {{page-title "My | Real Dev Squad"}}
 
-<MobileDialog/>
+<MobileDialog
+@dev ={{this.isDevMode}}
+/>
 <Navbar
   @firstName={{@model.firstName}}
   @profilePictureURL={{@model.profilePictureURL}}
