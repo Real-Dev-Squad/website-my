@@ -190,4 +190,40 @@ module('Integration | Component | tasks/modal', function (hooks) {
     this.set('isUpdating', false);
     assert.dom('[data-test-spinner]').doesNotExist();
   });
+
+  test('when the progress bar reaches 100%, a model ais displayed with a message and a "Proceed" button', async function (assert) {
+    this.setProperties({
+      goBack: () => {},
+      isUpdating: false,
+      markComplete: () => {},
+      markCompleteAndAssignTask: () => {},
+      showModal: true,
+      buttonRequired: true,
+      dev: false,
+      message:
+        'This task will be marked as done and a new task will be assigned to you',
+    });
+
+    await render(hbs`
+      <Task::Modal 
+        @goBack={{this.goBack}}
+        @markComplete={{this.markComplete}}
+        @markCompleteAndAssignTask={{this.markCompleteAndAssignTask}}
+        @message={{this.message}}
+        @showModal={{this.showModal}}
+        @buttonRequired={{this.buttonRequired}}
+        @isUpdating={{this.isUpdating}}
+        @dev={{this.dev}}
+      />
+    `);
+
+    assert.dom('[data-test-notAssignBtn]').exists();
+    assert.dom('[data-test-notAssignBtn]').hasProperty('button');
+    assert
+      .dom('[data-test-title]')
+      .hasText(
+        'This task will be marked as done and a new task will be assigned to you'
+      );
+    assert.dom('[data-test-notAssignBtn]').hasText('Proceed');
+  });
 });

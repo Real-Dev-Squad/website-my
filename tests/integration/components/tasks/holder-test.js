@@ -210,6 +210,41 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .hasValue(TASK_KEYS.IN_PROGRESS);
   });
 
+  test('Verify values of task status upon api failures under feature flag', async function (assert) {
+    const testTask = tasksData[3];
+    testTask.status = TASK_KEYS.IN_PROGRESS;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}}
+    @onTaskChange={{this.mock}}
+    @onStausChange={{this.mock}}
+    @onTaskUpdate={{this.onTaskUpdate}}
+    @userSelectedTask={{this.defaultType}}
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+
+    assert
+      .dom('[data-test-task-status-select]')
+      .hasValue(TASK_KEYS.IN_PROGRESS);
+
+    await select('[data-test-task-status-select]', TASK_KEYS.DONE);
+
+    assert
+      .dom('[data-test-task-status-select]')
+      .hasValue(TASK_KEYS.IN_PROGRESS);
+  });
+
   test('Verify status change to VERIFIED', async function (assert) {
     const testTask = tasksData[3];
 
@@ -241,5 +276,28 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     await select('[data-test-task-status-select]', TASK_KEYS.VERIFIED);
 
     assert.equal(onTaskUpdateCalled, 1, 'onTaskUpdate should be called once');
+  });
+
+  test('Render Task holder and check whether it has select tag with option DONE under feature flag', async function (assert) {
+    this.set('task', tasksData[3]);
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+
+    assert.dom('[data-test-task-status-select]').exists();
+    assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
   });
 });

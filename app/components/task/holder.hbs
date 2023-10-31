@@ -39,15 +39,14 @@
           id='task-update'
           {{on 'change' this.onStatusChange}}
         >
-          {{#each this.availabletaskStatusList as |taskStatus|}}
-            {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-              <option
-                value={{taskStatus.key}}
-                selected={{eq taskStatus.key this.status}}
-              >
-                {{taskStatus.displayLabel}}
-              </option>
-            {{/if}}
+          {{#each this.taskStatusList as |taskStatus|}}
+            <option
+              data-test-dropdown-option={{taskStatus.displayLabel}}
+              value={{taskStatus.key}}
+              selected={{eq taskStatus.key this.status}}
+            >
+              {{taskStatus.displayLabel}}
+            </option>
           {{/each}}
         </select>
       </div>
