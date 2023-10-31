@@ -9,12 +9,23 @@ module('Integration | Component | mobile-dialog', function (hooks) {
   test('Mobile-Dialog does not renders', async function (assert) {
     this.setProperties({
       dev: false,
+      deviceType: false,
     });
-    await render(hbs`
-    <MobileDialog
-    @dev={{this.dev}}  
-    />`);
+    await render(hbs`<MobileDialog @dev={{this.dev}}/>`);
 
     assert.dom('.mobile-dialog__dialog').doesNotExist();
+  });
+
+  test('Mobile-Dialog should renders', async function (assert) {
+    this.setProperties({
+      dev: true,
+      deviceType: true,
+    });
+
+    await render(
+      hbs`<MobileDialog @dev={{this.dev}} @deviceType={{this.deviceType}}  />`
+    );
+
+    assert.dom('.mobile-dialog__dialog').exists();
   });
 });

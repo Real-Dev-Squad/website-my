@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class MobileDialogComponent extends Component {
-  @tracked toShow = this.checkDeviceType();
+  @tracked toShow = true;
 
   @action
   closeDialog() {
@@ -15,20 +15,8 @@ export default class MobileDialogComponent extends Component {
     this.openApp();
   }
 
-  checkDeviceType() {
-    let regexp = /android|iphone|kindle|ipad/i;
-    let details = navigator.userAgent;
-    let isMobileDevice = regexp.test(details);
-
-    if (isMobileDevice) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   openApp() {
-    var flag = false;
+    let isAppInstalled = false;
     const appScheme = 'app://realdevsquad.com';
     const fallbackURL =
       'https://play.google.com/store/apps/details?id=com.github.android';
@@ -48,12 +36,12 @@ export default class MobileDialogComponent extends Component {
 
         const timeTaken = Date.now() - startTime;
         if (timeTaken <= MAXTIME) {
-          flag = true;
+          isAppInstalled = true;
         }
       });
 
       setTimeout(function () {
-        if (!flag) {
+        if (!isAppInstalled) {
           document.body.removeChild(iframe);
           window.location.href = fallbackURL;
         }
