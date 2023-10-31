@@ -14,6 +14,19 @@ export default class TasksHolderComponent extends Component {
   TASK_KEYS = TASK_KEYS;
   availabletaskStatusList = TASK_STATUS_LIST;
 
+  get taskStatusList() {
+    const statusToDisplay = this.availabletaskStatusList.filter(
+      (taskStatus) => {
+        if (this.args.dev === true) {
+          return taskStatus.key !== 'ALL' && taskStatus.key !== 'COMPLETED';
+        } else {
+          return taskStatus.key !== 'ALL' && taskStatus.key !== 'DONE';
+        }
+      }
+    );
+    return statusToDisplay;
+  }
+
   get taskStyleClass() {
     const statusNotOverDueList = [
       this.args.dev === true ? TASK_KEYS.DONE : TASK_KEYS.COMPLETED,
