@@ -65,10 +65,7 @@ const TASK_STATUS_LIST = [
     displayLabel: 'Completed',
     key: COMPLETED,
   },
-  {
-    displayLabel: 'Done',
-    key: DONE,
-  },
+
   {
     displayLabel: 'Needs Review',
     key: NEEDS_REVIEW,
@@ -76,6 +73,10 @@ const TASK_STATUS_LIST = [
   {
     displayLabel: 'In Review',
     key: IN_REVIEW,
+  },
+  {
+    displayLabel: 'Done',
+    key: DONE,
   },
   {
     displayLabel: 'Approved',
