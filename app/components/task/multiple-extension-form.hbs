@@ -80,7 +80,10 @@
                   }}approved{{else}}denied{{/if}}
                   by
                   {{extension.reviewedBy}}
-                  {{convertDate (array extension.timestamp) end_date=0}}.
+                  {{#if extension.reviewedAt}}{{convertDate
+                      (array extension.reviewedAt)
+                      end_date=0
+                    }}{{/if}}
                 </p>
               {{/if}}
             {{/each}}

@@ -39,38 +39,14 @@
           id='task-update'
           {{on 'change' this.onStatusChange}}
         >
-          {{#each this.availabletaskStatusList as |taskStatus|}}
-            {{#if (not-eq taskStatus.key this.TASK_KEYS.ALL)}}
-              {{#if @dev}}
-                {{#if
-                  (and
-                    (not-eq taskStatus.key 'VERIFIED')
-                    (not-eq taskStatus.key 'RELEASED')
-                    (not-eq taskStatus.key 'REGRESSION_CHECK')
-                    (not-eq taskStatus.key 'SANITY_CHECK')
-                    (not-eq taskStatus.key 'APPROVED')
-                    (not-eq taskStatus.key 'SMOKE_TESTING')
-                    (not-eq taskStatus.key 'NEEDS_REVIEW')
-                  )
-                }}
-                  <option
-                    value={{taskStatus.key}}
-                    selected={{eq taskStatus.key this.status}}
-                  >
-                    {{taskStatus.displayLabel}}
-                  </option>
-                {{/if}}
-
-              {{else}}
-                <option
-                  value={{taskStatus.key}}
-                  selected={{eq taskStatus.key this.status}}
-                >
-                  {{taskStatus.displayLabel}}
-                </option>
-              {{/if}}
-
-            {{/if}}
+          {{#each this.taskStatusList as |taskStatus|}}
+            <option
+              data-test-dropdown-option={{taskStatus.displayLabel}}
+              value={{taskStatus.key}}
+              selected={{eq taskStatus.key this.status}}
+            >
+              {{taskStatus.displayLabel}}
+            </option>
           {{/each}}
         </select>
       </div>
