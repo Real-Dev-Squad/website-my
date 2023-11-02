@@ -37,6 +37,7 @@
         data-test-task-status-select
         id='task-update'
         {{on 'change' this.onStatusChange}}
+        disabled={{eq @task.status 'DONE'}}
       >
         {{#each this.removedTaskStatus as |taskStatus|}}
           <option

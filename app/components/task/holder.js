@@ -9,6 +9,7 @@ export default class TasksHolderComponent extends Component {
   @tracked status = this.args.task.status;
   @tracked extensionFormOpened = false;
   @tracked isLoading = false;
+  @tracked disable = false;
   queryParams = ['dev'];
 
   TASK_KEYS = TASK_KEYS;
