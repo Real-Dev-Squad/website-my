@@ -37,7 +37,7 @@
         data-test-task-status-select
         id='task-update'
         {{on 'change' this.onStatusChange}}
-        disabled={{eq @task.status 'DONE'}}
+        disabled={{eq @task.status this.TASK_KEYS.DONE}}
       >
         {{#each this.removedTaskStatus as |taskStatus|}}
           <option
@@ -52,7 +52,7 @@
     </div>
 
     {{#if @dev}}
-      {{#if (not-eq @task.status 'DONE')}}
+      {{#if (not-eq @task.status this.TASK_KEYS.DONE)}}
         <button
           class='task-card__extensionForm-button'
           data-test-task-extensionForm-button

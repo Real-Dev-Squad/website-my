@@ -135,7 +135,7 @@ const TABS_TASK_STATUS_LIST = [
   },
   {
     displayLabel: 'Done',
-    key: COMPLETED,
+    key: DONE,
   },
   {
     displayLabel: 'Verified',
