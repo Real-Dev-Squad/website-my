@@ -32,15 +32,15 @@ export default class TasksHolderComponent extends Component {
       (taskStatus) => {
         if (this.args.dev === true) {
           if (
-            taskStatus.key !== 'ALL' &&
-            taskStatus.key !== 'VERIFIED' &&
-            taskStatus.key !== 'RELEASED' &&
-            taskStatus.key !== 'REGRESSION_CHECK' &&
-            taskStatus.key !== 'SANITY_CHECK' &&
-            taskStatus.key !== 'APPROVED' &&
-            taskStatus.key !== 'SMOKE_TESTING' &&
-            taskStatus.key !== 'COMPLETED' &&
-            taskStatus.key !== 'NEEDS_REVIEW'
+            taskStatus.key !== TASK_KEYS.ALL &&
+            taskStatus.key !== TASK_KEYS.VERIFIED &&
+            taskStatus.key !== TASK_KEYS.RELEASED &&
+            taskStatus.key !== TASK_KEYS.REGRESSION_CHECK &&
+            taskStatus.key !== TASK_KEYS.SANITY_CHECK &&
+            taskStatus.key !== TASK_KEYS.APPROVED &&
+            taskStatus.key !== TASK_KEYS.SMOKE_TESTING &&
+            taskStatus.key !== TASK_KEYS.COMPLETED &&
+            taskStatus.key !== TASK_KEYS.NEEDS_REVIEW
           ) {
             return true;
           } else {

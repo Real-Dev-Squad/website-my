@@ -204,6 +204,7 @@
 #task-update:disabled {
   -webkit-appearance: none;
   -moz-appearance: none;
+  border: none;
 }
 
 .task-details__title {
