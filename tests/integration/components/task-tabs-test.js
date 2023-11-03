@@ -51,8 +51,8 @@ module('Integration | Component | task-tabs', function (hooks) {
       userSelectedTaskText: DEFAULT_TASK_TYPE.displayLabel,
       showTasks: false,
       toggleTasks: () => {},
+      dev: true,
     });
-
     await render(hbs` <TaskTabs
     @taskStatusList={{this.tabsTaskStatusList}}
     @showDropDown={{this.showDropDown}}
@@ -61,6 +61,7 @@ module('Integration | Component | task-tabs', function (hooks) {
     @userSelectedTaskText={{this.userSelectedTaskText}}
     @showTasks={{this.showTasks}}
     @toggleTasks={{this.toggleTasks}}
+    @dev={{this.dev}}
   />`);
 
     assert
@@ -77,6 +78,7 @@ module('Integration | Component | task-tabs', function (hooks) {
     @userSelectedTaskText={{this.userSelectedTaskText}}
     @showTasks={{this.showTasks}}
     @toggleTasks={{this.toggleTasks}}
+    @dev={{this.dev}}
   />`);
 
     assert
