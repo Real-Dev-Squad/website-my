@@ -16,9 +16,6 @@ export default class IndexController extends Controller {
   @tracked showUserStateModal = false;
   @tracked newStatus;
 
-  get isDevMode() {
-    return this.featureFlag.isDevMode;
-  }
 
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
