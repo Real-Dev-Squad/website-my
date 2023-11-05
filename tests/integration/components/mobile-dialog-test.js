@@ -13,7 +13,7 @@ module('Integration | Component | mobile-dialog', function (hooks) {
     });
     await render(hbs`<MobileDialog @dev={{this.dev}}/>`);
 
-    assert.dom('.mobile-dialog__dialog').doesNotExist();
+    assert.dom('[data-test-mobile-dialog]').doesNotExist();
   });
 
   test('Mobile-Dialog should renders', async function (assert) {
@@ -26,6 +26,6 @@ module('Integration | Component | mobile-dialog', function (hooks) {
       hbs`<MobileDialog @dev={{this.dev}} @deviceType={{this.deviceType}}  />`
     );
 
-    assert.dom('.mobile-dialog__dialog').exists();
+    assert.dom('[data-test-mobile-dialog]').exists();
   });
 });

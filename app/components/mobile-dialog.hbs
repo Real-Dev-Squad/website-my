@@ -1,7 +1,7 @@
 {{#if @dev}}
   {{#if @deviceType}}
     {{#if this.toShow}}
-    <dialog class="mobile-dialog__dialog">
+    <dialog data-test-mobile-dialog  class="mobile-dialog">
         Open RDS in app
       <br/>
       <button id="mobile-dialog__close-button" type="button" {{on 'click' (fn this.closeDialog)}} >Cancle</button>

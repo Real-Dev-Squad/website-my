@@ -40,7 +40,7 @@ body {
 .main-container {
   margin: 0;
   padding: 0;
-  flex: 100%;
+  flex: 100%;            
   display: flex;
   flex-direction: column;
 }
@@ -56,7 +56,7 @@ body {
   width: 100%;
   padding: 16px;
 }
-.mobile-dialog__dialog {
+.mobile-dialog {
   display: block;
   border-radius: 3px;
   padding: 0.5rem 1rem;
@@ -64,7 +64,8 @@ body {
   margin: 0 auto;
   font-size:large;
   text-align: center;
-  background-color: lightgray;
+  background-color: var(--form--bg);
+  line-height: 1;
   border: none;
   box-shadow: 4px 8px 8px var(--mobile-dialog-box-shadow);
 
