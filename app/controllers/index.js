@@ -16,7 +16,6 @@ export default class IndexController extends Controller {
   @tracked showUserStateModal = false;
   @tracked newStatus;
 
-
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
   }
