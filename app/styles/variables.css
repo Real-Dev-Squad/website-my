@@ -181,4 +181,7 @@
   --profile-edit-btn-clr: #1e429f;
   --profile-disabled-btn-bg-clr: #e5efeb;
   --profile-disabled-btn-text-clr: #9ca3af;
+
+  --mobile-dialog-box-shadow: hsl(0deg 0% 0% / 0.38);
+  --mobile-dialog--open-button: #1d1283;
 }

@@ -19,6 +19,7 @@
 @import 'qrcode.css';
 @import 'progress-bar.css';
 @import 'mobile.css';
+@import 'components/mobile-dialog.css';
 
 html,
 body {
@@ -40,7 +41,7 @@ body {
 .main-container {
   margin: 0;
   padding: 0;
-  flex: 100%;
+  flex: 100%;            
   display: flex;
   flex-direction: column;
 }
