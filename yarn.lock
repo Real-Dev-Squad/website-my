@@ -1281,6 +1281,15 @@
     broccoli-funnel "^3.0.8"
     semver "^7.3.8"
 
+"@embroider/addon-shim@^1.8.6":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-1.8.7.tgz#ba2dcb0647ed2cb0c500c835326266b89ceec595"
+  integrity sha512-JGOQNRj3UR0NdWEg8MsM2eqPLncEwSB1IX+rwntIj22TEKj8biqx7GDgSbeH+ZedijmCh354Hf2c5rthrdzUAw==
+  dependencies:
+    "@embroider/shared-internals" "^2.5.1"
+    broccoli-funnel "^3.0.8"
+    semver "^7.3.8"
+
 "@embroider/macros@^0.41.0":
   version "0.41.0"
   resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-0.41.0.tgz#3e78b6f388d7229906abf4c75edfff8bb0208aca"
@@ -1348,7 +1357,7 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/shared-internals@2.5.1":
+"@embroider/shared-internals@2.5.1", "@embroider/shared-internals@^2.5.1":
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-2.5.1.tgz#a4d8c057cbff293ef6eb29ee6537f263d206b444"
   integrity sha512-b+TWDBisH1p6HeTbJIO8pgu1WzfTP0ZSAlZBqjXwOyrS0ZxP1qNYRrEX+IxyzIibEFjXBxeLakiejz3DJvZX5A==
@@ -5838,6 +5847,15 @@ ember-focus-trap@^1.0.0:
     "@embroider/addon-shim" "^1.0.0"
     focus-trap "^6.7.1"
 
+ember-functions-as-helper-polyfill@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ember-functions-as-helper-polyfill/-/ember-functions-as-helper-polyfill-2.1.2.tgz#5f7a7c7f87b87d4df785c53d1ee0810693c89b6b"
+  integrity sha512-yvW6xykvZEIYzzwlrC/g9yu6LtLkkj5F+ho6U+BDxN1uREMgoMOZnji7sSILn5ITVpaJ055DPcO+utEFD7IZOA==
+  dependencies:
+    ember-cli-babel "^7.26.11"
+    ember-cli-typescript "^5.0.0"
+    ember-cli-version-checker "^5.1.2"
+
 "ember-get-config@0.2.4 - 0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/ember-get-config/-/ember-get-config-0.5.0.tgz#8195f3e4c0ff0742182c81ae54aad78d07a24bcf"
@@ -6127,12 +6145,13 @@ ember-tracked-storage-polyfill@1.0.0:
     ember-cli-babel "^7.26.3"
     ember-cli-htmlbars "^5.7.1"
 
-ember-truth-helpers@^3.0.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-3.1.1.tgz#434715926d72bcc63b8a115dec09745fda4474dc"
-  integrity sha512-FHwJAx77aA5q27EhdaaiBFuy9No+8yaWNT5A7zs0sIFCmf14GbcLn69vJEp6mW7vkITezizGAWhw7gL0Wbk7DA==
+ember-truth-helpers@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-4.0.3.tgz#02705dc36f2d68f1d4cff0d8226396c8ae5dee2e"
+  integrity sha512-T6Ogd3pk9FxYiZfSxdjgn3Hb3Ksqgw7CD23V9qfig9jktNdkNEHo4+3PA3cSD/+3a2kdH3KmNvKyarVuzdtEkA==
   dependencies:
-    ember-cli-babel "^7.22.1"
+    "@embroider/addon-shim" "^1.8.6"
+    ember-functions-as-helper-polyfill "^2.1.2"
 
 ember-window-mock@^0.9.0:
   version "0.9.0"
