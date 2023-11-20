@@ -6,22 +6,14 @@ export default class TaskTabsComponent extends Component {
   availabletaskTabsList = this.args.taskStatusList;
 
   get taskCardStatusList() {
+    if (!this.args.dev) return this.availabletaskTabsList;
+    const statusToRemove = [TASK_KEYS.VERIFIED,
+      TASK_KEYS.RELEASED,
+      TASK_KEYS.APPROVED,
+      TASK_KEYS.COMPLETED,
+      TASK_KEYS.NEEDS_REVIEW]
     const statusToDisplay = this.availabletaskTabsList.filter((taskStatus) => {
-      if (this.args.dev === true) {
-        if (
-          taskStatus.key !== TASK_KEYS.VERIFIED &&
-          taskStatus.key !== TASK_KEYS.RELEASED &&
-          taskStatus.key !== TASK_KEYS.APPROVED &&
-          taskStatus.key !== TASK_KEYS.COMPLETED &&
-          taskStatus.key !== TASK_KEYS.NEEDS_REVIEW
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return taskStatus;
-      }
+      !statusToRemove.includes(taskStatus.key)
     });
     return statusToDisplay;
   }
