@@ -5,7 +5,7 @@ export default class TaskTabsComponent extends Component {
   TASK_KEYS = TASK_KEYS;
   availabletaskTabsList = this.args.taskStatusList;
 
-  get removedTaskTabs() {
+  get taskCardStatusList() {
     const statusToDisplay = this.availabletaskTabsList.filter((taskStatus) => {
       if (this.args.dev === true) {
         if (
