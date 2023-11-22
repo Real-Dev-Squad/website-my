@@ -9,6 +9,7 @@ import ENV from 'website-my/config/environment';
 export default class ApplicationController extends Controller {
   @service router;
   @service featureFlag;
+  @service toast;
   @tracked toVisible = this.checkDeviceType();
 
   GITHUB_URL = GITHUB_URL;
@@ -33,6 +34,7 @@ export default class ApplicationController extends Controller {
       }
     } catch (err) {
       console.error('Error: ', err);
+      this.toast.error("Unable to sign out. Something went wrong. Please try again.")
     }
   }
 
