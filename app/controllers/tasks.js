@@ -16,7 +16,6 @@ const API_BASE_URL = ENV.BASE_API_URL;
 export default class TasksController extends Controller {
   queryParams = ['dev'];
   @service toast;
-  @service featureFlag;
   TASK_KEYS = TASK_KEYS;
   taskStatusList = TASK_STATUS_LIST;
   tabsTaskStatusList = TABS_TASK_STATUS_LIST;
@@ -42,10 +41,6 @@ export default class TasksController extends Controller {
   @tracked showTasks = false;
   @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
   alreadyFetched = localStorage.getItem('already-fetched');
-
-  get isDevMode() {
-    return this.featureFlag.isDevMode;
-  }
 
   @action toggleDropDown() {
     this.showDropDown = !this.showDropDown;
@@ -98,9 +93,7 @@ export default class TasksController extends Controller {
     const taskCompletionPercentage = object.percentCompleted;
     if (taskCompletionPercentage) {
       if (taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage) {
-        this.isDevMode === true
-          ? (requestBody.status = 'DONE')
-          : (requestBody.status = 'COMPLETED');
+        requestBody.status = 'DONE';
       }
       requestBody.percentCompleted = parseInt(taskCompletionPercentage);
     }

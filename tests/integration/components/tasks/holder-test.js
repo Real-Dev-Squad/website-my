@@ -203,41 +203,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .dom('[data-test-task-status-select]')
       .hasValue(TASK_KEYS.IN_PROGRESS);
 
-    await select('[data-test-task-status-select]', TASK_KEYS.COMPLETED);
-
-    assert
-      .dom('[data-test-task-status-select]')
-      .hasValue(TASK_KEYS.IN_PROGRESS);
-  });
-
-  test('Verify values of task status upon api failures under feature flag', async function (assert) {
-    const testTask = tasksData[3];
-    testTask.status = TASK_KEYS.IN_PROGRESS;
-
-    this.set('task', testTask);
-    this.set('mock', () => {});
-    this.set('onTaskUpdate', (taskId, error) => {
-      error();
-    });
-    this.set('isLoading', false);
-    this.set('disabled', false);
-    this.set('defaultType', DEFAULT_TASK_TYPE);
-    this.set('dev', true);
-
-    await render(hbs`<Task::Holder
-    @task={{this.task}}
-    @onTaskChange={{this.mock}}
-    @onStausChange={{this.mock}}
-    @onTaskUpdate={{this.onTaskUpdate}}
-    @userSelectedTask={{this.defaultType}}
-    @disabled={{this.disabled}}
-    @dev={{this.dev}}
-  />`);
-
-    assert
-      .dom('[data-test-task-status-select]')
-      .hasValue(TASK_KEYS.IN_PROGRESS);
-
     await select('[data-test-task-status-select]', TASK_KEYS.DONE);
 
     assert
@@ -284,7 +249,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
-    this.set('dev', true);
 
     await render(hbs`<Task::Holder
     @task={{this.task}} 
@@ -294,7 +258,6 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     @isLoading={{this.isLoading}} 
     @userSelectedTask={{this.defaultType}} 
     @disabled={{this.disabled}}
-    @dev={{this.dev}}
   />`);
 
     assert.dom('[data-test-task-status-select]').exists();

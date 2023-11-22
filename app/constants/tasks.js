@@ -5,7 +5,6 @@ const TASK_KEYS = {
   IN_PROGRESS: 'IN_PROGRESS',
   BLOCKED: 'BLOCKED',
   SMOKE_TESTING: 'SMOKE_TESTING',
-  COMPLETED: 'COMPLETED',
   DONE: 'DONE',
   NEEDS_REVIEW: 'NEEDS_REVIEW',
   IN_REVIEW: 'IN_REVIEW',
@@ -24,7 +23,6 @@ const {
   IN_PROGRESS,
   BLOCKED,
   SMOKE_TESTING,
-  COMPLETED,
   DONE,
   NEEDS_REVIEW,
   IN_REVIEW,
@@ -60,10 +58,6 @@ const TASK_STATUS_LIST = [
   {
     displayLabel: 'Smoke Testing',
     key: SMOKE_TESTING,
-  },
-  {
-    displayLabel: 'Completed',
-    key: COMPLETED,
   },
   {
     displayLabel: 'Done',
