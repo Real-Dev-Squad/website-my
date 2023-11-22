@@ -1,6 +1,6 @@
 .mobile-dialog {
     display: block;
-    border-radius: 3px;
+    border-radius: 4px;
     padding: 0.5rem 1rem;
     font-weight: 900;
     margin: 0 auto;
@@ -14,7 +14,7 @@
       margin: 1rem;
       font-size:medium;
       border: none;
-      border-radius: 3px;
+      border-radius: 4px;
       color: var(--body-bg-color);
       font-weight: 600;
     }

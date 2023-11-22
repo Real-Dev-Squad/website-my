@@ -1,8 +1,8 @@
 {{page-title "My | Real Dev Squad"}}
 
 <MobileDialog
-@dev ={{this.isDevMode}}
-@deviceType = {{this.toVisible}}
+@isDevEnv = {{this.isDevMode}}
+@isMobileDevice = {{this.isMobileDevice}}
 />
 <Navbar
   @firstName={{@model.firstName}}

@@ -10,7 +10,7 @@ export default class ApplicationController extends Controller {
   @service router;
   @service featureFlag;
   @service toast;
-  @tracked toVisible = this.checkDeviceType();
+  @tracked isMobileDevice = this.detectMobileDevice();
 
   GITHUB_URL = GITHUB_URL;
   BASE_API_URL = ENV.BASE_API_URL;
@@ -40,7 +40,7 @@ export default class ApplicationController extends Controller {
     }
   }
 
-  checkDeviceType() {
+  detectMobileDevice() {
     let regexp = /android|iphone|kindle|ipad/i;
     let details = navigator.userAgent;
     let isMobileDevice = regexp.test(details);

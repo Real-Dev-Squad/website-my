@@ -1,8 +1,8 @@
-{{#if @dev}}
-  {{#if @deviceType}}
-    {{#if this.toShow}}
+{{#if @isDevEnv}}
+  {{#if @isMobileDevice}}
+    {{#if this.isDialogVisible}}
     <dialog data-test-mobile-dialog  class="mobile-dialog">
-        Open RDS in app
+        Redirect to RDS App
       <br/>
       <button id="mobile-dialog__close-button" type="button" {{on 'click' (fn this.closeDialog)}} >Cancle</button>
       <button id="mobile-dialog__open-button" type="button" {{on 'click' (fn this.openRDSApp)}}>Okay</button>
