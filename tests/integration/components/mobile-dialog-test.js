@@ -8,8 +8,8 @@ module('Integration | Component | mobile-dialog', function (hooks) {
 
   test('Mobile-Dialog does not renders', async function (assert) {
     this.setProperties({
-      dev: false,
-      deviceType: false,
+      isDevEnv: false,
+      isMobileDevice: false,
     });
     await render(hbs`<MobileDialog @dev={{this.dev}}/>`);
 
@@ -18,12 +18,12 @@ module('Integration | Component | mobile-dialog', function (hooks) {
 
   test('Mobile-Dialog should renders', async function (assert) {
     this.setProperties({
-      dev: true,
-      deviceType: true,
+      isDevEnv: true,
+      isMobileDevice: true,
     });
 
     await render(
-      hbs`<MobileDialog @dev={{this.dev}} @deviceType={{this.deviceType}}  />`
+      hbs`<MobileDialog @isDevEnv={{this.isDevEnv}} @isMobileDevice={{this.isMobileDevice}}  />`
     );
 
     assert.dom('[data-test-mobile-dialog]').exists();

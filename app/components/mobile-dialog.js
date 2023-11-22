@@ -1,13 +1,14 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import ENV from 'website-my/config/environment';
 import { tracked } from '@glimmer/tracking';
 
 export default class MobileDialogComponent extends Component {
-  @tracked toShow = true;
+  @tracked isDialogVisible = true;
 
   @action
   closeDialog() {
-    this.toShow = false;
+    this.isDialogVisible = false;
   }
 
   @action
@@ -17,9 +18,8 @@ export default class MobileDialogComponent extends Component {
 
   openApp() {
     let isAppInstalled = false;
-    const appScheme = 'app://realdevsquad.com';
-    const fallbackURL =
-      'https://play.google.com/store/apps/details?id=com.github.android';
+    const appScheme = ENV.RDS_ANDROID_SCHEME;
+    const fallbackURL = ENV.ANDROID_GITHUB_URL;
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const MAXTIME = 1000;
 
@@ -29,7 +29,7 @@ export default class MobileDialogComponent extends Component {
       iframe.style.display = 'none';
       iframe.src = appScheme;
       document.body.appendChild(iframe);
-      this.toShow = false;
+      this.isDialogVisible = false;
 
       window.addEventListener('blur', function () {
         document.body.removeChild(iframe);
@@ -45,7 +45,7 @@ export default class MobileDialogComponent extends Component {
           document.body.removeChild(iframe);
           window.location.href = fallbackURL;
         }
-        this.toShow = false;
+        this.isDialogVisible = false;
       }, 1000);
     }
   }
