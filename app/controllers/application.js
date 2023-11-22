@@ -34,7 +34,9 @@ export default class ApplicationController extends Controller {
       }
     } catch (err) {
       console.error('Error: ', err);
-      this.toast.error("Unable to sign out. Something went wrong. Please try again.")
+      this.toast.error(
+        'Unable to sign out. Something went wrong. Please try again.'
+      );
     }
   }
 
