@@ -1,0 +1,18 @@
+{{#if @dev}}
+  <section class='cache'>
+    <button
+      data-test-btn-clear-cache
+      class='cache__clear-btn'
+      type='submit'
+      disabled={{@isPurgingCache}}
+      {{on 'click' (fn @onClearCache)}}
+    >{{#if @isPurgingCache}}
+        <i class='fa fa-spinner fa-spin' data-test-button-spinner></i>
+      {{/if}}
+      Clear Cache</button>
+    <div data-test-pending-requests class='cache__remaining-requests'>
+      {{@totalTimes}}
+      / 3 requests remaining for today
+    </div>
+  </section>
+{{/if}}

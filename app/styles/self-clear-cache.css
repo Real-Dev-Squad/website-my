@@ -1,0 +1,35 @@
+.cache {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  box-shadow: 5px 10px 15px #09113344;
+  border-radius: 10px;
+  padding: 30px;
+  font-weight: 700;
+}
+
+.cache__last-request {
+  padding: 40px 4px 20px;
+  color: #1d1283;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.cache__clear-btn {
+  border-radius: 10px;
+  padding: 16px 60px;
+  border: 3px solid #e49504;
+  color: #e49504;
+  background-color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.cache__remaining-requests {
+  padding-top: 30px;
+  color: #1d1283;
+  font-size: 1.25rem;
+}

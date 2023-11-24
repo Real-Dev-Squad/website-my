@@ -5,18 +5,27 @@ import ENV from 'website-my/config/environment';
 import { inject as service } from '@ember/service';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 import { USER_STATES } from '../constants/user-status';
+import { MAX_CACHE_PURGE_COUNT } from '../constants/self-clear-cache';
 
 const BASE_URL = ENV.BASE_API_URL;
 
 export default class IndexController extends Controller {
+  queryParams = ['dev'];
+  @service featureFlag;
   @service toast;
   @tracked status = this.model;
   @tracked isStatusUpdating = false;
   @tracked showUserStateModal = false;
   @tracked newStatus;
+  @tracked isPurgingCache = false;
+  @tracked cacheTriggeredPending = MAX_CACHE_PURGE_COUNT;
 
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
+  }
+
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
   }
 
   @action async updateStatus(newStatus) {
@@ -67,5 +76,35 @@ export default class IndexController extends Controller {
   @action changeStatus(status) {
     this.newStatus = status;
     this.toggleUserStateModal();
+  }
+
+  @action async purgeCache() {
+    this.isPurgingCache = true;
+    try {
+      const response = await fetch(`${BASE_URL}/cache`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        this.cacheTriggeredPending--;
+        alert(data.message);
+      } else {
+        this.toast.error(
+          'Something went wrong.',
+          '',
+          toastNotificationTimeoutOptions
+        );
+      }
+    } catch (error) {
+      console.error('Error : ', error);
+      alert('Something went wrong!');
+    } finally {
+      this.isPurgingCache = false;
+    }
   }
 }
