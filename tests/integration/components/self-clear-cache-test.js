@@ -12,6 +12,7 @@ module('Integration | Component | self-clear-cache', function (hooks) {
       cacheTriggeredPending: 3,
       isDevMode: true,
       isPurgingCache: false,
+      lastUpdatedCacheRequest: '24 November, 1:23 PM IST',
     });
 
     await render(hbs`
@@ -20,6 +21,7 @@ module('Integration | Component | self-clear-cache', function (hooks) {
           @onClearCache={{this.purgeCache}}
           @isPurgingCache={{this.isPurgingCache}}
           @dev={{this.isDevMode}}
+          @time={{this.lastUpdatedCacheRequest}}
         />
     `);
 
