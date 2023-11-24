@@ -9,8 +9,7 @@ module('Integration | Component | self-clear-cache', function (hooks) {
   test('should render the component with relevant details', async function (assert) {
     this.setProperties({
       purgeCache: () => {},
-      count: 3,
-      cacheTriggeredPending: false,
+      cacheTriggeredPending: 3,
       isDevMode: true,
       isPurgingCache: false,
     });
@@ -28,6 +27,8 @@ module('Integration | Component | self-clear-cache', function (hooks) {
       .dom('[data-test-pending-requests]')
       .hasText(`3 / 3 requests remaining for today`);
     assert.dom('[data-test-btn-clear-cache]').hasText('Clear Cache');
-    assert.dom('[data-test-last-time]').hasText('24 November, 1:23 PM IST');
+    assert
+      .dom('[data-test-last-time]')
+      .hasText('Last Request: 24 November, 1:23 PM IST');
   });
 });
