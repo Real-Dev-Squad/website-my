@@ -1,8 +1,15 @@
-<div class="greeting">
+<div class='greeting'>
   <h1>Welcome to my site!</h1>
 </div>
-<UserStatus 
-  @status={{this.status}} 
+<SelfClearCache
+  @totalTimes={{this.cacheTriggeredPending}}
+  @onClearCache={{this.purgeCache}}
+  @isPurgingCache={{this.isPurgingCache}}
+  @time={{this.lastUpdatedCacheRequest}}
+  @dev={{this.isDevMode}}
+/>
+<UserStatus
+  @status={{this.status}}
   @changeStatus={{this.changeStatus}}
   @isStatusUpdating={{this.isStatusUpdating}}
   @updateStatus={{this.updateStatus}}
