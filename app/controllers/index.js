@@ -88,7 +88,6 @@ export default class IndexController extends Controller {
         },
         credentials: 'include',
       });
-      console.log(response);
       if (response.ok) {
         const data = await response.json();
         this.cacheTriggeredPending--;
