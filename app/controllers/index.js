@@ -21,7 +21,7 @@ export default class IndexController extends Controller {
   @tracked newStatus;
   @tracked isPurgingCache = false;
   @tracked cacheTriggeredPending = MAX_CACHE_PURGE_COUNT;
-  @tracked lastUpdatedCacheRequest = LAST_UPDATED_REQUEST;
+  lastUpdatedCacheRequest = LAST_UPDATED_REQUEST;
 
   @action toggleUserStateModal() {
     this.showUserStateModal = !this.showUserStateModal;
