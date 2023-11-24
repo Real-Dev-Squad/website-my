@@ -8,10 +8,11 @@ module('Integration | Component | self-clear-cache', function (hooks) {
 
   test('should render the component with relevant details', async function (assert) {
     this.setProperties({
-      onClearCache: () => {},
+      purgeCache: () => {},
       count: 3,
-      isPurginCache: false,
+      cacheTriggeredPending: false,
       isDevMode: true,
+      isPurgingCache: false,
     });
 
     await render(hbs`
