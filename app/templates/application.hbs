@@ -1,5 +1,9 @@
 {{page-title "My | Real Dev Squad"}}
 
+<MobileDialog
+@isDevEnv = {{this.isDevMode}}
+@isMobileDevice = {{this.isMobileDevice}}
+/>
 <Navbar
   @firstName={{@model.firstName}}
   @profilePictureURL={{@model.profilePictureURL}}
@@ -7,10 +11,10 @@
 />
 
 <div class="main-container">
-  {{outlet}}
+    {{outlet}}
 </div>
 <footer class="footer">Contents of this website are deployed from this
-  <a href={{this.GITHUB_URL}} target="_blank" rel="noopener noreferrer">
-    open sourced repo
-  </a>
+    <a href={{this.GITHUB_URL}} target="_blank" rel="noopener noreferrer">
+      open sourced repo
+    </a>
 </footer>

@@ -19,6 +19,8 @@
 @import 'qrcode.css';
 @import 'progress-bar.css';
 @import 'mobile.css';
+@import 'components/mobile-dialog.css';
+@import 'self-clear-cache.css';
 
 html,
 body {
