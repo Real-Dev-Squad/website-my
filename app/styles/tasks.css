@@ -375,7 +375,6 @@
 
 /* extension form */
 .task-card__extensionForm-button {
-  overflow: hidden;
   font-weight: bolder;
   display: block;
   padding: 0.5rem;
