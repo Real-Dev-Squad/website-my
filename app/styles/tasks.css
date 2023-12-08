@@ -18,7 +18,7 @@
 }
 
 .progress-bar-red {
-  --progress-bar-color:rgba(255, 0, 0, 0.8);
+  --progress-bar-color: rgba(255, 0, 0, 0.8);
 }
 .progress-bar-yellow {
   --progress-bar-color: rgba(255, 255, 0, 0.9);
@@ -28,7 +28,7 @@
   --progress-bar-color: rgba(0, 128, 0, 0.9);
 }
 .progress-bar-orange {
-  --progress-bar-color: rgba(255, 165, 0,0.9);
+  --progress-bar-color: rgba(255, 165, 0, 0.9);
 }
 
 .tasks-page {
@@ -384,7 +384,7 @@
   color: var(--primary-text-color);
   transition: 0.25s ease-in-out;
   height: 2.5rem;
-  width: 10rem;
+  width: auto;
   flex-shrink: 0;
 }
 
@@ -608,18 +608,18 @@
   white-space: normal;
 }
 
-  .multiple-extension-form__container-close {
-    background-color:#a70606;
-    color: var(--button-proceed--text);
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 9px;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    margin:0 auto;
-  }
+.multiple-extension-form__container-close {
+  background-color: #a70606;
+  color: var(--button-proceed--text);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 9px;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
 
 .error-message {
   color: red;
@@ -629,7 +629,6 @@
   height: 25px;
   width: 100%;
 }
-
 
 .error-placeholder {
   color: red;
@@ -647,16 +646,15 @@
   background-color: #888;
 }
 
-
-.multiple-extension-form__open-button:hover ,
+.multiple-extension-form__open-button:hover,
 .multiple-extension-form__create-button:hover {
   background-color: #01ad01;
   color: #fff;
 }
 
-.multiple-extension-form__container-close:hover{
+.multiple-extension-form__container-close:hover {
   background-color: #d50707;
-  color:#fff
+  color: #fff;
 }
 
 .multiple-extension-form__create-button {
@@ -670,24 +668,25 @@
   width: 40%;
   display: flex;
   justify-content: center;
-  margin:0 auto;
+  margin: 0 auto;
   border: none;
   border-radius: 8px;
   padding: 5px 9px;
   transition: background-color 0.3s ease;
 }
 
-  .latest-extension-info__content th {
-    text-align: right;
-    width: 50%;
-  }
+.latest-extension-info__content th {
+  text-align: right;
+  width: 50%;
+}
 
-.latest-extension-info__content th, td {
+.latest-extension-info__content th,
+td {
   padding: 8px 2px;
   vertical-align: top;
   min-width: 50%;
 }
-.latest-table{
+.latest-table {
   width: 100%;
 }
 .latest-extension-info__content th {
@@ -697,7 +696,8 @@
   text-align: left;
   word-wrap: normal;
 }
-tr>th,tr>td{
+tr > th,
+tr > td {
   vertical-align: top;
 }
 
@@ -707,9 +707,9 @@ textarea {
   overflow-y: auto;
 }
 
-div.buttons{
+div.buttons {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   min-width: 100%;
   align-content: center;
   justify-content: center;
