@@ -89,7 +89,7 @@
   flex-shrink: 0;
 }
 
-.task-card__progress-bar-container__progress-bar:hover {
+.task-card__progress-bar-container__progress-bar {
   background-color: transparent;
   overflow: hidden;
   position: relative;
