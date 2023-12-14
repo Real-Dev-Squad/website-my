@@ -14,6 +14,20 @@ export default class TasksHolderComponent extends Component {
   TASK_KEYS = TASK_KEYS;
   availabletaskStatusList = TASK_STATUS_LIST;
 
+  constructor() {
+    super(...arguments);
+    if (this.args.dev) {
+      this.status =
+        this.args.task.status === TASK_KEYS.COMPLETED
+          ? TASK_KEYS.DONE
+          : this.args.task.status;
+    } else {
+      this.status =
+        this.args.task.status === TASK_KEYS.DONE
+          ? TASK_KEYS.COMPLETED
+          : this.args.task.status;
+    }
+  }
   get taskStatusList() {
     const statusToDisplay = this.availabletaskStatusList.filter(
       (taskStatus) => {
@@ -35,7 +49,7 @@ export default class TasksHolderComponent extends Component {
     ];
     if (
       this.args.task.endsOn * 1000 < Date.now() &&
-      !statusNotOverDueList.includes(this.args.task.status)
+      !statusNotOverDueList.includes(this.status)
     ) {
       return 'task-late';
     } else return '';
@@ -85,7 +99,7 @@ export default class TasksHolderComponent extends Component {
   }
 
   get isProgressBarDisabled() {
-    return this.args.task.status !== TASK_KEYS.IN_PROGRESS;
+    return this.status !== TASK_KEYS.IN_PROGRESS;
   }
 
   @action
