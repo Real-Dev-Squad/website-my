@@ -196,9 +196,15 @@
   transition: 250ms ease-in-out;
 }
 
-#task-update:hover {
+#task-update:hover:not([disabled]) {
   background-color: var(--primary-text-color);
   color: var(--white);
+}
+
+#task-update:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
 }
 
 .task-details__title {

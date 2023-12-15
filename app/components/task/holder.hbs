@@ -31,33 +31,44 @@
       {{/if}}
     {{/if}}
 
-    {{#if (not-eq this.status this.TASK_KEYS.VERIFIED)}}
-      <div class='task-update-container'>
-        <label id='task-update-label' for='task-update'><b>Status:</b></label>
-        <select
-          data-test-task-status-select
-          id='task-update'
-          {{on 'change' this.onStatusChange}}
-        >
-          {{#each this.taskStatusList as |taskStatus|}}
-            <option
-              data-test-dropdown-option={{taskStatus.displayLabel}}
-              value={{taskStatus.key}}
-              selected={{eq taskStatus.key this.status}}
-            >
-              {{taskStatus.displayLabel}}
-            </option>
-          {{/each}}
-        </select>
-      </div>
-    {{/if}}
+    <div class='task-update-container'>
+      <label id='task-update-label' for='task-update'><b>Status:</b></label>
+      <select
+        data-test-task-status-select
+        id='task-update'
+        {{on 'change' this.onStatusChange}}
+        disabled={{eq @task.status this.TASK_KEYS.DONE}}
+      >
+        {{#each this.removedTaskStatus as |taskStatus|}}
+          <option
+            data-test-dropdown-option={{taskStatus.displayLabel}}
+            value={{taskStatus.key}}
+            selected={{eq taskStatus.key this.status}}
+          >
+            {{taskStatus.displayLabel}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
 
-    <button
-      class='task-card__extensionForm-button'
-      data-test-task-extensionForm-button
-      type='button'
-      {{on 'click' this.toggleExtensionForm}}
-    >Extension Status</button>
+    {{#if @dev}}
+      {{#if (not-eq @task.status this.TASK_KEYS.DONE)}}
+        <button
+          class='task-card__extensionForm-button'
+          data-test-task-extensionForm-button
+          type='button'
+          {{on 'click' this.toggleExtensionForm}}
+        > Request Extension </button>
+      {{/if}}
+    {{else}}
+      <button
+        class='task-card__extensionForm-button'
+        data-test-task-extensionForm-button
+        type='button'
+        {{on 'click' this.toggleExtensionForm}}
+      > Extension Status</button>
+
+    {{/if}}
 
     {{#if this.isLoading}}
       <div data-test-task-spinner class='task-card__loader-container'>

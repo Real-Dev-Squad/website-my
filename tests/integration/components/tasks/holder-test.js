@@ -22,23 +22,20 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     this.set('isLoading', false);
     this.set('disabled', false);
     this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
 
     await render(hbs`<Task::Holder
     @task={{this.task}} 
     @onTaskChange={{this.mock}} 
     @onStausChange={{this.mock}} 
     @onTaskUpdate={{this.mock}} 
-    @isLoading={{this.isLoading}} 
     @userSelectedTask={{this.defaultType}} 
     @disabled={{this.disabled}}
+    @dev={{this.dev}}
   />`);
-    await waitUntil(() => find('[data-test-task-extensionForm-button]'));
-
-    assert.equal(
-      this.element.querySelector('[data-test-task-extensionForm-button]')
-        .innerText,
-      'Extension Status'
-    );
+    assert
+      .dom('[data-test-task-extensionForm-button]')
+      .hasText('Request Extension');
   });
 
   test('Render Task holder and check wether it has progress bar', async function (assert) {
@@ -299,5 +296,112 @@ module('Integration | Component | Tasks Holder', function (hooks) {
 
     assert.dom('[data-test-task-status-select]').exists();
     assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
+  });
+  test('Should not render extension request button when task status is done', async function (assert) {
+    const testTask = tasksData[3];
+    testTask.status = TASK_KEYS.DONE;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+    assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
+    assert.dom('[data-test-task-extensionForm-button]').doesNotExist();
+  });
+
+  test('Should render all the task status when in feature flag', async function (assert) {
+    const testTask = tasksData;
+    testTask.status = TASK_KEYS.DONE;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+    assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
+    assert.dom('[data-test-dropdown-option=Available]').hasText('Available');
+    assert
+      .dom('[data-test-dropdown-option="In Progress"]')
+      .hasText('In Progress');
+    assert.dom('[data-test-dropdown-option=Blocked]').hasText('Blocked');
+    assert.dom('[data-test-dropdown-option=Assigned]').hasText('Assigned');
+    assert.dom('[data-test-dropdown-option="In Review"]').hasText('In Review');
+  });
+
+  test('Should render all the task status when not in feature flag', async function (assert) {
+    const testTask = tasksData;
+    testTask.status = TASK_KEYS.DONE;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', false);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}}
+    @onTaskChange={{this.mock}}
+    @onStausChange={{this.mock}}
+    @onTaskUpdate={{this.mock}}
+    @isLoading={{this.isLoading}}
+    @userSelectedTask={{this.defaultType}}
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+    assert.dom('[data-test-dropdown-option=Done]').hasText('Done');
+    assert.dom('[data-test-dropdown-option=Available]').hasText('Available');
+    assert
+      .dom('[data-test-dropdown-option="In Progress"]')
+      .hasText('In Progress');
+    assert.dom('[data-test-dropdown-option=Blocked]').hasText('Blocked');
+    assert.dom('[data-test-dropdown-option=Assigned]').hasText('Assigned');
+    assert.dom('[data-test-dropdown-option="In Review"]').hasText('In Review');
+    assert
+      .dom('[data-test-dropdown-option="Smoke Testing"]')
+      .hasText('Smoke Testing');
+    assert
+      .dom('[data-test-dropdown-option="Needs Review"]')
+      .hasText('Needs Review');
+    assert
+      .dom('[data-test-dropdown-option="Sanity Check"]')
+      .hasText('Sanity Check');
+    assert
+      .dom('[data-test-dropdown-option="Regression Check"]')
+      .hasText('Regression Check');
   });
 });

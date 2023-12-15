@@ -3,7 +3,7 @@
     class='task-tabs__dropdown-container
       {{if @showTasks "task-tabs__dropdown-active"}}'
   >
-    {{#each @taskStatusList as |status|}}
+    {{#each this.taskCardStatusList as |status|}}
       <button
         data-test-task-tabs-button
         href='#'
