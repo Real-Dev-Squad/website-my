@@ -54,8 +54,9 @@ module('Integration | Component | identity/step1', function (hooks) {
 
     await click('[data-test-step1-button]');
 
+    let resumeTest = this.resumeTest;
     setTimeout(() => {
-      this.resumeTest();
+      resumeTest();
     }, 500);
     // eslint-disable-next-line ember/no-pause-test
     await this.pauseTest();
