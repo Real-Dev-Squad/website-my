@@ -168,6 +168,7 @@
 }
 
 .identity-hero {
+  width: 25%;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -241,6 +242,7 @@
 }
 
 .identity-rds-logo {
+  width: 214px;
   margin-top: 4%;
 }
 
@@ -252,6 +254,7 @@
 
 .identity-header {
   position: absolute;
+  width: 100%;
   top: -32px;
   z-index: 0;
 }
