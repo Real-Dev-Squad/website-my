@@ -1,99 +1,140 @@
 {{page-title 'Identity'}}
 
-<h1 class='identity-heading'>
-  Identity Service Verification
-</h1>
-<div class='identity-container'>
-  {{#if (eq @model.profileStatus 'PENDING')}}
-    <p>Verification process is Pending!</p>
-    <button
-      type='button'
-      {{on 'click' (fn this.handleRefresh)}}
-    >Refresh</button>
-  {{else if (eq @model.profileStatus 'VERIFIED')}}
-    <p>Verification Done!</p>
-  {{else}}
-    {{#if (eq @model.profileStatus 'BLOCKED')}}
-      <p>Your previous chaincode is blocked for some reason. Please generate a
-        new chaincode.</p>
+{{#if this.isDev}}
+  <div class='identity-page'>
+    <img alt="header" class='identity-header' src='identity/header.svg' />
+    <img alt="hero" class='identity-hero' src='identity/hero.svg'  />
+    <img alt="rds" class='identity-rds-logo' src='identity/logo.svg' />
+    {{#if (eq this.state 'getStarted')}}
+      <div class='identity-heading'>Connect your Profile Service with Identity
+        Service</div>
     {{/if}}
-    <div class='chaincode-div'>
-      <label class='identity-label'>
-        {{#if this.isChaincodeClicked}}
-          <label class='chaincode'>{{this.Chaincode}}</label>
-
-          <Input
-            class='copy-button'
-            type='button'
-            @value='Copy'
-            {{on 'click' (fn this.handleCopy)}}
-          />
-
-        {{else}}
-          <div class='btn-container'>
-            <Input
-              class='identity-Buttons'
-              type='button'
-              @value={{this.Chaincode}}
-              {{on 'click' (fn this.handleGenerateChaincode)}}
-              disabled={{this.generateChainCodeDisabled}}
-            />
-          </div>
-        {{/if}}
-      </label>
+    <div class='identity-box'>
+      {{#if (eq this.state 'getStarted')}}
+        <Identity::GetStarted @setState={{this.setState}} />
+      {{else if (eq this.state 'step1')}}
+        <Identity::Step1 @setState={{this.setState}} />
+      {{else if (eq this.state 'step2')}}
+        <Identity::Step2
+          @setState={{this.setState}}
+          @profileURL={{@model.profileURL}}
+        />
+      {{else if (eq this.state 'step3')}}
+        <Identity::Step3 @setState={{this.setState}} />
+      {{else if (eq this.state 'reload')}}
+        <Identity::Reload />
+      {{else if (eq this.state 'verified')}}
+        <Identity::Verified />
+      {{else if (eq this.state 'blocked')}}
+        <Identity::Blocked @setState={{this.setState}} />
+      {{/if}}
     </div>
+    <img
+      alt="header-hero"
+      class='identity-header-hero'
+      src='identity/header-hero.svg'
+      width='10%'
+    />
+    <img alt="footer" class='identity-footer' src='identity/footer.svg' width='100%' />
+  </div>
+{{else}}
+  <h1 class='identity-heading'>
+    Identity Service Verification
+  </h1>
+  <div class='identity-container'>
+    {{#if (eq @model.profileStatus 'PENDING')}}
+      <p>Verification process is Pending!</p>
+      <button
+        type='button'
+        {{on 'click' (fn this.handleRefresh)}}
+      >Refresh</button>
+    {{else if (eq @model.profileStatus 'VERIFIED')}}
+      <p>Verification Done!</p>
+    {{else}}
+      {{#if (eq @model.profileStatus 'BLOCKED')}}
+        <p>Your previous chaincode is blocked for some reason. Please generate a
+          new chaincode.</p>
+      {{/if}}
+      <div class='chaincode-div'>
+        <label class='identity-label'>
+          {{#if this.isChaincodeClicked}}
+            <label class='chaincode'>{{this.Chaincode}}</label>
 
-    <div class='input-div'>
-      <div class="identity__input-container">  
-        <label class={{if this.profileURL "identity__profileURL-filled"}}>Profile URL</label>
-        <Input
+            <Input
+              class='copy-button'
+              type='button'
+              @value='Copy'
+              {{on 'click' (fn this.handleCopy)}}
+            />
+
+          {{else}}
+            <div class='btn-container'>
+              <Input
+                class='identity-Buttons'
+                type='button'
+                @value={{this.Chaincode}}
+                {{on 'click' (fn this.handleGenerateChaincode)}}
+                disabled={{this.generateChainCodeDisabled}}
+              />
+            </div>
+          {{/if}}
+        </label>
+      </div>
+
+      <div class='input-div'>
+        <div class='identity__input-container'>
+          <label
+            class={{if this.profileURL 'identity__profileURL-filled'}}
+          >Profile URL</label>
+          <Input
             class='input-url'
             @value={{this.profileURL}}
             type='text'
             onkeyup={{this.changeSaveDisabled}}
-        />
-      </div>  
-      <div class='btn-container'>
-        <button
-          disabled={{this.saveDisabled}}
-          {{on 'mouseenter' (fn this.setError 'SAVE_BUTTON')}}
-          {{on 'mouseleave' this.resetError}}
-          type='submit'
-          class='identity-Buttons edit'
-          {{on 'click' (fn this.handleEdit)}}
-        >
-          {{#if this.isEditClicked}}
-            <i class='fa fa-spinner fa-spin'></i>
-          {{/if}}
-          Save
-        </button>
+          />
+        </div>
+        <div class='btn-container'>
+          <button
+            disabled={{this.saveDisabled}}
+            {{on 'mouseenter' (fn this.setError 'SAVE_BUTTON')}}
+            {{on 'mouseleave' this.resetError}}
+            type='submit'
+            class='identity-Buttons edit'
+            {{on 'click' (fn this.handleEdit)}}
+          >
+            {{#if this.isEditClicked}}
+              <i class='fa fa-spinner fa-spin'></i>
+            {{/if}}
+            Save
+          </button>
+        </div>
       </div>
-    </div>
 
-    <label class='identity-check-label'>
-      I have saved my profile URL, generated a chaincode<br />and successfully
-      added that to my service.
-      <Input
-        @type='checkbox'
-        @checked={{this.isChecked}}
-        disabled={{this.checkboxDisabled}}
-        {{on 'mouseenter' (fn this.setError 'CHECKBOX')}}
+      <label class='identity-check-label'>
+        I have saved my profile URL, generated a chaincode<br />and successfully
+        added that to my service.
+        <Input
+          @type='checkbox'
+          @checked={{this.isChecked}}
+          disabled={{this.checkboxDisabled}}
+          {{on 'mouseenter' (fn this.setError 'CHECKBOX')}}
+          {{on 'mouseleave' this.resetError}}
+        />
+      </label>
+      <button
+        type='submit'
+        class='identity-verify-btn'
+        disabled={{not this.isChecked}}
+        {{on 'click' (fn this.handleVerify)}}
+        {{on 'mouseenter' (fn this.setError 'VERIFY_BUTTON')}}
         {{on 'mouseleave' this.resetError}}
-      />
-    </label>
-    <button
-      type='submit'
-      class='identity-verify-btn'
-      disabled={{not this.isChecked}}
-      {{on 'click' (fn this.handleVerify)}}
-      {{on 'mouseenter' (fn this.setError 'VERIFY_BUTTON')}}
-      {{on 'mouseleave' this.resetError}}
-    >
-      {{#if this.isVerifyClicked}}
-        <i class='fa fa-spinner fa-spin'></i>
-      {{/if}}
-      Link Chaincode
-    </button>
-    <p class='identity-error-message'>{{this.identityError}}</p>
-  {{/if}}
-</div>
+      >
+        {{#if this.isVerifyClicked}}
+          <i class='fa fa-spinner fa-spin'></i>
+        {{/if}}
+        Link Chaincode
+      </button>
+      <p class='identity-error-message'>{{this.identityError}}</p>
+    {{/if}}
+  </div>
+{{/if}}

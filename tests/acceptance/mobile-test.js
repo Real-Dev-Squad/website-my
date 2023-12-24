@@ -38,7 +38,7 @@ module('Acceptance | login', function (hooks) {
     // eslint-disable-next-line ember/no-pause-test
     await pauseTest();
     assert.equal(currentURL(), '/mobile');
-
+    stub.restore();
     server.shutdown();
   });
 

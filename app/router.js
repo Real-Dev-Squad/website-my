@@ -13,6 +13,7 @@ Router.map(function () {
   this.route('tasks');
   this.route('profile');
   this.route('identity');
+  this.route('new-identity');
   this.route('404', { path: '/*' });
   this.route('discord');
   this.route('mobile');

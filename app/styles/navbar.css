@@ -7,6 +7,7 @@ nav {
   font: 'Roboto', sans-serif;
   font-weight: 700;
   background-color: var(--nav--bg);
+  z-index: 1;
 }
 
 nav li a {

@@ -11,6 +11,7 @@ const BASE_URL = ENV.BASE_API_URL;
 
 export default class IdentityController extends Controller {
   @service toast;
+  @service router;
   @tracked isEditClicked = false;
   @tracked isGenerateChaincodeClicked = false;
   @tracked isChecked = false;
@@ -24,6 +25,30 @@ export default class IdentityController extends Controller {
   @tracked checkboxDisabled =
     this.generateChainCodeDisabled || this.model.chaincode === undefined;
   @tracked identityError = '';
+
+  get intialState() {
+    if (this.model.profileStatus === 'PENDING') {
+      return 'reload';
+    } else if (this.model.profileStatus === 'VERIFIED') {
+      return 'verified';
+    } else if (this.model.profileStatus === 'BLOCKED') {
+      return 'blocked';
+    }
+    return 'getStarted';
+  }
+
+  get isDev() {
+    if (this.router.currentRoute) {
+      return this.router.currentRoute.queryParams.dev;
+    }
+    return false;
+  }
+
+  @tracked state = this.intialState;
+
+  @action setState(value) {
+    this.state = value;
+  }
 
   @action async handleRefresh() {
     window.location.reload();
