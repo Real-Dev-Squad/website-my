@@ -37,13 +37,6 @@ export default class IdentityController extends Controller {
     return 'getStarted';
   }
 
-  get isDev() {
-    if (this.router.currentRoute) {
-      return this.router.currentRoute.queryParams.dev;
-    }
-    return false;
-  }
-
   @tracked state = this.intialState;
 
   @action setState(value) {
