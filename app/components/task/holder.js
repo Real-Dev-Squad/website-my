@@ -3,6 +3,9 @@ import { action } from '@ember/object';
 import { TASK_KEYS, TASK_STATUS_LIST } from 'website-my/constants/tasks';
 import { tracked } from '@glimmer/tracking';
 import { TASK_PERCENTAGE } from '../../constants/tasks';
+import ENV from 'website-my/config/environment';
+
+const STATUS_SITE = ENV.STATUS_SITE;
 
 export default class TasksHolderComponent extends Component {
   @tracked percentCompleted = this.args.task.percentCompleted;
@@ -101,7 +104,9 @@ export default class TasksHolderComponent extends Component {
   get isProgressBarDisabled() {
     return this.status !== TASK_KEYS.IN_PROGRESS;
   }
-
+  get taskDetailsURL() {
+    return `${STATUS_SITE}/tasks/${this.args.task.id}`;
+  }
   @action
   async onPercentageChange(e) {
     const { value } = e.target;
