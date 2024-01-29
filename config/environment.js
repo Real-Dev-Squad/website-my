@@ -58,7 +58,7 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
     //mock server url
     ENV.BASE_API_URL = '/mock-api';
-    ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
+    ENV.STATUS_SITE = 'http://localhost:3000';
   }
 
   if (environment === 'staging') {
