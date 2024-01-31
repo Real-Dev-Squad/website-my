@@ -544,6 +544,10 @@
   margin: 10px;
 }
 
+.task-details__status-site-link {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 720px) {
   .task-card {
     width: 90%;

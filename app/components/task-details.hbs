@@ -1,6 +1,10 @@
 <div class='task-details'>
   <div class='task-details__title-container'>
-    <p class='task-details__title'>{{@task.title}}</p>
+    <a
+      href='{{@taskDetailsURL}}'
+      title="Click to open details of task on status site"
+      class='task-details__status-site-link'
+    ><p class='task-details__title'>{{@task.title}}</p></a>
     <div class='task-card__progress-bar-container'>
       <div
         class='{{unless
