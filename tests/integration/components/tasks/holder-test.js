@@ -41,7 +41,7 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     );
     assert.equal(
       this.element
-        .querySelector('.task-details-status_site')
+        .querySelector('.task-details__status-site-link')
         .getAttribute('href'),
       'http://localhost:3000/tasks/t4'
     );
