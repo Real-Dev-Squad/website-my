@@ -93,7 +93,11 @@ export default class ExtensionFormComponent extends Component {
     this.createExtensionRequestError = null;
     this.isSubmitButtonDisabled = true;
     const formData = new FormData(e.target);
-    const extensionTime = new Date(formData.get('newEndsOn')).getTime() / 1000;
+    const newEndsOn = new Date(formData.get('newEndsOn'));
+    newEndsOn.setHours(5);
+    newEndsOn.setMinutes(30);
+    newEndsOn.setSeconds(0);
+    const extensionTime = newEndsOn.getTime() / 1000;
     const json = {};
     formData.forEach(function (value, key) {
       json[key] = value;
