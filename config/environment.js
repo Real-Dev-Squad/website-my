@@ -31,7 +31,7 @@ module.exports = function (environment) {
   ENV.RDS_ANDROID_SCHEME = 'app://realdevsquad.com';
 
   if (environment === 'development') {
-    ENV.BASE_API_URL = 'http://localhost:3000';
+    ENV.BASE_API_URL = 'https://staging-api.realdevsquad.com';
     ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     ENV['ember-cli-mirage'] = {
@@ -63,6 +63,7 @@ module.exports = function (environment) {
 
   if (environment === 'staging') {
     ENV.BASE_API_URL = 'https://staging-api.realdevsquad.com';
+    ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
   }
 
   if (environment === 'production') {
