@@ -185,6 +185,16 @@
 .task-details__title-container a {
   max-width: 66%;
 }
+@media screen and (min-width: 900px) {
+  .task-details__title-container a {
+    max-width: 66%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .task-details__title-container a {
+    max-width: 50%;
+  }
+}
 
 #task-update {
   border: 1px solid var(--tasks-page--text);
