@@ -183,16 +183,21 @@
   align-items: center;
 }
 .task-details__title-container a {
-  max-width: 66%;
+  max-width: 18.5rem;
 }
 @media screen and (min-width: 900px) {
   .task-details__title-container a {
-    max-width: 66%;
+    max-width: 18.3rem;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and ((max-width: 900px) and (min-width: 720px)) {
   .task-details__title-container a {
-    max-width: 50%;
+    max-width: 18.3rem;
+  }
+}
+@media screen and (max-width: 720px) {
+  .task-details__title-container a {
+    max-width: 100%;
   }
 }
 
