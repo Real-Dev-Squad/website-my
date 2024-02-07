@@ -39,6 +39,12 @@ module('Integration | Component | Tasks Holder', function (hooks) {
         .innerText,
       'Extension Status'
     );
+    assert.equal(
+      this.element
+        .querySelector('.task-details__status-site-link')
+        .getAttribute('href'),
+      'http://localhost:3000/tasks/t4'
+    );
   });
 
   test('Render Task holder and check wether it has progress bar', async function (assert) {
