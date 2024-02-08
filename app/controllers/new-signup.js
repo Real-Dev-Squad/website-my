@@ -12,8 +12,6 @@ export default class NewSignUpController extends Controller {
   @service analytics;
   @service featureFlag;
 
-  queryParams = ['currentStep', 'dev'];
-
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
   @tracked error = '';
@@ -22,12 +20,7 @@ export default class NewSignUpController extends Controller {
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
   THIRD_STEP = NEW_SIGNUP_STEPS[2];
   FOURTH_STEP = NEW_SIGNUP_STEPS[3];
-  FIFTH_STEP = NEW_SIGNUP_STEPS[4];
-  LAST_STEP = NEW_SIGNUP_STEPS[5];
-
-  get isDevMode() {
-    return this.featureFlag.isDevMode;
-  }
+  LAST_STEP = NEW_SIGNUP_STEPS[4];
 
   @tracked signupDetails = {
     firstName: '',
@@ -66,12 +59,10 @@ export default class NewSignUpController extends Controller {
   }
 
   @action completeSignUp() {
+    console.log('click');
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.NEW_SIGNUP_FLOW_DONE);
-    if (this.isDevMode) {
-      window.open('https://realdevsquad.com/goto?dev=true', '_self');
-    } else {
-      window.open(GOTO_URL, '_self');
-    }
+
+    window.open(GOTO_URL, '_self');
   }
 
   @action handleInputChange(key, value) {
@@ -94,7 +85,6 @@ export default class NewSignUpController extends Controller {
     const signupDetails = {
       first_name: this.signupDetails.firstName,
       last_name: this.signupDetails.lastName,
-      username: this.signupDetails.username,
     };
     const roles = {};
     Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
@@ -104,56 +94,34 @@ export default class NewSignUpController extends Controller {
     });
 
     this.isLoading = true;
-
-    const isUsernameAvailable = await checkUserName(signupDetails.username);
-    if (!isUsernameAvailable) {
+    const username = await checkUserName(
+      signupDetails.first_name,
+      signupDetails.last_name
+    );
+    if (!username) {
       this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
       this.isLoading = false;
       this.isButtonDisabled = false;
       return (this.error = ERROR_MESSAGES.userName);
     }
-
-    if (this.isDevMode) {
-      try {
-        const res = await newRegisterUser(signupDetails, roles);
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          this.currentStep = this.LAST_STEP;
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
-        }
-      } catch (error) {
-        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
+    signupDetails.username = username.username;
+    try {
+      const res = await newRegisterUser(signupDetail, roles);
+      if (res.status === 204) {
+        this.analytics.identifyUser();
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
+        this.currentStep = this.LAST_STEP;
+      } else {
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
         this.error = ERROR_MESSAGES.others;
         this.isButtonDisabled = false;
-      } finally {
-        this.isLoading = false;
       }
-    } else {
-      //this will get removed after removing feature flag
-      registerUser(signupDetails)
-        .then((res) => {
-          if (res.status === 204) {
-            this.analytics.identifyUser();
-            this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-            this.currentStep = this.LAST_STEP;
-          } else {
-            this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-            this.error = ERROR_MESSAGES.others;
-            this.isButtonDisabled = false;
-          }
-        })
-        .catch(() => {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+    } catch (error) {
+      this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
+      this.error = ERROR_MESSAGES.others;
+      this.isButtonDisabled = false;
+    } finally {
+      this.isLoading = false;
     }
   }
 }
