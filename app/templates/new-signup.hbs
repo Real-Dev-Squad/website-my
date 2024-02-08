@@ -37,17 +37,6 @@
     />
 {{/if}}
 
-
-  {{!-- {{#if (eq this.currentStep this.FIFTH_STEP)}}
-    <NewSignup::Checkbox
-      @onClick={{this.register}}
-      @currentStep={{this.currentStep}}
-      @onChange={{this.handleCheckboxInputChange}}
-      @isButtonDisabled={{this.isButtonDisabled}}
-      @isLoading={{this.isLoading}}
-    />
-{{/if}} --}}
-
 {{#if (eq this.currentStep this.LAST_STEP)}}
   <NewSignup::Info
     @onClick={{this.completeSignUp}}

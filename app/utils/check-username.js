@@ -19,17 +19,10 @@ export default async function checkUserName(firstname, lastname) {
     const data = await response.json();
     if (response.status === 200) {
       return data;
-    } else if (response.status === 401) {
-      console.error('401');
-      // this.toast.error(
-      //   'Please login to continue.',
-      //   '',
-      //   toastNotificationTimeoutOptions
-      // );
+    } else if (response.status === 400) {
+      console.error('400');
     }
   } catch (err) {
     console.error('40111111111111', err);
-
-    // this.toast.error('Something went wrong!', 'error!', TOAST_OPTIONS);
   }
 }

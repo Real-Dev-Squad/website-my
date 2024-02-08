@@ -1,7 +1,6 @@
 const GET_STARTED = 'get-started';
 const FIRST_NAME = 'firstName';
 const LAST_NAME = 'lastName';
-const USERNAME = 'username';
 const ROLE = 'role';
 const THANK_YOU = 'thank-you';
 
