@@ -454,3 +454,72 @@
     font-size: 12px;
   }
 }
+
+@media (max-height: 870px) and (min-width:460px){
+  .identity-rds-logo {
+    width: 174px;
+    margin-top: 3%;
+  }
+
+  .identity-heading {
+    font-family: 'Hanuman', serif;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .identity-box {
+    position: relative;
+    height: 202px;
+    width: 656px;
+    max-width: 90%;
+    margin-top: 24px;
+    border-radius: 47px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: #fff;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .identity-box-heading {
+    color: #1d1283;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 12px;
+  }
+
+  .identity-box-desc {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+  }
+
+  .identity-box-button {
+    padding: 10px;
+    border-radius: 15px;
+    background: #1d1283;
+    color: #fff;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 18px;
+  }
+}
