@@ -32,6 +32,7 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV.BASE_API_URL = 'http://localhost:3000';
+    ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     ENV['ember-cli-mirage'] = {
       enabled: false,
@@ -57,15 +58,18 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
     //mock server url
     ENV.BASE_API_URL = '/mock-api';
+    ENV.STATUS_SITE = 'http://localhost:3000';
   }
 
   if (environment === 'staging') {
     ENV.BASE_API_URL = 'https://staging-api.realdevsquad.com';
+    ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
   }
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
     ENV.BASE_API_URL = 'https://api.realdevsquad.com';
+    ENV.STATUS_SITE = 'https://status.realdevsquad.com';
   }
 
   return ENV;
