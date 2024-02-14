@@ -454,3 +454,32 @@
     font-size: 12px;
   }
 }
+
+@media (max-height: 870px) and (min-width: 460px) {
+  .identity-rds-logo {
+    width: 174px;
+    margin-top: 3%;
+  }
+
+  .identity-heading {
+    font-size: 24px;
+  }
+
+  .identity-box {
+    height: 202px;
+  }
+
+  .identity-box-heading {
+    font-size: 22px;
+  }
+
+  .identity-box-desc {
+    font-size: 18px;
+  }
+
+  .identity-box-button {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 18px;
+  }
+}
