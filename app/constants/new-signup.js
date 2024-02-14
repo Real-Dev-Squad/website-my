@@ -1,7 +1,6 @@
 const GET_STARTED = 'get-started';
 const FIRST_NAME = 'firstName';
 const LAST_NAME = 'lastName';
-const USERNAME = 'username';
 const ROLE = 'role';
 const THANK_YOU = 'thank-you';
 
@@ -9,7 +8,6 @@ export const NEW_SIGNUP_STEPS = [
   GET_STARTED,
   FIRST_NAME,
   LAST_NAME,
-  USERNAME,
   ROLE,
   THANK_YOU,
 ];
@@ -30,18 +28,6 @@ export const CHECK_BOX_DATA = [
   {
     label: 'Developer',
     name: 'developer',
-  },
-  {
-    label: 'Designer',
-    name: 'designer',
-  },
-  {
-    label: 'Maven',
-    name: 'maven',
-  },
-  {
-    label: 'Product Manager',
-    name: 'productmanager',
   },
 ];
 
