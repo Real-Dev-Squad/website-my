@@ -138,8 +138,7 @@ const TABS_TASK_STATUS_LIST = [
   },
 ];
 export const TASK_MESSAGES = {
-  MARK_DONE:
-    'This task will be marked as done and a new task will be assigned to you',
+  MARK_DONE: 'This task will be marked as Done',
   UPDATE_TASK: 'Updating task',
   FIND_TASK: 'Finding new task for you!',
 };

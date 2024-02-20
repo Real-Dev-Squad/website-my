@@ -8,6 +8,10 @@ export default class ProfileRoute extends Route {
   @service toast;
   async model() {
     try {
+      const res = await fetch(`${ENV.BASE_API_URL}/users/isDeveloper`, {
+        credentials: 'include',
+      });
+      const { developerRoleExistsOnUser } = await res.json();
       const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
         credentials: 'include',
       });
@@ -15,6 +19,7 @@ export default class ProfileRoute extends Route {
       if (response.status === 401) {
         throw new Error('You are not logged in. Please login to continue.');
       }
+      userData.isDeveloper = developerRoleExistsOnUser;
       return userData;
     } catch (error) {
       console.error(error.message);

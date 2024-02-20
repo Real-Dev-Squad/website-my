@@ -39,11 +39,22 @@
   border-color: var(--profile-input-outline-clr);
 }
 
+.profile-page-error {
+  text-align: center; 
+  color: red;
+}
+
 .profile-field-input {
   padding: 0 1.25rem;
   border: none;
   background: none;
   outline: none;
+}
+
+.profile-field-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .profile-field-input:active {
