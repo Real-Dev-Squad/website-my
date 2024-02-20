@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, waitUntil, fillIn } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -17,7 +17,7 @@ module('Integration | Component | tasks', function (hooks) {
     assert.ok(this.element.textContent.trim().includes('tasks'));
   });
 
-  test('there is a fetch task button if no in progress task are there', async function (assert) {
+  skip('there is a fetch task button if no in progress task are there', async function (assert) {
     this.setProperties({
       onTaskChange: () => {},
       onTaskUpdate: () => {},

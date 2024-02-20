@@ -1,7 +1,7 @@
 <div class='tasks-container'>
   {{#if @dev}}
     {{#if @noInProgressTask}}
-      <div class='fetch-task' data-test-fetchSection>
+      <div class='fetch-task hidden' data-test-fetchSection>
         <p>You have no task in progress! click below to fetch tasks</p>
         <Button
           @onClick={{@handleAssignment}}
