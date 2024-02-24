@@ -736,3 +736,6 @@ div.buttons {
   align-content: center;
   justify-content: center;
 }
+.hidden {
+  display: none;
+}

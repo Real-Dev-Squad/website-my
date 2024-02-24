@@ -200,8 +200,7 @@ module('Integration | Component | tasks/modal', function (hooks) {
       showModal: true,
       buttonRequired: true,
       dev: false,
-      message:
-        'This task will be marked as done and a new task will be assigned to you',
+      message: 'This task will be marked as Done',
     });
 
     await render(hbs`
@@ -219,11 +218,7 @@ module('Integration | Component | tasks/modal', function (hooks) {
 
     assert.dom('[data-test-notAssignBtn]').exists();
     assert.dom('[data-test-notAssignBtn]').hasProperty('button');
-    assert
-      .dom('[data-test-title]')
-      .hasText(
-        'This task will be marked as done and a new task will be assigned to you'
-      );
+    assert.dom('[data-test-title]').hasText('This task will be marked as Done');
     assert.dom('[data-test-notAssignBtn]').hasText('Proceed');
   });
 });
