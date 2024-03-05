@@ -22,26 +22,26 @@
         @closeModel={{this.closeExtensionModel}}
       />
     {{/if}}
-
-    <div class='task-update-container'>
-      <label id='task-update-label' for='task-update'><b>Status:</b></label>
-      <select
-        data-test-task-status-select
-        id='task-update'
-        {{on 'change' this.onStatusChange}}
-      >
-        {{#each this.taskStatusList as |taskStatus|}}
-          <option
-            data-test-dropdown-option={{taskStatus.displayLabel}}
-            value={{taskStatus.key}}
-            selected={{eq taskStatus.key this.status}}
-          >
-            {{taskStatus.displayLabel}}
-          </option>
-        {{/each}}
-      </select>
-    </div>
-
+    {{#if (or (not-eq this.status this.TASK_KEYS.VERIFIED) (eq @dev true))}}
+      <div class='task-update-container'>
+        <label id='task-update-label' for='task-update'><b>Status:</b></label>
+        <select
+          data-test-task-status-select
+          id='task-update'
+          {{on 'change' this.onStatusChange}}
+        >
+          {{#each this.taskStatusList as |taskStatus|}}
+            <option
+              data-test-dropdown-option={{taskStatus.displayLabel}}
+              value={{taskStatus.key}}
+              selected={{eq taskStatus.key this.status}}
+            >
+              {{taskStatus.displayLabel}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+    {{/if}}
     <button
       class='task-card__extensionForm-button'
       data-test-task-extensionForm-button

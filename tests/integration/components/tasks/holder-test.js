@@ -215,6 +215,53 @@ module('Integration | Component | Tasks Holder', function (hooks) {
       .dom('[data-test-task-status-select]')
       .hasValue(TASK_KEYS.IN_PROGRESS);
   });
+  test('Verify task status dropdown is hidden when task status is verified', async function (assert) {
+    const testTask = tasksData[3];
+    testTask.status = TASK_KEYS.VERIFIED;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}}
+    @onTaskChange={{this.mock}}
+    @onStausChange={{this.mock}}
+    @onTaskUpdate={{this.onTaskUpdate}}
+    @userSelectedTask={{this.defaultType}}
+    @disabled={{this.disabled}}
+  />`);
+    assert.dom('[data-test-task-status-select]').doesNotExist();
+  });
+  test('Verify task status dropdown is visible when task status is verified and feature flag is on', async function (assert) {
+    const testTask = tasksData[3];
+    testTask.status = TASK_KEYS.VERIFIED;
+
+    this.set('task', testTask);
+    this.set('mock', () => {});
+    this.set('onTaskUpdate', (taskId, error) => {
+      error();
+    });
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+    await render(hbs`<Task::Holder
+    @task={{this.task}}
+    @onTaskChange={{this.mock}}
+    @onStausChange={{this.mock}}
+    @onTaskUpdate={{this.onTaskUpdate}}
+    @userSelectedTask={{this.defaultType}}
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+    assert.dom('[data-test-task-status-select]').hasValue(TASK_KEYS.VERIFIED);
+  });
 
   test('Verify values of task status upon api failures under feature flag', async function (assert) {
     const testTask = tasksData[3];
