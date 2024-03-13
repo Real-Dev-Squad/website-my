@@ -42,7 +42,7 @@ export default class TasksController extends Controller {
   @tracked showTasks = false;
   @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
   alreadyFetched = localStorage.getItem('already-fetched');
-
+  resetCurrentTask = null;
   get isDevMode() {
     return this.featureFlag.isDevMode;
   }
@@ -97,16 +97,23 @@ export default class TasksController extends Controller {
     const requestBody = { ...object };
     const taskCompletionPercentage = object.percentCompleted;
     if (taskCompletionPercentage) {
-      if (taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage) {
-        this.isDevMode === true
-          ? (requestBody.status = 'DONE')
-          : (requestBody.status = 'COMPLETED');
+      if (
+        taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage &&
+        !this.dev
+      ) {
+        requestBody.status = 'COMPLETED';
       }
       requestBody.percentCompleted = parseInt(taskCompletionPercentage);
     }
     return requestBody;
   }
-
+  getTaskById(taskId) {
+    const indexOfSelectedTask = this.allTasks.findIndex(
+      (task) => task.id === taskId
+    );
+    const selectedTask = this.allTasks[indexOfSelectedTask];
+    return selectedTask;
+  }
   @action goBack() {
     this.showModal = false;
     this.onTaskChange('percentCompleted', '75');
@@ -143,9 +150,12 @@ export default class TasksController extends Controller {
       delete this.taskFields[prop];
     }
     this.taskFields[key] = value;
+    if (this.resetCurrentTask) {
+      this.resetCurrentTask();
+    }
   }
 
-  @action async updateTask(taskId, error) {
+  @action async updateTask(taskId) {
     this.disabled = true;
     this.buttonRequired = false;
     const taskData = this.taskFields;
@@ -195,7 +205,9 @@ export default class TasksController extends Controller {
             toastNotificationTimeoutOptions
           );
           this.disabled = false;
-          error();
+          if (this.resetCurrentTask) {
+            this.resetCurrentTask();
+          }
         }
       } catch (err) {
         this.toast.error(
@@ -204,7 +216,9 @@ export default class TasksController extends Controller {
           toastNotificationTimeoutOptions
         );
         console.error('Error : ', err);
-        error();
+        if (this.resetCurrentTask) {
+          this.resetCurrentTask();
+        }
       } finally {
         this.disabled = false;
       }
@@ -263,15 +277,71 @@ export default class TasksController extends Controller {
     }
   }
 
-  @action async handleUpdateTask(taskId, error) {
+  @action async handleUpdateTask(taskId, resetCurrentTask) {
+    this.resetCurrentTask = resetCurrentTask;
     const taskData = this.taskFields;
-    if (taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage) {
+    const currentTask = this.getTaskById(taskId);
+    const isCurrentTaskStatusInProgress =
+      currentTask.status === this.TASK_KEYS.IN_PROGRESS;
+    const isCurrentTaskStatusBlock =
+      currentTask.status === this.TASK_KEYS.BLOCKED;
+    const isNewTaskStatusInProgress =
+      taskData.status === this.TASK_KEYS.IN_PROGRESS;
+    const isNewTaskStatusBlock = taskData.status === this.TASK_KEYS.BLOCKED;
+    const isCurrProgress100 =
+      parseInt(currentTask.percentCompleted || 0) === 100;
+    const isCurrProgress0 = parseInt(currentTask.percentCompleted || 0) === 0;
+
+    if (this.dev && taskData.status) {
+      if (
+        isNewTaskStatusInProgress &&
+        !isCurrentTaskStatusBlock &&
+        !isCurrProgress0
+      ) {
+        this.message = 'Proceeding further will make task progress 0%.';
+        this.showModal = true;
+        this.buttonRequired = true;
+        this.tempTaskId = taskId;
+        this.taskFields.percentCompleted = 0;
+
+        return;
+      }
+      if (
+        isCurrentTaskStatusInProgress &&
+        !isNewTaskStatusBlock &&
+        !isCurrProgress100
+      ) {
+        this.message = 'Proceeding further will make task progress 100%.';
+        this.showModal = true;
+        this.buttonRequired = true;
+        this.tempTaskId = taskId;
+        this.taskFields.percentCompleted = 100;
+        return;
+      }
+      if (
+        isCurrentTaskStatusBlock &&
+        !isNewTaskStatusInProgress &&
+        !isCurrProgress100
+      ) {
+        this.message = `The progress of current task is ${currentTask.percentCompleted}%. Proceeding further will make task progress 100%.`;
+        this.showModal = true;
+        this.buttonRequired = true;
+        this.tempTaskId = taskId;
+        this.taskFields.percentCompleted = 100;
+        return;
+      }
+    }
+
+    if (
+      taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage &&
+      !this.dev
+    ) {
       this.message = TASK_MESSAGES.MARK_DONE;
       this.showModal = true;
       this.buttonRequired = true;
       this.tempTaskId = taskId;
     } else {
-      return this.updateTask(taskId, error);
+      return this.updateTask(taskId);
     }
   }
 }
