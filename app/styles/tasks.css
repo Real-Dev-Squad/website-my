@@ -182,6 +182,24 @@
   justify-content: space-between;
   align-items: center;
 }
+.task-details__title-container a {
+  max-width: 18.5rem;
+}
+@media screen and (min-width: 900px) {
+  .task-details__title-container a {
+    max-width: 18.3rem;
+  }
+}
+@media screen and ((max-width: 900px) and (min-width: 720px)) {
+  .task-details__title-container a {
+    max-width: 18.3rem;
+  }
+}
+@media screen and (max-width: 720px) {
+  .task-details__title-container a {
+    max-width: 100%;
+  }
+}
 
 #task-update {
   border: 1px solid var(--tasks-page--text);
@@ -717,4 +735,7 @@ div.buttons {
   min-width: 100%;
   align-content: center;
   justify-content: center;
+}
+.hidden {
+  display: none;
 }

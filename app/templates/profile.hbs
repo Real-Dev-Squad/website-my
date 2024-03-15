@@ -1,35 +1,58 @@
 {{page-title 'Profile'}}
 
-<div class="profile-container">
-  <form class="profile-form" {{on 'submit' (fn this.handleSubmit)}}>
+<div class='profile-container'>
+  <form class='profile-form' {{on 'submit' (fn this.handleSubmit)}}>
     <div class='picture_container'>
       {{#if @model.picture.url}}
-      <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
+        <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
       {{else}}
-      <img class='user__pic' src={{'dummyProfilePicture.png'}} alt='user profile ' />
+        <img
+          class='user__pic'
+          src={{'dummyProfilePicture.png'}}
+          alt='user profile '
+        />
       {{/if}}
-      <Button @onClick={{this.handleShowEditProfilePictureModal}} @class='edit-btn btn' @data-test-btn='edit'>
+      <Button
+        @onClick={{this.handleShowEditProfilePictureModal}}
+        @class='edit-btn btn'
+        @data-test-btn='edit'
+      >
         Update Picture
       </Button>
     </div>
     <div class='profile-form-grid'>
+      {{#if (get @model 'isDeveloper')}}
+        <p class='profile-page-error'>You can't update the profile data from UI.
+          You have to create a profile service(if not created yet). Find more
+          details about profile service
+          <a
+            href='https://github.com/Real-Dev-Squad/sample-profile-service'
+            target='_blank'
+            rel="noopener noreferrer"
+          >here</a>.</p>
+      {{/if}}
       {{#each this.fields as |field|}}
-        <ProfileField 
-          @id={{field.id}} 
+        <ProfileField
+          @id={{field.id}}
           @type={{field.type}}
           @value={{get @model field.id}}
-          @placeholder={{field.placeholder}} 
+          @placeholder={{field.placeholder}}
           @label={{field.label}}
-          @icon_url={{field.icon_url}} 
+          @icon_url={{field.icon_url}}
           @errorMessage={{field.errorMessage}}
           @showError={{field.showError}}
           @required={{field.required}}
           @onChange={{this.handleFieldChange}}
           @onBlur={{this.handleFieldValidation}}
+          @isDeveloper={{get @model 'isDeveloper'}}
         />
       {{/each}}
     </div>
-    <button type="submit" class="profile-form-submit" disabled={{this.isSubmitDisabled}}>Submit</button>
+    <button
+      type='submit'
+      class='profile-form-submit'
+      disabled={{this.isSubmitDisabled}}
+    >Submit</button>
   </form>
 </div>
 

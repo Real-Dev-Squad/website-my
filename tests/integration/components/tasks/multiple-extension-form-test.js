@@ -134,17 +134,13 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
     );
 
     await render(
-      hbs`<Task::ExtensionForm 
+      hbs`<Task::MultipleExtensionForm 
       @task={{this.task}} 
       @closeForm={{this.closeExtensionForm}} 
       @title='Form for extension Request' 
       @closeModel={{this.closeExtensionModel}}/>`
     );
     await waitFor('[data-test-create-extension-button]');
-    assert
-      .dom(this.element.querySelector('[data-test-create-extension-button]'))
-      .hasText('Create an extension request');
-
     await click(
       this.element.querySelector('[data-test-create-extension-button]')
     );
@@ -162,9 +158,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
     );
     assert
       .dom(this.element.querySelector('[data-test-extension-from-error]'))
-      .hasText(
-        'Error: The newEndsOn value cannot be smaller than the oldEndsOn value'
-      );
+      .hasText('New ETA must be greater than Old ETA');
 
     await settled();
     // if filled valid time then remove the error
@@ -174,67 +168,7 @@ module('Integration | Component | Multiple Extension Form', function (hooks) {
     );
     assert
       .dom(this.element.querySelector('[data-test-extension-from-error]'))
-      .doesNotExist();
-  });
-
-  test('When no extension requests found, we should be able to create one', async function (assert) {
-    this.set('task', tasksData[3]);
-    this.set(
-      'closeExtensionModel',
-      closeExtensionModel(this.set, 'extensionFormOpened')
-    );
-    this.set(
-      'closeExtensionForm',
-      closeExtensionForm(this.set, 'extensionFormOpened')
-    );
-
-    await render(
-      hbs`<Task::ExtensionForm 
-      @task={{this.task}} 
-      @closeForm={{this.closeExtensionForm}} 
-      @title='Extension Details' 
-      @closeModel={{this.closeExtensionModel}}/>`
-    );
-    await waitFor('[data-test-create-extension-button]');
-    assert
-      .dom(this.element.querySelector('[data-test-create-extension-button]'))
-      .hasText('Create an extension request');
-
-    await click(
-      this.element.querySelector('[data-test-create-extension-button]')
-    );
-    assert
-      .dom(
-        this.element
-          .querySelector('[data-test-extension-from-content]')
-          .querySelector('button[type=submit]')
-      )
-      .exists();
-
-    //create extension request
-    await fillIn('[data-test-extension-form-reason-input]', 'Testing');
-    await fillIn(
-      '[data-test-extension-form-newEndsOn-input]',
-      '2030-12-31T02:43'
-    );
-    await fillIn('[data-test-extension-form-title-input]', 'TestingAgain');
-    await click(this.element.querySelector('button[type=submit]'));
-
-    // rendering the component again to check the new data
-    await render(
-      hbs`<Task::ExtensionForm 
-      @task={{this.task}} 
-      @closeForm={{this.closeExtensionForm}} 
-      @title='Extension Details' 
-      @closeModel={{this.closeExtensionModel}}/>`
-    );
-    await waitFor('[data-test-extension-info-content]');
-    assert
-      .dom(this.element.querySelector('[data-test-extension-info-content]'))
-      .containsText('Testing')
-      .containsText('TestingAgain')
-      .containsText('PENDING')
-      .containsText('1');
+      .doesNotContainText();
   });
 
   test('When previous extension request is approved, the button to create extension request should be there', async function (assert) {

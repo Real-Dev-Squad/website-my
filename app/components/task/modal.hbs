@@ -1,24 +1,39 @@
 {{#if @showModal}}
-<div class="overlay">
-  <div class="modal" data-test-modal>
-    <button type="button" class="close" {{on "click" @goBack}} disabled={{@closeDisabled}} data-test-closeBtn>
-      <i class="fa fa-close"></i>
-    </button>
-    <p class="modal-title" data-test-title>{{@message}}</p>
-    {{#if @isUpdating}}
-    <Spinner data-test-spinner />
-    {{/if}}
-    {{#if @buttonRequired}}
-    <button type="button" class={{if (eq @dev true) "not-assign" "proceed-btn" }} {{on "click" @markComplete}}
-      data-test-notAssignBtn>
-      {{if (eq @dev true) "Don't assign task" "Proceed" }}
-    </button>
-    {{#if @dev}}
-    <button type="button" class="proceed-btn" {{on "click" @markCompleteAndAssignTask}} data-test-assignBtn>
-      Assign task
-    </button>
-    {{/if}}
-    {{/if}}
+  <div class='overlay'>
+    <div class='modal' data-test-modal>
+      <button
+        type='button'
+        class='close'
+        {{on 'click' @goBack}}
+        disabled={{@closeDisabled}}
+        data-test-closeBtn
+      >
+        <i class='fa fa-close'></i>
+      </button>
+      <p class='modal-title' data-test-title>{{@message}}</p>
+      {{#if @isUpdating}}
+        <Spinner data-test-spinner />
+      {{/if}}
+      {{#if @buttonRequired}}
+        <button
+          type='button'
+          class='proceed-btn'
+          {{on 'click' @markComplete}}
+          data-test-notAssignBtn
+        >
+          Proceed
+        </button>
+        {{#if @dev}}
+          <button
+            type='button'
+            class='proceed-btn hidden'
+            {{on 'click' @markCompleteAndAssignTask}}
+            data-test-assignBtn
+          >
+            Assign task
+          </button>
+        {{/if}}
+      {{/if}}
+    </div>
   </div>
-</div>
 {{/if}}

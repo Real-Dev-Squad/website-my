@@ -10,6 +10,7 @@
       placeholder={{@placeholder}} 
       class="profile-field-input"
       required={{@required}}
+      disabled={{@isDeveloper}}
       {{on 'input' (fn this.inputFieldChanged)}}
       {{on 'blur' (fn this.checkInputValidation)}}
     />
