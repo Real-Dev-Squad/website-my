@@ -442,7 +442,6 @@
   position: absolute;
   left: 30%;
   right: 30%;
-  height: max-content;
   gap: 20px;
   display: flex;
   flex-direction: column;
@@ -558,8 +557,8 @@
 }
 
 .extension-info__content {
-  border-bottom: 1px solid var(--light-black);
-  margin: 10px;
+  border-bottom: 4px solid var(--light-black);
+  margin: 90px;
 }
 
 .task-details__status-site-link {
