@@ -557,8 +557,8 @@
 }
 
 .extension-info__content {
-  border-bottom: 4px solid var(--light-black);
-  margin: 90px;
+  border-bottom: 1px solid var(--light-black);
+  margin: 10px;
 }
 
 .task-details__status-site-link {
