@@ -294,6 +294,7 @@ export default class TasksController extends Controller {
       parseInt(currentTask.percentCompleted || 0) === 100;
     const isCurrProgress0 = parseInt(currentTask.percentCompleted || 0) === 0;
     this.tempTaskId = taskId;
+
     if (this.dev && taskData.status) {
       if (!isCurrProgress100) {
         switch (currentTask.status) {
