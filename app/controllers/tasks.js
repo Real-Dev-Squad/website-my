@@ -304,20 +304,23 @@ export default class TasksController extends Controller {
                 TASK_MESSAGES.CHANGE_TO_100_PROGRESS
               );
               this.taskFields.percentCompleted = 100;
+              return;
             }
-            return;
+            break;
           case this.TASK_KEYS.BLOCKED:
             if (!isNewTaskStatusInProgress) {
               this.showTaskChangeInfoModal(
                 `The progress of current task is ${currentTask.percentCompleted}%. ${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
               );
               this.taskFields.percentCompleted = 100;
+              return;
             }
-            return;
+            break;
           default:
             break;
         }
       }
+
       if (
         isNewTaskStatusInProgress &&
         !isCurrentTaskStatusBlock &&
