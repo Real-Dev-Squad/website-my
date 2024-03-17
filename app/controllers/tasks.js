@@ -276,13 +276,15 @@ export default class TasksController extends Controller {
       );
     }
   }
-
+  showTaskChangeInfoModal(msg) {
+    this.message = msg;
+    this.showModal = true;
+    this.buttonRequired = true;
+  }
   @action async handleUpdateTask(taskId, resetCurrentTask) {
     this.resetCurrentTask = resetCurrentTask;
     const taskData = this.taskFields;
     const currentTask = this.getTaskById(taskId);
-    const isCurrentTaskStatusInProgress =
-      currentTask.status === this.TASK_KEYS.IN_PROGRESS;
     const isCurrentTaskStatusBlock =
       currentTask.status === this.TASK_KEYS.BLOCKED;
     const isNewTaskStatusInProgress =
@@ -291,43 +293,38 @@ export default class TasksController extends Controller {
     const isCurrProgress100 =
       parseInt(currentTask.percentCompleted || 0) === 100;
     const isCurrProgress0 = parseInt(currentTask.percentCompleted || 0) === 0;
-
+    this.tempTaskId = taskId;
     if (this.dev && taskData.status) {
+      if (!isCurrProgress100) {
+        switch (currentTask.status) {
+          case this.TASK_KEYS.IN_PROGRESS:
+            if (!isNewTaskStatusBlock) {
+              this.showTaskChangeInfoModal(
+                TASK_MESSAGES.CHANGE_TO_100_PROGRESS
+              );
+              this.taskFields.percentCompleted = 100;
+            }
+            return;
+          case this.TASK_KEYS.BLOCKED:
+            if (!isNewTaskStatusInProgress) {
+              this.showTaskChangeInfoModal(
+                `The progress of current task is ${currentTask.percentCompleted}%. ${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
+              );
+              this.taskFields.percentCompleted = 100;
+            }
+            return;
+          default:
+            break;
+        }
+      }
       if (
         isNewTaskStatusInProgress &&
         !isCurrentTaskStatusBlock &&
         !isCurrProgress0
       ) {
-        this.message = 'Proceeding further will make task progress 0%.';
-        this.showModal = true;
-        this.buttonRequired = true;
-        this.tempTaskId = taskId;
+        this.showTaskChangeInfoModal(TASK_MESSAGES.CHANGE_TO_0_PROGRESS);
         this.taskFields.percentCompleted = 0;
 
-        return;
-      }
-      if (
-        isCurrentTaskStatusInProgress &&
-        !isNewTaskStatusBlock &&
-        !isCurrProgress100
-      ) {
-        this.message = 'Proceeding further will make task progress 100%.';
-        this.showModal = true;
-        this.buttonRequired = true;
-        this.tempTaskId = taskId;
-        this.taskFields.percentCompleted = 100;
-        return;
-      }
-      if (
-        isCurrentTaskStatusBlock &&
-        !isNewTaskStatusInProgress &&
-        !isCurrProgress100
-      ) {
-        this.message = `The progress of current task is ${currentTask.percentCompleted}%. Proceeding further will make task progress 100%.`;
-        this.showModal = true;
-        this.buttonRequired = true;
-        this.tempTaskId = taskId;
-        this.taskFields.percentCompleted = 100;
         return;
       }
     }
@@ -336,10 +333,7 @@ export default class TasksController extends Controller {
       taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage &&
       !this.dev
     ) {
-      this.message = TASK_MESSAGES.MARK_DONE;
-      this.showModal = true;
-      this.buttonRequired = true;
-      this.tempTaskId = taskId;
+      this.showTaskChangeInfoModal(TASK_MESSAGES.MARK_DONE);
     } else {
       return this.updateTask(taskId);
     }
