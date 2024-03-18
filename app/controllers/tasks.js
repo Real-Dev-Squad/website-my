@@ -305,11 +305,8 @@ export default class TasksController extends Controller {
         !isNewTaskStatusInProgress
       ) {
         this.taskFields.percentCompleted = 100;
-        let msg = !isNewTaskStatusInProgress
-          ? `The progress of current task is ${currentTask.percentCompleted}%. `
-          : '';
         this.showTaskChangeInfoModal(
-          `${msg}${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
+          `The progress of current task is ${currentTask.percentCompleted}%. ${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
         );
         return;
       }
@@ -319,7 +316,9 @@ export default class TasksController extends Controller {
         !isCurrentTaskStatusBlock &&
         !isCurrProgress0
       ) {
-        this.showTaskChangeInfoModal(TASK_MESSAGES.CHANGE_TO_0_PROGRESS);
+        this.showTaskChangeInfoModal(
+          `The progress of current task is ${currentTask.percentCompleted}%. ${TASK_MESSAGES.CHANGE_TO_0_PROGRESS}`
+        );
         this.taskFields.percentCompleted = 0;
 
         return;

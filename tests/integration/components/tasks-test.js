@@ -102,7 +102,7 @@ module('Integration | Component | tasks', function (hooks) {
     assert.equal(ctrl.showModal, true);
     assert.equal(
       ctrl.message,
-      'Proceeding further will make task progress 0%.'
+      'The progress of current task is 25%. Proceeding further will make task progress 0%.'
     );
   });
   test('changing the task status from IN_PROGRESS to any status other than BLOCKED inform proceeding further will make progress 100', async function (assert) {
@@ -127,7 +127,7 @@ module('Integration | Component | tasks', function (hooks) {
     assert.equal(ctrl.showModal, true);
     assert.equal(
       ctrl.message,
-      'Proceeding further will make task progress 100%.'
+      'The progress of current task is 25%. Proceeding further will make task progress 100%.'
     );
   });
   test('changing the task status from BLOCKED to any status other than IN_PROGRESS when percentCompleted is less than 100, inform the user proceeding further will make progress 100', async function (assert) {
