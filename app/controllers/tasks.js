@@ -311,6 +311,7 @@ export default class TasksController extends Controller {
         this.showTaskChangeInfoModal(
           `${msg}${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
         );
+        return;
       }
 
       if (
