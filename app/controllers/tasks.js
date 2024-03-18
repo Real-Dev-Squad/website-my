@@ -287,6 +287,8 @@ export default class TasksController extends Controller {
     const currentTask = this.getTaskById(taskId);
     const isCurrentTaskStatusBlock =
       currentTask.status === this.TASK_KEYS.BLOCKED;
+    const isCurrentTaskStatusInProgress =
+      this.TASK_KEYS.IN_PROGRESS === currentTask.status;
     const isNewTaskStatusInProgress =
       taskData.status === this.TASK_KEYS.IN_PROGRESS;
     const isNewTaskStatusBlock = taskData.status === this.TASK_KEYS.BLOCKED;
@@ -296,29 +298,19 @@ export default class TasksController extends Controller {
     this.tempTaskId = taskId;
 
     if (this.dev && taskData.status) {
-      if (!isCurrProgress100) {
-        switch (currentTask.status) {
-          case this.TASK_KEYS.IN_PROGRESS:
-            if (!isNewTaskStatusBlock) {
-              this.showTaskChangeInfoModal(
-                TASK_MESSAGES.CHANGE_TO_100_PROGRESS
-              );
-              this.taskFields.percentCompleted = 100;
-              return;
-            }
-            break;
-          case this.TASK_KEYS.BLOCKED:
-            if (!isNewTaskStatusInProgress) {
-              this.showTaskChangeInfoModal(
-                `The progress of current task is ${currentTask.percentCompleted}%. ${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
-              );
-              this.taskFields.percentCompleted = 100;
-              return;
-            }
-            break;
-          default:
-            break;
-        }
+      if (
+        (isCurrentTaskStatusBlock || isCurrentTaskStatusInProgress) &&
+        !isCurrProgress100 &&
+        !isNewTaskStatusBlock &&
+        !isNewTaskStatusInProgress
+      ) {
+        this.taskFields.percentCompleted = 100;
+        let msg = !isNewTaskStatusInProgress
+          ? `The progress of current task is ${currentTask.percentCompleted}%. `
+          : '';
+        this.showTaskChangeInfoModal(
+          `${msg}${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`
+        );
       }
 
       if (
