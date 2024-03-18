@@ -442,7 +442,6 @@
   position: absolute;
   left: 30%;
   right: 30%;
-  height: max-content;
   gap: 20px;
   display: flex;
   flex-direction: column;
@@ -735,6 +734,8 @@ div.buttons {
   min-width: 100%;
   align-content: center;
   justify-content: center;
+  align-items: stretch;
+  gap: 10px;
 }
 .hidden {
   display: none;
