@@ -164,7 +164,9 @@ export default class TasksController extends Controller {
     if (taskData.status || taskData.percentCompleted) {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/tasks/self/${taskId}?userStatusFlag=true`,
+          `${API_BASE_URL}/tasks/self/${taskId}${
+            this.dev ? '?userStatusFlag=true' : ''
+          }`,
           {
             method: 'PATCH',
             body: JSON.stringify(cleanBody),
@@ -281,33 +283,33 @@ export default class TasksController extends Controller {
     this.showModal = true;
     this.buttonRequired = true;
   }
-  isTaskStatusChanged(taskStatus, task) {
+  isTaskStatusChanged(task, taskStatus) {
     return task.status === taskStatus;
   }
-  isProgressChanged(progress, task) {
-    parseInt(task.percentCompleted || 0) === progress;
+  isProgressChanged(task, progress) {
+    return parseInt(task.percentCompleted || 0) === progress;
   }
   shouldTaskProgressBe100(taskId) {
     const currentTask = this.getTaskById(taskId);
     const taskData = this.taskFields;
     const isCurrentTaskStatusBlock = this.isTaskStatusChanged(
-      this.TASK_KEYS.BLOCKED,
-      currentTask
+      currentTask,
+      this.TASK_KEYS.BLOCKED
     );
     const isCurrentTaskStatusInProgress = this.isTaskStatusChanged(
-      this.TASK_KEYS.IN_PROGRESS,
-      currentTask
+      currentTask,
+      this.TASK_KEYS.IN_PROGRESS
     );
     const isNewStatusInProgress = this.isTaskStatusChanged(
-      this.TASK_KEYS.IN_PROGRESS,
-      taskData
+      taskData,
+      this.TASK_KEYS.IN_PROGRESS
     );
     const isNewTaskStatusBlock = this.isTaskStatusChanged(
-      this.TASK_KEYS.BLOCKED,
-      taskData
+      taskData,
+      this.TASK_KEYS.BLOCKED
     );
 
-    const isCurrProgress100 = this.isProgressChanged(100, currentTask);
+    const isCurrProgress100 = this.isProgressChanged(currentTask, 100);
     return (
       (isCurrentTaskStatusBlock || isCurrentTaskStatusInProgress) &&
       !isNewStatusInProgress &&
@@ -319,14 +321,14 @@ export default class TasksController extends Controller {
     const taskData = this.taskFields;
     const currentTask = this.getTaskById(taskId);
     const isCurrentTaskStatusBlock = this.isTaskStatusChanged(
-      this.TASK_KEYS.BLOCKED,
-      currentTask
+      currentTask,
+      this.TASK_KEYS.BLOCKED
     );
     const isNewStatusInProgress = this.isTaskStatusChanged(
-      this.TASK_KEYS.IN_PROGRESS,
-      taskData
+      taskData,
+      this.TASK_KEYS.IN_PROGRESS
     );
-    const isCurrProgress0 = this.isProgressChanged(0, currentTask);
+    const isCurrProgress0 = this.isProgressChanged(currentTask, 0);
     return (
       isNewStatusInProgress && !isCurrentTaskStatusBlock && !isCurrProgress0
     );
@@ -351,10 +353,12 @@ export default class TasksController extends Controller {
     this.resetCurrentTask = resetCurrentTask;
     const taskData = this.taskFields;
     this.tempTaskId = taskId;
-    const msg = this.getInfoMsg(taskId);
-    if (this.dev && taskData.status && msg) {
-      this.showTaskChangeInfoModal(msg);
-      return;
+    if (this.dev && taskData.status) {
+      const msg = this.getInfoMsg(taskId);
+      if (msg) {
+        this.showTaskChangeInfoModal(msg);
+        return;
+      }
     }
 
     if (
