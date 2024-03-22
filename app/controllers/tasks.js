@@ -42,7 +42,7 @@ export default class TasksController extends Controller {
   @tracked showTasks = false;
   @tracked showFetchButton = this.isShowFetchButton() && !this.alreadyFetched;
   alreadyFetched = localStorage.getItem('already-fetched');
-
+  resetCurrentTask = null;
   get isDevMode() {
     return this.featureFlag.isDevMode;
   }
@@ -97,16 +97,23 @@ export default class TasksController extends Controller {
     const requestBody = { ...object };
     const taskCompletionPercentage = object.percentCompleted;
     if (taskCompletionPercentage) {
-      if (taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage) {
-        this.isDevMode === true
-          ? (requestBody.status = 'DONE')
-          : (requestBody.status = 'COMPLETED');
+      if (
+        taskCompletionPercentage === TASK_PERCENTAGE.completedPercentage &&
+        !this.dev
+      ) {
+        requestBody.status = 'COMPLETED';
       }
       requestBody.percentCompleted = parseInt(taskCompletionPercentage);
     }
     return requestBody;
   }
-
+  getTaskById(taskId) {
+    const indexOfSelectedTask = this.allTasks.findIndex(
+      (task) => task.id === taskId
+    );
+    const selectedTask = this.allTasks[indexOfSelectedTask];
+    return selectedTask;
+  }
   @action goBack() {
     this.showModal = false;
     this.onTaskChange('percentCompleted', '75');
@@ -143,9 +150,12 @@ export default class TasksController extends Controller {
       delete this.taskFields[prop];
     }
     this.taskFields[key] = value;
+    if (this.resetCurrentTask) {
+      this.resetCurrentTask();
+    }
   }
 
-  @action async updateTask(taskId, error) {
+  @action async updateTask(taskId) {
     this.disabled = true;
     this.buttonRequired = false;
     const taskData = this.taskFields;
@@ -154,7 +164,9 @@ export default class TasksController extends Controller {
     if (taskData.status || taskData.percentCompleted) {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/tasks/self/${taskId}?userStatusFlag=true`,
+          `${API_BASE_URL}/tasks/self/${taskId}${
+            this.dev ? '?userStatusFlag=true' : ''
+          }`,
           {
             method: 'PATCH',
             body: JSON.stringify(cleanBody),
@@ -195,7 +207,9 @@ export default class TasksController extends Controller {
             toastNotificationTimeoutOptions
           );
           this.disabled = false;
-          error();
+          if (this.resetCurrentTask) {
+            this.resetCurrentTask();
+          }
         }
       } catch (err) {
         this.toast.error(
@@ -204,7 +218,9 @@ export default class TasksController extends Controller {
           toastNotificationTimeoutOptions
         );
         console.error('Error : ', err);
-        error();
+        if (this.resetCurrentTask) {
+          this.resetCurrentTask();
+        }
       } finally {
         this.disabled = false;
       }
@@ -262,16 +278,96 @@ export default class TasksController extends Controller {
       );
     }
   }
-
-  @action async handleUpdateTask(taskId, error) {
+  showTaskChangeInfoModal(msg) {
+    this.message = msg;
+    this.showModal = true;
+    this.buttonRequired = true;
+  }
+  isTaskStatusChanged(task, taskStatus) {
+    return task.status === taskStatus;
+  }
+  isProgressChanged(task, progress) {
+    return parseInt(task.percentCompleted || 0) === progress;
+  }
+  shouldTaskProgressBe100(taskId) {
+    const currentTask = this.getTaskById(taskId);
     const taskData = this.taskFields;
-    if (taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage) {
-      this.message = TASK_MESSAGES.MARK_DONE;
-      this.showModal = true;
-      this.buttonRequired = true;
-      this.tempTaskId = taskId;
+    const isCurrentTaskStatusBlock = this.isTaskStatusChanged(
+      currentTask,
+      this.TASK_KEYS.BLOCKED
+    );
+    const isCurrentTaskStatusInProgress = this.isTaskStatusChanged(
+      currentTask,
+      this.TASK_KEYS.IN_PROGRESS
+    );
+    const isNewStatusInProgress = this.isTaskStatusChanged(
+      taskData,
+      this.TASK_KEYS.IN_PROGRESS
+    );
+    const isNewTaskStatusBlock = this.isTaskStatusChanged(
+      taskData,
+      this.TASK_KEYS.BLOCKED
+    );
+
+    const isCurrProgress100 = this.isProgressChanged(currentTask, 100);
+    return (
+      (isCurrentTaskStatusBlock || isCurrentTaskStatusInProgress) &&
+      !isNewStatusInProgress &&
+      !isNewTaskStatusBlock &&
+      !isCurrProgress100
+    );
+  }
+  shouldTaskProgressBe0(taskId) {
+    const taskData = this.taskFields;
+    const currentTask = this.getTaskById(taskId);
+    const isCurrentTaskStatusBlock = this.isTaskStatusChanged(
+      currentTask,
+      this.TASK_KEYS.BLOCKED
+    );
+    const isNewStatusInProgress = this.isTaskStatusChanged(
+      taskData,
+      this.TASK_KEYS.IN_PROGRESS
+    );
+    const isCurrProgress0 = this.isProgressChanged(currentTask, 0);
+    return (
+      isNewStatusInProgress && !isCurrentTaskStatusBlock && !isCurrProgress0
+    );
+  }
+  getInfoMsg(taskId) {
+    const currentTask = this.getTaskById(taskId);
+    const msg = `The progress of current task is ${currentTask.percentCompleted}%. `;
+
+    if (this.shouldTaskProgressBe100(taskId)) {
+      this.taskFields.percentCompleted = 100;
+      return `${msg}${TASK_MESSAGES.CHANGE_TO_100_PROGRESS}`;
+    }
+
+    if (this.shouldTaskProgressBe0(taskId)) {
+      this.taskFields.percentCompleted = 0;
+
+      return `${msg}${TASK_MESSAGES.CHANGE_TO_0_PROGRESS}`;
+    }
+    return;
+  }
+  @action async handleUpdateTask(taskId, resetCurrentTask) {
+    this.resetCurrentTask = resetCurrentTask;
+    const taskData = this.taskFields;
+    this.tempTaskId = taskId;
+    if (this.dev && taskData.status) {
+      const msg = this.getInfoMsg(taskId);
+      if (msg) {
+        this.showTaskChangeInfoModal(msg);
+        return;
+      }
+    }
+
+    if (
+      taskData.percentCompleted === TASK_PERCENTAGE.completedPercentage &&
+      !this.dev
+    ) {
+      this.showTaskChangeInfoModal(TASK_MESSAGES.MARK_DONE);
     } else {
-      return this.updateTask(taskId, error);
+      return this.updateTask(taskId);
     }
   }
 }
