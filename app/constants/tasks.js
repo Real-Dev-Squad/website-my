@@ -141,6 +141,8 @@ export const TASK_MESSAGES = {
   MARK_DONE: 'This task will be marked as Done',
   UPDATE_TASK: 'Updating task',
   FIND_TASK: 'Finding new task for you!',
+  CHANGE_TO_100_PROGRESS: 'Proceeding further will make task progress 100%.',
+  CHANGE_TO_0_PROGRESS: 'Proceeding further will make task progress 0%.',
 };
 
 export const TASK_PERCENTAGE = {
