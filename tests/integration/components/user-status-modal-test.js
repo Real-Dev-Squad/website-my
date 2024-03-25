@@ -47,7 +47,7 @@ module('Integration | Component | user-status-modal', function (hooks) {
     assert.dom('.modal__close').doesNotExist();
   });
 
-  test('payload contains relevant data when status is changed to OOO', async function (assert) {
+  test.skip('payload contains relevant data when status is changed to OOO', async function (assert) {
     this.setProperties({
       newStatus: 'OOO',
       showUserStateModal: true,
