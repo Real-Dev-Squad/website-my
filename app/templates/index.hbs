@@ -6,13 +6,16 @@
   @onClearCache={{this.purgeCache}}
   @isPurgingCache={{this.isPurgingCache}}
   @time={{this.lastUpdatedCacheRequest}}
-  @dev={{this.isDevMode}}
+  @cache={{this.isCacheEnabled}}
 />
 <UserStatus
   @status={{this.status}}
   @changeStatus={{this.changeStatus}}
   @isStatusUpdating={{this.isStatusUpdating}}
   @updateStatus={{this.updateStatus}}
+  @dev={{this.isDevMode}}
+      @statusUpdateDevApi={{this.statusUpdateDevApi}}
+
 />
 <UserStatusModal
   @isStatusUpdating={{this.isStatusUpdating}}
@@ -20,4 +23,7 @@
   @showUserStateModal={{this.showUserStateModal}}
   @toggleUserStateModal={{this.toggleUserStateModal}}
   @updateStatus={{this.updateStatus}}
+    @dev={{this.isDevMode}}
+    @statusUpdateDevApi={{this.statusUpdateDevApi}}
+
 />

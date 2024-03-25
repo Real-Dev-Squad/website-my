@@ -9,6 +9,7 @@ import {
   MAX_CACHE_PURGE_COUNT,
   LAST_UPDATED_REQUEST,
 } from '../constants/self-clear-cache';
+import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 const BASE_URL = ENV.BASE_API_URL;
 
@@ -29,6 +30,9 @@ export default class IndexController extends Controller {
 
   get isDevMode() {
     return this.featureFlag.isDevMode;
+  }
+  get isCacheEnabled() {
+    return this.featureFlag.isCacheEnabled;
   }
 
   @action async updateStatus(newStatus) {
@@ -68,6 +72,39 @@ export default class IndexController extends Controller {
       console.error('Error : ', error);
       this.toast.error(
         'Status Update failed. Something went wrong.',
+        '',
+        toastNotificationTimeoutOptions
+      );
+    } finally {
+      this.isStatusUpdating = false;
+    }
+  }
+
+  @action
+  async statusUpdateDevApi(from, until, message) {
+    const statusRequestBody = {
+      type: 'OOO',
+      from: getUTCMidnightTimestampFromDate(from),
+      until: getUTCMidnightTimestampFromDate(until),
+      message,
+      state: 'PENDING',
+    };
+    try {
+      const response = await fetch(`${BASE_URL}/requests?dev=true`, {
+        method: 'POST',
+        body: JSON.stringify(statusRequestBody),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        this.toast.success(data.message, '', toastNotificationTimeoutOptions);
+      }
+    } catch (error) {
+      this.toast.error(
+        'OOO status request failed. Something went wrong.',
         '',
         toastNotificationTimeoutOptions
       );

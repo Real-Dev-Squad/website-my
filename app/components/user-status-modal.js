@@ -19,6 +19,7 @@ import { getUTCMidnightTimestampFromDate } from '../utils/date-conversion';
 
 export default class FormStatusModal extends Component {
   @service toast;
+  @service featureFlag;
   @tracked currentStatus;
   @tracked fromDate = '';
   @tracked untilDate = '';
@@ -44,6 +45,7 @@ export default class FormStatusModal extends Component {
   async getCurrentStatusObj() {
     let from;
     let until;
+    const isDevMode = this.featureFlag.isDevMode;
     if (this.args.newStatus === USER_STATES.OOO) {
       if (!this.fromDate) {
         this.toast.error(
@@ -102,7 +104,15 @@ export default class FormStatusModal extends Component {
       message: this.reason,
       state: this.args.newStatus,
     };
-    await this.args.updateStatus({ currentStatus: newStateObj });
+    if (isDevMode) {
+      await this.args.statusUpdateDevApi(
+        this.fromDate,
+        this.untilDate,
+        this.reason
+      );
+    } else {
+      await this.args.updateStatus({ currentStatus: newStateObj });
+    }
     this.resetInputFields();
     this.disableSubmitButton = true;
   }
@@ -117,20 +127,14 @@ export default class FormStatusModal extends Component {
   @action
   checkSubmitBtnState() {
     this.disableSubmitButton = true;
-    if (this.args.newStatus === USER_STATES.OOO) {
-      if (this.checkIfFromToDatesAreClose()) {
-        this.disableSubmitButton = false;
-      } else if (
-        this.fromDate !== '' &&
-        this.untilDate !== '' &&
-        this.reason !== ''
-      ) {
-        this.disableSubmitButton = false;
-      }
-    } else if (this.args.newStatus === USER_STATES.IDLE) {
-      if (this.reason !== '') {
-        this.disableSubmitButton = false;
-      }
+    if (this.checkIfFromToDatesAreClose()) {
+      this.disableSubmitButton = false;
+    } else if (
+      this.fromDate !== '' &&
+      this.untilDate !== '' &&
+      this.reason !== ''
+    ) {
+      this.disableSubmitButton = false;
     }
   }
 
