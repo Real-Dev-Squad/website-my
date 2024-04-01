@@ -8,4 +8,9 @@ export default class FeatureFlagService extends Service {
     const queryParams = this.router.currentRoute.queryParams;
     return queryParams.dev === 'true';
   }
+
+  get isCacheEnabled() {
+    const queryParams = this.router.currentRoute.queryParams;
+    return queryParams.cache === 'true';
+  }
 }
