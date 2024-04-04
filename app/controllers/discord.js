@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class DiscordController extends Controller {
+  @service router;
   @service toast;
   @tracked discordId =
     this.model.externalAccountData.attributes.discordId || '';
@@ -13,6 +14,15 @@ export default class DiscordController extends Controller {
   @tracked isLinking = false;
   @tracked consent = false;
 
+  @tracked token = '';
+
+  queryParams = {
+    token: { refreshModel: true },
+  };
+
+  async model() {
+    this.token = this.paramsFor('discord').token;
+  }
   @action setConsent() {
     this.consent = !this.consent;
   }
@@ -22,14 +32,16 @@ export default class DiscordController extends Controller {
       this.isLinking = true;
 
       if (this.consent) {
-        const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
-          method: 'PATCH',
-          body: JSON.stringify({ discordId: this.discordId }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${ENV.BASE_API_URL}/external-accounts/link/${this.token}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          }
+        );
 
         if (response.status === 204) {
           this.linkStatus = 'linked';
