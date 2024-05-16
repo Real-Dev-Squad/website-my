@@ -399,4 +399,26 @@ module('Integration | Component | Tasks Holder', function (hooks) {
     assert.dom('[data-test-task-status-select]').exists();
     assert.dom('[data-test-dropdown-option=Completed]').hasText('Completed');
   });
+  test('Render Task holder and check if task status is COMPLETED it renders COMPLETED in dev mode', async function (assert) {
+    this.set('task', { ...tasksData[5], status: 'COMPLETED' });
+    this.set('mock', () => {});
+    this.set('isLoading', false);
+    this.set('disabled', false);
+    this.set('defaultType', DEFAULT_TASK_TYPE);
+    this.set('dev', true);
+
+    await render(hbs`<Task::Holder
+    @task={{this.task}} 
+    @onTaskChange={{this.mock}} 
+    @onStausChange={{this.mock}} 
+    @onTaskUpdate={{this.mock}} 
+    @isLoading={{this.isLoading}} 
+    @userSelectedTask={{this.defaultType}} 
+    @disabled={{this.disabled}}
+    @dev={{this.dev}}
+  />`);
+
+    assert.dom('[data-test-task-status-select]').exists();
+    assert.dom('[data-test-dropdown-option=Completed]').hasText('Completed');
+  });
 });
