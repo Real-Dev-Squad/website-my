@@ -19,7 +19,12 @@ export default class TasksHolderComponent extends Component {
 
   constructor() {
     super(...arguments);
-    if (!this.args.dev) {
+    if (this.args.dev) {
+      this.status =
+        this.args.task.status === TASK_KEYS.COMPLETED
+          ? TASK_KEYS.DONE
+          : this.args.task.status;
+    } else {
       this.status =
         this.args.task.status === TASK_KEYS.DONE
           ? TASK_KEYS.COMPLETED
@@ -29,12 +34,8 @@ export default class TasksHolderComponent extends Component {
   get taskStatusList() {
     const statusToDisplay = this.availabletaskStatusList.filter(
       (taskStatus) => {
-        if (this.args.dev) {
-          return (
-            taskStatus.key !== 'ALL' &&
-            (taskStatus.key !== TASK_KEYS.COMPLETED ||
-              this.args.task.status === TASK_KEYS.COMPLETED)
-          );
+        if (this.args.dev === true) {
+          return taskStatus.key !== 'ALL' && taskStatus.key !== 'COMPLETED';
         } else {
           return taskStatus.key !== 'ALL' && taskStatus.key !== 'DONE';
         }
@@ -45,13 +46,10 @@ export default class TasksHolderComponent extends Component {
 
   get taskStyleClass() {
     const statusNotOverDueList = [
-      TASK_KEYS.COMPLETED,
+      this.args.dev === true ? TASK_KEYS.DONE : TASK_KEYS.COMPLETED,
       TASK_KEYS.VERIFIED,
       TASK_KEYS.AVAILABLE,
     ];
-    if (this.args.dev) {
-      statusNotOverDueList.push(TASK_KEYS.DONE);
-    }
     if (
       this.args.task.endsOn * 1000 < Date.now() &&
       !statusNotOverDueList.includes(this.status)
