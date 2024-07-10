@@ -7,57 +7,63 @@ const timeDifference = (timestamp, timeNow) => {
   const mins = calc(60, timeInSec);
   const hours = calc(60, mins);
   const days = calc(24, hours);
-  const weeks = calc(7, days);
+  const weeks = Math.floor(days / 7);
+  const remainingDays = days % 7;
   const months = calc(30, days);
   const years = calc(12, months);
-  let result = years;
-  let cycle = 'year';
 
   if (timeInSec < 1) {
-    return 'just now';
+    return { result: '', cycle: 'just now' };
   }
 
   if (years > 0) {
-    result = years;
-    cycle = 'year';
+    return { result: years, cycle: 'year' };
   } else if (months > 0) {
-    result = months;
-    cycle = 'month';
+    return { result: months, cycle: 'month' };
   } else if (weeks > 0) {
-    result = weeks;
-    cycle = 'week';
+    if (remainingDays > 0) {
+      return {
+        result: weeks,
+        cycle: 'week',
+        extra: remainingDays,
+        extraCycle: 'day',
+      };
+    }
+    return { result: weeks, cycle: 'week' };
   } else if (days > 0) {
-    result = days;
-    cycle = 'day';
+    return { result: days, cycle: 'day' };
   } else if (hours > 0) {
-    result = hours;
-    cycle = 'hour';
+    return { result: hours, cycle: 'hour' };
   } else if (mins > 0) {
-    result = mins;
-    cycle = 'minute';
+    return { result: mins, cycle: 'minute' };
   } else {
-    result = '';
-    cycle = 'few seconds';
+    return { result: '', cycle: 'few seconds' };
   }
-  return { result, cycle };
 };
 
 function convertDate([timestamp], { end_date, timeNow = Date.now() }) {
   if (!timestamp) return 'TBD';
-  if (end_date == 1 && timestamp * 1000 < timeNow) {
-    const time_value = timeDifference(timestamp, timeNow);
-    return `${time_value.result} ${time_value.cycle}${
-      time_value.result > 1 ? 's' : ''
-    } ago`;
-  }
   const time_value = timeDifference(timestamp, timeNow);
-  if (timestamp * 1000 < timeNow)
-    return `${time_value.result} ${time_value.cycle}${
-      time_value.result > 1 ? 's ago' : ' ago'
-    }`;
-  return `in ${time_value.result} ${time_value.cycle}${
+
+  let timeString = `${time_value.result} ${time_value.cycle}${
     time_value.result > 1 ? 's' : ''
   }`;
+
+  if (time_value.extra) {
+    timeString += ` and ${time_value.extra} ${time_value.extraCycle}${
+      time_value.extra > 1 ? 's' : ''
+    }`;
+  }
+
+  if (end_date == 1 && timestamp * 1000 < timeNow) {
+    return `${timeString} ago`;
+  }
+
+  if (timestamp * 1000 < timeNow) {
+    return `${timeString} ago`;
+  }
+
+  return `in ${timeString}`;
 }
 
 export default helper(convertDate);
