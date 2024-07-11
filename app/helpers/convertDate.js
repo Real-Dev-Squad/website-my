@@ -7,10 +7,10 @@ const timeDifference = (timestamp, timeNow) => {
   const mins = calc(60, timeInSec);
   const hours = calc(60, mins);
   const days = calc(24, hours);
-  const weeks = Math.floor(days / 7);
-  const remainingDays = days % 7;
-  const months = calc(30, days);
-  const years = calc(12, months);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
+
+  console.log({ timeInSec, mins, hours, days, months, years }); // Debug log
 
   if (timeInSec < 1) {
     return { result: '', cycle: 'just now' };
@@ -20,16 +20,6 @@ const timeDifference = (timestamp, timeNow) => {
     return { result: years, cycle: 'year' };
   } else if (months > 0) {
     return { result: months, cycle: 'month' };
-  } else if (weeks > 0) {
-    if (remainingDays > 0) {
-      return {
-        result: weeks,
-        cycle: 'week',
-        extra: remainingDays,
-        extraCycle: 'day',
-      };
-    }
-    return { result: weeks, cycle: 'week' };
   } else if (days > 0) {
     return { result: days, cycle: 'day' };
   } else if (hours > 0) {
@@ -48,12 +38,6 @@ function convertDate([timestamp], { end_date, timeNow = Date.now() }) {
   let timeString = `${time_value.result} ${time_value.cycle}${
     time_value.result > 1 ? 's' : ''
   }`;
-
-  if (time_value.extra) {
-    timeString += ` and ${time_value.extra} ${time_value.extraCycle}${
-      time_value.extra > 1 ? 's' : ''
-    }`;
-  }
 
   if (end_date == 1 && timestamp * 1000 < timeNow) {
     return `${timeString} ago`;
