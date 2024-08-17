@@ -7,6 +7,8 @@ import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
+import ENV from 'website-my/config/environment';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 
 export default class NewSignUpController extends Controller {
   @service analytics;
@@ -39,6 +41,35 @@ export default class NewSignUpController extends Controller {
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
+  }
+
+  async generateUsername(firstname, lastname) {
+    try {
+      const sanitizedFirstname = firstname.toLowerCase();
+      const sanitizedLastname = lastname.toLowerCase();
+
+      const response = await fetch(
+        `${ENV.BASE_API_URL}/users/username?dev=true&firstname=${sanitizedFirstname}&lastname=${sanitizedLastname}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      );
+      const user = await response.json();
+
+      if (user && user.username) {
+        return user;
+      }
+    } catch (err) {
+      this.toast.error(
+        ERROR_MESSAGES.usernameGeneration,
+        'error!',
+        toastNotificationTimeoutOptions
+      );
+    }
   }
 
   @action changeStepToThree() {
@@ -91,10 +122,14 @@ export default class NewSignUpController extends Controller {
   }
 
   @action async signup() {
+    const user = await this.generateUsername(
+      this.signupDetails.firstName,
+      this.signupDetails.lastName
+    );
     const signupDetails = {
       first_name: this.signupDetails.firstName,
       last_name: this.signupDetails.lastName,
-      username: this.signupDetails.username,
+      username: user?.username,
     };
     const roles = {};
     Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
