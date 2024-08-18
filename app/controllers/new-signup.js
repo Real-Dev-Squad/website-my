@@ -132,6 +132,7 @@ export default class NewSignUpController extends Controller {
   @action async signup() {
     try {
       let user;
+      this.isLoading = true;
       if (!this.isDevMode)
         user = await this.generateUsername(
           this.signupDetails.firstName,
@@ -149,8 +150,6 @@ export default class NewSignUpController extends Controller {
         }
       });
 
-      this.isLoading = true;
-
       const isUsernameAvailable = await checkUserName(signupDetails.username);
       if (!isUsernameAvailable) {
         this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
@@ -159,29 +158,17 @@ export default class NewSignUpController extends Controller {
         return (this.error = ERROR_MESSAGES.userName);
       }
 
-      if (this.isDevMode) {
-        const res = await newRegisterUser(signupDetails, roles);
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          this.currentStep = this.LAST_STEP;
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
-        }
+      const res = this.isDevMode
+        ? await newRegisterUser(signupDetails, roles)
+        : await registerUser(signupDetails);
+      if (res.status === 204) {
+        this.analytics.identifyUser();
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
+        this.currentStep = this.LAST_STEP;
       } else {
-        //this will get removed after removing feature flag
-        const res = await registerUser(signupDetails);
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          this.currentStep = this.LAST_STEP;
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
-        }
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
+        this.error = ERROR_MESSAGES.others;
+        this.isButtonDisabled = false;
       }
     } catch (error) {
       this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
