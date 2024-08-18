@@ -7,10 +7,13 @@ import { GOTO_URL } from '../constants/url';
 import { NEW_SIGNUP_FLOW } from '../constants/analytics';
 import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
+import ENV from 'website-my/config/environment';
+import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
 
 export default class NewSignUpController extends Controller {
   @service analytics;
   @service featureFlag;
+  @service toast;
 
   queryParams = ['currentStep', 'dev'];
 
@@ -39,6 +42,42 @@ export default class NewSignUpController extends Controller {
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
+  }
+
+  async generateUsername(firstname, lastname) {
+    if (typeof firstname !== 'string' || typeof lastname !== 'string') {
+      throw new Error('Invalid input: firstname and lastname must be strings');
+    }
+    try {
+      const sanitizedFirstname = firstname.toLowerCase();
+      const sanitizedLastname = lastname.toLowerCase();
+
+      const response = await fetch(
+        `${ENV.BASE_API_URL}/users/username?dev=true&firstname=${sanitizedFirstname}&lastname=${sanitizedLastname}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      );
+      const user = await response.json();
+
+      if (user && user.username) {
+        return user;
+      }
+      throw new Error(
+        'Username generation failed: Invalid response from server'
+      );
+    } catch (err) {
+      this.toast.error(
+        ERROR_MESSAGES.usernameGeneration,
+        'error!',
+        toastNotificationTimeoutOptions
+      );
+      throw new Error(ERROR_MESSAGES.usernameGeneration);
+    }
   }
 
   @action changeStepToThree() {
@@ -91,69 +130,53 @@ export default class NewSignUpController extends Controller {
   }
 
   @action async signup() {
-    const signupDetails = {
-      first_name: this.signupDetails.firstName,
-      last_name: this.signupDetails.lastName,
-      username: this.signupDetails.username,
-    };
-    const roles = {};
-    Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
-      if (value === true) {
-        roles[key] = value;
-      }
-    });
-
-    this.isLoading = true;
-
-    const isUsernameAvailable = await checkUserName(signupDetails.username);
-    if (!isUsernameAvailable) {
-      this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
-      this.isLoading = false;
-      this.isButtonDisabled = false;
-      return (this.error = ERROR_MESSAGES.userName);
-    }
-
-    if (this.isDevMode) {
-      try {
-        const res = await newRegisterUser(signupDetails, roles);
-        if (res.status === 204) {
-          this.analytics.identifyUser();
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-          this.currentStep = this.LAST_STEP;
-        } else {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
+    try {
+      let user;
+      this.isLoading = true;
+      if (!this.isDevMode)
+        user = await this.generateUsername(
+          this.signupDetails.firstName,
+          this.signupDetails.lastName
+        );
+      const signupDetails = {
+        first_name: this.signupDetails.firstName,
+        last_name: this.signupDetails.lastName,
+        username: this.isDevMode ? this.signupDetails.username : user.username,
+      };
+      const roles = {};
+      Object.entries(this.signupDetails.roles).forEach(([key, value]) => {
+        if (value === true) {
+          roles[key] = value;
         }
-      } catch (error) {
-        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
+      });
+
+      const isUsernameAvailable = await checkUserName(signupDetails.username);
+      if (!isUsernameAvailable) {
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
+        this.isLoading = false;
+        this.isButtonDisabled = false;
+        return (this.error = ERROR_MESSAGES.userName);
+      }
+
+      const res = this.isDevMode
+        ? await newRegisterUser(signupDetails, roles)
+        : await registerUser(signupDetails);
+      if (res.status === 204) {
+        this.analytics.identifyUser();
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
+        this.currentStep = this.LAST_STEP;
+      } else {
+        this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
         this.error = ERROR_MESSAGES.others;
         this.isButtonDisabled = false;
-      } finally {
-        this.isLoading = false;
       }
-    } else {
-      //this will get removed after removing feature flag
-      registerUser(signupDetails)
-        .then((res) => {
-          if (res.status === 204) {
-            this.analytics.identifyUser();
-            this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_REGISTERED);
-            this.currentStep = this.LAST_STEP;
-          } else {
-            this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_SIGNUP);
-            this.error = ERROR_MESSAGES.others;
-            this.isButtonDisabled = false;
-          }
-        })
-        .catch(() => {
-          this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
-          this.error = ERROR_MESSAGES.others;
-          this.isButtonDisabled = false;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+    } catch (error) {
+      this.analytics.trackEvent(NEW_SIGNUP_FLOW.UNABLE_TO_REGISTER);
+      console.log(error);
+      this.error = error?.message || ERROR_MESSAGES.others;
+      this.isButtonDisabled = false;
+    } finally {
+      this.isLoading = false;
     }
   }
 }
