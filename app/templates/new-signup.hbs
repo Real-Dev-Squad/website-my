@@ -18,13 +18,24 @@
 {{/if}}
 
 {{#if (eq this.currentStep this.THIRD_STEP)}}
-  <NewSignup::Input
-    @onClick={{this.register}}
-    @currentStep={{this.currentStep}}
-    @onChange={{this.handleInputChange}}
-    @isButtonDisabled={{this.isButtonDisabled}}
-    @isLoading={{this.isLoading}}
-  />
+  {{#if this.isDevMode}}
+    <NewSignup::Input
+      @onClick={{this.changeStepToFour}}
+      @currentStep={{this.currentStep}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+    />
+  {{else}}
+    <NewSignup::Input
+      @onClick={{this.register}}
+      @currentStep={{this.currentStep}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+      @error={{this.error}}
+    />
+  {{/if}}
 {{/if}}
 
 {{#if this.isDevMode}}
