@@ -88,13 +88,13 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('[data-test-btn="signup"]').hasAnyText();
   });
 
-  test('button should have text Submit if the current step is username', async function (assert) {
+  test('button should have text Submit if the current step is lastName', async function (assert) {
     assert.expect(2);
     this.setProperties({
       onClick: function () {
         this.currentStep = this.LAST_STEP;
       },
-      currentStep: 'username',
+      currentStep: 'lastName',
     });
 
     await render(hbs`
@@ -107,13 +107,13 @@ module('Integration | Component | new-sign-up/form', function (hooks) {
     assert.dom('[data-test-btn="signup"]').hasText('Submit');
   });
 
-  test('button should have text Submit if the current step is username and if dev is set to false', async function (assert) {
+  test('button should have text Submit if the current step is lastName and if dev is set to false', async function (assert) {
     assert.expect(2);
     this.setProperties({
       onClick: function () {
         this.currentStep = this.LAST_STEP;
       },
-      currentStep: 'username',
+      currentStep: 'lastName',
       dev: false,
     });
 
