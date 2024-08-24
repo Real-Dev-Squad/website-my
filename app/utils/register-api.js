@@ -13,7 +13,7 @@ const registerUser = (user) =>
   });
 
 const newRegisterUser = async (signupDetail, roles) => {
- const res = await registerUser({
+  const res = await registerUser({
     ...signupDetail,
     roles: {
       ...roles,

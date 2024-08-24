@@ -10,7 +10,7 @@ module('Integration | Component | self-clear-cache', function (hooks) {
     this.setProperties({
       purgeCache: () => {},
       cacheTriggeredPending: 3,
-      isDevMode: true,
+      isCacheEnabled: true,
       isPurgingCache: false,
       lastUpdatedCacheRequest: '24 November, 1:23 PM IST',
     });
@@ -20,7 +20,7 @@ module('Integration | Component | self-clear-cache', function (hooks) {
           @totalTimes={{this.cacheTriggeredPending}}
           @onClearCache={{this.purgeCache}}
           @isPurgingCache={{this.isPurgingCache}}
-          @dev={{this.isDevMode}}
+          @cache={{this.isCacheEnabled}}
           @time={{this.lastUpdatedCacheRequest}}
         />
     `);

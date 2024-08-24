@@ -23,6 +23,7 @@ export const LABEL_TEXT = {
 export const ERROR_MESSAGES = {
   userName: 'username already taken!',
   others: 'something went wrong',
+  usernameGeneration: 'Username cannot be generated',
 };
 
 export const CHECK_BOX_DATA = [

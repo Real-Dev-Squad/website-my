@@ -22,8 +22,7 @@
         @closeModel={{this.closeExtensionModel}}
       />
     {{/if}}
-
-    {{#if (not-eq this.status this.TASK_KEYS.VERIFIED)}}
+    {{#if (or (not-eq this.status this.TASK_KEYS.VERIFIED) (eq @dev true))}}
       <div class='task-update-container'>
         <label id='task-update-label' for='task-update'><b>Status:</b></label>
         <select
@@ -43,7 +42,6 @@
         </select>
       </div>
     {{/if}}
-
     <button
       class='task-card__extensionForm-button'
       data-test-task-extensionForm-button
