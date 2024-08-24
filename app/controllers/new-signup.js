@@ -9,14 +9,11 @@ import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
 import ENV from 'website-my/config/environment';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
-
 export default class NewSignUpController extends Controller {
   @service analytics;
   @service featureFlag;
   @service toast;
-
   queryParams = ['currentStep', 'dev'];
-
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
   @tracked error = '';
@@ -25,20 +22,21 @@ export default class NewSignUpController extends Controller {
   SECOND_STEP = NEW_SIGNUP_STEPS[1];
   THIRD_STEP = NEW_SIGNUP_STEPS[2];
   FOURTH_STEP = NEW_SIGNUP_STEPS[3];
-  LAST_STEP = NEW_SIGNUP_STEPS[4];
-
+  FIFTH_STEP = NEW_SIGNUP_STEPS[4];
+  LAST_STEP = NEW_SIGNUP_STEPS[5];
+  get isDevMode() {
+    return this.featureFlag.isDevMode;
+  }
   @tracked signupDetails = {
     firstName: '',
     lastName: '',
     username: '',
     roles: {},
   };
-
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
   }
-
   async generateUsername(firstname, lastname) {
     if (typeof firstname !== 'string' || typeof lastname !== 'string') {
       throw new Error('Invalid input: firstname and lastname must be strings');
@@ -46,7 +44,6 @@ export default class NewSignUpController extends Controller {
     try {
       const sanitizedFirstname = firstname.toLowerCase();
       const sanitizedLastname = lastname.toLowerCase();
-
       const response = await fetch(
         `${ENV.BASE_API_URL}/users/username?dev=true&firstname=${sanitizedFirstname}&lastname=${sanitizedLastname}`,
         {
@@ -58,7 +55,6 @@ export default class NewSignUpController extends Controller {
         }
       );
       const user = await response.json();
-
       if (user && user.username) {
         return user;
       }
@@ -74,45 +70,40 @@ export default class NewSignUpController extends Controller {
       throw new Error(ERROR_MESSAGES.usernameGeneration);
     }
   }
-
   @action changeStepToThree() {
     this.currentStep = this.THIRD_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_FIRST_NAME);
     this.isButtonDisabled = true;
   }
-
   @action changeStepToFour() {
     this.currentStep = this.FOURTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_LAST_NAME);
     this.isButtonDisabled = true;
   }
-
   @action changeStepToFive() {
     this.currentStep = this.FIFTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_USERNAME);
     this.isButtonDisabled = true;
   }
-
   @action register() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_ROLE);
     this.isButtonDisabled = true;
     this.signup();
   }
-
   @action completeSignUp() {
-    console.log('click');
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.NEW_SIGNUP_FLOW_DONE);
-
-    window.open(GOTO_URL, '_self');
+    if (this.isDevMode) {
+      window.open('https://realdevsquad.com/goto?dev=true', '_self');
+    } else {
+      window.open(GOTO_URL, '_self');
+    }
   }
-
   @action handleInputChange(key, value) {
     this.error = '';
     set(this.signupDetails, key, value);
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
     else this.isButtonDisabled = true;
   }
-
   @action handleCheckboxInputChange(key, value) {
     set(this.signupDetails.roles, key, value);
     if (Object.values(this.signupDetails.roles).includes(true)) {
@@ -121,7 +112,6 @@ export default class NewSignUpController extends Controller {
       this.isButtonDisabled = true;
     }
   }
-
   @action async signup() {
     try {
       let user;
@@ -142,7 +132,6 @@ export default class NewSignUpController extends Controller {
           roles[key] = value;
         }
       });
-
       const isUsernameAvailable = await checkUserName(signupDetails.username);
       if (!isUsernameAvailable) {
         this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
@@ -150,7 +139,6 @@ export default class NewSignUpController extends Controller {
         this.isButtonDisabled = false;
         return (this.error = ERROR_MESSAGES.userName);
       }
-
       const res = this.isDevMode
         ? await newRegisterUser(signupDetails, roles)
         : await registerUser(signupDetails);
