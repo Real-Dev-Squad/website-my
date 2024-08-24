@@ -9,11 +9,14 @@ import { ERROR_MESSAGES, NEW_SIGNUP_STEPS } from '../constants/new-signup';
 import checkUserName from '../utils/check-username';
 import ENV from 'website-my/config/environment';
 import { toastNotificationTimeoutOptions } from '../constants/toast-notification';
+
 export default class NewSignUpController extends Controller {
   @service analytics;
   @service featureFlag;
   @service toast;
+
   queryParams = ['currentStep', 'dev'];
+
   @tracked isLoading = false;
   @tracked isButtonDisabled = true;
   @tracked error = '';
@@ -24,19 +27,23 @@ export default class NewSignUpController extends Controller {
   FOURTH_STEP = NEW_SIGNUP_STEPS[3];
   FIFTH_STEP = NEW_SIGNUP_STEPS[4];
   LAST_STEP = NEW_SIGNUP_STEPS[5];
+
   get isDevMode() {
     return this.featureFlag.isDevMode;
   }
+
   @tracked signupDetails = {
     firstName: '',
     lastName: '',
     username: '',
     roles: {},
   };
+
   @action changeStepToTwo() {
     this.currentStep = this.SECOND_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_GETTING_STARTED);
   }
+
   async generateUsername(firstname, lastname) {
     if (typeof firstname !== 'string' || typeof lastname !== 'string') {
       throw new Error('Invalid input: firstname and lastname must be strings');
@@ -44,6 +51,7 @@ export default class NewSignUpController extends Controller {
     try {
       const sanitizedFirstname = firstname.toLowerCase();
       const sanitizedLastname = lastname.toLowerCase();
+
       const response = await fetch(
         `${ENV.BASE_API_URL}/users/username?dev=true&firstname=${sanitizedFirstname}&lastname=${sanitizedLastname}`,
         {
@@ -55,6 +63,7 @@ export default class NewSignUpController extends Controller {
         }
       );
       const user = await response.json();
+
       if (user && user.username) {
         return user;
       }

@@ -1,3 +1,11 @@
+{{page-title 'New Sign Up'}}
+
+{{#if (eq this.currentStep this.FIRST_STEP)}}
+  <NewSignup::Info
+    @onClick={{this.changeStepToTwo}}
+    @currentStep={{this.currentStep}}
+  />
+{{/if}}
 {{#if (eq this.currentStep this.SECOND_STEP)}}
   <NewSignup::Input
     @onClick={{this.changeStepToThree}}
