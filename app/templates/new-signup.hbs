@@ -18,25 +18,13 @@
 {{/if}}
 
 {{#if (eq this.currentStep this.THIRD_STEP)}}
-  <NewSignup::Input
-    @onClick={{this.changeStepToFour}}
-    @currentStep={{this.currentStep}}
-    @onChange={{this.handleInputChange}}
-    @isButtonDisabled={{this.isButtonDisabled}}
-    @isLoading={{this.isLoading}}
-  />
-{{/if}}
-
-{{#if (eq this.currentStep this.FOURTH_STEP)}}
   {{#if this.isDevMode}}
     <NewSignup::Input
-      @onClick={{this.changeStepToFive}}
+      @onClick={{this.changeStepToFour}}
       @currentStep={{this.currentStep}}
-      @dev={{this.isDevMode}}
       @onChange={{this.handleInputChange}}
       @isButtonDisabled={{this.isButtonDisabled}}
       @isLoading={{this.isLoading}}
-      @error={{this.error}}
     />
   {{else}}
     <NewSignup::Input
@@ -51,6 +39,18 @@
 {{/if}}
 
 {{#if this.isDevMode}}
+  {{#if (eq this.currentStep this.FOURTH_STEP)}}
+    <NewSignup::Input
+      @onClick={{this.changeStepToFive}}
+      @currentStep={{this.currentStep}}
+      @dev={{this.isDevMode}}
+      @onChange={{this.handleInputChange}}
+      @isButtonDisabled={{this.isButtonDisabled}}
+      @isLoading={{this.isLoading}}
+      @error={{this.error}}
+    />
+  {{/if}}
+
   {{#if (eq this.currentStep this.FIFTH_STEP)}}
     <NewSignup::Checkbox
       @onClick={{this.register}}
