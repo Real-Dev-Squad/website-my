@@ -10,7 +10,7 @@
         <Spinner />
       </div>
     {{else}}
-      {{#if (and @model.userData.discordId (not @model.userData.roles.archived))}}
+      {{#if (and @model.userData.discordId (eq @model.userData.roles.archived false))}}
         <div class='discord__success'>
           <p class='success__text'>Your Discord account has been successfully
             linked.</p>
@@ -20,7 +20,7 @@
         <div class='discord__error'>
           <p class='error__text'>Something went wrong. Please try again.</p>
         </div>
-      {{else if (eq this.linkStatus 'not-linked')}}
+      {{else}}
         <header class='header horizontal-flex w-100' data-test-header>
           <img
             src='RDSLogo.png'
