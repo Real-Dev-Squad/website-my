@@ -79,26 +79,31 @@ export default class NewSignUpController extends Controller {
       throw new Error(ERROR_MESSAGES.usernameGeneration);
     }
   }
+
   @action changeStepToThree() {
     this.currentStep = this.THIRD_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_FIRST_NAME);
     this.isButtonDisabled = true;
   }
+
   @action changeStepToFour() {
     this.currentStep = this.FOURTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_LAST_NAME);
     this.isButtonDisabled = true;
   }
+
   @action changeStepToFive() {
     this.currentStep = this.FIFTH_STEP;
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_USERNAME);
     this.isButtonDisabled = true;
   }
+
   @action register() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.USER_ROLE);
     this.isButtonDisabled = true;
     this.signup();
   }
+
   @action completeSignUp() {
     this.analytics.trackEvent(NEW_SIGNUP_FLOW.NEW_SIGNUP_FLOW_DONE);
     if (this.isDevMode) {
@@ -107,12 +112,14 @@ export default class NewSignUpController extends Controller {
       window.open(GOTO_URL, '_self');
     }
   }
+
   @action handleInputChange(key, value) {
     this.error = '';
     set(this.signupDetails, key, value);
     if (this.signupDetails[key] > '') this.isButtonDisabled = false;
     else this.isButtonDisabled = true;
   }
+
   @action handleCheckboxInputChange(key, value) {
     set(this.signupDetails.roles, key, value);
     if (Object.values(this.signupDetails.roles).includes(true)) {
@@ -121,6 +128,7 @@ export default class NewSignUpController extends Controller {
       this.isButtonDisabled = true;
     }
   }
+
   @action async signup() {
     try {
       let user;
@@ -141,6 +149,7 @@ export default class NewSignUpController extends Controller {
           roles[key] = value;
         }
       });
+
       const isUsernameAvailable = await checkUserName(signupDetails.username);
       if (!isUsernameAvailable) {
         this.analytics.trackEvent(NEW_SIGNUP_FLOW.USERNAME_NOT_AVAILABLE);
@@ -148,6 +157,7 @@ export default class NewSignUpController extends Controller {
         this.isButtonDisabled = false;
         return (this.error = ERROR_MESSAGES.userName);
       }
+
       const res = this.isDevMode
         ? await newRegisterUser(signupDetails, roles)
         : await registerUser(signupDetails);

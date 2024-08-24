@@ -6,6 +6,7 @@
     @currentStep={{this.currentStep}}
   />
 {{/if}}
+
 {{#if (eq this.currentStep this.SECOND_STEP)}}
   <NewSignup::Input
     @onClick={{this.changeStepToThree}}
@@ -15,6 +16,7 @@
     @isLoading={{this.isLoading}}
   />
 {{/if}}
+
 {{#if (eq this.currentStep this.THIRD_STEP)}}
   {{#if this.isDevMode}}
     <NewSignup::Input
