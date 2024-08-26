@@ -44,7 +44,7 @@ export default class DiscordRoute extends Route {
           toastNotificationTimeoutOptions
         );
 
-        return { isTokenEpired: true };
+        return { isTokenExpired: true };
       }
     } catch (error) {
       this.toast.error(error.message, '', toastNotificationTimeoutOptions);
