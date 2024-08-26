@@ -10,7 +10,19 @@
         <Spinner />
       </div>
     {{else}}
-      {{#if (and @model.userData.discordId (eq @model.userData.roles.archived false))}}
+      {{! Added (eq @model.userData.roles.archived false) check for temporary,
+          For users who have left RDS before and are rejoining again now
+          This
+          TODO: 1. fix (eq @model.userData.roles.archived false) after deprecating archived role
+                2. Remove this check and get a flow in place for users who had left RDS previously and are coming back now
+                3. fix @model.userData.discordId check, which was removed, get a proper solution in place
+          }}
+      {{#if
+        (or
+          (eq @model.userData.roles.archived false)
+          (eq this.linkStatus 'linked')
+        )
+      }}
         <div class='discord__success'>
           <p class='success__text'>Your Discord account has been successfully
             linked.</p>
@@ -20,7 +32,7 @@
         <div class='discord__error'>
           <p class='error__text'>Something went wrong. Please try again.</p>
         </div>
-      {{else}}
+      {{else if (eq this.linkStatus 'not-linked')}}
         <header class='header horizontal-flex w-100' data-test-header>
           <img
             src='RDSLogo.png'
