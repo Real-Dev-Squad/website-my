@@ -14,10 +14,10 @@
       {{/if}}
       <Button
         @onClick={{this.handleShowEditProfilePictureModal}}
-        @class='edit-btn btn'
+        @class='edit-btn '
         @data-test-btn='edit'
-      >
-        Update Picture
+        >
+        <FaIcon @icon="edit" />
       </Button>
     </div>
     <div class='profile-form-grid'>

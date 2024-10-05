@@ -40,7 +40,7 @@
 }
 
 .profile-page-error {
-  text-align: center; 
+  text-align: center;
   color: red;
 }
 
@@ -91,6 +91,7 @@
   aspect-ratio: 1;
   margin: auto;
   text-align: center;
+  position: relative;
 }
 
 .profile-form .user__pic {
@@ -100,9 +101,16 @@
 }
 
 .edit-btn {
-  padding: 0;
+  padding-inline: 5px;
+  padding-block: 3px;
+  z-index: 10;
+  border-radius: 100%;
+  position: absolute;
+  top: 8px;
+  right: 10px;
   font-size: 1rem;
-  margin-top: 0.5rem;
+  border: 0.5px solid black;
+  background: var(--profile-edit-btn-bg-clr);
   color: var(--profile-edit-btn-clr);
   font-weight: 600;
 }
