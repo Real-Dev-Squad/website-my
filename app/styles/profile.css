@@ -91,6 +91,7 @@
   aspect-ratio: 1;
   margin: auto;
   text-align: center;
+  position: relative;
 }
 
 .profile-form .user__pic {
