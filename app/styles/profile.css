@@ -101,6 +101,14 @@
 }
 
 .edit-btn {
+  padding: 0;
+  margin-top: 0.5rem;
+  color: var(--profile-edit-btn-clr);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.profile-edit-button {
   padding-inline: 5px;
   padding-block: 3px;
   z-index: 10;
