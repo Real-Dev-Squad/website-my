@@ -109,13 +109,12 @@
 }
 
 .profile-edit-button {
-  padding-inline: 5px;
-  padding-block: 3px;
+  padding: 8px;
   z-index: 10;
   border-radius: 100%;
   position: absolute;
   top: 8px;
-  right: 10px;
+  right: 12px;
   font-size: 1rem;
   margin-top: 0.5rem;
   color: var(--profile-edit-btn-clr);
