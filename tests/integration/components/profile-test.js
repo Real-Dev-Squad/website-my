@@ -7,9 +7,7 @@ module('Integration | Component | profile-component', function (hooks) {
   setupRenderingTest(hooks);
 
   test('button appearance based on isDev property', async function (assert) {
-    this.set('handleShowEditProfilePictureModal', function () {
-      //
-    });
+    this.set('handleShowEditProfilePictureModal', function () {});
 
     this.set('isDev', true);
 
