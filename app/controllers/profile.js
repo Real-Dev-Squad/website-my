@@ -9,6 +9,15 @@ const BASE_URL = ENV.BASE_API_URL;
 export default class ProfileController extends Controller {
   @service toast;
   @service router;
+  get isDev() {
+    if (
+      this.router.currentRoute &&
+      this.router.currentRoute.queryParams.dev === 'true'
+    ) {
+      return this.router.currentRoute.queryParams.dev;
+    }
+    return false;
+  }
   get imageUploadUrl() {
     return `${BASE_URL}/users/picture`;
   }
