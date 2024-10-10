@@ -1,13 +1,15 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, settled, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | profile-component', function (hooks) {
   setupRenderingTest(hooks);
 
   test('button appearance based on isDev property', async function (assert) {
-    this.set('handleShowEditProfilePictureModal', function () {});
+    this.set('handleShowEditProfilePictureModal', () => {
+      this.set('showEditProfilePictureModal', true);
+    });
 
     this.set('isDev', true);
 
@@ -30,6 +32,13 @@ module('Integration | Component | profile-component', function (hooks) {
     assert.dom('[data-test-btn="edit"]').exists();
     assert.dom('[data-test-btn="edit"]').hasClass('profile-edit-button');
 
+    await click('[data-test-btn="edit"]');
+
+    assert.ok(
+      this.showEditProfilePictureModal,
+      'Modal should be shown after clicking the button'
+    );
+
     this.set('isDev', false);
 
     await settled();
@@ -37,5 +46,12 @@ module('Integration | Component | profile-component', function (hooks) {
     assert.dom('[data-test-btn="edit"]').exists();
     assert.dom('[data-test-btn="edit"]').hasClass('edit-btn');
     assert.dom('[data-test-btn="edit"]').hasText('Update Picture');
+
+    await click('[data-test-btn="edit"]');
+
+    assert.ok(
+      this.showEditProfilePictureModal,
+      'Modal should be shown after clicking the button'
+    );
   });
 });
