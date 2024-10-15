@@ -10,8 +10,6 @@ const timeDifference = (timestamp, timeNow) => {
   const months = Math.floor(days / 30);
   const years = Math.floor(months / 12);
 
-  console.log({ timeInSec, mins, hours, days, months, years }); // Debug log
-
   if (timeInSec < 1) {
     return { result: '', cycle: 'just now' };
   }

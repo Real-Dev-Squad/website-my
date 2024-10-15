@@ -9,16 +9,23 @@
         <img
           class='user__pic'
           src={{'dummyProfilePicture.png'}}
-          alt='user profile '
+          alt='user profile'
         />
       {{/if}}
-      <Button
-        @onClick={{this.handleShowEditProfilePictureModal}}
-        @class='edit-btn btn'
-        @data-test-btn='edit'
-      >
-        Update Picture
-      </Button>
+
+      {{#if this.isDev}}
+        <Button @onClick={{this.handleShowEditProfilePictureModal}}
+         @class='profile-edit-button '
+         @data-test-btn='edit'>
+          <FaIcon @icon="edit" />
+        </Button>
+      {{else}}
+        <Button @onClick={{this.handleShowEditProfilePictureModal}}
+         @class='edit-btn btn'
+         @data-test-btn='edit'>
+          Update Picture
+        </Button>
+        {{/if}}
     </div>
     <div class='profile-form-grid'>
       {{#if (get @model 'isDeveloper')}}

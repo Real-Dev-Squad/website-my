@@ -13,8 +13,8 @@ module('Integration | Component | profile-field', function (hooks) {
     });
 
     await render(hbs`
-      <ProfileField 
-        @label={{this.label}} 
+      <ProfileField
+        @label={{this.label}}
         @icon_url={{this.icon_url}}
       />
     `);
@@ -35,8 +35,8 @@ module('Integration | Component | profile-field', function (hooks) {
     });
 
     await render(hbs`
-      <ProfileField 
-        @showError={{this.showError}} 
+      <ProfileField
+        @showError={{this.showError}}
         @errorMessage={{this.errorMessage}}
       />
     `);
@@ -53,8 +53,8 @@ module('Integration | Component | profile-field', function (hooks) {
     });
 
     await render(hbs`
-      <ProfileField 
-        @label={{this.label}} 
+      <ProfileField
+        @label={{this.label}}
         @icon_url={{this.icon_url}}
         @isDeveloper={{this.isDeveloper}}
       />
@@ -80,8 +80,8 @@ module('Integration | Component | profile-field', function (hooks) {
     });
 
     await render(hbs`
-      <ProfileField 
-        @label={{this.label}} 
+      <ProfileField
+        @label={{this.label}}
         @icon_url={{this.icon_url}}
         @isDeveloper={{this.isDeveloper}}
       />
