@@ -132,6 +132,7 @@
   background: var(--overlay--bg);
   position: fixed;
   top: 0;
+  z-index: 1;
 }
 
 .image-upload-modal {
