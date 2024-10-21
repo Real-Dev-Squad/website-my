@@ -112,10 +112,9 @@
   padding: 0.5rem;
   border-radius: 100%;
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
+  top: 5%;
+  right: 5%;
   font-size: 1rem;
-  margin-top: 0.5rem;
   color: var(--profile-edit-btn-clr);
   font-weight: 600;
 }
