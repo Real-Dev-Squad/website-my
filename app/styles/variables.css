@@ -173,6 +173,9 @@
 
   --placeholder-text-color: grey;
 
+  --line-border-fill: #1d1283;
+  --line-border-empty: #e0e0e0;
+
   --profile-field-input-bg-clr: #f9fafb;
   --profile-field-input-border-clr: #d1d5db;
   --profile-input-outline-clr: #1c64f2;
