@@ -4,7 +4,7 @@ require('dotenv').config();
 module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'website-my',
-    environment: 'development',
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -24,14 +24,14 @@ module.exports = function (environment) {
     },
   };
 
-  ENV.BASE_API_URL = 'http://localhost:4000';
+  ENV.BASE_API_URL = 'https://api.realdevsquad.com';
   ENV.MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN || 'DUMMY_TOKEN';
   ENV.ANDROID_GITHUB_URL =
     'https://play.google.com/store/apps/details?id=com.github.android';
   ENV.RDS_ANDROID_SCHEME = 'app://realdevsquad.com';
 
   if (environment === 'development') {
-    ENV.BASE_API_URL = 'http://localhost:4000';
+    ENV.BASE_API_URL = 'http://localhost:3000';
     ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
     ENV.MIXPANEL_TOKEN = 'TEST_TOKEN';
     ENV['ember-cli-mirage'] = {
