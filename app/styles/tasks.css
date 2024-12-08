@@ -438,13 +438,19 @@
   padding: 18px;
   border-radius: 10px;
   background-color: var(--white);
+  overflow: auto;
   /* overflow-y: scroll; */
   position: absolute;
-  left: 30%;
-  right: 30%;
+  max-width: 60%;
+  max-height: 90%;
   gap: 20px;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 768px), (max-height: 100vh) and (orientation: portrait) {
+  .extension-form__container-main {
+    max-width: 95%;
+  }
 }
 .extension-form__container-main:hover {
   cursor: default;
@@ -465,6 +471,7 @@
 }
 
 .extension-form__content {
+  /* overflow: auto; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -705,13 +712,13 @@
 td {
   padding: 8px 2px;
   vertical-align: top;
-  min-width: 50%;
+  max-width: 20%;
 }
 .latest-table {
   width: 100%;
 }
 .latest-extension-info__content th {
-  text-align: right;
+  text-align: left;
 }
 .latest-extension-info__content td {
   text-align: left;
