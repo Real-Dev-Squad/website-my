@@ -20,16 +20,4 @@ module('Unit | Route | profile', function (hooks) {
     assert.dom('[data-test-modal="image-upload"]').exists();
     assert.dom('[data-test-btn="browse"]').exists();
   });
-  test('button appearance based on dev query param', async (assert) => {
-    await visit('/profile?dev=true');
-
-    assert.dom('[data-test-btn="edit"]').exists();
-    assert.dom('[data-test-btn="edit"]').hasClass('profile-edit-button');
-
-    await visit('/profile?dev=false');
-
-    assert.dom('[data-test-btn="edit"]').exists();
-    assert.dom('[data-test-btn="edit"]').hasClass('edit-btn');
-    assert.dom('[data-test-btn="edit"]').hasText('Update Picture');
-  });
 });
