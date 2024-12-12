@@ -8,7 +8,7 @@ export default class IdentityRoute extends Route {
   @service toast;
   async model() {
     try {
-      const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
+      const response = await fetch(`${ENV.BASE_API_URL}/users?profile=true`, {
         credentials: 'include',
       });
       const userData = await response.json();

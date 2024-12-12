@@ -12,7 +12,7 @@ export default class ProfileRoute extends Route {
         credentials: 'include',
       });
       const { developerRoleExistsOnUser } = await res.json();
-      const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
+      const response = await fetch(`${ENV.BASE_API_URL}/users?profile=true`, {
         credentials: 'include',
       });
       const userData = await response.json();
