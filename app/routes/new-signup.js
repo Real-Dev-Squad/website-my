@@ -13,7 +13,7 @@ export default class NewSignupRoute extends Route {
   async model() {
     try {
       this.analytics.trackEvent(SIGNUP.PAGE_LOADED);
-      const response = await fetch(`${ENV.BASE_API_URL}/users/self`, {
+      const response = await fetch(`${ENV.BASE_API_URL}/users?profile=true`, {
         credentials: 'include',
       });
       const userData = await response.json();

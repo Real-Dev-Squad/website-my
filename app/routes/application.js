@@ -13,7 +13,7 @@ export default class ApplicationRoute extends Route {
     const defaultPicture = 'dummyProfilePicture.png';
 
     try {
-      const response = await fetch(`${API_BASE_URL}/users/self`, {
+      const response = await fetch(`${API_BASE_URL}/users?profile=true`, {
         credentials: 'include',
       });
       const userData = await response.json();
