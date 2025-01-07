@@ -3,7 +3,7 @@ import ENV from 'website-my/config/environment';
 const { BASE_API_URL } = ENV;
 
 const registerUser = (user) =>
-  fetch(`${BASE_API_URL}/users/self`, {
+  fetch(`${BASE_API_URL}/users?profile=true`, {
     method: 'PATCH',
     body: JSON.stringify(user),
     headers: {
