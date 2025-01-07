@@ -148,7 +148,7 @@ export default class ProfileController extends Controller {
     e.preventDefault();
     const cleanReqObject = this.removeEmptyFields(this.formData);
     try {
-      const response = await fetch(`${BASE_URL}/users?profile=true`, {
+      const response = await fetch(`${BASE_URL}/users/self`, {
         method: 'PATCH',
         body: JSON.stringify(cleanReqObject),
         headers: {
