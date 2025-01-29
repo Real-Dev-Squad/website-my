@@ -13,7 +13,7 @@ const registerUser = (user) =>
   });
 
 const newRegisterUser = async (signupDetails, roles) => {
-  const getResponse = await fetch(`${BASE_API_URL}/users/self`, {
+  const getResponse = await fetch(`${BASE_API_URL}/users?profile=true`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

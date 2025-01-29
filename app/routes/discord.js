@@ -22,9 +22,12 @@ export default class DiscordRoute extends Route {
         }
       );
 
-      const userResponse = await fetch(`${ENV.BASE_API_URL}/users/self`, {
-        credentials: 'include',
-      });
+      const userResponse = await fetch(
+        `${ENV.BASE_API_URL}/users?profile=true`,
+        {
+          credentials: 'include',
+        }
+      );
 
       const externalAccountData = await externalAccountResponse.json();
       const userData = await userResponse.json();
