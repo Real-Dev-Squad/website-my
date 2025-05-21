@@ -17,7 +17,7 @@ export const FETCH_DEVICE_INFO = `${ENV.BASE_API_URL}/auth/device`;
 export const MAIN_SITE_PREFIX = ENV.MAIN_SITE_URL;
 export const REDIRECT_URLS = {
   // TODO: remove dev=true after it being removed from main site
-  // @Tejasgp: is taking crate of this under a doc
+  // @Tejasgp: is taking care of this under a doc
   profile: `${MAIN_SITE_PREFIX}/profile?dev=true`,
   index: `${MAIN_SITE_PREFIX}/status`,
   notifications: `${MAIN_SITE_PREFIX}/notifications?dev=true`,
