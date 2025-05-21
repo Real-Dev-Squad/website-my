@@ -6,10 +6,10 @@ import redirectAuth from '../utils/redirect-auth';
 
 export default class IdentityRoute extends Route {
   @service toast;
-
+  @service router;
   beforeModel() {
     this.router.transitionTo('goto', {
-      queryParams: { from: 'identity' },
+      queryParams: { from: this.routeName },
     });
   }
 
