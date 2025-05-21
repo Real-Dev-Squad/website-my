@@ -10,7 +10,6 @@ export default class GotoController extends Controller {
   @action
   redirectToAppropriatePage() {
     const source = this.from;
-    console.log('this is from', source);
     if (source) {
       const redirectUrl = REDIRECT_URLS[source];
       if (redirectUrl) {
