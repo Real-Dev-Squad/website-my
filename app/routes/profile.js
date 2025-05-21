@@ -6,6 +6,13 @@ import redirectAuth from '../utils/redirect-auth';
 
 export default class ProfileRoute extends Route {
   @service toast;
+  @service router;
+
+  beforeModel() {
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
+  }
   async model() {
     try {
       const res = await fetch(`${ENV.BASE_API_URL}/users/isDeveloper`, {

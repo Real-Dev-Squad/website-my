@@ -17,4 +17,5 @@ Router.map(function () {
   this.route('404', { path: '/*' });
   this.route('discord');
   this.route('mobile');
+  this.route('goto');
 });

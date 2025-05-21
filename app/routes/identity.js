@@ -6,6 +6,13 @@ import redirectAuth from '../utils/redirect-auth';
 
 export default class IdentityRoute extends Route {
   @service toast;
+
+  beforeModel() {
+    this.router.transitionTo('goto', {
+      queryParams: { from: 'identity' },
+    });
+  }
+
   async model() {
     try {
       const response = await fetch(`${ENV.BASE_API_URL}/users?profile=true`, {

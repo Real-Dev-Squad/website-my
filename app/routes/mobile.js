@@ -8,7 +8,13 @@ const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class MobileRoute extends Route {
   @service toast;
+  @service router;
 
+  beforeModel() {
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
+  }
   model = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/users?profile=true`, {

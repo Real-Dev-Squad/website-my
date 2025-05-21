@@ -14,6 +14,9 @@ export default class NotificationsRoute extends Route {
     if (transition?.to?.queryParams?.dev !== 'true') {
       this.router.transitionTo('404');
     }
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
   }
 
   async model() {
