@@ -9,18 +9,10 @@ export default class GotoController extends Controller {
 
   @action
   redirectToAppropriatePage() {
-    const source = this.from;
-    if (source) {
-      const redirectUrl = REDIRECT_URLS[source];
-      if (redirectUrl) {
-        setTimeout(() => {
-          window.location.href = redirectUrl;
-        }, REDIRECTION_TIME);
-      }
-    } else {
-      setTimeout(() => {
-        window.location.href = MAIN_SITE_PREFIX;
-      }, REDIRECTION_TIME);
-    }
+    const redirectUrl = REDIRECT_URLS[this.from];
+
+    setTimeout(() => {
+      window.location.href = redirectUrl ?? MAIN_SITE_PREFIX;
+    }, REDIRECTION_TIME);
   }
 }
