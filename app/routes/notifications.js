@@ -13,7 +13,14 @@ export default class NotificationsRoute extends Route {
   beforeModel(transition) {
     if (transition?.to?.queryParams?.dev !== 'true') {
       this.router.transitionTo('404');
+      return;
     }
+    // This route is deprecated and redirects to the new site
+    // See ticket for context on the redirection strategy
+    // https://github.com/Real-Dev-Squad/website-www/issues/1031
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
   }
 
   async model() {

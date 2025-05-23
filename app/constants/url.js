@@ -13,3 +13,15 @@ export const AUTH_URL =
   'https://github.com/login/oauth/authorize?client_id=23c78f66ab7964e5ef97';
 export const FETCH_AUTH_STATUS = `${ENV.BASE_API_URL}/auth/qr-code-auth/authorization_status/`;
 export const FETCH_DEVICE_INFO = `${ENV.BASE_API_URL}/auth/device`;
+
+export const MAIN_SITE_PREFIX = ENV.MAIN_SITE_URL;
+export const REDIRECT_URLS = {
+  // TODO: remove dev=true after it being removed from main site
+  // @Tejasgp: is taking care of this under a doc
+  profile: `${MAIN_SITE_PREFIX}/profile?dev=true`,
+  index: `${MAIN_SITE_PREFIX}/status`,
+  notifications: `${MAIN_SITE_PREFIX}/notifications?dev=true`,
+  identity: `${MAIN_SITE_PREFIX}/identity?dev=true`,
+  mobile: `${MAIN_SITE_PREFIX}/mobile?dev=true`,
+  // TODO: add other links after finishing their testing on main site
+};

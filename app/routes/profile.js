@@ -6,6 +6,16 @@ import redirectAuth from '../utils/redirect-auth';
 
 export default class ProfileRoute extends Route {
   @service toast;
+  @service router;
+
+  beforeModel() {
+    // This route is deprecated and redirects to the new site
+    // See ticket for context on the redirection strategy
+    // https://github.com/Real-Dev-Squad/website-www/issues/1031
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
+  }
   async model() {
     try {
       const res = await fetch(`${ENV.BASE_API_URL}/users/isDeveloper`, {
