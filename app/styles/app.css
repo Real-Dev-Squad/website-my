@@ -21,6 +21,7 @@
 @import 'mobile.css';
 @import 'components/mobile-dialog.css';
 @import 'self-clear-cache.css';
+@import 'goto.css';
 
 html,
 body {
@@ -72,4 +73,8 @@ body {
     padding: 8px 8px 16px;
     font-size: 0.87rem;
   }
+}
+
+:root {
+  --warning-color: #F57C00;
 }

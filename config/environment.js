@@ -29,7 +29,7 @@ module.exports = function (environment) {
   ENV.ANDROID_GITHUB_URL =
     'https://play.google.com/store/apps/details?id=com.github.android';
   ENV.RDS_ANDROID_SCHEME = 'app://realdevsquad.com';
-
+  ENV.MAIN_SITE_URL = 'https://realdevsquad.com';
   if (environment === 'development') {
     ENV.BASE_API_URL = 'http://localhost:3000';
     ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
@@ -42,6 +42,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.MAIN_SITE_URL = 'http://localhost:4200';
   }
 
   if (environment === 'test') {
@@ -59,17 +60,20 @@ module.exports = function (environment) {
     //mock server url
     ENV.BASE_API_URL = '/mock-api';
     ENV.STATUS_SITE = 'http://localhost:3000';
+    ENV.MAIN_SITE_URL = 'http://localhost:4200';
   }
 
   if (environment === 'staging') {
     ENV.BASE_API_URL = 'https://staging-api.realdevsquad.com';
     ENV.STATUS_SITE = 'https://staging-status.realdevsquad.com';
+    ENV.MAIN_SITE_URL = 'https://staging-www.realdevsquad.com';
   }
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
     ENV.BASE_API_URL = 'https://api.realdevsquad.com';
     ENV.STATUS_SITE = 'https://status.realdevsquad.com';
+    ENV.MAIN_SITE_URL = 'https://realdevsquad.com';
   }
 
   return ENV;
