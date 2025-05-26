@@ -23,5 +23,6 @@ export const REDIRECT_URLS = {
   notifications: `${MAIN_SITE_PREFIX}/notifications?dev=true`,
   identity: `${MAIN_SITE_PREFIX}/identity?dev=true`,
   mobile: `${MAIN_SITE_PREFIX}/mobile?dev=true`,
-  // TODO: add other links after finishing their testing on main site
+  'new-signup': `${MAIN_SITE_PREFIX}/new-signup?dev=true`,
+  discord: `${MAIN_SITE_PREFIX}/discord?dev=true`,
 };

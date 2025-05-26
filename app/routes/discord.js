@@ -8,6 +8,14 @@ export default class DiscordRoute extends Route {
   @service router;
   @service toast;
 
+  beforeModel() {
+    this.router.transitionTo('goto', {
+      queryParams: {
+        from: this.routeName,
+        token: this.paramsFor('discord').token,
+      },
+    });
+  }
   queryParams = {
     token: { refreshModel: true },
   };
