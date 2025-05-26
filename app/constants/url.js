@@ -25,4 +25,7 @@ export const REDIRECT_URLS = {
   mobile: `${MAIN_SITE_PREFIX}/mobile?dev=true`,
   'new-signup': `${MAIN_SITE_PREFIX}/new-signup?dev=true`,
   discord: `${MAIN_SITE_PREFIX}/discord?dev=true`,
+  // TODO: add link for the '/tasks` pas as well but on status site
+  // rishi should be doing this
+  // ticket link:
 };
