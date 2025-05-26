@@ -11,8 +11,10 @@ export default class GotoController extends Controller {
   redirectToAppropriatePage() {
     let redirectUrl = REDIRECT_URLS[this.from];
     if (this.token) {
-      redirectUrl = `${redirectUrl}?token=${this.token}`;
+      const separator = redirectUrl.includes('?') ? '&' : '?';
+      redirectUrl = `${redirectUrl}${separator}token=${this.token}`;
     }
+
     setTimeout(() => {
       window.location.href = redirectUrl ?? MAIN_SITE_PREFIX;
     }, REDIRECTION_TIME);
