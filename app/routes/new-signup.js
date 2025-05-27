@@ -9,6 +9,13 @@ export default class NewSignupRoute extends Route {
   @service analytics;
   @service toast;
   @service featureFlag;
+  @service router;
+
+  beforeModel() {
+    this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
+  }
 
   async model() {
     try {
