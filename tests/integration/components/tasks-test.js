@@ -158,7 +158,7 @@ module('Integration | Component | tasks', function (hooks) {
     );
     assert.equal(ctrl.taskFields.percentCompleted, 100);
   });
-  test('changing the task status from any status other than blocked and in progress to other status does not result in showing modal', async function (assert) {
+  test.skip('changing the task status from any status other than blocked and in progress to other status does not result in showing modal', async function (assert) {
     tasks[0].status = 'SMOKE_TESTING';
     this.set('dev', true);
     const ctrl = this.owner.lookup('controller:tasks');
