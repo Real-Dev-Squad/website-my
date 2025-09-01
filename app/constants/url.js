@@ -15,6 +15,7 @@ export const FETCH_AUTH_STATUS = `${ENV.BASE_API_URL}/auth/qr-code-auth/authoriz
 export const FETCH_DEVICE_INFO = `${ENV.BASE_API_URL}/auth/device`;
 
 export const MAIN_SITE_PREFIX = ENV.MAIN_SITE_URL;
+export const STATUS_SITE_PREFIX = ENV.STATUS_SITE;
 export const REDIRECT_URLS = {
   // TODO: remove dev=true after it being removed from main site
   // @Tejasgp: is taking care of this under a doc
@@ -25,7 +26,5 @@ export const REDIRECT_URLS = {
   mobile: `${MAIN_SITE_PREFIX}/mobile?dev=true`,
   'new-signup': `${MAIN_SITE_PREFIX}/new-signup?dev=true`,
   discord: `${MAIN_SITE_PREFIX}/discord?dev=true`,
-  // TODO: add link for the '/tasks` pas as well but on status site
-  // rishi should be doing this
-  // ticket link:
+  tasks: `${STATUS_SITE_PREFIX}/tasks?dev=true`,
 };

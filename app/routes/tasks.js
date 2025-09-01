@@ -8,6 +8,17 @@ const API_BASE_URL = ENV.BASE_API_URL;
 
 export default class TasksRoute extends Route {
   @service toast;
+  @service router;
+
+  beforeModel() {
+    // This route is deprecated and redirects to the status site
+    // See ticket for context on the redirection strategy
+    // https://github.com/Real-Dev-Squad/website-www/issues/1031
+    return this.router.transitionTo('goto', {
+      queryParams: { from: this.routeName },
+    });
+  }
+
   model = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/tasks/self`, {
