@@ -1,59 +1,66 @@
 {{page-title 'Profile'}}
+<div class='profile-wrapper'>
 
-<div class='profile-container'>
-  <form class='profile-form' {{on 'submit' (fn this.handleSubmit)}}>
-    <div class='picture_container'>
-      {{#if @model.picture.url}}
-        <img class='user__pic' src={{@model.picture.url}} alt='user profile ' />
-      {{else}}
-        <img
-          class='user__pic'
-          src={{'dummyProfilePicture.png'}}
-          alt='user profile'
-        />
-      {{/if}}
-        <Button @onClick={{this.handleShowEditProfilePictureModal}}
-         @class='profile-edit-button '
-         @data-test-btn='edit'>
-          <FaIcon @icon="edit" />
+  <div class='profile-container'>
+    <form class='profile-form' {{on 'submit' (fn this.handleSubmit)}}>
+      <div class='picture_container'>
+        {{#if @model.picture.url}}
+          <img
+            class='user__pic'
+            src={{@model.picture.url}}
+            alt='user profile '
+          />
+        {{else}}
+          <img
+            class='user__pic'
+            src={{'dummyProfilePicture.png'}}
+            alt='user profile'
+          />
+        {{/if}}
+        <Button
+          @onClick={{this.handleShowEditProfilePictureModal}}
+          @class='profile-edit-button '
+          @data-test-btn='edit'
+        >
+          <FaIcon @icon='edit' />
         </Button>
-    </div>
-    <div class='profile-form-grid'>
-      {{#if (get @model 'isDeveloper')}}
-        <p class='profile-page-error'>You can't update the profile data from UI.
-          You have to create a profile service(if not created yet). Find more
-          details about profile service
-          <a
-            href='https://github.com/Real-Dev-Squad/sample-profile-service'
-            target='_blank'
-            rel="noopener noreferrer"
-          >here</a>.</p>
-      {{/if}}
-      {{#each this.fields as |field|}}
-        <ProfileField
-          @id={{field.id}}
-          @type={{field.type}}
-          @value={{get @model field.id}}
-          @placeholder={{field.placeholder}}
-          @label={{field.label}}
-          @icon_url={{field.icon_url}}
-          @errorMessage={{field.errorMessage}}
-          @showError={{field.showError}}
-          @required={{field.required}}
-          @onChange={{this.handleFieldChange}}
-          @onBlur={{this.handleFieldValidation}}
-          @isDeveloper={{get @model 'isDeveloper'}}
-        />
-      {{/each}}
-    </div>
-    <button
-      type='submit'
-      class='profile-form-submit'
-      disabled={{this.isSubmitDisabled}}
-    >Submit</button>
-  </form>
+      </div>
+      <div class='profile-form-grid'>
+        {{#if (get @model 'isDeveloper')}}
+          <p class='profile-page-error'>You can't update the profile data from
+            UI. You have to create a profile service(if not created yet). Find
+            more details about profile service
+            <a
+              href='https://github.com/Real-Dev-Squad/sample-profile-service'
+              target='_blank'
+              rel='noopener noreferrer'
+            >here</a>.</p>
+        {{/if}}
+        {{#each this.fields as |field|}}
+          <ProfileField
+            @id={{field.id}}
+            @type={{field.type}}
+            @value={{get @model field.id}}
+            @placeholder={{field.placeholder}}
+            @label={{field.label}}
+            @icon_url={{field.icon_url}}
+            @errorMessage={{field.errorMessage}}
+            @showError={{field.showError}}
+            @required={{field.required}}
+            @onChange={{this.handleFieldChange}}
+            @onBlur={{this.handleFieldValidation}}
+            @isDeveloper={{get @model 'isDeveloper'}}
+          />
+        {{/each}}
+      </div>
+      <button
+        type='submit'
+        class='profile-form-submit'
+        disabled={{this.isSubmitDisabled}}
+      >Submit</button>
+    </form>
+  </div>
 </div>
-
 {{#if this.showEditProfilePictureModal}}
   <div class='model_background'>
     <section
