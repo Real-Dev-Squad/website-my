@@ -16,5 +16,5 @@ export async function onRequest(context) {
     );
   }
 
-  return next();
+  return await next();
 }
