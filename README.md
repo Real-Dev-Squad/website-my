@@ -1,5 +1,27 @@
 # website-my
 
+> [!CAUTION]
+>
+> **This repository is now ARCHIVED and DEPRECATED.** <br />
+> My site served us well but it was time to bid it farewell. The project is no longer maintained. Please refer to migrated pages for updated routes.
+
+## Migrated Pages
+
+| Route | New Location |
+| :--- | :--- |
+| `/` | [realdevsquad.com/status](https://realdevsquad.com/status) |
+| `/profile` | [realdevsquad.com/profile](https://realdevsquad.com/profile) |
+| `/tasks` | [status.realdevsquad.com/tasks](https://status.realdevsquad.com/tasks) |
+| `/identity` | [realdevsquad.com/identity](https://realdevsquad.com/identity) |
+| `/discord` | [realdevsquad.com/discord](https://realdevsquad.com/discord) |
+| `/new-signup` | [realdevsquad.com/new-signup](https://realdevsquad.com/new-signup) |
+| `/notifications` | [realdevsquad.com/notifications](https://realdevsquad.com/notifications) |
+
+---
+
+<br />
+<br />
+
 A personal dashboard website where you can do profile related stuff!
 
 ## Prerequisites
