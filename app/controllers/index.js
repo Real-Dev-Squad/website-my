@@ -82,12 +82,14 @@ export default class IndexController extends Controller {
 
   @action
   async statusUpdateDevApi(from, until, message) {
+
+    this.toggleUserStateModal();
+
     const statusRequestBody = {
       type: 'OOO',
       from: getUTCMidnightTimestampFromDate(from),
       until: getUTCMidnightTimestampFromDate(until),
-      message,
-      state: 'PENDING',
+      reason: message,
     };
     try {
       const response = await fetch(`${BASE_URL}/requests?dev=true`, {
@@ -98,9 +100,13 @@ export default class IndexController extends Controller {
         },
         credentials: 'include',
       });
+
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
         this.toast.success(data.message, '', toastNotificationTimeoutOptions);
+      } else {
+        this.toast.error(data.message, '', toastNotificationTimeoutOptions);
       }
     } catch (error) {
       this.toast.error(
