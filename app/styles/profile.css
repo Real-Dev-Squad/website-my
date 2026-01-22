@@ -1,9 +1,15 @@
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .profile-container {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 2rem;
   max-width: min(90%, 1536px);
-  margin: 3rem auto 0 auto;
+  margin: 1.5rem auto 0 auto;
 }
 
 .profile-form {
@@ -42,6 +48,10 @@
 .profile-page-error {
   text-align: center;
   color: red;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
 }
 
 .profile-field-input {
@@ -92,6 +102,9 @@
   margin: auto;
   text-align: center;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-form .user__pic {
